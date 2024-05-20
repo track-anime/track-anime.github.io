@@ -402,7 +402,7 @@ async function get_settings() {
             "e": e,
 
         }
-        dialog(ed, true)
+        dialog_(ed, true)
     }
 }
 // url_get.searchParams.delete("seartch")
@@ -521,7 +521,7 @@ async function add_push(e) {
 
     notification.addEventListener("click", (event) => {
         e.shift = event.shiftKey
-        dialog(e, !event.shiftKey)
+        dialog_(e, !event.shiftKey)
     })
 
 }
@@ -702,25 +702,26 @@ function add_cart(e) {
     cart.r = e.raiting
     document.body.r > cart.r ? cart.classList.add('hide') : null;
 
-    cart.addEventListener("mousedown", (event) => {
-        console.log(event.which, event.button);
-        var a = new URL(window.location.href)
-        a.searchParams.set("shikimori_id", `${e.shikimori}`)
-        // console.log(a.href);
-        // console.log(e.shikimori);
-        // return
-        if(event.button==1)  return window.open(a.href, '_blank')
-        e.shift = event.shiftKey
-        dialog(e, !event.shiftKey)
-        cart.classList.remove("new_cart")
-    })
-
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
     imgTop.alt = 'cover';
     cart.appendChild(imgTop);
+    
+    imgTop.addEventListener("mousedown", (event) => {
+        console.log(event.which, event.button);
+        var a = new URL(window.location.href)
+        a.searchParams.set("shikimori_id", `${e.shikimori}`)
+        // console.log(a.href);
+        // console.log(e.shikimori);
+        // return
+        if(event.button==1) return window.open(a.href, '_blank')
+        if(event.button==2) return
+        e.shift = event.shiftKey
+        dialog_(e, !event.shiftKey)
+        cart.classList.remove("new_cart")
+    })
 
     const cartTitle = document.createElement('h5');
     cartTitle.classList.add('cart-title');
@@ -793,7 +794,7 @@ function add_cart(e) {
     cartFavorite.classList.add('cart-fav');
     cartFavorite.textContent = "♥";
     cartFavorite.title = e.series;
-    imgTop.appendChild(cartFavorite);
+    cart.appendChild(cartFavorite);
     cartFavorite.style.color = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
 
     cart.addEventListener("mouseover", (ev) => {
@@ -907,7 +908,7 @@ function showToast(e) {
     // toast.dispose()
 }
 
-function dialog(e, info) {
+function dialog_(e, info) {
     if (e.shift) {
         // return
         if (confirm(`Добавить аниме "${e.title}" в список "смотрю" на shikimori?`)) {
