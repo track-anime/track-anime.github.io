@@ -1,0 +1,22 @@
+<style>
+    body{
+        margin: 0;
+    }
+</style>
+<div class="kinobox_player"></div>
+<script src="https://kinobox.tv/kinobox.min.js"></script>
+<script>
+    kbox('.kinobox_player', {
+        search: {
+            // kinopoisk: '1127489',
+            // shikimori: '55888',
+            imdb: 'tt9335498',
+        },
+        players: {
+            alloha: { enable: true, position: 1, domain: 'https://sansa.newplayjj.com:9443' }
+        },
+        params: {
+            alloha: { token: '3a4e69a3bb3a0eb3b5bf5eba7e563b' }
+        }
+    });
+</script>

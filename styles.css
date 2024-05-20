@@ -1,0 +1,501 @@
+/* *{
+    outline: 1px solid rgb(0, 128, 0) !important;
+} */
+
+body {
+    background-color: rgb(66, 66, 66);
+    /* display: flex; */
+    flex-wrap: wrap;
+    justify-content: center;
+    background-image: url(background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    overflow: hidden;
+    /* padding: 0px 15px 0px 15px; */
+    backdrop-filter: blur(4px) brightness(30%);
+    /* width: 100%;
+    height: 95%;
+    position: absolute; */
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #286090;
+    /* Темно-синий цвет */
+    border-color: #204d74;
+    /* Темно-синий цвет */
+}
+
+.btn-success:hover,
+.btn-success:focus,
+.btn-success:active,
+.btn-success.active,
+.open>.dropdown-toggle.btn-success {
+    color: #fff;
+    background-color: #3b8a3f;
+    /* Темно-зеленый цвет */
+    border-color: #2d6a2e;
+    /* Темно-зеленый цвет */
+}
+
+.btn-danger:hover,
+.btn-danger:focus,
+.btn-danger:active,
+.btn-danger.active,
+.open>.dropdown-toggle.btn-danger {
+    color: #fff;
+    background-color: #9a3838;
+    /* Темно-красный цвет */
+    border-color: #792525;
+    /* Темно-красный цвет */
+}
+
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active,
+.btn-warning.active,
+.open>.dropdown-toggle.btn-warning {
+    color: #fff;
+    background-color: #ab7a2f;
+    /* Темно-оранжевый цвет */
+    border-color: #865b24;
+    /* Темно-оранжевый цвет */
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus,
+.btn-secondary:active,
+.btn-secondary.active,
+.open>.dropdown-toggle.btn-secondary {
+    color: #fff;
+    background-color: #5f5f5f;
+    /* Темно-серый цвет */
+    border-color: #464646;
+    /* Темно-серый цвет */
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open>.dropdown-toggle.btn-info {
+    color: #fff;
+    background-color: #386ab2;
+    /* Темно-голубой цвет */
+    border-color: #25518a;
+    /* Темно-голубой цвет */
+}
+
+#load {
+    background-color: #0000008b;
+    z-index: 999999999999999999;
+    /* backdrop-filter: blur(2px); */
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+}
+
+.cartRaitingProgress {
+    border-radius: 0;
+}
+
+
+.ned {
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 0.3rem;
+    border-color: #c6c6c6;
+    justify-content: center;
+    background-color: #5d5d5db5;
+}
+
+.ned_name {
+    background-color: #c6c6c6;
+    color: #424242;
+    width: 100%;
+    text-align: center;
+    border-radius: 7px;
+    margin: 15px 0px 15px 0px;
+    padding: 5px 0px 5px 0px;
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+.cart-fav {
+    border-style: solid;
+    border-width: 0.3rem 0rem 0.3rem 0.3rem;
+    border-color: #ffffff00;
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    width: 3rem;
+    /* height: 4rem; */
+    top: 33%;
+    background-color: #353434bd;
+    padding: 0px 17px 0px 17px;
+    border-radius: 25px 0px 0px 25px;
+    font-size: 2.2rem;
+    z-index: 2;
+    cursor: pointer;
+
+}
+
+.cart-fav:hover {
+    border-color: #ffffff;
+}
+
+/* button.btn.btn-primary.mt-3 {
+    width: 100%;
+} */
+
+#list_calendar {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    align-items: stretch;
+}
+
+.anime_list {
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+}
+
+.container_ {
+    width: 100vw;
+    height: calc(100vh - 56px);
+    overflow: auto;
+    bottom: 0;
+    position: fixed;
+}
+
+.hide {
+    display: none !important;
+}
+
+.new_cart {
+    border-color: #1008b6 !important;
+}
+
+
+#closeDialogButton {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+    width: 45px;
+    height: 45px;
+
+
+}
+
+dialog#VideoPlayerAnime {
+    padding: 0;
+    width: 80%;
+    /* height: 80%; */
+    border-radius: 12px;
+    border-width: thin;
+    border-color: #6d757d;
+    aspect-ratio: 16 / 9;
+    overflow-y: hidden;
+
+}
+
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    /* backdrop-filter: blur(5px); */
+}
+
+.DialogVideoInfoScroll {
+    top: 0% !important;
+}
+
+
+#DialogVideoInfo {
+    position: absolute;
+    width: 100%;
+    height: 200%;
+    top: -100%;
+    transition: top 1s ease;
+}
+
+.progress-bar .sr-only {
+    font-size: 16px;
+}
+
+
+iframe#VideoPlayer {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    aspect-ratio: 16 / 9;
+    top: 50%;
+
+}
+
+#VideoInfo {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    padding: 34px;
+    background-color: #212529;
+    aspect-ratio: 16 / 9;
+    top: 0%;
+    transition: top 1s ease;
+}
+
+.VideoInfoBtn {
+    top: 50%;
+    left: 40%;
+    margin-top: -30px;
+    position: absolute;
+    z-index: 2;
+    width: 20%;
+}
+
+p {
+    margin: 0;
+}
+
+.cart-img-top {
+    background-size: cover;
+    height: 25rem;
+    width: 17rem;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+
+}
+
+.cart-title {
+    background: linear-gradient(180deg, rgb(69, 69, 69, 0.8) 0%, rgba(69, 69, 69, 0.8) 80%, rgba(191, 191, 191, 0) 100%);
+    /*background-color: #5d5d5dde; */
+    text-align: center;
+    padding: 10px 0px 25px 0px;
+    visibility: hidden;
+    z-index: 2;
+    /* height: 125px; */
+}
+
+.cart-voice {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    position: fixed;
+    writing-mode: vertical-rl;
+    padding: 5px;
+    text-align: center;
+    margin: 0px;
+    z-index: 1;
+    /* background-color: #5d5d5d99; */
+    background: linear-gradient(193deg, rgba(69, 69, 69, 0) 0%, rgba(69, 69, 69, 0.8) 25%, rgba(69, 69, 69, 0.8) 75%, rgba(69, 69, 69, 0) 100%);
+}
+
+.cart-raiting {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+}
+
+.progress-bar-vertical {
+    width: 20px;
+    height: 100%;
+    float: left;
+    display: flex;
+    -webkit-align-items: flex-end;
+    align-items: flex-end;
+    background-color: #424242af;
+}
+
+.progress-bar-vertical .progress-bar {
+    width: 100%;
+    height: 0;
+    -webkit-transition: height 0.6s ease;
+    -o-transition: height 0.6s ease;
+    transition: height 0.6s ease;
+    z-index: 2;
+}
+
+span.sr-only {
+    writing-mode: vertical-rl;
+}
+
+.cart-time {
+    /* background-color: #5d5d5dde; */
+    background: linear-gradient(0deg, rgb(69, 69, 69, 0.8) 0%, rgba(69, 69, 69, 0.8) 80%, rgba(191, 191, 191, 0) 100%);
+    padding: 25px 0px 10px 0px;
+    text-align: center;
+    margin: 0px;
+    padding: 5px;
+    z-index: 2;
+
+}
+
+.cart-series {
+    position: absolute;
+    right: 0px;
+    background-color: #353434bd;
+    padding: 0px 15px 7px 18px;
+    border-radius: 0px 0px 0px 20px;
+    font-size: 2.2rem;
+    z-index: 1;
+}
+
+/* #info_title::before {
+    content: '';
+    width: .5em;
+    height: .5em;
+    border-radius: 1em;
+    background-color: #20ff87;
+    margin-right: .5em;
+  } */
+
+
+
+.cart_ {
+    border-color: rgba(0, 0, 0, 0);
+    /* border-color: rgb(255, 255, 255); */
+    overflow: hidden;
+    border-radius: 15px;
+    border-style: solid;
+    border-width: 0.3rem;
+    margin: 5px;
+
+    scale: 1;
+
+    /* scale: 0;
+    transition: scale 0.5s ease; */
+
+    user-select: none;
+
+    /* opacity: 0%;
+    transition: opacity 2s ease; */
+
+}
+
+.cart_n {
+    height: 25rem;
+    width: 17rem;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.cart_n:hover {
+    border-color: rgba(0, 0, 0, 0) !important;
+}
+
+.cart_n_bg {
+    --bs-bg-opacity: 1;
+    border-color: #212529;
+    border-style: solid;
+    border-width: 0.3rem;
+    border-radius: 15px;
+}
+
+.cart_spawn {
+    scale: 1;
+    /* opacity: 100%; */
+}
+
+.cart_:hover {
+    border-color: rgb(255, 255, 255);
+
+    .cart-title,
+    .cart-fav {
+        visibility: visible;
+    }
+
+}
+
+#ToastsMain {
+    right: 30px;
+}
+
+
+
+/* ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+
+
+.AniLibria\.TV {
+    color: rgb(250, 145, 145);
+}
+
+.Dream\%20Cast {
+    color: rgb(136, 255, 255)
+}
+
+.AniStar {
+    color: rgb(251, 73, 251);
+}
+
+.AnimeVost {
+    color: rgb(101, 214, 101);
+}
+
+.AniDUB,
+.AniDub\%20Online {
+    color: rgb(214, 161, 101);
+}
+
+.SHIZAProject {
+    color: rgb(118, 101, 214);
+}
+
+.JAM {
+    color: rgb(214, 101, 101);
+}
+
+.SHIZA\%20Project {
+    color: rgb(101, 214, 180);
+}
+
+.\%D0\%94\%D1\%83\%D0\%B1\%D0\%BB\%D0\%B8\%D1\%80\%D0\%BE\%D0\%B2\%D0\%B0\%D0\%BD\%D0\%BD\%D1\%8B\%D0\%B9 {
+    color: rgb(151, 255, 31);
+}
+
+.VF-Studio {
+    color: rgb(243, 73, 73);
+}

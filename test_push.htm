@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+ <div>ghbdtn</div>
+</body>
+<style>
+    body {
+        background-color: rgb(66, 66, 66);
+        color: aliceblue;
+    }
+</style>
+<script>
+    var notification;
+    async function initNotif() {
+        const perm = await Notification.requestPermission()
+        if (perm != "granted") return
+
+        const notification = setTimeout(() => {
+            if (document.visibilityState == "hidden") {
+                const Notification1 = new Notification('title',
+                    {
+                        body: "text text text",
+                        tag: "1",
+                        icon: "favicon.png",
+                    }, 3000)
+            }
+        })
+
+        document.addEventListener('visibilitychange', () => {
+            notification.close()
+        })
+    }
+
+    async function test() {
+        const perm = await Notification.requestPermission()
+        if (perm != "granted") {
+            alert(perm)
+            return
+        }
+        notification = new Notification('title',
+            {
+                body: Math.random(),
+                // tag: "1",
+                icon: "favicon.png",
+            })
+
+
+    }
+    // test()
+
+    // notification.addEventListener("close", ()=>{})
+    // notification.addEventListener("click", ()=>{})
+    // notification.addEventListener("show", ()=>{})
+    // notification.addEventListener("error", ()=>{})
+
+
+
+
+
+
+
+
+
+
+    // Открываем новое окно
+// var newWindow = window.open("", "New Window", "width=500,height=500");
+
+
+// newWindow.document.body.innerHTML = localStorage.getItem('BaseAnime');
+
+
+
+var jsonObject = { name: "John", age: 30, city: "New York" }; // ваш JSON-объект
+
+var windowFeatures = "width=500,height=500,scrollbars=yes,resizable=yes"; // параметры нового окна
+
+var newWindow = window.open("", "JSON Window", windowFeatures); // открываем новое окно
+
+// newWindow.document.write("<pre>" +  JSON.stringify(localStorage.getItem('BaseAnime'), null, 2) + "</pre>"); // выводим JSON-объект в новом окне
+// newWindow.document.body.innerHTML = `<div>${localStorage.getItem('BaseAnime').toString()}</div>`
+newWindow.document.body.textContent = localStorage.getItem('BaseAnime')
+newWindow.document.body.select()
+// JSON.stringify(jsonObject, null, 2)
+
+
+
+    const KeyTab = Math.floor(Math.random() * 10000000000)
+
+    document.cookie = getCookie("KeyTab") ? `` : `KeyTab=${KeyTab}; path=/; max-age=10`
+
+
+
+
+
+/*     setInterval(() => {
+        // 
+        if (getCookie("KeyTab") == KeyTab) {
+            console.log("yes")
+        } else {
+            console.log("no")
+        }
+        if(!getCookie("KeyTab"))
+        {
+            document.cookie = getCookie("KeyTab") ? `` : `KeyTab=${KeyTab}; path=/; max-age=10`
+        }
+        console.log(getCookie("KeyTab"))
+    }, 1000); */
+
+
+
+    function getCookie(name) {
+        var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+
+</script>
+
+</html>

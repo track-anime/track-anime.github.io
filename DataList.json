@@ -1,0 +1,409 @@
+{
+    "name": ".",
+    "suffix": "",
+    "type": "directory",
+    "children": [
+        {
+            "name": "24.05.14_23.20.zip",
+            "suffix": ".zip",
+            "type": "file"
+        },
+        {
+            "name": "alloha.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "background.jpg",
+            "suffix": ".jpg",
+            "type": "file"
+        },
+        {
+            "name": "bg",
+            "suffix": "",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "00c68e6bbd1b908d7ccc126fb45a0bbc2da27266.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "07eab176f4c8350fa1d1a155f4aa0e02df16366e.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "084d4c461f982e99875bf4fa806dc781fb663f6a.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "0ba6fd55f7b6484c95070d74202f61e87ea97670.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "0fa275e7aa6514e876d5c34482010e9e6c7051f3.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "1.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "1268baa358f829251da1e9b3d8d360de03897f0a.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "15f98be9a40fad87c9dd48a1cde07355f76c67a7.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "15fdcd9d7f14867f062e1e33744d07649ee95f93.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "171b546c4c2e97f81248b10b986d90c97ecf59f4.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "190a09273d192e90b8bf234a102e5f15ddf92eac.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "1f1c989ef0bf64090fc572877bc6ab56b25f4423.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "2.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "274999ab083cc9d7a9a9edbf85100eb0e4fbc70b.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "3.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "34642fc890b7e6131fc4f23e1ea40518cf66f8ea.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "35b4332b696ffa92b1bb49356757762c1cda6da6.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "382344e97a4587c1773728480610d76dba4eb9f3.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "3d0953f0036a6be0d9cfde1a25c29b9cc20cffad.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "3e118cd98accdd6e68750dac59bf290a4596442d.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "41c6b63020bfe954fb326126596e486b525f2f64.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "468c12b70d194e6368d9324051c7f7de0346c9fa.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "4dac2d572c270c82ff296af288daf0578f40787d.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "569fc363a280dec28447cc84bcbcafba8a09831d.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "586bc6b8df20af276aa242a93241df58eeb39673.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "593891874304e86c41f233d7d9e17294408951db.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "5a68f07c7dc7e656939cec334a27f7c288d93bf2.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "620f925d0c5a6cfe5e24fc1d558ed6f0395eb3c9.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "70334d36cafc3ef88a9d66eef3a5bc5df9f3b249.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "71bc32ef02d7548d16fabb52a05fe7f263635fad.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "7de331fa9e3eb7c71721310069799980f91b20d9.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "7f623ee3f773bc93bc8422d3f1af9cd0aa441be0.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "82ddcd89d3f0d3b80202f784573da645d0533d3b.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "84e0b8640ba2162066910cb7c1684e5439d27c9d.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "880bd035177910fe9167c9175f6e8c21a51b9d54.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "8b2cd706d75a23e2c2bc7342a9a3b7bd030efde4.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "95de71b2337a50f98981001dad3f318a6c20777b.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "a22c61914fd94b9e07216d74dacb3731678a999d.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "ad5ea69d056af9ccae0305fd93f172b5c5c981ea.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "af3ea8cca121926efecf8bbcf25e44fd8fd1c5df.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "b163ccd1df401e9227f94a2f0c1febbf39fc57f0.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "b33554c24506c4b097bca0fafde11081a88be8ad.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "b450ca4953a16ccd5a14bde57a196d0c659bbb9a.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "c00e957fa76f727d8f90c63358e29c48539780ad.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "c52bd196a5168a307e18308c5edeb0f23b76f862.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "c6231a36171fc2c2eb5998a1fcd0e76a378d9ac3.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "c66b45f8ab2fd857add1925e70036544cf0381f6.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "ce7803bf66444e496762bd50d744c4f208bb1bd1.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "d1fbb1e8bdf52d6450144651eea784c5d033f365.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "da81c9878a28ebd725e91f4f588e97fcac769251.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "db1af5fd27f000a8e786ee780e952e899d25d205.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "db7df308d8bb6d5f4b042804eea082b3f691082c.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "e1af508f3bc737e9e9f7c6801a99c3c6c7c4e30e.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "e5f4d82302253688e9bb36e820534936b342a9ba.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "e9649b16b7c007c8c0b0fb3722b924bbba185ea8.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "ead22b544aed120a6c60e42627ce71858396d227.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "ef663b2e7ba33a90395061d09483194cd6f660a2.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "f1e841dba538e381aef57a6af71e4e8de63797ef.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "fbe3d1c40bd25d711366e04f7d332931ab214937.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                },
+                {
+                    "name": "ffaf416ed4076c6da5dfaec7f5dcf518fae05028.jpg",
+                    "suffix": ".jpg",
+                    "type": "file"
+                }
+            ]
+        },
+        {
+            "name": "DataList.json",
+            "suffix": ".json",
+            "type": "file"
+        },
+        {
+            "name": "favicon.png",
+            "suffix": ".png",
+            "type": "file"
+        },
+        {
+            "name": "google.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "index.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "index.js",
+            "suffix": ".js",
+            "type": "file"
+        },
+        {
+            "name": "meloboom.mp3",
+            "suffix": ".mp3",
+            "type": "file"
+        },
+        {
+            "name": "scan.exe",
+            "suffix": ".exe",
+            "type": "file"
+        },
+        {
+            "name": "shikimori.api.js",
+            "suffix": ".js",
+            "type": "file"
+        },
+        {
+            "name": "shikimori_api.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "shikimori_api.js",
+            "suffix": ".js",
+            "type": "file"
+        },
+        {
+            "name": "styles.css",
+            "suffix": ".css",
+            "type": "file"
+        },
+        {
+            "name": "test-aniboom.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "test-cart.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "test-Info.htm",
+            "suffix": ".htm",
+            "type": "file"
+        },
+        {
+            "name": "test.json",
+            "suffix": ".json",
+            "type": "file"
+        },
+        {
+            "name": "test_push.htm",
+            "suffix": ".htm",
+            "type": "file"
+        }
+    ]
+}
