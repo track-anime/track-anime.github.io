@@ -275,9 +275,43 @@ document.addEventListener("authorize", function (e) { // (1)
     // console.log(1, sh_api.UserData)
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
     document.getElementById("User_Menu_Button").querySelector('span').textContent = sh_api.UserData.nickname
-    var status = { num: {}, name: {} }
+    sh_api.status = sh_api.status ? sh_api.status : {
+        name: {
+
+        }
+    }
+    var status = {
+        "num": {
+            "watching": 0,
+            "completed": 0,
+            "dropped": 0,
+            "on_hold": 0,
+            "planned": 0,
+            "rewatching": 0,
+        },
+        "name": [
+            "смотрю",
+            "просмотренно",
+            "брошено",
+            "отложено",
+            "запланировано",
+            "пересматриваю",
+        ],
+        "name2": [
+            "watching",
+            "completed",
+            "dropped",
+            "on_hold",
+            "planned",
+            "rewatching",
+        ]
+    }
     list_fav.querySelectorAll(".ned").forEach(e => {
         e.innerHTML = ""
+    });
+
+    document.querySelectorAll("#list_fav .ned_name").forEach((e, i) => {
+        e.status = status.name2[i]
     });
 
     sh_api.Favorits.data.forEach(e => {
@@ -322,10 +356,22 @@ document.addEventListener("authorize", function (e) { // (1)
 
         const cart = add_cart(e1)
         status.num[e.status] = status.num[e.status] ? status.num[e.status] + 1 : 1
-        status.name[e.status] = status.name[e.status] ? status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
+        // sh_api.status.name[e.status] = sh_api.status.name[e.status] ? sh_api.status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
         document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
-        document.querySelector(`#fav_${e.status} .ned_name`).textContent = `${status.name[e.status]} ${status.num[e.status]}`
+        // document.querySelector(`#fav_${e.status} .ned_name`).status = e.status
+        console.log(e.status)
     });
+
+    document.querySelectorAll("#list_fav .ned_name").forEach((e, i) => {
+        console.log(e.status)
+        e.textContent = `${status.name[i]} ${status.num[e.status]}`
+
+
+    });
+    console.log(status)
+    // num.forEach(e => {
+    //     document.querySelector(`#fav_${e.status} .ned_name`).textContent = `${sh_api.status.name[e.status]} ${num[e.status]}`
+    // });
 
 });
 
