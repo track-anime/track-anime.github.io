@@ -17,6 +17,9 @@ const list_calendar = document.getElementById("list_calendar");
 const container_ = document.body.querySelector('.container_');
 const load = document.getElementById("load");
 const list_fav = document.getElementById("list_fav");
+const list_serch = document.getElementById("list_serch");
+const list_history = document.getElementById("list_history");
+
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 // const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 // const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
@@ -275,7 +278,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
     // console.log("authorize", e)
     sh_api.Favorits.data.forEach(e => {
-        // console.log(e)
+        console.log(e)
         if (e.status == "watching" && !base_anime.fav.includes(e.anime.id.toString())) {
             base_anime.fav.push(e.anime.id.toString())
             localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -295,7 +298,12 @@ document.addEventListener("authorize", function (e) { // (1)
             "shikimori": e.anime.id.toString(),
             "status": e.anime.status,
             "raiting": e.anime.score,
-            "material_data": [],
+            "material_data": {
+                poster_url: `https://shikimori.one${e.anime.image.original}`,
+                anime_kind: `${e.anime.kind}`,
+                anime_title: `${e.anime.title}`,
+
+            },
             "id": e.id,
             "screenshots": [],
             "e": e,
@@ -303,6 +311,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
         const cart = add_cart(e1)
         document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
+        // HistoryIsActivy = false
         // console.log(1, e1)
     });
 
@@ -352,7 +361,11 @@ closeDialogButton.addEventListener('click', () => {
 });
 document.getElementById("list_calendar_Button").addEventListener('click', async (e) => {
     console.log(e.shiftKey)
-    if (e.shiftKey) return getChapter("#list_fav")
+    if (e.shiftKey) {
+        HistoryIsActivy = false
+        getChapter("#list_fav")
+        return
+    }
     getCalendar()
 });
 document.getElementById("list_home_Button").addEventListener('click', async () => {
@@ -986,13 +999,15 @@ async function GetKodi(seartch, revers) {
     ld = true
     // if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - scrollM && HistoryIsActivy == true && document.getElementById('search_input').value ) {
     // if(container_.clientHeight + container_.scrollTop > container_.scrollHeight - scrollM){
+
     if ((window.innerHeight + window.scrollY) >= container_.offsetHeight - scrollM) {
-        if (!seartch || seartch == undefined || seartch == "") {
+        if ((!seartch || seartch == undefined || seartch == "")) {
+            getChapter("#list_serch")
             HistoryIsActivy = true
             ignoreVoice = false
-            document.getElementById('list_history').classList.add("hide")
+            // document.getElementById('list_history').classList.add("hide")
+
             targetFrame = document.getElementById('list_serch')
-            getChapter("#list_serch")
 
             if (revers) {
                 dat = await httpGet(URLListStart)
