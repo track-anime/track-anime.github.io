@@ -285,23 +285,32 @@ document.addEventListener("authorize", function (e) { // (1)
         }  //sh_api.Favorits.ids.push(e.anime.id)
 
         const e1 = {
-            "title": e.anime.title,
+            "title": e.anime.russian,
             "cover": `https://shikimori.one${e.anime.image.original}`,
             // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
             "date": formatDate(e.updated_at),
             // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
             "voice": e.status,
             "series": e.anime.episodes ? e.anime.episodes : "M",
-            "link": `https://shikimori.one${e.anime.url}`,
-            "kp": "?",
-            "imdb": "?",
+            "link": `https://kodik.cc/find-player?shikimoriID=${e.anime.id}`,
+            "kp": null,
+            "imdb": null,
             "shikimori": e.anime.id.toString(),
             "status": e.anime.status,
             "raiting": e.anime.score,
             "material_data": {
                 poster_url: `https://shikimori.one${e.anime.image.original}`,
                 anime_kind: `${e.anime.kind}`,
-                anime_title: `${e.anime.title}`,
+                anime_title: `${e.anime.russian}`,
+                episodes_aired: `${e.anime.episodes_aired}`,
+                episodes_total: `${e.anime.episodes}`,
+                description: ``,
+                anime_status: `${e.anime.status}`,
+                anime_studios: ``,
+                year: `${e.anime.aired_on}`,
+                rating_mpaa: ``,
+                shikimori_rating: `${e.anime.score}`,
+
 
             },
             "id": e.id,
