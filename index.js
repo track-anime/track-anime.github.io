@@ -275,10 +275,12 @@ document.addEventListener("authorize", function (e) { // (1)
     // console.log(1, sh_api.UserData)
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
     document.getElementById("User_Menu_Button").querySelector('span').textContent = sh_api.UserData.nickname
+    var status = { num: {}, name: {} }
+    list_fav.querySelectorAll(".ned").forEach(e => {
+        e.innerHTML = ""
+    });
 
-    // console.log("authorize", e)
     sh_api.Favorits.data.forEach(e => {
-        console.log(e)
         if (e.status == "watching" && !base_anime.fav.includes(e.anime.id.toString())) {
             base_anime.fav.push(e.anime.id.toString())
             localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -319,9 +321,10 @@ document.addEventListener("authorize", function (e) { // (1)
         }
 
         const cart = add_cart(e1)
+        status.num[e.status] = status.num[e.status] ? status.num[e.status] + 1 : 1
+        status.name[e.status] = status.name[e.status] ? status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
         document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
-        // HistoryIsActivy = false
-        // console.log(1, e1)
+        document.querySelector(`#fav_${e.status} .ned_name`).textContent = `${status.name[e.status]} ${status.num[e.status]}`
     });
 
 });
