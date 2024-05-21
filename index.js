@@ -205,7 +205,8 @@ function setVideoInfo(e) {
         btn_sh_save.classList.add("hide")
         return
     }
-    btn_sh_save.sh_fv = sh_api.Favorits.data.find(item => item.anime.id == e.shikimori)
+
+    btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.shikimori)
 
     btn_sh_save.classList.remove("hide")
     btn_sh_save.classList.remove("btn-outline-light")
