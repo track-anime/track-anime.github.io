@@ -45,97 +45,100 @@
 </head>
 
 <link rel="stylesheet" type="text/css" href="/styles.css" media="screen" />
-<body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="/">Track Anime By ДугДуг</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Переключатель навигации">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <button id="list_home_Button" class="nav-link active" aria-current="page">Главная</button>
-                    </li>
-                    <li class="nav-item">
-                        <button id="list_calendar_Button" aria-current="page"
-                            class="btn-link nav-link">Календарь</button>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            Настройки
-                        </a>
-                        <ul class="dropdown-menu" style="min-width: 200px;">
-                            <!-- <li class="nav-item"><a class="nav-link disabled">Отключенная</a></li> -->
-                            <!-- <li><a class="dropdown-item disabled" href="">Сортировка по рейтингу</a></li> -->
-                            <li>
-                                <span class="dropdown-item-text" id="RangeRaitingTitle">Фильтр по рейтингу:</span>
-                            </li>
-                            <li><input type="range" class="form-range px-2" min="0.1" max="10" step="0.1" value="2"
-                                    id="RangeRaiting"></input></li>
-                    </li>
-                    <!--                     <li>
-                        <hr class="dropdown-divider">
-                    </li> -->
-                    <li class="form-check form-switch nav-item mx-2">
-                        <input class="form-check-input" type="checkbox" value="" id="CheckChinaTrash" disabled>
 
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Включить китай
-                        </label>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-                    <li class="nav-item">
-                        <button id="VoiceButtonMenu" aria-current="page" class="dropdown-item">Озвучки</button>
-                    </li>
-                    <!-- <li><a class="dropdown-item disabled" href="">Действие</a></li> -->
-
-                    <!-- <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li> -->
-                </ul>
-                </li>
-                </ul>
-                <form class="d-flex w-25" role="search" id="search_form">
-                    <input id="search_input" name="search_input" class="form-control me-2" type="search"
-                        placeholder="Поиск" aria-describedby="search anume" aria-label="Поиск">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
-                </form>
-                <button id="list_login_Button" aria-current="page" class="btn btn-outline-primary mx-2">Вход</button>
-
-                <div class="btn-group dropstart ">
-                    <button type="button" id="User_Menu_Button"
-                        class="mx-2 btn btn-outline-primary dropdown-toggle hide" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        <img class="mx-2" alt="Image" width="24" height="24"
-                            src="https://desu.shikimori.one/system/users/x48/1393072.png"></img>
-                        <span>UserName</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                        <!-- <li><a class="dropdown-item" href="#">Элемент меню</a></li> -->
-                        <!-- <li><a class="dropdown-item" href="#">Элемент меню</a></li> -->
-                        <li><button class="dropdown-item" id="User_cloud_sinc_button">Выгрузить в облако</button></li>
-                        <!-- <li><a class="dropdown-item" id="User_sinc_button" >Выгрузить в облако</a></li> -->
-                        <li><button class="dropdown-item" id="User_Logaut_button">Выход</button></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <div class="hide" id="load">
-        <div class="spinner-border text-primary" role="status" style="scale: 3;">
-            <span class="visually-hidden">Loading...</span>
-        </div>
+<div class="hide" id="load">
+    <div class="spinner-border text-primary" role="status" style="scale: 3;">
+        <span class="visually-hidden">Loading...</span>
     </div>
+</div>
 
+<body>
     <div aria-live="polite" aria-atomic="true" class="position-relative">
         <div id="ToastsMain" class="toast-container position-fixed bottom-0 p-3">
         </div>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Track Anime By ДугДуг</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Переключатель навигации">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <button id="list_home_Button" class="nav-link active" aria-current="page">Главная</button>
+                        </li>
+                        <li class="nav-item">
+                            <button id="list_calendar_Button" aria-current="page"
+                                class="btn-link nav-link">Календарь</button>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Настройки
+                            </a>
+                            <ul class="dropdown-menu" style="min-width: 200px;">
+                                <!-- <li class="nav-item"><a class="nav-link disabled">Отключенная</a></li> -->
+                                <!-- <li><a class="dropdown-item disabled" href="">Сортировка по рейтингу</a></li> -->
+                                <li>
+                                    <span class="dropdown-item-text" id="RangeRaitingTitle">Фильтр по рейтингу:</span>
+                                </li>
+                                <li><input type="range" class="form-range px-2" min="0.1" max="10" step="0.1" value="2"
+                                        id="RangeRaiting"></input></li>
+                        </li>
+                        <!--                     <li>
+                        <hr class="dropdown-divider">
+                    </li> -->
+                        <li class="form-check form-switch nav-item mx-2">
+                            <input class="form-check-input" type="checkbox" value="" id="CheckChinaTrash" disabled>
+
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Включить китай
+                            </label>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li class="nav-item">
+                            <button id="VoiceButtonMenu" aria-current="page" class="dropdown-item">Озвучки</button>
+                        </li>
+                        <!-- <li><a class="dropdown-item disabled" href="">Действие</a></li> -->
+
+                        <!-- <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li> -->
+                    </ul>
+                    </li>
+                    </ul>
+                    <form class="d-flex w-25" role="search" id="search_form">
+                        <input id="search_input" name="search_input" class="form-control me-2" type="search"
+                            placeholder="Поиск" aria-describedby="search anume" aria-label="Поиск">
+                        <button class="btn btn-outline-success" type="submit">Поиск</button>
+                    </form>
+                    <button id="list_login_Button" aria-current="page"
+                        class="btn btn-outline-primary mx-2">Вход</button>
+
+                    <div class="btn-group dropstart ">
+                        <button type="button" id="User_Menu_Button"
+                            class="mx-2 btn btn-outline-primary dropdown-toggle hide" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img class="mx-2" alt="Image" width="24" height="24"
+                                src="https://desu.shikimori.one/system/users/x48/1393072.png"></img>
+                            <span>UserName</span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <!-- <li><a class="dropdown-item" href="#">Элемент меню</a></li> -->
+                            <!-- <li><a class="dropdown-item" href="#">Элемент меню</a></li> -->
+                            <li><button class="dropdown-item" id="User_cloud_sinc_button">Выгрузить в облако</button>
+                            </li>
+                            <!-- <li><a class="dropdown-item" id="User_sinc_button" >Выгрузить в облако</a></li> -->
+                            <li><button class="dropdown-item" id="User_Logaut_button">Выход</button></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </nav>
     </div>
+
     <div class="container_">
         <div class="anime_list hide" id="list_calendar">
             <details class="ned_spoiler">
@@ -170,6 +173,32 @@
 
         <div class="anime_list" id="list_history"></div>
         <div class="anime_list hide" id="list_serch"></div>
+        <div class="anime_list hide" id="list_fav">
+            <details id="fav_watching" class="ned_spoiler">
+                <summary class="ned_name">смотрю</summary>
+                <div class="ned"></div>
+            </details>
+            <details id="fav_completed" class="ned_spoiler">
+                <summary class="ned_name">просмотренно</summary>
+                <div class="ned"></div>
+            </details>
+            <details id="fav_dropped" class="ned_spoiler">
+                <summary class="ned_name">брошено</summary>
+                <div class="ned"></div>
+            </details>
+            <details id="fav_on_hold" class="ned_spoiler">
+                <summary class="ned_name">отложено</summary>
+                <div class="ned"></div>
+            </details>
+            <details id="fav_planned" class="ned_spoiler">
+                <summary class="ned_name">запланировано</summary>
+                <div class="ned"></div>
+            </details>
+            <details id="fav_rewatching" class="ned_spoiler">
+                <summary class="ned_name">пересматриваю</summary>
+                <div class="ned"></div>
+            </details>
+        </div>
     </div>
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
