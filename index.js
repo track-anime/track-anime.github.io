@@ -418,8 +418,8 @@ closeDialogButton.addEventListener('click', () => {
     window.history.pushState({}, '', url_get);
 });
 document.getElementById("list_calendar_Button").addEventListener('click', async (e) => {
-    console.log(e.shiftKey)
-    if (e.shiftKey) {
+    // console.log(e.shiftKey)
+    if (e.shiftKey && sh_api.authorize) {
         HistoryIsActivy = false
         getChapter("#list_fav")
         return
