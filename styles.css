@@ -18,7 +18,6 @@ body {
     height: 95%;
     position: absolute; */
 }
-
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
@@ -30,7 +29,6 @@ body {
     border-color: #204d74;
     /* Темно-синий цвет */
 }
-
 .btn-success:hover,
 .btn-success:focus,
 .btn-success:active,
@@ -84,11 +82,10 @@ body {
 .btn-info:active,
 .btn-info.active,
 .open>.dropdown-toggle.btn-info {
-    color: #fff;
-    background-color: #386ab2;
-    /* Темно-голубой цвет */
-    border-color: #25518a;
-    /* Темно-голубой цвет */
+    color: #000;
+    background-color: #31d2f2;
+    border-color: #25cff2;
+
 }
 
 #load {
@@ -162,13 +159,15 @@ body {
     width: 100%;
 } */
 
-#list_calendar {
+#list_calendar, #list_fav {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: stretch;
 }
+
+
 
 .anime_list {
     top: 0;

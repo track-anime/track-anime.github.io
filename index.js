@@ -16,7 +16,7 @@ const VideoPlayer = document.getElementById('VideoPlayer');
 const list_calendar = document.getElementById("list_calendar");
 const container_ = document.body.querySelector('.container_');
 const load = document.getElementById("load");
-
+const list_fav = document.getElementById("list_fav");
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 // const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 // const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
@@ -280,7 +280,32 @@ document.addEventListener("authorize", function (e) { // (1)
             base_anime.fav.push(e.anime.id.toString())
             localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
         }  //sh_api.Favorits.ids.push(e.anime.id)
+
+        const e1 = {
+            "title": e.anime.title,
+            "cover": `https://shikimori.one${e.anime.image.original}`,
+            // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
+            "date": formatDate(e.updated_at),
+            // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+            "voice": e.status,
+            "series": e.anime.episodes ? e.anime.episodes : "M",
+            "link": `https://shikimori.one${e.anime.url}`,
+            "kp": "?",
+            "imdb": "?",
+            "shikimori": e.anime.id.toString(),
+            "status": e.anime.status,
+            "raiting": e.anime.score,
+            "material_data": [],
+            "id": e.id,
+            "screenshots": [],
+            "e": e,
+        }
+
+        const cart = add_cart(e1)
+        document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
+        // console.log(1, e1)
     });
+
 });
 
 
@@ -309,6 +334,13 @@ function getBackground() {
     // document.body.style.backgroundImage = `url(bg/7f623ee3f773bc93bc8422d3f1af9cd0aa441be0.jpg)`
 }
 
+function getChapter(name) {
+    document.querySelectorAll(".anime_list").forEach(e => {
+        e.classList.add("hide")
+    });
+    name ? document.querySelector(name).classList.remove("hide") : null
+}
+
 closeDialogButton.addEventListener('click', () => {
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     VideoPlayerAnime.close();
@@ -318,7 +350,9 @@ closeDialogButton.addEventListener('click', () => {
 
     window.history.pushState({}, '', url_get);
 });
-document.getElementById("list_calendar_Button").addEventListener('click', async () => {
+document.getElementById("list_calendar_Button").addEventListener('click', async (e) => {
+    console.log(e.shiftKey)
+    if (e.shiftKey) return getChapter("#list_fav")
     getCalendar()
 });
 document.getElementById("list_home_Button").addEventListener('click', async () => {
@@ -411,9 +445,7 @@ async function getHome(iss) {
     // location.reload()
     HistoryIsActivy = true
     TypePage = 0
-    document.getElementById("list_calendar").classList.add("hide")
-    document.getElementById("list_history").classList.add("hide")
-    document.getElementById("list_serch").classList.remove("hide")
+    getChapter("#list_serch")
 
     nav_panel_buttons.querySelectorAll('button').forEach((e) => {
         e.classList.remove("active")
@@ -446,9 +478,8 @@ async function getCalendar() {
 
 async function addCalendar() {
     document.getElementById('search_input').value = ""
-    document.getElementById("list_history").classList.add("hide")
-    document.getElementById("list_serch").classList.add("hide")
-    document.getElementById("list_calendar").classList.remove("hide")
+    getChapter("#list_calendar")
+
     var URLCalendarAdd = URLCalendar;
     var data = []
     var d1
@@ -708,7 +739,7 @@ function add_cart(e) {
     imgTop.classList.add('cart-img-top');
     imgTop.alt = 'cover';
     cart.appendChild(imgTop);
-    
+
     imgTop.addEventListener("mousedown", (event) => {
         console.log(event.which, event.button);
         var a = new URL(window.location.href)
@@ -716,8 +747,8 @@ function add_cart(e) {
         // console.log(a.href);
         // console.log(e.shikimori);
         // return
-        if(event.button==1) return window.open(a.href, '_blank')
-        if(event.button==2) return
+        if (event.button == 1) return window.open(a.href, '_blank')
+        if (event.button == 2) return
         e.shift = event.shiftKey
         dialog_(e, !event.shiftKey)
         cart.classList.remove("new_cart")
@@ -961,7 +992,7 @@ async function GetKodi(seartch, revers) {
             ignoreVoice = false
             document.getElementById('list_history').classList.add("hide")
             targetFrame = document.getElementById('list_serch')
-            targetFrame.classList.remove("hide")
+            getChapter("#list_serch")
 
             if (revers) {
                 dat = await httpGet(URLListStart)
@@ -982,9 +1013,8 @@ async function GetKodi(seartch, revers) {
             ignoreVoice = true
             document.getElementById('search_input').value = decodeURIComponent(seartch)
             targetFrame = document.getElementById('list_history')
-            targetFrame.classList.remove("hide")
+            getChapter("#list_history")
             targetFrame.innerHTML = ""
-            document.getElementById('list_serch').classList.add("hide")
             dat1 = await httpGet(`${URLSearch}${seartch}`)
             dat = {}
 
@@ -1018,7 +1048,7 @@ async function GetKodi(seartch, revers) {
 GetKodi(url_get.searchParams.get('seartch'))
 
 
-function ScanBase(e, i, revers) {
+/* function ScanBase(e, i, revers) {
     document.getElementById("loading-bar").classList.remove("hide");
     var t = 0
     if (i >= e.length) {
@@ -1038,7 +1068,7 @@ function ScanBase(e, i, revers) {
     setTimeout(() => {
         ScanBase(e, i + 1, revers);
     }, t);
-}
+} */
 
 function GetKodiScan(data, revers) {
 
