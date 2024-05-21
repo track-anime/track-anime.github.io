@@ -20,6 +20,7 @@ const list_fav = document.getElementById("list_fav");
 const list_serch = document.getElementById("list_serch");
 const list_history = document.getElementById("list_history");
 
+
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 // const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 // const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
@@ -248,6 +249,11 @@ function setVideoInfo(e) {
     }
 }
 
+document.getElementById('User_Fav_sinc_button').addEventListener('click', () => {
+    HistoryIsActivy = false
+    getChapter("#list_fav")
+})
+
 document.getElementById('VoiceButtonMenu').addEventListener('click', () => {
     VoiceSettingsMenu()
 })
@@ -419,11 +425,11 @@ closeDialogButton.addEventListener('click', () => {
 });
 document.getElementById("list_calendar_Button").addEventListener('click', async (e) => {
     // console.log(e.shiftKey)
-    if (e.shiftKey && sh_api.authorize) {
+/*     if (e.shiftKey && sh_api.authorize) {
         HistoryIsActivy = false
         getChapter("#list_fav")
         return
-    }
+    } */
     getCalendar()
 });
 document.getElementById("list_home_Button").addEventListener('click', async () => {
