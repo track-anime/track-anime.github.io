@@ -278,9 +278,16 @@ document.getElementById("VideoInfoBtn").addEventListener('click', () => {
 document.addEventListener("authorize", function (e) { // (1)
     document.getElementById("list_login_Button").classList.add('hide')
     document.getElementById("User_Menu_Button").classList.remove('hide')
-    // console.log(1, sh_api.UserData)
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
     document.getElementById("User_Menu_Button").querySelector('span').textContent = sh_api.UserData.nickname
+
+    const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
+    const difference = base_anime.fav.filter(element => !set2.has(element));
+    difference.length==0?document.getElementById("User_cloud_sinc_button").classList.add("hide"):document.getElementById("User_cloud_sinc_button").classList.remove("hide")
+    console.log("Несохранённых данных:", difference.length)
+
+
+    // document.getElementById("User_cloud_sinc_button")
     sh_api.status = sh_api.status ? sh_api.status : {
         name: {
 
@@ -365,16 +372,13 @@ document.addEventListener("authorize", function (e) { // (1)
         // sh_api.status.name[e.status] = sh_api.status.name[e.status] ? sh_api.status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
         document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
         // document.querySelector(`#fav_${e.status} .ned_name`).status = e.status
-        console.log(e.status)
     });
 
     document.querySelectorAll("#list_fav .ned_name").forEach((e, i) => {
-        console.log(e.status)
         e.textContent = `${status.name[i]} ${status.num[e.status]}`
 
 
     });
-    console.log(status)
     // num.forEach(e => {
     //     document.querySelector(`#fav_${e.status} .ned_name`).textContent = `${sh_api.status.name[e.status]} ${num[e.status]}`
     // });

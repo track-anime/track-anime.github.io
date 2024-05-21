@@ -189,7 +189,7 @@ sh_api.get_favorit = (sh_user) => {
 }
 
 sh_api.AddUserRates = (id, sl) => {
-
+    if(!sh_api.authorize) return console.log("Вы не авторизированы")
     var url = `https://shikimori.one/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'POST',
