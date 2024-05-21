@@ -21,6 +21,8 @@ const list_serch = document.getElementById("list_serch");
 const list_history = document.getElementById("list_history");
 
 
+
+
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 // const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
 // const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
@@ -1243,6 +1245,8 @@ function GetKodiScan(data, revers) {
     });
 }
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+
+
 
 
 
