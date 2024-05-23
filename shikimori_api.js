@@ -152,7 +152,7 @@ sh_api.get_user = (user, isanother) => {
         .then(data => {
             if (data == "404") {
                 console.log("404 Пользователь не найден")
-
+                document.dispatchEvent(sh_api.search_another);
                 sh_api.get_favorit(sh_api.UserData.id)
                 return
             }

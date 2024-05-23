@@ -287,9 +287,17 @@ document.getElementById("VideoInfoBtn").addEventListener('click', () => {
 
 })
 document.addEventListener("search_another", function (e) {
+
+    if (sh_api.another.status != 200) {
+        console.log(sh_api.another.status)
+        getHome()
+        load.show(false)
+        return
+    }
     console.log("search_another")
     GetFavoriteList("search_another")
     getChapter("#list_fav")
+    HistoryIsActivy = false
 })
 
 document.addEventListener("authorize", function (e) { // (1)
@@ -302,17 +310,17 @@ document.addEventListener("authorize", function (e) { // (1)
     const difference = base_anime.fav.filter(element => !set2.has(element));
 
     difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
-    
+
     console.log("Несохранённых данных:", difference.length, difference)
     GetFavoriteList("authorize")
 });
 
 
 function GetFavoriteList(type) {
-    var sh_f = sh_api
+    var sh_f = type == "search_another" ? sh_api.another : sh_api
 
-    if (type == "search_another") sh_f = sh_api.another
-    
+    // if (type == "search_another") sh_f = sh_api.another
+
 
     // document.getElementById("User_cloud_sinc_button")
     sh_f.status = sh_f.status ? sh_f.status : {
@@ -1164,7 +1172,7 @@ async function GetKodi(seartch, revers) {
 }
 // }
 
-url_get.searchParams.get('sh_user_fav')?GetFavUsersList(url_get.searchParams.get('sh_user_fav')):GetKodi(url_get.searchParams.get('seartch'))
+url_get.searchParams.get('sh_user_fav') ? GetFavUsersList(url_get.searchParams.get('sh_user_fav')) : GetKodi(url_get.searchParams.get('seartch'))
 
 
 
