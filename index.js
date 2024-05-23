@@ -286,7 +286,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
     const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
     const difference = base_anime.fav.filter(element => !set2.has(element));
-    difference.length==0?document.getElementById("User_cloud_sinc_button").classList.add("hide"):document.getElementById("User_cloud_sinc_button").classList.remove("hide")
+    difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
     console.log("Несохранённых данных:", difference.length)
 
 
@@ -432,11 +432,11 @@ closeDialogButton.addEventListener('click', () => {
 });
 document.getElementById("list_calendar_Button").addEventListener('click', async (e) => {
     // console.log(e.shiftKey)
-/*     if (e.shiftKey && sh_api.authorize) {
-        HistoryIsActivy = false
-        getChapter("#list_fav")
-        return
-    } */
+    /*     if (e.shiftKey && sh_api.authorize) {
+            HistoryIsActivy = false
+            getChapter("#list_fav")
+            return
+        } */
     getCalendar()
 });
 document.getElementById("list_home_Button").addEventListener('click', async () => {

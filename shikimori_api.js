@@ -3,9 +3,10 @@ var sh_api = {}
 sh_api.url_get = new URL(window.location.href)
 sh_api.UserData = {}
 sh_api.Favorits = {}
-sh_api.another = {}
+sh_api.another = {UserData:{}, Favorits:{},status:"0"}
 sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
+sh_api.search_another = new Event("search_another", { bubbles: true })
 sh_api.code = sh_api.url_get.searchParams.get('code')
 sh_api.status_lable = [
     "watching",
@@ -136,19 +137,30 @@ sh_api.get_user = (user, isanother) => {
     const url = `https://shikimori.one/api/users/${user ? user : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
         .then(response => {
+            sh_api.another.status = response.status
             if (response.ok) {
                 return response.json();
             } else {
+                
+                if(response.status=="404") return response.status
+
                 throw new Error('Ответ сети был не в порядке. get_user');
             }
         })
         .then(data => {
+            if(data=="404") {
+                console.log("404 Пользователь не найден")
+
+                sh_api.get_favorit(sh_api.UserData.id)
+                return 
+            }
             sh_api.authorize = true
             console.log("user_data", data);
             isanother ? sh_api.another.UserData = data : sh_api.UserData = data
-            sh_api.get_favorit(user, isanother)
+            sh_api.get_favorit(sh_api.another.UserData.id, isanother)
         })
         .catch(error => {
+            
             console.error('Возникла проблема с операцией выборки get_user:', error);
         });
 
@@ -171,7 +183,9 @@ sh_api.get_favorit = (sh_user, isanother) => {
         })
         .then(data => {
             if (isanother) {
-
+                sh_api.another.Favorits.data = data
+                document.dispatchEvent(sh_api.search_another);
+                console.log(sh_api.another.UserData.nickname, sh_api.another.Favorits.data)
             } else {
                 sh_api.authorize = true
                 console.log("anime_rates", data);
@@ -242,3 +256,24 @@ sh_api.DelUserRates = (id, sl) => {
 
 
 if (sh_api.code) sh_api.add_token()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*     
+https://shikimori.one/api/doc/1.0
+https://shikimori.one/api/doc/2.0
+https://shikimori.one/oauth/applications
+*/
