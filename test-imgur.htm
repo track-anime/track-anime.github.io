@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<style>
+    html {
+        color-scheme: light dark;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    var myHeaders = new Headers();
+    myHeaders.append("Authorization", "Client-ID {{9d27ee96f84abb8}}");
+    const albumHash = "veeVW0A"
+    const client_id = "9d27ee96f84abb8"
+    var formdata = new FormData();
+
+    var requestOptions = {
+        method: 'GET',
+        headers: myHeaders,
+        body: formdata,
+        redirect: 'follow'
+    };
+    get_albom_imgur(albumHash)
+    async function get_albom_imgur(albumHash) {
+        var response = await fetch(`https://api.imgur.com/3/album/${albumHash}?client_id=${client_id}`);
+        if (response.status != 200) return
+        var data = await response.json();
+
+        console.log(data)
+        console.log(data.data)
+        console.log(data.data.images)
+        var h = ""
+        data.data.images.forEach(e => {
+            if (e.type == 'image/jpeg') {
+                // console.log(e.link)
+                h=`${h}	<img src="${e.link}"/> <img src="https://example.com/photo/low.jpg">`}
+        });
+        document.body.innerHTML = h
+    }
+
+    // fetch(`https://api.imgur.com/3/album/${albumHash}?client_id=${client_id}`)
+    //     .then(response => response.text())
+    //     .then(result => console.log(result))
+    //     .catch(error => console.log('error', error));
+</script>
+
+</html>
+<!-- client_id=9d27ee96f84abb8 -->
