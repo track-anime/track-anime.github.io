@@ -31,6 +31,7 @@
     };
     albumid = prompt("Вставь ссылку на альбом imgur", "https://imgur.com/a/veeVW0A").split("https://imgur.com/a/")
     console.log(albumid, albumid[1])
+    if (albumid[1]) return alert("Ссылка не найдена. нужна ссылка на альбом 'https://imgur.com/a/*'")
     get_albom_imgur(albumid[1])
     async function get_albom_imgur(albumHash) {
         var response = await fetch(`https://api.imgur.com/3/album/${albumHash}?client_id=${client_id}`);
