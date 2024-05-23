@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>imgur api</title>
 </head>
 
 <body>
@@ -29,7 +29,9 @@
         body: formdata,
         redirect: 'follow'
     };
-    get_albom_imgur(albumHash)
+    albumid = prompt("Вставь ссылку на альбом imgur", "https://imgur.com/a/veeVW0A").split("https://imgur.com/a/")
+    console.log(albumid, albumid[1])
+    get_albom_imgur(albumid[1])
     async function get_albom_imgur(albumHash) {
         var response = await fetch(`https://api.imgur.com/3/album/${albumHash}?client_id=${client_id}`);
         if (response.status != 200) return
