@@ -232,10 +232,21 @@ sh_api.AddUserRates = (id, sl) => {
         .then(response => response.json())
         .then(data => {
             console.log("AddUserRates", data)
-            sh_api.get_favorit()
+            console.log(url_get.searchParams.get('sh_user_fav'))
+            sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'), true)
         })
         .catch(error => console.error(error));
 }
+
+
+
+
+
+
+
+
+
+///////////////////////
 
 sh_api.DelUserRates = (id, sl) => {
     var url = `https://shikimori.one/api/v2/user_rates/${id}?access_token=${sh_api.getCookie("sh_access_token")}`

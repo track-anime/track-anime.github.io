@@ -208,7 +208,7 @@ function setVideoInfo(e) {
     var btn_sh_save = document.getElementById('btn_sh_save')
     btn_sh_save.ids = e.shikimori ? e.shikimori : null;
     if (sh_api.authorize) {
-        sh_api.get_favorit()
+        sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'), true)
     } else {
         btn_sh_save.classList.add("hide")
         return
@@ -866,13 +866,16 @@ function add_cart(e) {
     cart.appendChild(imgTop);
 
     imgTop.addEventListener("mousedown", (event) => {
-        console.log(event.which, event.button);
+        // console.log(event.which, event.button);
         var a = new URL(window.location.href)
         a.searchParams.set("shikimori_id", `${e.shikimori}`)
         // console.log(a.href);
         // console.log(e.shikimori);
         // return
-        if (event.button == 1) return window.open(a.href, '_blank')
+        if (event.button == 1) {
+            var newTab = window.open(a.href, '_blank')    
+            return
+        }
         if (event.button == 2) return
         e.shift = event.shiftKey
         dialog_(e, !event.shiftKey)
