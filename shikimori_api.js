@@ -3,7 +3,7 @@ var sh_api = {}
 sh_api.url_get = new URL(window.location.href)
 sh_api.UserData = {}
 sh_api.Favorits = {}
-sh_api.another = {UserData:{}, Favorits:{},status:"0"}
+sh_api.another = { UserData: {}, Favorits: {}, status: "0" }
 sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
 sh_api.search_another = new Event("search_another", { bubbles: true })
@@ -130,37 +130,39 @@ sh_api.refresh_token = () => {
 }
 
 sh_api.get_user = (user, isanother) => {
-    if (!sh_api.getCookie("sh_access_token")) {
+    if (!sh_api.getCookie("sh_access_token") && !isanother) {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
     }
-    const url = `https://shikimori.one/api/users/${user ? user : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
+    console.log(encodeURI(user))
+    var url = `https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `https://shikimori.one/api/users/${encodeURI(user)}`
     fetch(url)
         .then(response => {
             sh_api.another.status = response.status
             if (response.ok) {
                 return response.json();
             } else {
-                
-                if(response.status=="404") return response.status
+
+                if (response.status == "404") return response.status
 
                 throw new Error('Ответ сети был не в порядке. get_user');
             }
         })
         .then(data => {
-            if(data=="404") {
+            if (data == "404") {
                 console.log("404 Пользователь не найден")
 
                 sh_api.get_favorit(sh_api.UserData.id)
-                return 
+                return
             }
-            sh_api.authorize = true
+            if (!isanother) sh_api.authorize = true
             console.log("user_data", data);
             isanother ? sh_api.another.UserData = data : sh_api.UserData = data
             sh_api.get_favorit(sh_api.another.UserData.id, isanother)
         })
         .catch(error => {
-            
+
             console.error('Возникла проблема с операцией выборки get_user:', error);
         });
 
@@ -169,11 +171,14 @@ sh_api.get_user = (user, isanother) => {
 }
 
 sh_api.get_favorit = (sh_user, isanother) => {
-    if (!sh_api.getCookie("sh_access_token")) {
+    if (!sh_api.getCookie("sh_access_token") && !isanother) {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
     }
-    fetch(`https://shikimori.one/api/users/${sh_user ? sh_user : sh_api.UserData.id}/anime_rates?limit=5000&access_token=${sh_api.getCookie("sh_access_token")}`)
+    var url = `https://shikimori.one/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000&access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `https://shikimori.one/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000`
+
+    fetch(url)
         .then(response => {
             if (response.ok) {
                 return response.json();
@@ -184,10 +189,10 @@ sh_api.get_favorit = (sh_user, isanother) => {
         .then(data => {
             if (isanother) {
                 sh_api.another.Favorits.data = data
-                document.dispatchEvent(sh_api.search_another);
                 console.log(sh_api.another.UserData.nickname, sh_api.another.Favorits.data)
+                document.dispatchEvent(sh_api.search_another);
             } else {
-                sh_api.authorize = true
+                if (!isanother) sh_api.authorize = true
                 console.log("anime_rates", data);
                 if (sh_user) {
                     sh_api.Favorits[sh_user] = data

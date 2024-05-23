@@ -95,7 +95,13 @@ URLList = url_get.searchParams.get('year') ? `${URLList}&year=${encodeURICompone
 URLList = url_get.searchParams.get('countries') ? `${URLList}&countries=${encodeURIComponent(url_get.searchParams.get('countries'))}` : URLList
 URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=${encodeURIComponent(url_get.searchParams.get('anime_studios'))}` : URLList
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
+
+
 URLListStart = URLList
+
+load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add("hide")
+
+
 
 function setVideoInfo(e) {
     var html
@@ -255,6 +261,9 @@ function setVideoInfo(e) {
 document.getElementById('User_Fav_sinc_button').addEventListener('click', () => {
     HistoryIsActivy = false
     getChapter("#list_fav")
+    GetFavoriteList("authorize")
+    url_get.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
+    window.history.pushState({}, '', url_get);
 })
 
 document.getElementById('VoiceButtonMenu').addEventListener('click', () => {
@@ -277,6 +286,11 @@ document.getElementById("VideoInfoBtn").addEventListener('click', () => {
     DialogVideoInfo.classList.contains('DialogVideoInfoScroll') ? DialogVideoInfo.classList.remove("DialogVideoInfoScroll") : DialogVideoInfo.classList.add("DialogVideoInfoScroll")
 
 })
+document.addEventListener("search_another", function (e) {
+    console.log("search_another")
+    GetFavoriteList("search_another")
+    getChapter("#list_fav")
+})
 
 document.addEventListener("authorize", function (e) { // (1)
     document.getElementById("list_login_Button").classList.add('hide')
@@ -286,12 +300,22 @@ document.addEventListener("authorize", function (e) { // (1)
 
     const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
     const difference = base_anime.fav.filter(element => !set2.has(element));
-    difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
-    console.log("Несохранённых данных:", difference.length)
 
+    difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
+    
+    console.log("Несохранённых данных:", difference.length, difference)
+    GetFavoriteList("authorize")
+});
+
+
+function GetFavoriteList(type) {
+    var sh_f = sh_api
+
+    if (type == "search_another") sh_f = sh_api.another
+    
 
     // document.getElementById("User_cloud_sinc_button")
-    sh_api.status = sh_api.status ? sh_api.status : {
+    sh_f.status = sh_f.status ? sh_f.status : {
         name: {
 
         }
@@ -330,11 +354,11 @@ document.addEventListener("authorize", function (e) { // (1)
         e.status = status.name2[i]
     });
 
-    sh_api.Favorits.data.forEach(e => {
-        if (e.status == "watching" && !base_anime.fav.includes(e.anime.id.toString())) {
+    sh_f.Favorits.data.forEach(e => {
+        if (e.status == "watching" && !base_anime.fav.includes(e.anime.id.toString()) && type == "authorize") {
             base_anime.fav.push(e.anime.id.toString())
             localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-        }  //sh_api.Favorits.ids.push(e.anime.id)
+        }  //sh_f.Favorits.ids.push(e.anime.id)
 
         const e1 = {
             "title": e.anime.russian,
@@ -372,9 +396,10 @@ document.addEventListener("authorize", function (e) { // (1)
 
         const cart = add_cart(e1)
         status.num[e.status] = status.num[e.status] ? status.num[e.status] + 1 : 1
-        // sh_api.status.name[e.status] = sh_api.status.name[e.status] ? sh_api.status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
+        // sh_f.status.name[e.status] = sh_f.status.name[e.status] ? sh_f.status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
         document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
         // document.querySelector(`#fav_${e.status} .ned_name`).status = e.status
+        load.show(false)
     });
 
     document.querySelectorAll("#list_fav .ned_name").forEach((e, i) => {
@@ -383,10 +408,17 @@ document.addEventListener("authorize", function (e) { // (1)
 
     });
     // num.forEach(e => {
-    //     document.querySelector(`#fav_${e.status} .ned_name`).textContent = `${sh_api.status.name[e.status]} ${num[e.status]}`
+    //     document.querySelector(`#fav_${e.status} .ned_name`).textContent = `${sh_f.status.name[e.status]} ${num[e.status]}`
     // });
 
-});
+}
+
+function GetFavUsersList(sh_user_fav) {
+    if (!sh_user_fav) return
+
+    load.show(true)
+    sh_api.get_user(sh_user_fav, true)
+}
 
 
 function getRandomInt(max) {
@@ -530,7 +562,8 @@ async function getHome(iss) {
     HistoryIsActivy = true
     TypePage = 0
     getChapter("#list_serch")
-
+    url_get.searchParams.delete("sh_user_fav")
+    window.history.pushState({}, '', url_get);
     nav_panel_buttons.querySelectorAll('button').forEach((e) => {
         e.classList.remove("active")
     })
@@ -1131,7 +1164,8 @@ async function GetKodi(seartch, revers) {
 }
 // }
 
-GetKodi(url_get.searchParams.get('seartch'))
+url_get.searchParams.get('sh_user_fav')?GetFavUsersList(url_get.searchParams.get('sh_user_fav')):GetKodi(url_get.searchParams.get('seartch'))
+
 
 
 /* function ScanBase(e, i, revers) {
