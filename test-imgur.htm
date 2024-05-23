@@ -38,7 +38,7 @@
         data.data.images.forEach(e => {
             if (e.type == 'image/jpeg') {
                 // console.log(e.link)
-                h = `${h}	<img src="${e.link}"/> <img src="https://example.com/photo/low.jpg">`
+                h = `${h}	<img src="${e.link.replace(/^https?\:/i, "")}"/>`
             }
         });
         document.body.innerHTML = h

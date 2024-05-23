@@ -3,6 +3,7 @@ var sh_api = {}
 sh_api.url_get = new URL(window.location.href)
 sh_api.UserData = {}
 sh_api.Favorits = {}
+sh_api.another = {}
 sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
 sh_api.code = sh_api.url_get.searchParams.get('code')
@@ -127,7 +128,7 @@ sh_api.refresh_token = () => {
 
 }
 
-sh_api.get_user = (user) => {
+sh_api.get_user = (user, isanother) => {
     if (!sh_api.getCookie("sh_access_token")) {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
@@ -144,8 +145,8 @@ sh_api.get_user = (user) => {
         .then(data => {
             sh_api.authorize = true
             console.log("user_data", data);
-            sh_api.UserData = data
-            sh_api.get_favorit(user)
+            isanother ? sh_api.another.UserData = data : sh_api.UserData = data
+            sh_api.get_favorit(user, isanother)
         })
         .catch(error => {
             console.error('Возникла проблема с операцией выборки get_user:', error);
@@ -155,7 +156,7 @@ sh_api.get_user = (user) => {
     // document.cookie = getCookie("KeyTab") ? `` : `KeyTab=${KeyTab}; path=/; max-age=10`
 }
 
-sh_api.get_favorit = (sh_user) => {
+sh_api.get_favorit = (sh_user, isanother) => {
     if (!sh_api.getCookie("sh_access_token")) {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
@@ -169,17 +170,21 @@ sh_api.get_favorit = (sh_user) => {
             }
         })
         .then(data => {
-            sh_api.authorize = true
-            console.log("anime_rates", data);
-            if (sh_user) {
-                sh_api.Favorits[sh_user] = data
+            if (isanother) {
+
             } else {
-                sh_api.Favorits.data = data
-                sh_api.Favorits.ids = []
-                sh_api.Favorits.data.forEach(e => {
-                    if (e.status == "watching") sh_api.Favorits.ids.push(e.anime.id)
-                });
-                document.dispatchEvent(sh_api.authorize_ev);
+                sh_api.authorize = true
+                console.log("anime_rates", data);
+                if (sh_user) {
+                    sh_api.Favorits[sh_user] = data
+                } else {
+                    sh_api.Favorits.data = data
+                    sh_api.Favorits.ids = []
+                    sh_api.Favorits.data.forEach(e => {
+                        if (e.status == "watching") sh_api.Favorits.ids.push(e.anime.id)
+                    });
+                    document.dispatchEvent(sh_api.authorize_ev);
+                }
             }
 
         })
@@ -189,7 +194,7 @@ sh_api.get_favorit = (sh_user) => {
 }
 
 sh_api.AddUserRates = (id, sl) => {
-    if(!sh_api.authorize) return console.log("Вы не авторизированы")
+    if (!sh_api.authorize) return console.log("Вы не авторизированы")
     var url = `https://shikimori.one/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'POST',
