@@ -105,6 +105,8 @@ load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add(
 
 function setVideoInfo(e) {
     var html
+
+    VideoInfo.e = e
     const tv = e.material_data.anime_kind ? ` [${e.material_data.anime_kind.toUpperCase()}]` : ""
     VideoInfo.info.cover.src = e.material_data.poster_url;
     VideoInfo.info.title.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
@@ -256,6 +258,7 @@ function setVideoInfo(e) {
             btn_sh_save.classList.add("btn-outline-light")
             break;
     }
+
 }
 
 document.getElementById('User_Fav_sinc_button').addEventListener('click', () => {
@@ -313,6 +316,39 @@ document.addEventListener("authorize", function (e) { // (1)
 
     console.log("Несохранённых данных:", difference.length, difference)
     GetFavoriteList("authorize")
+    btn_sh_save?.classList.remove("hide")
+    
+    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori).status) {
+        case "watching":
+            btn_sh_save.textContent = "смотрю"
+            btn_sh_save.classList.add("btn-primary")
+            break;
+        case "completed":
+            btn_sh_save.textContent = "просмотренно"
+            btn_sh_save.classList.add("btn-success")
+
+            break;
+        case "dropped":
+            btn_sh_save.textContent = "брошено"
+            btn_sh_save.classList.add("btn-danger")
+            break;
+        case "on_hold":
+            btn_sh_save.textContent = "отложено"
+            btn_sh_save.classList.add("btn-warning")
+            break;
+        case "planned":
+            btn_sh_save.textContent = "запланировано"
+            btn_sh_save.classList.add("btn-secondary")
+            break;
+        case "rewatching":
+            btn_sh_save.textContent = "пересматриваю"
+            btn_sh_save.classList.add("btn-info")
+            break;
+        default:
+            btn_sh_save.textContent = "Добавить"
+            btn_sh_save.classList.add("btn-outline-light")
+            break;
+    }
 });
 
 
