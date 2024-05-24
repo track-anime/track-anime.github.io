@@ -141,7 +141,7 @@
         </nav>
     </div>
 
-    <div class="container_">
+    <div class="container_ ">
         <div class="anime_list hide ned_" id="list_calendar">
             <details class="ned_spoiler">
                 <summary class="ned_name">Понедельник</summary>
@@ -173,9 +173,9 @@
             </details>
         </div>
 
-        <div class="anime_list ned_ hide" id="list_fav">
+        <div class="anime_list ned_ hide  " id="list_fav">
             <div class="d-flex justify-content-center">
-<!--                 <form class="d-flex w-100 mt-2" role="search" id="search_user_form">
+                <!--                 <form class="d-flex w-100 mt-2" role="search" id="search_user_form">
                     <input id="search_user_input" name="search_user_favorite" class="form-control me-2" type="search"
                         placeholder="Поиск пользователя на shikimori" aria-describedby="search user" aria-label="Поиск">
                     <button class="btn btn-outline-primary" type="submit">Поиск</button>
@@ -225,33 +225,34 @@
                     <div class="row g-0">
                         <h5 id="info_title" class="card-title">Провожающая в последний путь Фрирен</h5>
                         <hr>
-                        <div class="col-md-2 embed-responsive-16by9">
+                        <div class="col-md-2 ">
+                            <div class="d-flex flex-column align-items-center">
+                                <img id="info_cover" src="https://st.kp.yandex.net/images/film_big/5401195.jpg"
+                                    class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded min-w-350">
 
-                            <img id="info_cover" src="https://st.kp.yandex.net/images/film_big/5401195.jpg"
-                                class="embed-responsive-item img-fluid rounded-start rounded min-w-350" alt="...">
-
-                            <div style="width: 100%;" class="btn-group">
-                                <button type="button" id="btn_sh_save" class="btn btn-outline-light dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Добавить
-                                </button>
-                                <ul class="dropdown-menu text-center">
-                                    <li><button id="watching" type="button" title="смотрю" onclick="AddFavorite(0)"
-                                            class="dropdown-item btn btn-primary">Смотрю</button></li>
-                                    <li><button id="completed" type="button" title="просмотренно"
-                                            onclick="AddFavorite(1)"
-                                            class="dropdown-item btn btn-success">Просмотренно</button></li>
-                                    <li><button id="dropped" type="button" title="брошено" onclick="AddFavorite(2)"
-                                            class="dropdown-item btn btn-danger">Брошено</button></li>
-                                    <li><button id="on_hold" type="button" title="отложено" onclick="AddFavorite(3)"
-                                            class="dropdown-item btn btn-warning">Отложено</button></li>
-                                    <li><button id="planned" type="button" title="запланировано"
-                                            onclick="AddFavorite(4)"
-                                            class="dropdown-item btn btn-secondary">Запланировано</button></li>
-                                    <li><button id="rewatching" type="button" title="пересматриваю"
-                                            onclick="AddFavorite(5)"
-                                            class="dropdown-item btn btn-info">Пересматриваю</button></li>
-                                </ul>
+                                <div style="width: 100%;" class="btn-group mt-3">
+                                    <button type="button" id="btn_sh_save" class="btn btn-outline-light dropdown-toggle"
+                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                        Добавить
+                                    </button>
+                                    <ul class="dropdown-menu text-center">
+                                        <li><button id="watching" type="button" title="смотрю" onclick="AddFavorite(0)"
+                                                class="dropdown-item btn btn-primary">Смотрю</button></li>
+                                        <li><button id="completed" type="button" title="просмотренно"
+                                                onclick="AddFavorite(1)"
+                                                class="dropdown-item btn btn-success">Просмотренно</button></li>
+                                        <li><button id="dropped" type="button" title="брошено" onclick="AddFavorite(2)"
+                                                class="dropdown-item btn btn-danger">Брошено</button></li>
+                                        <li><button id="on_hold" type="button" title="отложено" onclick="AddFavorite(3)"
+                                                class="dropdown-item btn btn-warning">Отложено</button></li>
+                                        <li><button id="planned" type="button" title="запланировано"
+                                                onclick="AddFavorite(4)"
+                                                class="dropdown-item btn btn-secondary">Запланировано</button></li>
+                                        <li><button id="rewatching" type="button" title="пересматриваю"
+                                                onclick="AddFavorite(5)"
+                                                class="dropdown-item btn btn-info">Пересматриваю</button></li>
+                                    </ul>
+                                </div>
                             </div>
 
                             <div id="shikimori_info">
