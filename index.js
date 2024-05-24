@@ -208,7 +208,7 @@ function setVideoInfo(e) {
     var btn_sh_save = document.getElementById('btn_sh_save')
     btn_sh_save.ids = e.shikimori ? e.shikimori : null;
     if (sh_api.authorize) {
-        sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'), true)
+        sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'))
     } else {
         btn_sh_save.classList.add("hide")
         return
@@ -877,6 +877,7 @@ function add_cart(e) {
             return
         }
         if (event.button == 2) return
+
         e.shift = event.shiftKey
         dialog_(e, !event.shiftKey)
         cart.classList.remove("new_cart")
