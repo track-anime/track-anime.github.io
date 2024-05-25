@@ -74,6 +74,7 @@ VideoInfo.info = {
     "IMDB_link": VideoInfo.querySelector("#info_IMDB_link"),
     "AlohaPlayer": VideoInfo.querySelector("#info_AlohaPlayer"),
     "KodikPlayer": VideoInfo.querySelector("#info_KodikPlayer"),
+    "duration": VideoInfo.querySelector("#info_duration"),
 
 
 }
@@ -118,6 +119,8 @@ function setVideoInfo(e) {
     tmp346 = tmp346 + `/${e.material_data.episodes_total ? e.material_data.episodes_total : "?"}`;
 
     VideoInfo.info.series.textContent = tmp346;
+    VideoInfo.info.duration.textContent = `${window.counterToStringLabel(VideoInfo?.e?.material_data?.duration)}`;
+    VideoInfo.info.duration.min = VideoInfo?.e?.material_data?.duration
     // VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : ""}`;
 
     VideoInfo.info.description.textContent = e.material_data.description ? e.material_data.description : "?";
@@ -144,7 +147,7 @@ function setVideoInfo(e) {
         VideoInfo.info.updated_at.textContent = `Вышла ${formatDate(dat).moment.fromNow().toLowerCase()}. ${formatDate(dat).moment.calendar()}`
     }
 
-    VideoInfo.info.title.innerHTML = `•${VideoInfo.info.title.textContent} <br>• [${VideoInfo.info.updated_at.textContent}]`
+    VideoInfo.info.title.innerHTML = `${VideoInfo.info.title.textContent} <br>[${VideoInfo.info.updated_at.textContent}]`
 
     VideoInfo.info.shikimori_rating.style.width = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating * 10}%` : "0%";
     VideoInfo.info.shikimori_rating.textContent = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating}/10` : "?";
@@ -169,7 +172,7 @@ function setVideoInfo(e) {
             VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
         }
     })
-
+    
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
@@ -261,6 +264,7 @@ function setVideoInfo(e) {
 
 }
 
+
 document.getElementById('User_Fav_sinc_button').addEventListener('click', () => {
     HistoryIsActivy = false
     getChapter("#list_fav")
@@ -319,6 +323,10 @@ document.addEventListener("authorize", function (e) { // (1)
     btn_sh_save?.classList.remove("hide")
 
     if (!VideoInfo.e) return
+    let tt = moment().add(moment.duration(VideoInfo.e.material_data.duration, 'minutes').asMilliseconds())
+    console.log(1, tt.fromNow())
+    // console.log(`${tt.hours()!=0?`${tt.hours()}:`:""}${tt.minutes()}`)
+    console.log(VideoInfo.e.material_data.duration)
     switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
