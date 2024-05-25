@@ -314,11 +314,11 @@ document.addEventListener("authorize", function (e) { // (1)
 
     difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
 
-    if(difference.length!=0)console.log("Несохранённых данных:", difference.length, difference)
+    if (difference.length != 0) console.log("Несохранённых данных:", difference.length, difference)
     GetFavoriteList("authorize")
     btn_sh_save?.classList.remove("hide")
 
-    if(!VideoInfo.e) return
+    if (!VideoInfo.e) return
     switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
@@ -910,7 +910,7 @@ function add_cart(e) {
         // console.log(e.shikimori);
         // return
         if (event.button == 1) {
-            var newTab = window.open(a.href, '_blank')    
+            var newTab = window.open(a.href, '_blank')
             return
         }
         if (event.button == 2) return
