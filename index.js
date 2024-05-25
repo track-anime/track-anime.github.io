@@ -314,10 +314,11 @@ document.addEventListener("authorize", function (e) { // (1)
 
     difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
 
-    console.log("Несохранённых данных:", difference.length, difference)
+    if(difference.length!=0)console.log("Несохранённых данных:", difference.length, difference)
     GetFavoriteList("authorize")
     btn_sh_save?.classList.remove("hide")
-    console.log(VideoInfo.e, VideoInfo.e.shikimori)
+
+    if(!VideoInfo.e) return
     switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
