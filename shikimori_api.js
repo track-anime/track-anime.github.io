@@ -126,15 +126,15 @@ sh_api.refresh_token = () => {
             // location.reload()
         })
         .catch(error => console.error(error));
-
+        return "await"
 }
 
 sh_api.get_user = (user, isanother) => {
     if (!sh_api.getCookie("sh_access_token") && !isanother) {
         const ot = sh_api.refresh_token()
-        if (ot == "No_Authorize") return ot
+        if (ot == "No_Authorize" || ot == "await") return ot
     }
-    console.log(encodeURI(user))
+    // console.log(encodeURI(user))
     var url = `https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
     if (isanother) url = `https://shikimori.one/api/users/${encodeURI(user)}`
     fetch(url)

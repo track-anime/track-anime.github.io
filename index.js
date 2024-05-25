@@ -317,8 +317,8 @@ document.addEventListener("authorize", function (e) { // (1)
     console.log("Несохранённых данных:", difference.length, difference)
     GetFavoriteList("authorize")
     btn_sh_save?.classList.remove("hide")
-    
-    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori).status) {
+    console.log(1, sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori))
+    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
             btn_sh_save.classList.add("btn-primary")
