@@ -10,7 +10,9 @@
             margin: 0;
             padding: 0;
             user-select: none;
-            cursor: wait;
+            /* cursor: wait; */
+            animation: 0.4s ease-in-out 0s normal none infinite running cursor-droch;
+
         }
 
         #myVideo {
@@ -46,6 +48,27 @@
         #E404_2 {
             text-shadow: 50px 50px 5px #000000bd;
 
+        }
+        @keyframes cursor-droch {
+            0% {
+                cursor: w-resize;
+            }
+
+            25% {
+                cursor: ne-resize;
+            }
+            
+            50% {
+                cursor: n-resize;
+            }
+            
+            75% {
+                cursor: nw-resize;
+            }
+            
+            100% {
+                cursor: move;
+            }
         }
 
         @keyframes tilt-n-move-shaking {
