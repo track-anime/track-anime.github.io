@@ -151,7 +151,7 @@
         document.body.addEventListener("click", function () {
             window.history.back();
         });
-        window.addEventListener('scroll', function () {
+        document.body.addEventListener('scroll', function () {
             video.muted = false;
             video.play();
         });
