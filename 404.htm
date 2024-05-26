@@ -32,39 +32,44 @@
             font-size: 1000%;
             font-weight: bold;
             color: #d4e1e4;
-            ;
-
-        }
-
-        #E404_1 {
-            text-shadow: 80px 40px 5px #000000bd;
+            -webkit-text-stroke: 3px #0000007e;
             animation: 0.4s ease-in-out 0s normal none infinite running tilt-n-move-shaking;
         }
 
+        #E404_1 {
+            text-shadow: -50px 50px 5px #000000bd;
+
+        }
+
         #E404_2 {
-            text-shadow: -80px 40px 5px #000000bd;
-            animation: 0.4s ease-in-out 0s normal none infinite running tilt-n-move-shaking ;
+            text-shadow: 50px 50px 5px #000000bd;
+
         }
 
         @keyframes tilt-n-move-shaking {
             0% {
                 transform: translate(0, 0) rotate(0deg);
+                color: #b3ceb580;
             }
 
             25% {
                 transform: translate(5px, 5px) rotate(5deg);
+                color: #d4e1e480;
             }
 
             50% {
                 transform: translate(0, 0) rotate(0eg);
+                color: #e3d7bd80;
             }
 
             75% {
                 transform: translate(-5px, 5px) rotate(-5deg);
+                color: #a5b1b380;
             }
 
             100% {
                 transform: translate(0, 0) rotate(0deg);
+                color: #b7e4ef80;
             }
         }
 
