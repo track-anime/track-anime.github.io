@@ -5,7 +5,6 @@
 
 <head>
     <style>
-
         body,
         html {
             margin: 0;
@@ -19,7 +18,7 @@
             position: fixed;
             filter: blur(20px);
             z-index: -1;
-            
+
         }
 
         #myVideo2 {
@@ -32,16 +31,41 @@
         .text-overlay {
             font-size: 1000%;
             font-weight: bold;
-            color: #d4e1e4;;
-            
-        }
-        #E404_1{
-            text-shadow: 80px 40px 5px #000000bd ;
+            color: #d4e1e4;
+            ;
 
         }
-        #E404_2{
-            text-shadow: -80px 40px 5px #000000bd ;
 
+        #E404_1 {
+            text-shadow: 80px 40px 5px #000000bd;
+            animation: 0.4s ease-in-out 0s normal none infinite running tilt-n-move-shaking;
+        }
+
+        #E404_2 {
+            text-shadow: -80px 40px 5px #000000bd;
+            animation: 0.4s ease-in-out 0s normal none infinite running tilt-n-move-shaking ;
+        }
+
+        @keyframes tilt-n-move-shaking {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            25% {
+                transform: translate(5px, 5px) rotate(5deg);
+            }
+
+            50% {
+                transform: translate(0, 0) rotate(0eg);
+            }
+
+            75% {
+                transform: translate(-5px, 5px) rotate(-5deg);
+            }
+
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
         }
 
         #v2 {
@@ -63,13 +87,13 @@
         <source src="404.webm" type="video/webm">
     </video>
     <div id="v2">
-        <div id="E404_1"class="text-overlay">
+        <div id="E404_1" class="text-overlay">
             404
         </div>
         <video id="myVideo2" autoplay loop loop loop muted controlsList="noplayback">
             <source src="404.webm" type="video/webm">
         </video>
-        <div id="E404_2"class="text-overlay">
+        <div id="E404_2" class="text-overlay">
             404
         </div>
     </div>
