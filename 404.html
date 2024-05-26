@@ -38,20 +38,21 @@
             color: #d4e1e4;
             -webkit-text-stroke: 3px #0000007e;
             animation: 0.9s ease-in-out 0s normal none infinite running tilt-n-move-shaking;
-            
+
         }
-        
+
         #E404_1 {
             text-shadow: -50px 50px 5px #000000bd;
             cursor: no-drop;
-            
+
         }
-        
+
         #E404_2 {
             text-shadow: 50px 50px 5px #000000bd;
             cursor: not-allowed;
 
         }
+
         @keyframes cursor-droch {
             0% {
                 cursor: w-resize;
@@ -60,15 +61,15 @@
             25% {
                 cursor: ne-resize;
             }
-            
+
             50% {
                 cursor: n-resize;
             }
-            
+
             75% {
                 cursor: nw-resize;
             }
-            
+
             100% {
                 cursor: nw-resize;
             }
@@ -145,9 +146,14 @@
         video.volume = 0.15;
         document.body.addEventListener("mouseover", function () {
             video.muted = false;
+            video.play();
         });
         document.body.addEventListener("click", function () {
             window.history.back();
+        });
+        window.addEventListener('scroll', function () {
+            video.muted = false;
+            video.play();
         });
 
         /*         video.addEventListener("mouseout", function () {
