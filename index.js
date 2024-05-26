@@ -113,7 +113,7 @@ function setVideoInfo(e) {
     VideoInfo.info.title.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
 
     VideoInfo.info.countries.textContent = e.material_data.countries ? e.material_data.countries : "?";
-    VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : ""}`;
+    VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.htm"}`;
 
     var tmp346 = e.material_data.episodes_aired ? e.material_data.episodes_aired : "?";
     tmp346 = tmp346 + `/${e.material_data.episodes_total ? e.material_data.episodes_total : "?"}`;
@@ -121,21 +121,21 @@ function setVideoInfo(e) {
     VideoInfo.info.series.textContent = tmp346;
     VideoInfo.info.duration.textContent = `${window.counterToStringLabel(VideoInfo?.e?.material_data?.duration)}`;
     VideoInfo.info.duration.min = VideoInfo?.e?.material_data?.duration
-    // VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : ""}`;
+    // VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.htm"}`;
 
     VideoInfo.info.description.textContent = e.material_data.description ? e.material_data.description : "?";
 
     VideoInfo.info.info_status.textContent = e.material_data.anime_status ? e.material_data.anime_status : "?";
-    VideoInfo.info.info_status.href = `${window.location.origin + window.location.pathname}?anime_status=${e.material_data.anime_status ? e.material_data.anime_status : ""}`;
+    VideoInfo.info.info_status.href = `${window.location.origin + window.location.pathname}?anime_status=${e.material_data.anime_status ? e.material_data.anime_status : "404.htm"}`;
 
     VideoInfo.info.studios.textContent = e.material_data.anime_studios ? e.material_data.anime_studios : "?";
-    VideoInfo.info.studios.href = `${window.location.origin + window.location.pathname}?anime_studios=${e.material_data.anime_studios ? e.material_data.anime_studios : ""}`;
+    VideoInfo.info.studios.href = `${window.location.origin + window.location.pathname}?anime_studios=${e.material_data.anime_studios ? e.material_data.anime_studios : "404.htm"}`;
 
     VideoInfo.info.year.textContent = e.material_data.year ? e.material_data.year : "?";
-    VideoInfo.info.year.href = `${window.location.origin + window.location.pathname}?year=${e.material_data.year ? e.material_data.year : ""}`;
+    VideoInfo.info.year.href = `${window.location.origin + window.location.pathname}?year=${e.material_data.year ? e.material_data.year : "404.htm"}`;
 
     VideoInfo.info.rating_mpaa.textContent = e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "?";
-    VideoInfo.info.rating_mpaa.href = `${window.location.origin + window.location.pathname}?rating_mpaa=${e.material_data.rating_mpaa ? e.material_data.rating_mpaa : ""}`;
+    VideoInfo.info.rating_mpaa.href = `${window.location.origin + window.location.pathname}?rating_mpaa=${e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "404.htm"}`;
 
     const dat = e.material_data.next_episode_at ? e.material_data.next_episode_at : e.e.created_at
 
@@ -152,12 +152,12 @@ function setVideoInfo(e) {
     VideoInfo.info.shikimori_rating.style.width = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating * 10}%` : "0%";
     VideoInfo.info.shikimori_rating.textContent = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating}/10` : "?";
     VideoInfo.info.shikimori_votes.textContent = e.material_data.shikimori_votes ? `${e.material_data.shikimori_votes} проголосовавших` : "?";
-    VideoInfo.info.shikimori_link.href = `https://shikimori.one/animes/${e.shikimori ? e.shikimori : ""}`;
+    VideoInfo.info.shikimori_link.href = `https://shikimori.one/animes/${e.shikimori ? e.shikimori : "404.htm"}`;
 
     VideoInfo.info.imdb_rating.style.width = e.material_data.imdb_rating ? `${e.material_data.imdb_rating * 10}%` : "0%";
     VideoInfo.info.imdb_rating.textContent = e.material_data.imdb_rating ? `${e.material_data.imdb_rating}/10` : "?";
     VideoInfo.info.imdb_votes.textContent = e.material_data.imdb_votes ? `${e.material_data.imdb_votes} проголосовавших` : "?";
-    VideoInfo.info.IMDB_link.href = `https://www.imdb.com/title/${e.imdb ? e.imdb : ""}`;
+    VideoInfo.info.IMDB_link.href = `https://www.imdb.com/title/${e.imdb ? e.imdb : "404.htm"}`;
 
     e.imdb ? document.getElementById("imdb_info").classList.remove('hide') : document.getElementById("imdb_info").classList.add('hide')
     // e.imdb||e.kp ? VideoInfo.info.AlohaPlayer.classList.remove('hide') : VideoInfo.info.AlohaPlayer.classList.add('hide')
