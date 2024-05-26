@@ -10,7 +10,7 @@
             margin: 0;
             padding: 0;
             user-select: none;
-            /* cursor: wait; */
+            /* cursor: s-resize; */
             animation: 0.4s ease-in-out 0s normal none infinite running cursor-droch;
 
         }
@@ -37,16 +37,19 @@
             font-weight: bold;
             color: #d4e1e4;
             -webkit-text-stroke: 3px #0000007e;
-            animation: 0.4s ease-in-out 0s normal none infinite running tilt-n-move-shaking;
+            animation: 0.9s ease-in-out 0s normal none infinite running tilt-n-move-shaking;
+            
         }
-
+        
         #E404_1 {
             text-shadow: -50px 50px 5px #000000bd;
-
+            cursor: no-drop;
+            
         }
-
+        
         #E404_2 {
             text-shadow: 50px 50px 5px #000000bd;
+            cursor: not-allowed;
 
         }
         @keyframes cursor-droch {
@@ -67,7 +70,7 @@
             }
             
             100% {
-                cursor: move;
+                cursor: nw-resize;
             }
         }
 
