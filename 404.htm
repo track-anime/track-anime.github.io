@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body,
+        html {
+            margin: 0;
+            padding: 0;
+        }
+
+        #myVideo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: fixed;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        #myVideo2 {
+            /* width: 100%; */
+            height: 100%;
+            object-fit: cover;
+            /* position: fixed; */
+
+        }
+
+        .text-overlay {
+            /* position: absolute; */
+            /* transform: translate(-50%, -50%); */
+            font-size: 1000%;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 0 10px black;
+            z-index: 1;
+        }
+
+        #text-overlay1 {
+            /* top: 50%;
+            right: 20%; */
+            /* transform: translate(-50%, -50%); */
+        }
+
+        #text-overlay2 {
+            /* top: 50%;
+            left: 20%; */
+            /* transform: translate(-50%, -50%); */
+        }
+
+        #v2 {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            height: 100%;
+            width: 100%;
+            align-items: center;
+            justify-content: space-around;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <video id="myVideo" autoplay loop loop loop muted controlsList="noplayback">
+        <source src="404.webm" type="video/webm">
+    </video>
+    <div id="v2">
+        <div class="text-overlay">
+            404
+        </div>
+        <video id="myVideo2" autoplay loop loop loop muted controlsList="noplayback">
+            <source src="404.webm" type="video/webm">
+        </video>
+        <div class="text-overlay">
+            404
+        </div>
+    </div>
+    <!--     <div id="404">
+        <div class="text-overlay">
+            404
+        </div>
+        <div class="text-overlay">
+            404
+        </div>
+    </div> -->
+
+    <script>
+        var video = document.getElementById("myVideo");
+
+        video.volume = 0.15;
+        video.addEventListener("mouseover", function () {
+            // video.muted = false;
+        });
+
+        /*         video.addEventListener("mouseout", function () {
+                    // video.muted = true;
+                }); */
+    </script>
+</body>
+
+</html>
