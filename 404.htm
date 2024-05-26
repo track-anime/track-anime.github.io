@@ -9,6 +9,8 @@
         html {
             margin: 0;
             padding: 0;
+            user-select: none;
+            cursor: wait;
         }
 
         #myVideo {
@@ -117,6 +119,9 @@
         video.volume = 0.15;
         document.body.addEventListener("mouseover", function () {
             video.muted = false;
+        });
+        document.body.addEventListener("click", function () {
+            window.history.back();
         });
 
         /*         video.addEventListener("mouseout", function () {
