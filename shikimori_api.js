@@ -7,6 +7,7 @@ sh_api.another = { UserData: {}, Favorits: {}, status: "0" }
 sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
 sh_api.search_another = new Event("search_another", { bubbles: true })
+sh_api.logout_ev = new Event("sh_api_logout", { bubbles: true })
 sh_api.code = sh_api.url_get.searchParams.get('code')
 sh_api.status_lable = [
     "watching",
@@ -92,7 +93,11 @@ sh_api.logout = () => {
     document.cookie = `sh_access_token=""; path=/; max-age=-1;`
     document.cookie = `sh_refresh_token=""; path=/; max-age=-1;`
     document.cookie = `_kawai_session=""; path=/; max-age=-1;`
-    location.reload()
+    sh_api.authorize = false
+    document.dispatchEvent(sh_api.logout_ev);
+    setTimeout(() => {
+        location.reload()
+    }, 1000); 
 }
 
 sh_api.refresh_token = () => {

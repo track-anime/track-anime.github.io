@@ -24,8 +24,6 @@ const list_history = document.getElementById("list_history");
 
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
-// const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
-// const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
 
 
 
@@ -35,9 +33,27 @@ var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&c
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
 
 
+///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
+var base_anime = localStorage.getItem('BaseAnime')
+if (base_anime) {
+    base_anime = JSON.parse(base_anime)
+} else {
+    base_anime = {}
+}
+if (base_anime.base) {
+    delete base_anime.base;
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+}
+base_anime.fav = base_anime.fav ? base_anime.fav : []
+base_anime.authorize = base_anime.authorize?base_anime.authorize:false
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 window?.Notification?.requestPermission()
 sh_api.get_user()
+// sh_api.get_key()
+if(!sh_api.getCookie("sh_refresh_token") && base_anime.authorize==true) sh_api.get_key()
+
 
 const voice = [
     "AniStar",
@@ -79,26 +95,29 @@ VideoInfo.info = {
 
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
 setInterval(() => {
     if (!HistoryIsActivy || ld) return
     GetKodi("", true)
 }, 30 * 1000);  //Автопроверка 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// URLListStart = url_get.searchParams.get('anime_genres')?`${URLListStart}&anime_genres=${encodeURIComponent(url_get.searchParams.get('anime_genres'))}`:URLListStart
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////Проверка гет фильтров поиска///////////////////////////////////////////////////////////
+///////////////////////////////////////// Проверка гет фильтров поиска ///////////////////////////////////////////////////////////
 URLList = url_get.searchParams.get('anime_genres') ? `${URLList}&anime_genres=${encodeURIComponent(url_get.searchParams.get('anime_genres'))}` : URLList
 URLList = url_get.searchParams.get('rating_mpaa') ? `${URLList}&rating_mpaa=${encodeURIComponent(url_get.searchParams.get('rating_mpaa'))}` : URLList
 URLList = url_get.searchParams.get('year') ? `${URLList}&year=${encodeURIComponent(url_get.searchParams.get('year'))}` : URLList
 URLList = url_get.searchParams.get('countries') ? `${URLList}&countries=${encodeURIComponent(url_get.searchParams.get('countries'))}` : URLList
 URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=${encodeURIComponent(url_get.searchParams.get('anime_studios'))}` : URLList
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
 
 
-URLListStart = URLList
 
 load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add("hide")
 
@@ -307,7 +326,14 @@ document.addEventListener("search_another", function (e) {
     HistoryIsActivy = false
 })
 
+document.addEventListener("sh_api_logout", function (e) { // (1)
+    base_anime.authorize = sh_api.authorize;
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+})
 document.addEventListener("authorize", function (e) { // (1)
+    base_anime.authorize = sh_api.authorize;
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+
     document.getElementById("list_login_Button").classList.add('hide')
     document.getElementById("User_Menu_Button").classList.remove('hide')
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
@@ -562,17 +588,7 @@ container_.addEventListener('scroll', async function (e) {
     }
 });
 
-var base_anime = localStorage.getItem('BaseAnime')
-if (base_anime) {
-    base_anime = JSON.parse(base_anime)
-} else {
-    base_anime = {}
-}
-if (base_anime.base) {
-    delete base_anime.base;
-    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-}
-base_anime.fav = base_anime.fav ? base_anime.fav : []
+
 
 
 ///////////////////// GET параметры 
