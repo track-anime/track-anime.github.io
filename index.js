@@ -52,9 +52,8 @@ base_anime.authorize = base_anime.authorize?base_anime.authorize:false
 window?.Notification?.requestPermission()
 sh_api.get_user()
 // sh_api.get_key()
+if(!sh_api.getCookie("sh_refresh_token") && base_anime.authorize==true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) sh_api.get_key()
 setTimeout(() => {
-    if(!sh_api.getCookie("sh_refresh_token") && base_anime.authorize==true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) sh_api.get_key()
-    
 }, 1500);
 
 
