@@ -344,7 +344,7 @@ p {
 }
 
 .progress-bar-vertical {
-    width: 20px;
+    width: 26px;
     height: 100%;
     float: left;
     display: flex;
