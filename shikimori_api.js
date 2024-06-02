@@ -47,7 +47,7 @@ sh_api.get_key = () => {
 
 sh_api.add_token = () => {
 
-    if (sh_api.getCookie("sh_access_token")) {
+    if (sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_access_token")!="undefined") {
         return sh_api.getCookie("sh_access_token")
     }
 
