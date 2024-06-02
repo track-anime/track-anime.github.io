@@ -308,17 +308,19 @@ p {
     }
 
 }
+
 @media screen and (min-width: 1200px) {
     #btn_so_min {
         display: none;
     }
 
 }
+
 @media screen and (max-width: 992px) {
+
     #VideoPlayerAnime,
     #VideoPlayerAnime>div,
-    #VideoPlayerAnime>div>div
-     {
+    #VideoPlayerAnime>div>div {
         width: 100%;
         height: 100%;
         margin: 0;
@@ -329,6 +331,29 @@ p {
         max-width: 100%;
     }
 
+}
+
+@media screen and (min-width: 992px) {
+     #VideoPlayerAnime
+     {
+        width: 100%;
+        /* height: 100%; */
+        
+     } 
+    #VideoPlayerAnime>div
+    /* #VideoPlayerAnime>div>div */
+     {
+        width: 80%;
+        max-width: 80%;
+        aspect-ratio: 16 / 9;
+        
+        height: 80%; 
+    }
+    #VideoPlayerAnime>div>div{
+        width: 100%;
+        height: 100%;
+        
+    }
 }
 
 .cart-img-top {
