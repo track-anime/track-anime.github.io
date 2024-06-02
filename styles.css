@@ -330,6 +330,18 @@ p {
         border-radius: 0;
         max-width: 100%;
     }
+    .VideoInfoBtn{
+        position: fixed;
+        transition: top 1s ease;
+        bottom: auto;
+        top: 0;
+    }
+    .DialogVideoInfoScroll>.VideoInfoBtn{
+        position: fixed;
+        transition: top 1s ease;
+        bottom: auto;
+        top:100%;
+    }
 
 }
 @media screen and (max-width: 992px) {
