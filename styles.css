@@ -332,16 +332,22 @@ p {
     }
 
 }
+@media screen and (max-width: 992px) {
+    .anime_list 
+    {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+
+    }
+}
 
 @media screen and (min-width: 992px) {
      #VideoPlayerAnime
      {
-        width: 100%;
-        /* height: 100%; */
-        
+        width: 100%;        
      } 
     #VideoPlayerAnime>div
-    /* #VideoPlayerAnime>div>div */
      {
         width: 80%;
         max-width: 80%;
