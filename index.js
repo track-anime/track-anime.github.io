@@ -72,6 +72,7 @@ const voice = [
 VideoInfo.info = {
     "cover": VideoInfo.querySelector("#info_cover"),
     "title": VideoInfo.querySelector("#info_title"),
+    "title2": VideoInfo.querySelector("#info_title2"),
     "description": VideoInfo.querySelector("#info_description"),
 
     "countries": VideoInfo.querySelector("#info_countries"),
@@ -133,6 +134,7 @@ function setVideoInfo(e) {
     const tv = e.material_data.anime_kind ? ` [${e.material_data.anime_kind.toUpperCase()}]` : ""
     VideoInfo.info.cover.src = e.material_data.poster_url;
     VideoInfo.info.title.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
+    // VideoInfo.info.title2.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
 
     VideoInfo.info.countries.textContent = e.material_data.countries ? e.material_data.countries : "?";
     VideoInfo.info.countries.href = e.material_data.countries?`${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}`:"404.html";
@@ -169,7 +171,8 @@ function setVideoInfo(e) {
         VideoInfo.info.updated_at.textContent = `Вышла ${formatDate(dat).moment.fromNow().toLowerCase()}. ${formatDate(dat).moment.calendar()}`
     }
 
-    VideoInfo.info.title.innerHTML = `${VideoInfo.info.title.textContent} <br>[${VideoInfo.info.updated_at.textContent}]`
+    VideoInfo.info.title.innerHTML = `${VideoInfo.info.title.textContent}`
+    VideoInfo.info.title2.innerHTML = `[${VideoInfo.info.updated_at.textContent}]`
 
     VideoInfo.info.shikimori_rating.style.width = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating * 10}%` : "0%";
     VideoInfo.info.shikimori_rating.textContent = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating}/10` : "?";

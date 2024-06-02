@@ -92,6 +92,9 @@ body {
     border-color: #25cff2;
 
 }
+#info_title2{
+    color: darkgrey;
+}
 
 #load {
     background-color: #0000008b;
@@ -186,6 +189,7 @@ body {
     justify-content: center;
     align-items: flex-start;
 }
+
 
 html,
 body {
@@ -358,6 +362,19 @@ p {
     }
     #User_Menu_Button{
         margin: 0px !important;
+    }
+    #VideoInfo {
+        padding: 4px;
+    }
+    #info_cover
+    {
+        width: 100%;
+    }
+    #VideoInfo>div>div>div>div{
+        width: 100%;
+    }
+    #carouselExampleAutoplaying{
+        margin: 4px !important;
     }
 
 }
