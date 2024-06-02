@@ -314,7 +314,7 @@ p {
     }
 
 }
-@media screen and (max-width: 570px) {
+@media screen and (max-width: 992px) {
     #VideoPlayerAnime,
     #VideoPlayerAnime>div,
     #VideoPlayerAnime>div>div
@@ -326,6 +326,7 @@ p {
         height: auto;
         min-height: 100%;
         border-radius: 0;
+        max-width: 100%;
     }
 
 }
