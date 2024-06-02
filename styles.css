@@ -528,7 +528,7 @@ span.sr-only {
     }
 
 }
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
     .cart_ {
         border-color: rgb(255, 255, 255);
     
