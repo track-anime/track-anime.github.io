@@ -58,7 +58,7 @@ sh_api.add_token = () => {
         return
     }
 
-    if (!sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_refresh_token")) {
+    if (!sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_refresh_token") && sh_api.getCookie("sh_refresh_token")!="undefined") {
         console.log("reload_token")
         sh_api.refresh_token()
 
