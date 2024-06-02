@@ -272,6 +272,9 @@ iframe#VideoPlayer {
     top: 50%;
 
 }
+#search_form {
+    width: 25%;
+}
 
 #VideoInfo {
     position: absolute;
@@ -342,6 +345,9 @@ p {
         bottom: auto;
         top:100%;
     }
+    #search_form {
+        width: 100%;
+    }
 
 }
 @media screen and (max-width: 992px) {
@@ -353,6 +359,7 @@ p {
 
     } */
 }
+
 
 @media screen and (min-width: 992px) {
      #VideoPlayerAnime
