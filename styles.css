@@ -281,6 +281,7 @@ iframe#VideoPlayer {
     top: 50%;
 
 }
+
 #search_form {
     width: 25%;
 }
@@ -329,6 +330,9 @@ p {
 }
 /* (max-width: 992px) and */
 @media screen and (orientation: portrait), screen and (max-width: 992px) {
+    iframe#VideoPlayer {
+        height: 100dvh;
+    }
 
     #VideoPlayerAnime,
     #VideoPlayerAnime>div,
