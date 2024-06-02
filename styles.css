@@ -345,8 +345,14 @@ p {
         bottom: auto;
         top:100%;
     }
-    #search_form {
+
+    #search_form, #User_Menu_Group, #list_login_Button {
+        margin: 3px !important;
         width: 100%;
+        
+    }
+    #User_Menu_Button{
+        margin: 0px !important;
     }
 
 }
