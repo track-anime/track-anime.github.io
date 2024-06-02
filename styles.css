@@ -328,7 +328,7 @@ p {
 
 }
 
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 992px) and (orientation: portrait) {
 
     #VideoPlayerAnime,
     #VideoPlayerAnime>div,
