@@ -333,13 +333,13 @@ p {
 
 }
 @media screen and (max-width: 992px) {
-    .anime_list 
+/*     .anime_list 
     {
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
 
-    }
+    } */
 }
 
 @media screen and (min-width: 992px) {
