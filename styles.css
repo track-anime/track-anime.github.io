@@ -528,6 +528,16 @@ span.sr-only {
     }
 
 }
+@media only screen and (max-width: 600px) {
+    .cart_ {
+        border-color: rgb(255, 255, 255);
+    
+        .cart-title,
+        .cart-fav {
+            visibility: visible;
+        }
+    }
+}
 
 #ToastsMain {
     right: 30px;
