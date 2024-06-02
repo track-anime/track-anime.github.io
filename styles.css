@@ -214,6 +214,11 @@ body {
     border-color: #1008b6 !important;
 }
 
+.ned_spoiler[open] {
+    .ned_name{
+        background-color: rgb(218, 239, 148);
+    }
+}
 
 #closeDialogButton {
     position: absolute;
