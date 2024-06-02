@@ -339,8 +339,9 @@ p {
         padding: 0;
         height: auto;
         min-height: 100%;
-        border-radius: 0;
         max-width: 100%;
+        border: none;
+        border-radius: 0;
     }
     .VideoInfoBtn{
         position: fixed;
