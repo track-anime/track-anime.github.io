@@ -221,13 +221,13 @@ body {
     top: 6px;
     width: 45px;
     height: 45px;
-
-
 }
 
-dialog#VideoPlayerAnime {
+#VideoPlayerAnime,
+#VideoPlayerAnime>div,
+#VideoPlayerAnime>div>div {
     padding: 0;
-    width: 80%;
+    /* width: 80%; */
     /* height: 80%; */
     border-radius: 12px;
     border-width: thin;
@@ -286,6 +286,7 @@ iframe#VideoPlayer {
     aspect-ratio: 16 / 9;
     top: 0%;
     transition: top 1s ease;
+    overflow-y: auto;
 }
 
 .VideoInfoBtn {
@@ -299,6 +300,34 @@ iframe#VideoPlayer {
 
 p {
     margin: 0;
+}
+
+@media screen and (max-width: 1200px) {
+    #btn_so_max {
+        display: none;
+    }
+
+}
+@media screen and (min-width: 1200px) {
+    #btn_so_min {
+        display: none;
+    }
+
+}
+@media screen and (max-width: 570px) {
+    #VideoPlayerAnime,
+    #VideoPlayerAnime>div,
+    #VideoPlayerAnime>div>div
+     {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        height: auto;
+        min-height: 100%;
+        border-radius: 0;
+    }
+
 }
 
 .cart-img-top {

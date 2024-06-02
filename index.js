@@ -10,6 +10,7 @@ document.body.r = 2
 var url_get = new URL(window.location.href)
 const KeyTab = Math.floor(Math.random() * 10000000000)
 const VideoPlayerAnime = document.getElementById('VideoPlayerAnime');
+VideoPlayerAnime.modal = new bootstrap.Modal(VideoPlayerAnime);
 const VideoInfo = document.getElementById('VideoInfo');
 const VoiceSettings = document.getElementById('VoiceSettings');
 const VideoPlayer = document.getElementById('VideoPlayer');
@@ -536,7 +537,7 @@ function getChapter(name) {
 
 closeDialogButton.addEventListener('click', () => {
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
-    VideoPlayerAnime.close();
+    VideoPlayerAnime.modal.hide();
     VideoPlayer.contentWindow.location.href = "../index.htm";
     url_get.searchParams.delete("shikimori_id")
     url_get.searchParams.delete("id")
@@ -577,9 +578,14 @@ document.getElementById("User_cloud_sinc_button").addEventListener('click', asyn
     }
 });
 
-VideoPlayerAnime.addEventListener("close", () => {
+/* VideoPlayerAnime.addEventListener("close", () => {
     document.title = "Track Anime By ДугДуг"
-});
+}); */
+
+VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
+    // VideoPlayerAnime.modal.focus()
+    document.title = "Track Anime By ДугДуг"
+  })
 
 
 // window.onscroll = function () {
@@ -883,7 +889,7 @@ function VoiceSettingsMenu() {
         location.reload();
     });
 
-    VoiceSettings.showModal()
+    VoiceSettings.show()
 
 }
 async function httpGet(theUrl) {
@@ -1149,7 +1155,7 @@ function dialog_(e, info) {
 
 
 
-    VideoPlayerAnime.showModal();
+    VideoPlayerAnime.modal.show();
 
     // if ((e.imdb || e.kp) && e.shift) {
     //     VideoPlayer.contentWindow.location.href = e.kp ? `//dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&kinopoiskID=${e.kp}` : `//dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
