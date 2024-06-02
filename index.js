@@ -588,6 +588,8 @@ document.getElementById("User_cloud_sinc_button").addEventListener('click', asyn
 VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
     // VideoPlayerAnime.modal.focus()
     document.title = "Track Anime By ДугДуг"
+    url_get.searchParams.delete("shikimori_id")
+    window.history.pushState({}, '', url_get);
   })
 
 
