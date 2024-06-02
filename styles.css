@@ -203,7 +203,7 @@ body {
 }
 
 .container_ {
-    width: 100vw;
+    width: 100%;
     height: calc(100% - 56px);
     overflow: auto;
     bottom: 0;
