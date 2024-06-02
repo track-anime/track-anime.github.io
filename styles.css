@@ -530,7 +530,7 @@ span.sr-only {
 }
 @media (max-width: 600px) {
     .cart_ {
-        border-color: rgb(255, 255, 255);
+        /* border-color: rgb(255, 255, 255); */
     
         .cart-title,
         .cart-fav {
