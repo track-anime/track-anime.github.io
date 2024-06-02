@@ -200,7 +200,7 @@ body {
 
 .container_ {
     width: 100vw;
-    height: calc(100vh - 56px);
+    height: calc(100% - 56px);
     overflow: auto;
     bottom: 0;
     position: fixed;
