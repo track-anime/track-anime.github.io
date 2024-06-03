@@ -226,7 +226,7 @@ body {
 
 #closeDialogButton {
     position: absolute;
-    right: 6px;
+    right: 20px;
     top: 6px;
     width: 45px;
     height: 45px;
@@ -331,7 +331,7 @@ p {
 /* (max-width: 992px) and */
 @media screen and (orientation: portrait), screen and (max-width: 992px) {
     .VideoInfoBtn {
-        right: 60px;
+        right: 80px;
     }
     iframe#VideoPlayer {
         height: 100dvh;
