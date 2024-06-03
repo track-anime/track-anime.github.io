@@ -226,7 +226,7 @@ body {
 
 #closeDialogButton {
     position: absolute;
-    right: 20px;
+    right: 6px;
     top: 6px;
     width: 45px;
     height: 45px;
@@ -235,6 +235,7 @@ body {
 #VideoPlayerAnime,
 #VideoPlayerAnime>div,
 #VideoPlayerAnime>div>div {
+    overflow: hidden;
     padding: 0;
     /* width: 80%; */
     /* height: 80%; */
@@ -252,16 +253,16 @@ dialog::backdrop {
 }
 
 .DialogVideoInfoScroll {
-    top: 0% !important;
+    left: 0% !important;
 }
 
 
 #DialogVideoInfo {
     position: absolute;
-    width: 100%;
-    height: 200%;
-    top: -100%;
-    transition: top 1s ease;
+    width: 200%;
+    height: 100%;
+    left: -100%;
+    transition: left 1s ease;
 }
 
 .progress-bar .sr-only {
@@ -271,14 +272,14 @@ dialog::backdrop {
 
 iframe#VideoPlayer {
     position: absolute;
-    width: 100%;
-    height: 50%;
+    width: 50%;
+    height: 100%;
     border: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     aspect-ratio: 16 / 9;
-    top: 50%;
+    left: 50%;
 
 }
 
@@ -288,8 +289,8 @@ iframe#VideoPlayer {
 
 #VideoInfo {
     position: absolute;
-    width: 100%;
-    height: 50%;
+    width: 50%;
+    height: 100%;
     border: none;
     margin: 0;
     padding: 0;
@@ -303,36 +304,61 @@ iframe#VideoPlayer {
 }
 
 .VideoInfoBtn {
-    top: 50%;
-    right: 40%;
-    margin-top: -30px;
+    writing-mode: vertical-rl;
+    left: 50%;
+    top: 40%;
+    margin-left: -40px;
     position: absolute;
     z-index: 2;
-    width: 20%;
+    height: 20%;
+    width: 80px;
 }
 
 p {
     margin: 0;
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-height: 900px) {
     #btn_so_max {
         display: none;
+        
+    }
+    #VideoInfoBtn{
+        height: 70px;
     }
 
 }
 
-@media screen and (min-width: 1200px) {
+@media screen and (min-height: 900px) {
     #btn_so_min {
         display: none;
     }
 
 }
+@media screen and (max-height: 500px) {
+    /* #btn_so_max {
+        display: none;
+        
+    } */
+    /* #VideoInfoBtn{
+        height: 50px;
+    } */
+
+}
+
+@media screen and (min-height: 500px) {
+    /* #btn_so_min {
+        display: none;
+    } */
+
+
+}
 /* (max-width: 992px) and */
 @media screen and (orientation: portrait), screen and (max-width: 992px) {
-    .VideoInfoBtn {
-        right: 80px;
-    }
+    /* .VideoInfoBtn {
+        right: 60px;
+        width: 60px;
+    } */
     iframe#VideoPlayer {
         height: 100dvh;
     }
@@ -345,6 +371,7 @@ p {
         margin: 0;
         padding: 0;
         height: auto;
+        overflow: hidden;
         min-height: 100%;
         max-width: 100%;
         border: none;
@@ -352,15 +379,15 @@ p {
     }
     .VideoInfoBtn{
         position: fixed;
-        transition: top 1s ease;
+        transition: left 1s ease;
         bottom: auto;
-        top: 0;
+        left: 0;
     }
     .DialogVideoInfoScroll>.VideoInfoBtn{
         position: fixed;
-        transition: top 1s ease;
+        transition: left 1s ease;
         bottom: auto;
-        top:100%;
+        left:100%;
     }
 
     #search_form, #User_Menu_Group, #list_login_Button {
