@@ -46,14 +46,14 @@ if (base_anime.base) {
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
 base_anime.fav = base_anime.fav ? base_anime.fav : []
-base_anime.authorize = base_anime.authorize?base_anime.authorize:false
+base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 window?.Notification?.requestPermission()
 sh_api.get_user()
 // sh_api.get_key()
-if(!sh_api.getCookie("sh_refresh_token") && base_anime.authorize==true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) sh_api.get_key()
+if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) sh_api.get_key()
 setTimeout(() => {
 }, 1500);
 
@@ -138,7 +138,7 @@ function setVideoInfo(e) {
     // VideoInfo.info.title2.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
 
     VideoInfo.info.countries.textContent = e.material_data.countries ? e.material_data.countries : "?";
-    VideoInfo.info.countries.href = e.material_data.countries?`${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}`:"404.html";
+    VideoInfo.info.countries.href = e.material_data.countries ? `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}` : "404.html";
 
     var tmp346 = e.material_data.episodes_aired ? e.material_data.episodes_aired : "?";
     tmp346 = tmp346 + `/${e.material_data.episodes_total ? e.material_data.episodes_total : "?"}`;
@@ -151,16 +151,16 @@ function setVideoInfo(e) {
     VideoInfo.info.description.textContent = e.material_data.description ? e.material_data.description : "?";
 
     VideoInfo.info.info_status.textContent = e.material_data.anime_status ? e.material_data.anime_status : "?";
-    VideoInfo.info.info_status.href = e.material_data.anime_status?`${window.location.origin + window.location.pathname}?anime_status=${e.material_data.anime_status ? e.material_data.anime_status : "404.html"}`:"404.html";
+    VideoInfo.info.info_status.href = e.material_data.anime_status ? `${window.location.origin + window.location.pathname}?anime_status=${e.material_data.anime_status ? e.material_data.anime_status : "404.html"}` : "404.html";
 
     VideoInfo.info.studios.textContent = e.material_data.anime_studios ? e.material_data.anime_studios : "?";
-    VideoInfo.info.studios.href = e.material_data.anime_studios?`${window.location.origin + window.location.pathname}?anime_studios=${e.material_data.anime_studios ? e.material_data.anime_studios : "404.html"}`:"404.html";
+    VideoInfo.info.studios.href = e.material_data.anime_studios ? `${window.location.origin + window.location.pathname}?anime_studios=${e.material_data.anime_studios ? e.material_data.anime_studios : "404.html"}` : "404.html";
 
     VideoInfo.info.year.textContent = e.material_data.year ? e.material_data.year : "?";
-    VideoInfo.info.year.href = e.material_data.year?`${window.location.origin + window.location.pathname}?year=${e.material_data.year ? e.material_data.year : "404.html"}`:"404.html";
+    VideoInfo.info.year.href = e.material_data.year ? `${window.location.origin + window.location.pathname}?year=${e.material_data.year ? e.material_data.year : "404.html"}` : "404.html";
 
     VideoInfo.info.rating_mpaa.textContent = e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "?";
-    VideoInfo.info.rating_mpaa.href = e.material_data.rating_mpaa?`${window.location.origin + window.location.pathname}?rating_mpaa=${e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "404.html"}`:"404.html";
+    VideoInfo.info.rating_mpaa.href = e.material_data.rating_mpaa ? `${window.location.origin + window.location.pathname}?rating_mpaa=${e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "404.html"}` : "404.html";
 
     const dat = e.material_data.next_episode_at ? e.material_data.next_episode_at : e.e.created_at
 
@@ -178,12 +178,12 @@ function setVideoInfo(e) {
     VideoInfo.info.shikimori_rating.style.width = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating * 10}%` : "0%";
     VideoInfo.info.shikimori_rating.textContent = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating}/10` : "?";
     VideoInfo.info.shikimori_votes.textContent = e.material_data.shikimori_votes ? `${e.material_data.shikimori_votes} проголосовавших` : "?";
-    VideoInfo.info.shikimori_link.href = e.shikimori?`https://shikimori.one/animes/${e.shikimori ? e.shikimori : "404.html"}`:"404.html";
+    VideoInfo.info.shikimori_link.href = e.shikimori ? `https://shikimori.one/animes/${e.shikimori ? e.shikimori : "404.html"}` : "404.html";
 
     VideoInfo.info.imdb_rating.style.width = e.material_data.imdb_rating ? `${e.material_data.imdb_rating * 10}%` : "0%";
     VideoInfo.info.imdb_rating.textContent = e.material_data.imdb_rating ? `${e.material_data.imdb_rating}/10` : "?";
     VideoInfo.info.imdb_votes.textContent = e.material_data.imdb_votes ? `${e.material_data.imdb_votes} проголосовавших` : "?";
-    VideoInfo.info.IMDB_link.href = e.imdb?`https://www.imdb.com/title/${e.imdb ? e.imdb : "404.html"}`:"404.html";
+    VideoInfo.info.IMDB_link.href = e.imdb ? `https://www.imdb.com/title/${e.imdb ? e.imdb : "404.html"}` : "404.html";
 
     e.imdb ? document.getElementById("imdb_info").classList.remove('hide') : document.getElementById("imdb_info").classList.add('hide')
     // e.imdb||e.kp ? VideoInfo.info.AlohaPlayer.classList.remove('hide') : VideoInfo.info.AlohaPlayer.classList.add('hide')
@@ -198,18 +198,23 @@ function setVideoInfo(e) {
             VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
         }
     })
-    
+
     VideoInfo.info.TorrentPlayer.addEventListener('click', (ev) => {
 
 
         // VideoPlayer.contentWindow.location.href = e.imdb ? `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&imdb=${e.imdb}` : `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
-        VideoPlayer.contentWindow.location.href = `https://torlook.in/?search=${e.material_data.anime_title}`
-        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
-        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        
+        let url = `https://tragtorr.info/search/${e.material_data.anime_title}`
+        if (ev.shiftKey) {
+            window.open(url)
+        } else {
+            VideoPlayer.contentWindow.location.href = url
+            let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+            DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        }
+
         // window.open(`https://tragtorr.info/search/${e.material_data.anime_title}`)
     })
-    
+
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
@@ -602,7 +607,7 @@ VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
     document.title = "Track Anime By ДугДуг"
     url_get.searchParams.delete("shikimori_id")
     window.history.pushState({}, '', url_get);
-  })
+})
 
 
 // window.onscroll = function () {
