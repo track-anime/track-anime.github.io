@@ -96,6 +96,7 @@ VideoInfo.info = {
     "TorrentPlayer": VideoInfo.querySelector("#info_TorrentPlayer"),
     "KodikPlayer": VideoInfo.querySelector("#info_KodikPlayer"),
     "duration": VideoInfo.querySelector("#info_duration"),
+    "TorrentURL": null,
 
 
 }
@@ -126,7 +127,10 @@ URLListStart = URLList  // Обновляем ссылку после пррим
 
 load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add("hide")
 
-
+function TorrentURL() {
+    // console.log(22, `${VideoInfo.info.TorrentPlayer.title}`);
+    window.open(`https://darklibria.it/search?find=${VideoInfo.info.TorrentPlayer.title}`)
+};
 
 function setVideoInfo(e) {
     var html
@@ -199,22 +203,12 @@ function setVideoInfo(e) {
         }
     })
 
-    VideoInfo.info.TorrentPlayer.addEventListener('click', (ev) => {
 
 
-        // VideoPlayer.contentWindow.location.href = e.imdb ? `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&imdb=${e.imdb}` : `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
-        // let url = `https://torlook.in/?search=${e.material_data.anime_title}`
-        // let url = `https://darklibria.it/search?find=${e.material_data.anime_title}`
-        window.open(`https://darklibria.it/search?find=${e.material_data.anime_title}`)
-        if (ev.shiftKey) {
-        } else {
-            // VideoPlayer.contentWindow.location.href = url
-            // let DialogVideoInfo = document.getElementById('DialogVideoInfo');
-            // DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        }
-
-        // window.open(`https://tragtorr.info/search/${e.material_data.anime_title}`)
-    })
+    VideoInfo.info.TorrentPlayer.title = e.material_data.anime_title
+    VideoInfo.info.TorrentPlayer.removeEventListener('click', TorrentURL, false)
+    VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
+    // VideoInfo.info.TorrentPlayer.en = true;
 
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
@@ -374,9 +368,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.material_data.duration, 'minutes').asMilliseconds())
-    console.log(1, tt.fromNow())
     // console.log(`${tt.hours()!=0?`${tt.hours()}:`:""}${tt.minutes()}`)
-    console.log(VideoInfo.e.material_data.duration)
     switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
@@ -845,18 +837,14 @@ function AddFavorite(t) {
 function SetFavorite(e) {
     base_anime.fav.push(e)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    // console.log(1, e)
     sh_api.AddUserRates(Number(e), 0)
-    // console.log(2, e)
     return base_anime.fav
 }
 
 function DeleteFavorite(e) {
     base_anime.fav = base_anime.fav.filter(item => !item.includes(e));
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    // console.log(3, e)
     sh_api.AddUserRates(Number(e), 1)
-    // console.log(4, e)
     return base_anime.fav
 }
 
