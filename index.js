@@ -93,6 +93,7 @@ VideoInfo.info = {
     "shikimori_link": VideoInfo.querySelector("#info_shikimori_link"),
     "IMDB_link": VideoInfo.querySelector("#info_IMDB_link"),
     "AlohaPlayer": VideoInfo.querySelector("#info_AlohaPlayer"),
+    "TorrentPlayer": VideoInfo.querySelector("#info_TorrentPlayer"),
     "KodikPlayer": VideoInfo.querySelector("#info_KodikPlayer"),
     "duration": VideoInfo.querySelector("#info_duration"),
 
@@ -196,6 +197,15 @@ function setVideoInfo(e) {
         if (ev.shiftKey) {
             VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
         }
+    })
+    VideoInfo.info.TorrentPlayer.addEventListener('click', (ev) => {
+
+
+        // VideoPlayer.contentWindow.location.href = e.imdb ? `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&imdb=${e.imdb}` : `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
+        VideoPlayer.contentWindow.location.href = `http://tragtorr.info/search/${e.material_data.anime_title}`
+        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+
     })
     
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
