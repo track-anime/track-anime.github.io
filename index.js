@@ -203,11 +203,11 @@ function setVideoInfo(e) {
 
 
         // VideoPlayer.contentWindow.location.href = e.imdb ? `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&imdb=${e.imdb}` : `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
-        // VideoPlayer.contentWindow.location.href = `https://tragtorr.info/search/${e.material_data.anime_title}`
-        window.open(`https://tragtorr.info/search/${e.material_data.anime_title}`)
-        // let DialogVideoInfo = document.getElementById('DialogVideoInfo');
-        // DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-
+        VideoPlayer.contentWindow.location.href = `https://torlook.in/?search=${e.material_data.anime_title}`
+        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        
+        // window.open(`https://tragtorr.info/search/${e.material_data.anime_title}`)
     })
     
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
