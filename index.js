@@ -198,6 +198,7 @@ function setVideoInfo(e) {
             VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
         }
     })
+    
     VideoInfo.info.TorrentPlayer.addEventListener('click', (ev) => {
 
 
