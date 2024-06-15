@@ -132,6 +132,10 @@ function TorrentURL() {
     window.open(`https://darklibria.it/search?find=${VideoInfo.info.TorrentPlayer.title}`)
 };
 
+document.querySelector("#pipDialogButton").addEventListener('click', () => {
+    ta_pip()
+})
+
 function setVideoInfo(e) {
     var html
 
@@ -209,6 +213,8 @@ function setVideoInfo(e) {
     VideoInfo.info.TorrentPlayer.removeEventListener('click', TorrentURL, false)
     VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
     // VideoInfo.info.TorrentPlayer.en = true;
+
+ 
 
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
@@ -1152,6 +1158,7 @@ function showToast(e) {
 }
 
 function dialog_(e, info) {
+    VideoPlayerAnime.pip = VideoPlayerAnime.pip ?VideoPlayerAnime.pip : false
     if (e.shift) {
         // return
         if (confirm(`Добавить аниме "${e.title}" в список "смотрю" на shikimori?`)) {
@@ -1179,6 +1186,32 @@ function dialog_(e, info) {
     VideoPlayer.contentWindow.location.href = e.link
 
     info ? DialogVideoInfo.classList.add("DialogVideoInfoScroll") : DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
+    
+    ta_pip(false)
+}
+
+function ta_pip(flag) //picture to picture
+{
+    console.log(typeof flag )
+    if (typeof flag != "boolean" && typeof flag != "undefined") return console.log("Ну и что это такое?")
+    VideoPlayerAnime.pip = typeof flag == "boolean" ? flag : !VideoPlayerAnime.pip
+    console.log(flag, VideoPlayerAnime.pip)
+
+    if(VideoPlayerAnime.pip==true){
+        // VideoPlayerAnime.pip = true
+        document.querySelector("#VideoPlayerAnime").classList.add("ta_modal")
+        document.querySelector("#VideoPlayerAnime").classList.remove("modal")
+        document.querySelector(".modal-backdrop").classList.add("ta_modal-backdrop_hide")
+        document.querySelector("#DialogVideoInfo").classList.remove("DialogVideoInfoScroll")
+    }
+    if(VideoPlayerAnime.pip==false){
+        // VideoPlayerAnime.pip = false
+        document.querySelector("#VideoPlayerAnime").classList.remove("ta_modal")
+        document.querySelector("#VideoPlayerAnime").classList.add("modal")
+        document.querySelector(".modal-backdrop").classList.remove("ta_modal-backdrop_hide")
+        // document.querySelector("#DialogVideoInfo").classList.add("DialogVideoInfoScroll")
+    }
+    return VideoPlayerAnime.pip
 }
 
 

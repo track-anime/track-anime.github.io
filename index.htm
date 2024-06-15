@@ -218,7 +218,7 @@
 
 
     <div id="VideoPlayerAnime" class="modal fade" tabindex="-1">
-        <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-dialog modal-xl modal-dialog-centered ">
             <div class="modal-content">
                 <div id="DialogVideoInfo">
                     <div id="VideoInfo">
@@ -453,8 +453,14 @@
                         </iframe>
                     </div>
                 </div>
+                
                 <button type="button" class="btn btn-secondary" id="closeDialogButton">X</button>
-
+                <button type="button" class="btn btn-secondary" title="PiP" id="pipDialogButton">
+                    <svg width="50%" height="50%">
+                        <rect x="10%" y="10%" width="80%" height="80%" stroke-width="2" stroke="var(--bs-body-color)" fill="none" />
+                        <rect x="10%" y="10%" width="50%" id="ta_modal_pip_btn_mini" height="50%" stroke-width="2" stroke="var(--bs-body-color)" fill="none" />
+                    </svg>
+                </button>
             </div>
         </div>
     </div>
