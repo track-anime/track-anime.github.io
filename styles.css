@@ -232,6 +232,7 @@ body {
     width: 45px;
     height: 45px;
 }
+
 #pipDialogButton {
     padding: 0px;
     position: absolute;
@@ -253,7 +254,7 @@ body {
     border-color: #6d757d;
     aspect-ratio: 16 / 9;
     overflow-y: hidden;
-    
+
 }
 
 dialog::backdrop {
@@ -323,7 +324,7 @@ iframe#VideoPlayer {
     width: 80px;
 }
 
-            /*Режим pip*/
+/*Режим pip*/
 @media screen and (min-width: 992px) {
     .ta_modal {
         width: 500px !important;
@@ -344,12 +345,15 @@ iframe#VideoPlayer {
     }
 }
 
-.ta_modal-backdrop_hide {
-    display: none;
+dialog::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
-
-
+.ta_modal-backdrop_hide {
+    transition: opacity 2s;
+    pointer-events: none;
+    opacity: 0 !important;    
+}
 
 p {
     margin: 0;
@@ -396,9 +400,10 @@ p {
 /* (max-width: 992px) and */
 @media screen and (orientation: portrait),
 screen and (max-width: 992px) {
-    #pipDialogButton{
+    #pipDialogButton {
         display: none;
     }
+
     /* .VideoInfoBtn {
         right: 60px;
         width: 60px;
