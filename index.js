@@ -12,7 +12,8 @@ const KeyTab = Math.floor(Math.random() * 10000000000)
 const VideoPlayerAnime = document.getElementById('VideoPlayerAnime');
 VideoPlayerAnime.modal = new bootstrap.Modal(VideoPlayerAnime);
 const VideoInfo = document.getElementById('VideoInfo');
-const VoiceSettings = document.getElementById('VoiceSettings');
+const VoiceSettings = document.getElementById('VoiceSettings_content');
+VoiceSettings.modal = new bootstrap.Modal(document.getElementById('VoiceSettings'));
 const VideoPlayer = document.getElementById('VideoPlayer');
 const list_calendar = document.getElementById("list_calendar");
 const container_ = document.body.querySelector('.container_');
@@ -902,11 +903,11 @@ function VoiceSettingsMenu() {
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
         VoiceSettings.innerHTML = ""
-        VoiceSettings.close()
+        VoiceSettings.modal.close()
         location.reload();
     });
 
-    VoiceSettings.show()
+    VoiceSettings.modal.show()
 
 }
 async function httpGet(theUrl) {

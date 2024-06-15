@@ -559,6 +559,10 @@ span.sr-only {
     writing-mode: vertical-rl;
 }
 
+#VoiceSettings_content {
+    padding: 13px;
+}
+
 .cart-time {
     /* background-color: #5d5d5dde; */
     background: linear-gradient(0deg, rgb(69, 69, 69, 0.8) 0%, rgba(69, 69, 69, 0.8) 80%, rgba(191, 191, 191, 0) 100%);
