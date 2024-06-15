@@ -863,6 +863,7 @@ function GetFavorite(e) {
     return false
 }
 function VoiceSettingsMenu() {
+    VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
 
@@ -902,8 +903,8 @@ function VoiceSettingsMenu() {
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-        VoiceSettings.innerHTML = ""
-        VoiceSettings.modal.close()
+        // VoiceSettings.innerHTML = ""
+        VoiceSettings.modal.hide()
         location.reload();
     });
 
