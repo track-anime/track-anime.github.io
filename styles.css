@@ -253,7 +253,7 @@ body {
     border-color: #6d757d;
     aspect-ratio: 16 / 9;
     overflow-y: hidden;
-
+    
 }
 
 dialog::backdrop {
@@ -328,9 +328,11 @@ iframe#VideoPlayer {
     .ta_modal {
         width: 500px !important;
         height: 300px !important;
+        top: calc(100% - 300px) !important;
+        left: calc(100% - 500px) !important;
         right: 0px !important;
         bottom: 0px !important;
-        position: absolute !important;
+        position: fixed !important;
 
         #ta_modal_pip_btn_mini {
             stroke: none;
@@ -345,6 +347,8 @@ iframe#VideoPlayer {
 .ta_modal-backdrop_hide {
     display: none;
 }
+
+
 
 
 p {
@@ -476,7 +480,15 @@ screen and (max-width: 992px) {
 
 @media screen and (min-width: 992px) {
     #VideoPlayerAnime {
+        /* transition:  right, bottom 1s ease; */
+        /* transition: width, height 1s ease; */
+        transition: all 1s ease;
         width: 100%;
+        height: 100%;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        top: 0px;
     }
 
     #VideoPlayerAnime>div {
