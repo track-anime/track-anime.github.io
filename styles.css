@@ -369,7 +369,7 @@ dialog::backdrop {
 }
 
 .ta_modal-backdrop_hide {
-    transition: opacity 2s;
+    transition: opacity 1s;
     pointer-events: none;
     opacity: 0 !important;    
 }
