@@ -6,7 +6,6 @@ var ignoreVoice = false
 window.moment.locale('ru')
 var HistoryIsActivy = true
 var TypePage = 0
-var nTab
 document.body.r = 2
 var url_get = new URL(window.location.href)
 const KeyTab = Math.floor(Math.random() * 10000000000)
@@ -322,9 +321,9 @@ document.getElementById('User_Fav_sinc_button').addEventListener('mousedown', (e
             break;
         case 1:
             // console.log(url_get.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`))
-            a = url_get
-            a.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
-            window.open(a.href, "_blank");
+            tmp = url_get
+            tmp.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
+            window.open(tmp.href, "_blank");
             break;
         case 2:
             break;
