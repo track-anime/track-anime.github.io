@@ -268,6 +268,8 @@ function setVideoInfo(e) {
     btn_sh_save.classList.remove("hide")
     btn_sh_save.classList.remove("btn-outline-light")
     btn_sh_save.classList.remove("btn-primary")
+    btn_sh_save.classList.remove("yellow")
+    btn_sh_save.classList.remove("yellow_bg")
     btn_sh_save.classList.remove("btn-success")
     btn_sh_save.classList.remove("btn-danger")
     btn_sh_save.classList.remove("btn-warning")
@@ -277,6 +279,8 @@ function setVideoInfo(e) {
     switch (btn_sh_save?.sh_fv?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
+            btn_sh_save.classList.add("yellow")
+            btn_sh_save.classList.add("yellow_bg")
             btn_sh_save.classList.add("btn-primary")
             break;
         case "completed":
@@ -380,6 +384,8 @@ document.addEventListener("authorize", function (e) { // (1)
         case "watching":
             btn_sh_save.textContent = "смотрю"
             btn_sh_save.classList.add("btn-primary")
+            btn_sh_save.classList.add("yellow")
+            btn_sh_save.classList.add("yellow_bg")
             break;
         case "completed":
             btn_sh_save.textContent = "просмотренно"
@@ -780,6 +786,8 @@ function AddFavorite(t) {
 
     e1.classList.remove("btn-outline-light")
     e1.classList.remove("btn-primary")
+    e1.classList.remove("yellow")
+    e1.classList.remove("yellow_bg")
     e1.classList.remove("btn-success")
     e1.classList.remove("btn-danger")
     e1.classList.remove("btn-warning")
@@ -790,6 +798,8 @@ function AddFavorite(t) {
         case 0:
             e1.textContent = "смотрю"
             e1.classList.add("btn-primary")
+            e1.classList.add("yellow")
+            e1.classList.add("yellow_bg")
             SetFavorite(e1.ids)
             break;
         case 1:
@@ -890,7 +900,7 @@ function VoiceSettingsMenu() {
 
     const saveButton = document.createElement('button');
     saveButton.type = 'button';
-    saveButton.className = 'btn btn-primary mt-3';
+    saveButton.className = 'btn btn-primary yellow mt-3';
     saveButton.textContent = 'Сохранить';
     VoiceSettings.prepend(saveButton)
     saveButton.addEventListener('click', () => {

@@ -22,18 +22,20 @@ body {
     position: absolute; */
 }
 
-.btn-primary:hover,
-.btn-primary:focus,
-.btn-primary:active,
-.btn-primary.active,
-.open>.dropdown-toggle.btn-primary {
+.yellow:hover,
+.yellow:focus,
+.yellow:active,
+.yellow.active,
+.open>.dropdown-toggle.yellow {
     color: #000000;
     background-color: #ffdd00;
-    /* background-color: #286090; */
-    /* Темно-синий цвет */
     border-color: #dec104;
-    /* Темно-синий цвет */
 }
+.yellow_bg{
+    background-color: #b49d03;
+    color: #000000;
+}
+
 
 .btn-success:hover,
 .btn-success:focus,
