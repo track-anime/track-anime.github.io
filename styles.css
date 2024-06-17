@@ -36,6 +36,22 @@ body {
     color: #000000;
 }
 
+.pink:hover,
+.pink:focus,
+.pink:active,
+.pink.active,
+.open>.dropdown-toggle.pink {
+    color: #ffffff;
+    background-color: #ff00fb;
+    border-color: #c201bf;
+}
+.pink_bg{
+    background-color: #9f039d;
+    border-color: #880386;
+    color: #ffffff;
+}
+
+
 
 .btn-success:hover,
 .btn-success:focus,

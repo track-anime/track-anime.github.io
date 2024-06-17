@@ -273,7 +273,8 @@ function setVideoInfo(e) {
     btn_sh_save.classList.remove("btn-success")
     btn_sh_save.classList.remove("btn-danger")
     btn_sh_save.classList.remove("btn-warning")
-    btn_sh_save.classList.remove("btn-secondary")
+    btn_sh_save.classList.remove("pink")
+    btn_sh_save.classList.remove("pink-bg")
     btn_sh_save.classList.remove("btn-info")
 
     switch (btn_sh_save?.sh_fv?.status) {
@@ -298,7 +299,9 @@ function setVideoInfo(e) {
             break;
         case "planned":
             btn_sh_save.textContent = "запланировано"
-            btn_sh_save.classList.add("btn-secondary")
+            // btn_sh_save.classList.add("btn-secondary")
+            btn_sh_save.classList.add("pink")
+            btn_sh_save.classList.add("pink_bg")
             break;
         case "rewatching":
             btn_sh_save.textContent = "пересматриваю"
@@ -421,7 +424,9 @@ document.addEventListener("authorize", function (e) { // (1)
             break;
         case "planned":
             btn_sh_save.textContent = "запланировано"
-            btn_sh_save.classList.add("btn-secondary")
+            // btn_sh_save.classList.add("btn-secondary")
+            btn_sh_save.classList.add("pink")
+            btn_sh_save.classList.add("pink_bg")
             break;
         case "rewatching":
             btn_sh_save.textContent = "пересматриваю"
@@ -837,6 +842,8 @@ function AddFavorite(t) {
     e1.classList.remove("btn-danger")
     e1.classList.remove("btn-warning")
     e1.classList.remove("btn-secondary")
+    e1.classList.remove("pink")
+    e1.classList.remove("pink_bg")
     e1.classList.remove("btn-info")
 
     switch (t) {
@@ -871,7 +878,9 @@ function AddFavorite(t) {
             break;
         case 4:
             e1.textContent = "запланировано"
-            e1.classList.add("btn-secondary")
+            // e1.classList.add("btn-secondary")
+            e1.classList.add("pink")
+            e1.classList.add("pink_bg")
             DeleteFavorite(e1.ids)
             setTimeout(() => {
                 sh_api.AddUserRates(Number(e1.ids), t)
