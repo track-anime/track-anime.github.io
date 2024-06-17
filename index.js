@@ -586,14 +586,16 @@ function getChapter(name) {
 }
 
 closeDialogButton.addEventListener('click', () => {
-    DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     VideoPlayerAnime.modal.hide();
-    VideoPlayer.contentWindow.location.href = "../index.htm";
+    DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     url_get.searchParams.delete("shikimori_id")
     url_get.searchParams.delete("id")
-
+    
     window.history.pushState({}, '', url_get);
+    VideoPlayer.contentWindow.location.href = "clear.htm";
+    return
 });
+
 document.getElementById("list_calendar_Button").addEventListener('mousedown', async (e) => {
 
     switch (e.button) {
@@ -1109,9 +1111,10 @@ function add_cart(e) {
     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
   </svg>`
     // cartFavorite.title = e.series;
-    cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
+    console.log(sh_api.get_fav_color(e.shikimori), e.shikimori)
     cart.appendChild(cartFavorite);
     // cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+    cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
     cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
 
     cart.addEventListener("mouseover", (ev) => {
@@ -1301,7 +1304,7 @@ async function GetKodi(seartch, revers) {
     ld = true
     // if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - scrollM && HistoryIsActivy == true && document.getElementById('search_input').value ) {
     // if(container_.clientHeight + container_.scrollTop > container_.scrollHeight - scrollM){
-
+    console.log(seartch, HistoryIsActivy)
     if ((window.innerHeight + window.scrollY) >= container_.offsetHeight - scrollM) {
         if ((!seartch || seartch == undefined || seartch == "")) {
             getChapter("#list_serch")
@@ -1366,27 +1369,6 @@ url_get.searchParams.get('sh_user_fav') ? GetFavUsersList(url_get.searchParams.g
 
 
 
-/* function ScanBase(e, i, revers) {
-    document.getElementById("loading-bar").classList.remove("hide");
-    var t = 0
-    if (i >= e.length) {
-        GetKodiScan(data, revers)
-
-        document.getElementById("loading-bar").classList.add("hide");
-        if (container_.clientHeight + container_.scrollTop > container_.scrollHeight - scrollM && HistoryIsActivy) {
-
-            GetKodi()
-        }
-        return;
-    }
-    const prog = `${i}%`
-    document.getElementById("loading-bar").style.width = prog
-    document.getElementById("loading-bar").textContent = prog
-
-    setTimeout(() => {
-        ScanBase(e, i + 1, revers);
-    }, t);
-} */
 
 function GetKodiScan(data, revers) {
 
