@@ -17,6 +17,14 @@ sh_api.status_lable = [
     "planned",
     "rewatching",
 ]
+sh_api.status_color = {
+    watching: ["#286090", "смотрю"],
+    completed: ["#3b8a3f", "просмотренно"],
+    dropped: ["#9a3838", "брошено"],
+    on_hold: ["#ab7a2f", "отложено"],
+    planned: ["#5f5f5f", "запланировано"],
+    rewatching: ["#31d2f2", "пересматриваю"],
+}
 sh_api.status_lable_ru = [
     "смотрю",
     "просмотренно",
@@ -47,9 +55,9 @@ sh_api.get_key = () => {
 
 sh_api.add_token = () => {
 
-/*     if (sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_access_token")!="undefined") {
-        return sh_api.getCookie("sh_access_token")
-    } */
+    /*     if (sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_access_token")!="undefined") {
+            return sh_api.getCookie("sh_access_token")
+        } */
 
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
@@ -57,13 +65,13 @@ sh_api.add_token = () => {
         window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
         return
     }
-/* 
-    if (!sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_refresh_token") && sh_api.getCookie("sh_refresh_token")!="undefined") {
-        console.log("reload_token")
-        sh_api.refresh_token()
-
-        return
-    } */
+    /* 
+        if (!sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_refresh_token") && sh_api.getCookie("sh_refresh_token")!="undefined") {
+            console.log("reload_token")
+            sh_api.refresh_token()
+    
+            return
+        } */
 
     fetch('https://shikimori.one/oauth/token', {
         method: 'POST',
@@ -97,7 +105,7 @@ sh_api.logout = () => {
     document.dispatchEvent(sh_api.logout_ev);
     setTimeout(() => {
         location.reload()
-    }, 1000); 
+    }, 1000);
 }
 
 sh_api.refresh_token = () => {
@@ -131,7 +139,7 @@ sh_api.refresh_token = () => {
             // location.reload()
         })
         .catch(error => console.error(error));
-        return "await"
+    return "await"
 }
 
 sh_api.get_user = (user, isanother) => {
@@ -173,6 +181,13 @@ sh_api.get_user = (user, isanother) => {
 
 
     // document.cookie = getCookie("KeyTab") ? `` : `KeyTab=${KeyTab}; path=/; max-age=10`
+}
+sh_api.get_fav_color = (id) => {  //Возвращает по id цвет избранного
+    if (!sh_api.authorize) return
+
+    id_status = sh_api.Favorits.data.find(e => e.anime.id == id)?.status
+
+    return [id_status ? sh_api.status_color[id_status][0] : "#ffffff", id_status ? sh_api.status_color[id_status][1] : "не добавлено"]
 }
 
 sh_api.get_favorit = (sh_user, isanother) => {
