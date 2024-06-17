@@ -592,7 +592,7 @@ closeDialogButton.addEventListener('click', () => {
     url_get.searchParams.delete("id")
     
     window.history.pushState({}, '', url_get);
-    VideoPlayer.contentWindow.location.href = "clear.htm";
+    VideoPlayer.contentWindow.location.href = "loading.htm";
     return
 });
 
