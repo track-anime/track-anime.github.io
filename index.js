@@ -129,7 +129,6 @@ URLListStart = URLList  // Обновляем ссылку после пррим
 load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add("hide")
 
 function TorrentURL() {
-    // console.log(22, `${VideoInfo.info.TorrentPlayer.title}`);
     window.open(`https://darklibria.it/search?find=${VideoInfo.info.TorrentPlayer.title}`)
 };
 
@@ -323,7 +322,6 @@ document.getElementById('User_Fav_sinc_button').addEventListener('mousedown', (e
             GetFavBtn(sh_api.UserData.id)
             break;
         case 1:
-            // console.log(url_get.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`))
             tmp = url_get
             tmp.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
             window.open(tmp.href, "_blank");
@@ -366,12 +364,10 @@ document.getElementById("VideoInfoBtn").addEventListener('click', () => {
 document.addEventListener("search_another", function (e) {
 
     if (sh_api.another.status != 200) {
-        console.log(sh_api.another.status)
         getHome()
         load.show(false)
         return
     }
-    console.log("search_another")
     GetFavoriteList("search_another")
     getChapter("#list_fav")
     HistoryIsActivy = false
@@ -401,7 +397,6 @@ document.addEventListener("authorize", function (e) { // (1)
 
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.material_data.duration, 'minutes').asMilliseconds())
-    // console.log(`${tt.hours()!=0?`${tt.hours()}:`:""}${tt.minutes()}`)
     switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
@@ -1020,12 +1015,8 @@ function add_cart(e) {
     cart.appendChild(imgTop);
 
     imgTop.addEventListener("mousedown", (event) => {
-        // console.log(event.which, event.button);
         var a = new URL(window.location.href)
         a.searchParams.set("shikimori_id", `${e.shikimori}`)
-        // console.log(a.href);
-        // console.log(e.shikimori);
-        // return
         if (event.button == 1) {
             var newTab = window.open(a.href, '_blank')
             return
@@ -1111,11 +1102,11 @@ function add_cart(e) {
     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
   </svg>`
     // cartFavorite.title = e.series;
-    console.log(sh_api.get_fav_color(e.shikimori), e.shikimori)
     cart.appendChild(cartFavorite);
     // cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
-    cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
+    console.log(sh_api.get_fav_color(e.shikimori), e.title)
     cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+    cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
 
     cart.addEventListener("mouseover", (ev) => {
         cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
@@ -1126,10 +1117,12 @@ function add_cart(e) {
         if (GetFavorite(e.shikimori)) {
             // cartFavorite.querySelector('svg').style.fill = "#ffffff"
             DeleteFavorite(e.shikimori)
+            cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
             cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         } else {
             // cartFavorite.querySelector('svg').style.fill = "#ffdd00"
             SetFavorite(e.shikimori)
+            cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
             cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         }
 

@@ -89,17 +89,6 @@ body {
     /* Темно-оранжевый цвет */
 }
 
-.btn-secondary:hover,
-.btn-secondary:focus,
-.btn-secondary:active,
-.btn-secondary.active,
-.open>.dropdown-toggle.btn-secondary {
-    color: #fff;
-    background-color: #5f5f5f;
-    /* Темно-серый цвет */
-    border-color: #464646;
-    /* Темно-серый цвет */
-}
 
 .btn-info:hover,
 .btn-info:focus,

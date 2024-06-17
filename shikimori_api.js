@@ -23,7 +23,7 @@ sh_api.status_color = {
     completed: ["#3b8a3f", "просмотренно"],
     dropped: ["#9a3838", "брошено"],
     on_hold: ["#ab7a2f", "отложено"],
-    planned: ["#5f5f5f", "запланировано"],
+    planned: ["#ff00fb", "запланировано"],
     rewatching: ["#31d2f2", "пересматриваю"],
 }
 sh_api.status_lable_ru = [
