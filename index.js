@@ -324,7 +324,7 @@ document.getElementById('User_Fav_sinc_button').addEventListener('mousedown', (e
             // console.log(url_get.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`))
             a = url_get
             a.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
-            nTab = window.open(a.href, "_blank");
+            window.open(a.href, "_blank");
             break;
         case 2:
             break;
