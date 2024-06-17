@@ -6,6 +6,7 @@ var ignoreVoice = false
 window.moment.locale('ru')
 var HistoryIsActivy = true
 var TypePage = 0
+var nTab
 document.body.r = 2
 var url_get = new URL(window.location.href)
 const KeyTab = Math.floor(Math.random() * 10000000000)
@@ -215,7 +216,7 @@ function setVideoInfo(e) {
     VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
     // VideoInfo.info.TorrentPlayer.en = true;
 
- 
+
 
     VideoInfo.info.KodikPlayer.addEventListener('click', () => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
@@ -313,13 +314,32 @@ function setVideoInfo(e) {
 }
 
 
-document.getElementById('User_Fav_sinc_button').addEventListener('click', () => {
+document.getElementById('User_Fav_sinc_button').addEventListener('mousedown', (e) => {
+
+    switch (e.button) {
+        case 0:
+            GetFavBtn(sh_api.UserData.id)
+            break;
+        case 1:
+            // console.log(url_get.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`))
+            a = url_get
+            a.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
+            nTab = window.open(a.href, "_blank");
+            break;
+        case 2:
+            break;
+
+        default:
+            break;
+    }
+})
+function GetFavBtn(UserID) {
     HistoryIsActivy = false
     getChapter("#list_fav")
     GetFavoriteList("authorize")
-    url_get.searchParams.set("sh_user_fav", `${sh_api.UserData.id}`)
-    window.history.pushState({}, '', url_get);
-})
+    url_get.searchParams.set("sh_user_fav", `${UserID}`)
+    history.pushState({}, '', url_get);
+}
 
 document.getElementById('VoiceButtonMenu').addEventListener('click', () => {
     VoiceSettingsMenu()
@@ -570,17 +590,43 @@ closeDialogButton.addEventListener('click', () => {
 
     window.history.pushState({}, '', url_get);
 });
-document.getElementById("list_calendar_Button").addEventListener('click', async (e) => {
-    // console.log(e.shiftKey)
-    /*     if (e.shiftKey && sh_api.authorize) {
-            HistoryIsActivy = false
-            getChapter("#list_fav")
-            return
-        } */
-    getCalendar()
+document.getElementById("list_calendar_Button").addEventListener('mousedown', async (e) => {
+
+    switch (e.button) {
+        case 0:
+            window.getCalendar()
+            break;
+        case 1:
+            nTab = window.open(window.location.href, "_blank");
+            nTab.onload = function () {
+                nTab.getCalendar()
+            };
+            break;
+        case 2:
+            break;
+
+        default:
+            break;
+    }
 });
-document.getElementById("list_home_Button").addEventListener('click', async () => {
-    getHome()
+document.getElementById("list_home_Button").addEventListener('mousedown', async (e) => {
+
+    switch (e.button) {
+        case 0:
+            window.getHome()
+            break;
+        case 1:
+            nTab = window.open(window.location.href, "_blank");
+            nTab.onload = function () {
+                nTab.getHome()
+            };
+            break;
+        case 2:
+            break;
+
+        default:
+            break;
+    }
 });
 document.getElementById("list_login_Button").addEventListener('click', async () => {
     sh_api.get_key()
@@ -1058,10 +1104,10 @@ function add_cart(e) {
     cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
     cart.appendChild(cartFavorite);
     // cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
-    cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0]: GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+    cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
 
     cart.addEventListener("mouseover", (ev) => {
-        cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0]: GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+        cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
     });
 
     cartFavorite.addEventListener("click", (ev) => {
@@ -1069,11 +1115,11 @@ function add_cart(e) {
         if (GetFavorite(e.shikimori)) {
             // cartFavorite.querySelector('svg').style.fill = "#ffffff"
             DeleteFavorite(e.shikimori)
-            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0]: GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         } else {
             // cartFavorite.querySelector('svg').style.fill = "#ffdd00"
             SetFavorite(e.shikimori)
-            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0]: GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         }
 
 
@@ -1174,7 +1220,7 @@ function showToast(e) {
 }
 
 function dialog_(e, info) {
-    VideoPlayerAnime.pip = VideoPlayerAnime.pip ?VideoPlayerAnime.pip : false
+    VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
     if (e.shift) {
         // return
         if (confirm(`Добавить аниме "${e.title}" в список "смотрю" на shikimori?`)) {
@@ -1202,25 +1248,25 @@ function dialog_(e, info) {
     VideoPlayer.contentWindow.location.href = e.link
 
     info ? DialogVideoInfo.classList.add("DialogVideoInfoScroll") : DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
-    
+
     ta_pip(false)
 }
 
 function ta_pip(flag) //picture to picture
 {
-    console.log(typeof flag )
+    console.log(typeof flag)
     if (typeof flag != "boolean" && typeof flag != "undefined") return console.log("Ну и что это такое?")
     VideoPlayerAnime.pip = typeof flag == "boolean" ? flag : !VideoPlayerAnime.pip
     console.log(flag, VideoPlayerAnime.pip)
 
-    if(VideoPlayerAnime.pip==true){
+    if (VideoPlayerAnime.pip == true) {
         // VideoPlayerAnime.pip = true
         document.querySelector("#VideoPlayerAnime").classList.add("ta_modal")
         document.querySelector("#VideoPlayerAnime").classList.remove("modal")
         document.querySelector(".modal-backdrop").classList.add("ta_modal-backdrop_hide")
         document.querySelector("#DialogVideoInfo").classList.remove("DialogVideoInfoScroll")
     }
-    if(VideoPlayerAnime.pip==false){
+    if (VideoPlayerAnime.pip == false) {
         // VideoPlayerAnime.pip = false
         document.querySelector("#VideoPlayerAnime").classList.remove("ta_modal")
         document.querySelector("#VideoPlayerAnime").classList.add("modal")
