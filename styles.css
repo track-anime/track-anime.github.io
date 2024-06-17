@@ -27,10 +27,11 @@ body {
 .btn-primary:active,
 .btn-primary.active,
 .open>.dropdown-toggle.btn-primary {
-    color: #fff;
-    background-color: #286090;
+    color: #000000;
+    background-color: #ffdd00;
+    /* background-color: #286090; */
     /* Темно-синий цвет */
-    border-color: #204d74;
+    border-color: #dec104;
     /* Темно-синий цвет */
 }
 

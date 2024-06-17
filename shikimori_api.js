@@ -18,7 +18,8 @@ sh_api.status_lable = [
     "rewatching",
 ]
 sh_api.status_color = {
-    watching: ["#286090", "смотрю"],
+    watching: ["#ffdd00", "смотрю"],
+    // watching: ["#286090", "смотрю"],
     completed: ["#3b8a3f", "просмотренно"],
     dropped: ["#9a3838", "брошено"],
     on_hold: ["#ab7a2f", "отложено"],
@@ -184,8 +185,8 @@ sh_api.get_user = (user, isanother) => {
 }
 sh_api.get_fav_color = (id) => {  //Возвращает по id цвет избранного
     if (!sh_api.authorize) return
-
-    id_status = sh_api.Favorits.data.find(e => e.anime.id == id)?.status
+    if(!sh_api.Favorits.data) return
+    id_status = sh_api.Favorits.data?.find(e => e.anime.id == id)?.status
 
     return [id_status ? sh_api.status_color[id_status][0] : "#ffffff", id_status ? sh_api.status_color[id_status][1] : "не добавлено"]
 }
