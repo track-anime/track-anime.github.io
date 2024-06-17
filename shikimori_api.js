@@ -186,7 +186,7 @@ sh_api.get_user = (user, isanother) => {
 sh_api.get_fav_color = (id) => {  //Возвращает по id цвет избранного
     if (!sh_api?.authorize) return
     if(!sh_api?.Favorits?.data) return
-    id_status = sh_api.Favorits.data?.find(e => e.anime.id == id)?.status
+    id_status = sh_api.Favorits?.data?.find(e => e.anime.id == id)?.status
 
     return [id_status ? sh_api.status_color[id_status][0] : "#ffffff", id_status ? sh_api.status_color[id_status][1] : "не добавлено"]
 }
