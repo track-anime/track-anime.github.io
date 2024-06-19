@@ -210,7 +210,7 @@ sh_api.get_favorit = (sh_user, isanother) => {
         .then(data => {
             if (isanother) {
                 sh_api.another.Favorits.data = data
-                console.log(sh_api.another.UserData.nickname, sh_api.another.Favorits.data)
+                // console.log(sh_api.another.UserData.nickname, sh_api.another.Favorits.data)
                 document.dispatchEvent(sh_api.search_another);
             } else {
                 if (!isanother) sh_api.authorize = true
@@ -233,7 +233,7 @@ sh_api.get_favorit = (sh_user, isanother) => {
         });
 }
 
-sh_api.AddUserRates = (id, sl) => {
+sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет аниме в избранном
     if (!sh_api.authorize) return console.log("Вы не авторизированы")
     var url = `https://shikimori.one/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {

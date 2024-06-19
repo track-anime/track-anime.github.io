@@ -104,14 +104,16 @@ VideoInfo.info = {
 
 // list_serch.children[4].scrollIntoView({behavior: "smooth"}) чтоб перейти к нужному объекту на странице
 
+document.addEventListener('DOMContentLoaded', function () {
 
-//////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
-setInterval(() => {
-    if (!HistoryIsActivy || ld) return
-    GetKodi("", true)
-}, 30 * 1000);  //Автопроверка 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
+    setInterval(() => {
+        if (!HistoryIsActivy || ld) return
+        GetKodi("", true)
+    }, 30 * 1000);  //Автопроверка 
+    ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+});
 
 ///////////////////////////////////////// Проверка гет фильтров поиска ///////////////////////////////////////////////////////////
 URLList = url_get.searchParams.get('anime_genres') ? `${URLList}&anime_genres=${encodeURIComponent(url_get.searchParams.get('anime_genres'))}` : URLList
@@ -377,6 +379,7 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 })
+
 document.addEventListener("authorize", function (e) { // (1)
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -585,7 +588,7 @@ closeDialogButton.addEventListener('click', () => {
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     url_get.searchParams.delete("shikimori_id")
     url_get.searchParams.delete("id")
-    
+
     window.history.pushState({}, '', url_get);
     VideoPlayer.contentWindow.location.href = "loading.htm";
     return
@@ -1104,7 +1107,6 @@ function add_cart(e) {
     // cartFavorite.title = e.series;
     cart.appendChild(cartFavorite);
     // cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
-    console.log(sh_api.get_fav_color(e.shikimori), e.title)
     cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
     cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
 
@@ -1180,9 +1182,6 @@ function formatDate(isoDateString) {
     return days;
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    // showToast();
-});
 
 function showToast(e) {
     // prompt("",JSON.stringify(e))
@@ -1258,10 +1257,8 @@ function dialog_(e, info) {
 
 function ta_pip(flag) //picture to picture
 {
-    console.log(typeof flag)
     if (typeof flag != "boolean" && typeof flag != "undefined") return console.log("Ну и что это такое?")
     VideoPlayerAnime.pip = typeof flag == "boolean" ? flag : !VideoPlayerAnime.pip
-    console.log(flag, VideoPlayerAnime.pip)
 
     if (VideoPlayerAnime.pip == true) {
         // VideoPlayerAnime.pip = true
