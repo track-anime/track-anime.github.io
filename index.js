@@ -139,45 +139,47 @@ document.querySelector("#pipDialogButton").addEventListener('click', () => {
 })
 
 function setVideoInfo(e) {
+    // console.log(e)
+    load.show(false)
     var html
 
     VideoInfo.e = e
-    const tv = e.material_data.anime_kind ? ` [${e.material_data.anime_kind.toUpperCase()}]` : ""
-    VideoInfo.info.cover.src = e.material_data.poster_url;
-    VideoInfo.info.title.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
+    const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
+    VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
+    VideoInfo.info.title.textContent = e.russian ? `${tv} ${e.russian}` : "?";
     // VideoInfo.info.title2.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
+    
+    // VideoInfo.info.countries.textContent = e.countries ? e.countries : "?";
+    // VideoInfo.info.countries.href = e.countries ? `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}` : "404.html";
 
-    VideoInfo.info.countries.textContent = e.material_data.countries ? e.material_data.countries : "?";
-    VideoInfo.info.countries.href = e.material_data.countries ? `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}` : "404.html";
-
-    var tmp346 = e.material_data.episodes_aired ? e.material_data.episodes_aired : "?";
-    tmp346 = tmp346 + `/${e.material_data.episodes_total ? e.material_data.episodes_total : "?"}`;
+    var tmp346 = e.episodes_aired ? e.episodes_aired : "?";
+    tmp346 = tmp346 + `/${e.episodes ? e.episodes : "?"}`;
 
     VideoInfo.info.series.textContent = tmp346;
-    VideoInfo.info.duration.textContent = `${window.counterToStringLabel(VideoInfo?.e?.material_data?.duration)}`;
-    VideoInfo.info.duration.min = VideoInfo?.e?.material_data?.duration
-    // VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}`;
+    VideoInfo.info.duration.textContent = `${window.counterToStringLabel(e?.duration)}`;
+    VideoInfo.info.duration.min = VideoInfo?.e?.duration
+    // VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.countries ? e.countries : "404.html"}`;
 
-    VideoInfo.info.description.textContent = e.material_data.description ? e.material_data.description : "?";
+    VideoInfo.info.description.innerHTML = e.description_html ? e.description_html : "?";
 
-    VideoInfo.info.info_status.textContent = e.material_data.anime_status ? e.material_data.anime_status : "?";
-    VideoInfo.info.info_status.href = e.material_data.anime_status ? `${window.location.origin + window.location.pathname}?anime_status=${e.material_data.anime_status ? e.material_data.anime_status : "404.html"}` : "404.html";
+    VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
+    VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.anime_status ? e.anime_status : "404.html"}` : "404.html";
 
-    VideoInfo.info.studios.textContent = e.material_data.anime_studios ? e.material_data.anime_studios : "?";
-    VideoInfo.info.studios.href = e.material_data.anime_studios ? `${window.location.origin + window.location.pathname}?anime_studios=${e.material_data.anime_studios ? e.material_data.anime_studios : "404.html"}` : "404.html";
+    VideoInfo.info.studios.textContent = e.studios[0].filtered_name ? e.studios[0].filtered_name : "?";
+    VideoInfo.info.studios.href = e.studios[0].filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
 
-    VideoInfo.info.year.textContent = e.material_data.year ? e.material_data.year : "?";
-    VideoInfo.info.year.href = e.material_data.year ? `${window.location.origin + window.location.pathname}?year=${e.material_data.year ? e.material_data.year : "404.html"}` : "404.html";
+    VideoInfo.info.year.textContent = e.aired_on ? e.aired_on.split("-")[0] : "?";
+    VideoInfo.info.year.href = e.year ? `${window.location.origin + window.location.pathname}?year=${e.year ? e.year : "404.html"}` : "404.html";
 
-    VideoInfo.info.rating_mpaa.textContent = e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "?";
-    VideoInfo.info.rating_mpaa.href = e.material_data.rating_mpaa ? `${window.location.origin + window.location.pathname}?rating_mpaa=${e.material_data.rating_mpaa ? e.material_data.rating_mpaa : "404.html"}` : "404.html";
+    VideoInfo.info.rating_mpaa.textContent = e.rating ? e.rating : "?";
+    VideoInfo.info.rating_mpaa.href = e.rating ? `${window.location.origin + window.location.pathname}?rating_mpaa=${e.rating ? e.rating : "404.html"}` : "404.html";
 
-    const dat = e.material_data.next_episode_at ? e.material_data.next_episode_at : e.e.created_at
+    const dat = e.released_on ? e.released_on : e.aired_on
 
-    if (e.material_data.anime_status == "ongoing" && formatDate(dat).moment.diff(moment.now(), "minute") > 0) {
+    if (e.status == "ongoing" && formatDate(dat).moment.diff(moment.now(), "minute") > 0) {
 
-        // VideoInfo.info.updated_at_text.textContent = e.material_data.anime_status == "ongoing" ? "Следующая серия выйдет " : "Последняя серия вышла ";
-        VideoInfo.info.updated_at.textContent = `Следующая серия выйдет ${formatDate(dat).moment.fromNow().toLowerCase()}. ${formatDate(dat).moment.calendar()}`
+        // VideoInfo.info.updated_at_text.textContent = e.anime_status == "ongoing" ? "Следующая серия выйдет " : "Последняя серия вышла ";
+        VideoInfo.info.updated_at.textContent = `Следующая серия выйдет ${formatDate(e.next_episode_at).moment.fromNow().toLowerCase()}. ${formatDate(e.next_episode_at).moment.calendar()}`
     } else {
         VideoInfo.info.updated_at.textContent = `Вышла ${formatDate(dat).moment.fromNow().toLowerCase()}. ${formatDate(dat).moment.calendar()}`
     }
@@ -185,14 +187,18 @@ function setVideoInfo(e) {
     VideoInfo.info.title.innerHTML = `${VideoInfo.info.title.textContent}`
     VideoInfo.info.title2.innerHTML = `[${VideoInfo.info.updated_at.textContent}]`
 
-    VideoInfo.info.shikimori_rating.style.width = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating * 10}%` : "0%";
-    VideoInfo.info.shikimori_rating.textContent = e.material_data.shikimori_rating ? `${e.material_data.shikimori_rating}/10` : "?";
-    VideoInfo.info.shikimori_votes.textContent = e.material_data.shikimori_votes ? `${e.material_data.shikimori_votes} проголосовавших` : "?";
-    VideoInfo.info.shikimori_link.href = e.shikimori ? `https://shikimori.one/animes/${e.shikimori ? e.shikimori : "404.html"}` : "404.html";
+    VideoInfo.info.shikimori_rating.style.width = e.score ? `${e.score * 10}%` : "0%";
+    VideoInfo.info.shikimori_rating.textContent = e.score ? `${e.score}/10` : "?";
+    var rates_scores_stats = 0
+    e.rates_scores_stats.forEach(e => {
+        rates_scores_stats = rates_scores_stats+e.value
+    });
+    VideoInfo.info.shikimori_votes.textContent = rates_scores_stats ? `${rates_scores_stats} проголосовавших` : "?";
+    VideoInfo.info.shikimori_link.href = e.id ? `https://shikimori.one/animes/${e.id ? e.id : "404.html"}` : "404.html";
 
-    VideoInfo.info.imdb_rating.style.width = e.material_data.imdb_rating ? `${e.material_data.imdb_rating * 10}%` : "0%";
-    VideoInfo.info.imdb_rating.textContent = e.material_data.imdb_rating ? `${e.material_data.imdb_rating}/10` : "?";
-    VideoInfo.info.imdb_votes.textContent = e.material_data.imdb_votes ? `${e.material_data.imdb_votes} проголосовавших` : "?";
+    VideoInfo.info.imdb_rating.style.width = e.imdb_rating ? `${e.imdb_rating * 10}%` : "0%";
+    VideoInfo.info.imdb_rating.textContent = e.imdb_rating ? `${e.imdb_rating}/10` : "?";
+    VideoInfo.info.imdb_votes.textContent = e.imdb_votes ? `${e.imdb_votes} проголосовавших` : "?";
     VideoInfo.info.IMDB_link.href = e.imdb ? `https://www.imdb.com/title/${e.imdb ? e.imdb : "404.html"}` : "404.html";
 
     e.imdb ? document.getElementById("imdb_info").classList.remove('hide') : document.getElementById("imdb_info").classList.add('hide')
@@ -203,15 +209,15 @@ function setVideoInfo(e) {
 
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        VideoPlayer.contentWindow.location.href = e.imdb ? `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&imdb=${e.imdb}` : `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
+        VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&query=${e.name.replace(/ /g, '+')}`
         if (ev.shiftKey) {
-            VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&title=${e.material_data.anime_title}`
+            VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&query=${e.english[0].replace(/ /g, '+')}`
         }
     })
 
 
 
-    VideoInfo.info.TorrentPlayer.title = e.material_data.anime_title
+    VideoInfo.info.TorrentPlayer.title = e.russian
     VideoInfo.info.TorrentPlayer.removeEventListener('click', TorrentURL, false)
     VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
     // VideoInfo.info.TorrentPlayer.en = true;
@@ -222,41 +228,34 @@ function setVideoInfo(e) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
 
-        VideoPlayer.contentWindow.location.href = e.link;
+        // VideoPlayer.contentWindow.location.href = e.link;
+        VideoPlayer.contentWindow.location.href =  `https://kodik.cc/find-player?shikimoriID=${e.id}`;
         // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
     })
-
     html = ""
-    e.material_data.screenshots?.forEach(el => {
+    e.screenshots?.forEach(el => {
         html = html + `
         <div class="carousel-item">
-        <img src="${el}"
+        <img src="https://shikimori.one${el.original}"
             class="d-block w-100" alt="...">
     </div>
     ` });
 
-    /*    e.screenshots?.forEach(el => {
-           html = html + `
-           <div class="carousel-item">
-           <img src="${el}"
-               class="d-block w-100" alt="...">
-       </div>
-       ` }); */
 
-    e.material_data.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
+    e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
     VideoInfo.info.screenshots.innerHTML = html;
     VideoInfo.info.screenshots.querySelectorAll(".carousel-item")[0]?.classList.add("active");
 
     html = "Жанры: "
-    e.material_data.anime_genres?.forEach(el => {
+    e.genres?.forEach(el => {
         html = html + `
-        <a href="${window.location.origin + window.location.pathname}?anime_genres=${el}"class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${el}</a>
+        <a href="${window.location.origin + window.location.pathname}?anime_genres=${el.russian}"class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${el.russian}</a>
         `
     })
     VideoInfo.info.genres.innerHTML = html;
 
     var btn_sh_save = document.getElementById('btn_sh_save')
-    btn_sh_save.ids = e.shikimori ? e.shikimori : null;
+    btn_sh_save.ids = e.id ? e.id : null;
     if (sh_api.authorize) {
         sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'))
     } else {
@@ -264,7 +263,7 @@ function setVideoInfo(e) {
         return
     }
 
-    btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.shikimori)
+    btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.id)
 
     btn_sh_save.classList.remove("hide")
     btn_sh_save.classList.remove("btn-outline-light")
@@ -399,8 +398,8 @@ document.addEventListener("authorize", function (e) { // (1)
     btn_sh_save?.classList.remove("hide")
 
     if (!VideoInfo.e) return
-    let tt = moment().add(moment.duration(VideoInfo.e.material_data.duration, 'minutes').asMilliseconds())
-    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.shikimori)?.status) {
+    let tt = moment().add(moment.duration(VideoInfo.e.duration, 'minutes').asMilliseconds())
+    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.id)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
             btn_sh_save.classList.add("btn-primary")
@@ -701,7 +700,7 @@ async function get_settings() {
             "shikimori": e.shikimori_id,
             "status": e.material_data.all_status,
             "raiting": e.material_data.shikimori_rating,
-            "material_data": e.material_data,
+            // "material_data": e.material_data,
             "id": e.id,
             "screenshots": e.screenshots,
             "e": e,
@@ -781,6 +780,7 @@ async function addCalendar() {
                 // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
                 "voice": formatDate(e.material_data.next_episode_at).moment.format('dddd'),
                 "series": e.episodes_count ? e.episodes_count : "M",
+                
                 "link": e.link,
                 "kp": e.kinopoisk_id,
                 "imdb": e.imdb_id,
@@ -1031,6 +1031,7 @@ function add_cart(e) {
         cart.classList.remove("new_cart")
     })
 
+
     const cartTitle = document.createElement('h5');
     cartTitle.classList.add('cart-title');
     cartTitle.textContent = e.title;
@@ -1221,6 +1222,47 @@ function showToast(e) {
     // toast0.show();
     // toast.dispose()
 }
+document.addEventListener("sh_get_anime", function (e) {
+    // console.log("sh_get_anime", e.anime)
+    // console.log(`https://shikimori.one${e.anime.image.original}`)
+    const e1 = {
+        "title": e.anime.anime_title,
+        // "cover": e.anime.image.original,
+        "cover": `https://shikimori.one${e.anime.image.original}`,
+        "date": formatDate(e.updated_at),
+        // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+        "voice": e.anime.title,
+        "series": e.anime.episodes_count ? e.episodes_count : "M",
+        "link": `//kodik.info/find-player?shikimoriID=${e.anime.id}&camrip=false`,
+        // "link": e.anime.link,
+        "kp": e.anime.kinopoisk_id,
+        "imdb": e.anime.imdb_id,
+        "shikimori": e.shikimori_id,
+        "status": e.anime.all_status,
+        "raiting": e.anime.score,
+        "material_data": {
+            poster_url: `https://shikimori.one${e.anime.image.original}`,
+            anime_kind: `${e.anime.kind}`,
+            anime_title: `${e.anime.russian}`,
+            episodes_aired: `${e.anime.episodes_aired}`,
+            episodes_total: `${e.anime.episodes}`,
+            description: e.anime.description_html,
+            // description: e.anime.description,
+            anime_status: `${e.anime.status}`,
+            anime_studios: e.anime.studios[0].filtered_name,
+            year: e.anime.aired_on,
+            rating_mpaa: ``,
+            shikimori_rating: e.anime.score,
+
+
+        },
+        "id": e.anime.id,
+        "screenshots": e.anime.screenshots,
+        "e": e.anime,
+
+    }
+    setVideoInfo(e.anime)
+})
 
 function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
@@ -1234,7 +1276,10 @@ function dialog_(e, info) {
         // add_push(e)
         return
     }
-    setVideoInfo(e)
+    // console.log(e.shikimori, info)
+    sh_api.get_anime(e.shikimori)
+    load.show(true)
+    // setVideoInfo(e)
     url_get.searchParams.set("shikimori_id", `${e.shikimori}`)
     window.history.pushState({}, '', url_get);
     document.title = `TA: ${e.title}`
@@ -1290,11 +1335,59 @@ function VoiceTranslate(name) {
     }
 
 }
+document.addEventListener("sh_api_search", function (e) {
+    load.show(false)
+    if(e.search==404) return
+
+    getHome(true)
+    HistoryIsActivy = false
+    ignoreVoice = true
+    targetFrame = document.getElementById('list_history')
+    targetFrame.innerHTML = ""
+    getChapter("#list_history")
+    e.search.forEach(e => {
+        // console.log(e)
+        // return
+        const e1 = {
+            "title": e.russian,
+            // "cover": e.image.original,
+            "cover": `https://shikimori.one${e.image.original}`,
+            "date": formatDate(e.aired_on),
+            // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+            "voice": e.status,
+            "series": e.episodes ? e.episodes : "M",
+            "link": e.link,
+            "kp": "",
+            "imdb": "",
+            "shikimori": e.id,
+            "status": e.status,
+            "raiting": e.score,
+            "material_data": [],
+            "id": e.id,
+            "screenshots": [],
+            "e": [],
+
+        }
+        const cart = add_cart(e1)
+        targetFrame.appendChild(cart)
+    })
+
+})
+
+function get_seartch(search) {
+    url_get = new URL(window.location.href)
+    url_get.searchParams.set("seartch", `${search}`)
+    window.history.pushState({}, '', url_get);
+
+    load.show(true)
+    sh_api.search(search)
+}
+
+// get_seartch("мастера меча онлайн")
 async function GetKodi(seartch, revers) {
     ld = true
     // if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - scrollM && HistoryIsActivy == true && document.getElementById('search_input').value ) {
     // if(container_.clientHeight + container_.scrollTop > container_.scrollHeight - scrollM){
-    console.log(seartch, HistoryIsActivy)
     if ((window.innerHeight + window.scrollY) >= container_.offsetHeight - scrollM) {
         if ((!seartch || seartch == undefined || seartch == "")) {
             getChapter("#list_serch")
@@ -1314,10 +1407,8 @@ async function GetKodi(seartch, revers) {
 
             }
 
-            url_get = new URL(window.location.href)
-            url_get.searchParams.delete("seartch")
-            window.history.pushState({}, '', url_get);
         } else {
+            
             getHome(true)
             HistoryIsActivy = false
             ignoreVoice = true
@@ -1337,6 +1428,8 @@ async function GetKodi(seartch, revers) {
             url_get = new URL(window.location.href)
             url_get.searchParams.set("seartch", `${seartch}`)
             window.history.pushState({}, '', url_get);
+            get_seartch(seartch)
+            return
         }
         data = dat.results
         prev_page = dat.prev_page

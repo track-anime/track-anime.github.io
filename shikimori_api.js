@@ -8,6 +8,9 @@ sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
 sh_api.search_another = new Event("search_another", { bubbles: true })
 sh_api.logout_ev = new Event("sh_api_logout", { bubbles: true })
+sh_api.search_ev = new CustomEvent("sh_api_search", {  bubbles: true })
+sh_api.get_anime_ev = new CustomEvent("sh_get_anime", {  bubbles: true })
+
 sh_api.code = sh_api.url_get.searchParams.get('code')
 sh_api.status_lable = [
     "watching",
@@ -263,7 +266,73 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 
 
+sh_api.get_anime = (id) =>
+{
+    var url = `https://shikimori.one/api/animes/${id}`
 
+    fetch(url)
+        .then(response => {
+            sh_api.another.status = response.status
+            if (response.ok) {
+                return response.json();
+            } else {
+
+                if (response.status == "404") return response.status
+
+                throw new Error('Ответ сети был не в порядке. get_anime');
+            }
+        })
+        .then(data => {
+            if (data == "404") {
+                sh_api.get_anime_ev.anime = data
+                document.dispatchEvent(sh_api.get_anime_ev);
+                return
+            }
+
+            sh_api.get_anime_ev.anime = data
+            document.dispatchEvent(sh_api.get_anime_ev);
+            // sh_api.Last_search = data
+            // console.log(sh_api.Last_search)
+        })
+        .catch(error => {
+
+            console.error('Возникла проблема с операцией выборки get_anime:', error);
+        });
+}
+
+sh_api.search = (seartch) =>
+{
+    var url = `https://shikimori.one/api/animes?with_material_data=true&limit=50&search=${seartch}`
+
+    fetch(url)
+        .then(response => {
+            sh_api.another.status = response.status
+            if (response.ok) {
+                return response.json();
+            } else {
+
+                if (response.status == "404") return response.status
+
+                throw new Error('Ответ сети был не в порядке. Last_seartchr');
+            }
+        })
+        .then(data => {
+            if (data == "404") {
+                sh_api.search_ev.search = data
+                document.dispatchEvent(sh_api.search_ev);
+                return
+            }
+
+            sh_api.search_ev.search = data
+            document.dispatchEvent(sh_api.search_ev);
+            // sh_api.Last_search = data
+            // console.log(sh_api.Last_search)
+        })
+        .catch(error => {
+
+            console.error('Возникла проблема с операцией выборки Last_seartch:', error);
+        });
+}
 
 
 
