@@ -21,8 +21,8 @@ const load = document.getElementById("load");
 const list_fav = document.getElementById("list_fav");
 const list_serch = document.getElementById("list_serch");
 const list_history = document.getElementById("list_history");
-
-
+const styleDateCart = document.createElement("style")
+const ChecDataCart = document.getElementById("ChecDataCart")
 
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
@@ -130,6 +130,36 @@ URLListStart = URLList  // Обновляем ссылку после пррим
 
 load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add("hide")
 
+ChecDataCart.addEventListener('change', function () {
+    hide_date_cart(this.checked)
+})
+
+hide_date_cart()
+
+function hide_date_cart(tr) {
+    document.head.appendChild(styleDateCart)
+    if (typeof tr != "boolean") {
+        ChecDataCart.checked = base_anime.hide_date_cart
+        tr = base_anime.hide_date_cart
+    }
+    // console.log(121, tr)
+    
+    // ChecDataCart.checked = tr
+
+    if (tr == true) {
+        styleDateCart.textContent = `
+        .cart_n_bg{
+            display: none !important;
+        }
+        `
+    } else {
+        styleDateCart.textContent = `
+        `
+    }
+    base_anime.hide_date_cart = tr
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+}
+
 function TorrentURL() {
     window.open(`https://darklibria.it/search?find=${VideoInfo.info.TorrentPlayer.title}`)
 };
@@ -137,6 +167,7 @@ function TorrentURL() {
 document.querySelector("#pipDialogButton").addEventListener('click', () => {
     ta_pip()
 })
+
 
 function setVideoInfo(e) {
     // console.log(e)
@@ -148,7 +179,7 @@ function setVideoInfo(e) {
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     VideoInfo.info.title.textContent = e.russian ? `${tv} ${e.russian}` : "?";
     // VideoInfo.info.title2.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
-    
+
     // VideoInfo.info.countries.textContent = e.countries ? e.countries : "?";
     // VideoInfo.info.countries.href = e.countries ? `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}` : "404.html";
 
@@ -191,7 +222,7 @@ function setVideoInfo(e) {
     VideoInfo.info.shikimori_rating.textContent = e.score ? `${e.score}/10` : "?";
     var rates_scores_stats = 0
     e.rates_scores_stats.forEach(e => {
-        rates_scores_stats = rates_scores_stats+e.value
+        rates_scores_stats = rates_scores_stats + e.value
     });
     VideoInfo.info.shikimori_votes.textContent = rates_scores_stats ? `${rates_scores_stats} проголосовавших` : "?";
     VideoInfo.info.shikimori_link.href = e.id ? `https://shikimori.one/animes/${e.id ? e.id : "404.html"}` : "404.html";
@@ -229,7 +260,7 @@ function setVideoInfo(e) {
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
 
         // VideoPlayer.contentWindow.location.href = e.link;
-        VideoPlayer.contentWindow.location.href =  `https://kodik.cc/find-player?shikimoriID=${e.id}`;
+        VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
         // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
     })
     html = ""
@@ -681,16 +712,16 @@ get_settings()
 async function get_settings() {
     if (url_get.searchParams.get('id') || url_get.searchParams.get('shikimori_id')) {
 
-/*         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
-            `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&shikimori_id=${url_get.searchParams.get('shikimori_id')}` :
-            `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
-        ) */
+        /*         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
+                    `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&shikimori_id=${url_get.searchParams.get('shikimori_id')}` :
+                    `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
+                ) */
         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
             `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
             `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
         )
         console.log(1, e)
-        if(e.code=="404") {
+        if (e.code == "404") {
             url_get.searchParams.delete("id")
             url_get.searchParams.delete("shikimori_id")
             return
@@ -790,7 +821,7 @@ async function addCalendar() {
                 // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
                 "voice": formatDate(e.material_data.next_episode_at).moment.format('dddd'),
                 "series": e.episodes_count ? e.episodes_count : "M",
-                
+
                 "link": e.link,
                 "kp": e.kinopoisk_id,
                 "imdb": e.imdb_id,
@@ -1259,7 +1290,7 @@ document.addEventListener("sh_get_anime", function (e) {
             description: e.anime.description_html,
             // description: e.anime.description,
             anime_status: e.anime.status,
-            anime_studios: e.anime.studios[0]?e.anime.studios[0].filtered_name:"?",
+            anime_studios: e.anime.studios[0] ? e.anime.studios[0].filtered_name : "?",
             year: e.anime.aired_on,
             rating_mpaa: ``,
             shikimori_rating: e.anime.score,
@@ -1348,7 +1379,7 @@ function VoiceTranslate(name) {
 }
 document.addEventListener("sh_api_search", function (e) {
     load.show(false)
-    if(e.search==404) return
+    if (e.search == 404) return
 
     getHome(true)
     HistoryIsActivy = false
@@ -1419,7 +1450,7 @@ async function GetKodi(seartch, revers) {
             }
 
         } else {
-            
+
             getHome(true)
             HistoryIsActivy = false
             ignoreVoice = true
