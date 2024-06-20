@@ -262,7 +262,7 @@ function setVideoInfo(e) {
         btn_sh_save.classList.add("hide")
         return
     }
-
+    console.log(123, e.id)
     btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.id)
 
     btn_sh_save.classList.remove("hide")
