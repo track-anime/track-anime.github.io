@@ -143,7 +143,7 @@ function hide_date_cart(tr) {
         tr = base_anime.hide_date_cart
     }
     // console.log(121, tr)
-    
+
     // ChecDataCart.checked = tr
 
     if (tr == true) {
@@ -1176,10 +1176,14 @@ function add_cart(e) {
     //border-top-color: green;
     // cart.style.borderTopColor = 
     // console.log(e)
-    var id = e.shikimori?e.shikimori:e.id
+    var id = e.shikimori ? e.shikimori : e.id
     // console.log(sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status)
     // console.log(sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0])
-    cart.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0]?sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0]:"none"
+    if (sh_api.authorize == true) {
+        cart.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] : "none"
+    }else{
+        cart.style.borderTopColor = GetFavorite(id) ? "#ffdd00" : "none"
+    }
     return cart
 }
 function add_card_ned(e) {
