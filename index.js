@@ -165,8 +165,8 @@ function setVideoInfo(e) {
     VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
     VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.anime_status ? e.anime_status : "404.html"}` : "404.html";
 
-    VideoInfo.info.studios.textContent = e.studios[0].filtered_name ? e.studios[0].filtered_name : "?";
-    VideoInfo.info.studios.href = e.studios[0].filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
+    VideoInfo.info.studios.textContent = e.studios[0]?.filtered_name ? e.studios[0].filtered_name : "?";
+    VideoInfo.info.studios.href = e.studios[0]?.filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
 
     VideoInfo.info.year.textContent = e.aired_on ? e.aired_on.split("-")[0] : "?";
     VideoInfo.info.year.href = e.year ? `${window.location.origin + window.location.pathname}?year=${e.year ? e.year : "404.html"}` : "404.html";
@@ -681,31 +681,41 @@ get_settings()
 async function get_settings() {
     if (url_get.searchParams.get('id') || url_get.searchParams.get('shikimori_id')) {
 
-        e = await httpGet(url_get.searchParams.get('shikimori_id') ?
+/*         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
             `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&shikimori_id=${url_get.searchParams.get('shikimori_id')}` :
             `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
+        ) */
+        e = await httpGet(url_get.searchParams.get('shikimori_id') ?
+            `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
+            `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
         )
-        e = e.results[0]
+        console.log(1, e)
+        if(e.code=="404") {
+            url_get.searchParams.delete("id")
+            url_get.searchParams.delete("shikimori_id")
+            return
+        }
         const ed = {
-            "title": e.material_data.anime_title,
-            "cover": `${e.material_data.poster_url}`,
+            "title": e.russian,
+            "cover": e.image?.original,
             // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
-            "date": formatDate(e.material_data.next_episode_at),
+            "date": formatDate(e.released_on),
             // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
-            "voice": formatDate(e.material_data.next_episode_at).moment.format('dddd'),
+            "voice": formatDate(e.released_on).moment.format('dddd'),
             "series": e.episodes_count ? e.episodes_count : "M",
             "link": e.link,
             "kp": e.kinopoisk_id,
             "imdb": e.imdb_id,
-            "shikimori": e.shikimori_id,
-            "status": e.material_data.all_status,
-            "raiting": e.material_data.shikimori_rating,
+            "shikimori": e.id,
+            "status": e.status,
+            "raiting": e.score,
             // "material_data": e.material_data,
             "id": e.id,
             "screenshots": e.screenshots,
             "e": e,
 
         }
+        console.log(3, ed)
         dialog_(ed, true)
     }
 }
@@ -1223,7 +1233,7 @@ function showToast(e) {
     // toast.dispose()
 }
 document.addEventListener("sh_get_anime", function (e) {
-    // console.log("sh_get_anime", e.anime)
+    console.log("sh_get_anime", e.anime)
     // console.log(`https://shikimori.one${e.anime.image.original}`)
     const e1 = {
         "title": e.anime.anime_title,
@@ -1248,8 +1258,8 @@ document.addEventListener("sh_get_anime", function (e) {
             episodes_total: `${e.anime.episodes}`,
             description: e.anime.description_html,
             // description: e.anime.description,
-            anime_status: `${e.anime.status}`,
-            anime_studios: e.anime.studios[0].filtered_name,
+            anime_status: e.anime.status,
+            anime_studios: e.anime.studios[0]?e.anime.studios[0].filtered_name:"?",
             year: e.anime.aired_on,
             rating_mpaa: ``,
             shikimori_rating: e.anime.score,
@@ -1277,6 +1287,7 @@ function dialog_(e, info) {
         return
     }
     // console.log(e.shikimori, info)
+    console.log(2, e)
     sh_api.get_anime(e.shikimori)
     load.show(true)
     // setVideoInfo(e)

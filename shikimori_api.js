@@ -269,7 +269,6 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 sh_api.get_anime = (id) =>
 {
     var url = `https://shikimori.one/api/animes/${id}`
-
     fetch(url)
         .then(response => {
             sh_api.another.status = response.status
