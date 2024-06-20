@@ -1173,7 +1173,13 @@ function add_cart(e) {
 
     })
     // setTimeout(() => cart.classList.add("cart_spawn"), 0)
-
+    //border-top-color: green;
+    // cart.style.borderTopColor = 
+    // console.log(e)
+    var id = e.shikimori?e.shikimori:e.id
+    // console.log(sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status)
+    // console.log(sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0])
+    cart.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0]?sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0]:"none"
     return cart
 }
 function add_card_ned(e) {
