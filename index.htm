@@ -93,7 +93,7 @@
                         <hr class="dropdown-divider">
                     </li> -->
                         <li class="form-check form-switch nav-item mx-2">
-                            <input class="form-check-input" type="checkbox" value="" id="ChecDataCart" >
+                            <input class="form-check-input" type="checkbox" value="" id="ChecDataCart">
 
                             <label class="form-check-label" for="flexCheckDefault">
                                 Скрыть разделители
@@ -191,7 +191,7 @@
                 </form> -->
             </div>
             <details id="fav_watching" class="ned_spoiler">
-            <!-- <details id="fav_watching" class="ned_spoiler" open> -->
+                <!-- <details id="fav_watching" class="ned_spoiler" open> -->
                 <summary class="ned_name btn-primary yellow">смотрю</summary>
                 <div class="ned"></div>
             </details>
@@ -239,14 +239,19 @@
 
                         <div class="card mb-3 border-0">
                             <div class="row g-0">
-                                <h5 id="info_title" class="card-title">Провожающая в последний путь Фрирен</h5>
-                                <h5 id="info_title2" class="card-title">Провожающая в последний путь Фрирен</h5>
+
+                                <p style="font-size: 1.4em" id="info_title">
+
+                                    <a style="text-decoration: none;"  class="link-danger" target="_blank"href="./">[ТВ]</a>
+                                    <a style="margin-left: 7px; text-decoration: none;"  class="link-danger" target="_blank"href="./">Провожающая в последний путь Фрирен</a>
+                                </p>
+                                <h5 id="info_title2" class="card-title">[Вышла да и хуй с ней. 0:00]</h5>
                                 <hr>
                                 <div class="col-md-3 ">
                                     <div class="d-flex flex-column align-items-center">
                                         <img id="info_cover" src="https://st.kp.yandex.net/images/film_big/5401195.jpg"
                                             class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded w-75">
-                                            <!-- class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded min-w-350"> -->
+                                        <!-- class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded min-w-350"> -->
 
                                         <div style="width: 100%;" class="btn-group mt-3">
                                             <button type="button" id="btn_sh_save"
@@ -257,7 +262,8 @@
                                             <ul class="dropdown-menu text-center">
                                                 <li><button id="watching" type="button" title="смотрю"
                                                         onclick="AddFavorite(0)"
-                                                        class="dropdown-item btn btn-primary yellow ">Смотрю</button></li>
+                                                        class="dropdown-item btn btn-primary yellow ">Смотрю</button>
+                                                </li>
                                                 <li><button id="completed" type="button" title="просмотренно"
                                                         onclick="AddFavorite(1)"
                                                         class="dropdown-item btn btn-success">Просмотренно</button></li>
@@ -400,7 +406,8 @@
                                         </div>
 
                                         <div id="carouselExampleAutoplaying"
-                                            class="carousel slide col col-md-5 m-4 margin-1 w-100" data-bs-ride="carousel">
+                                            class="carousel slide col col-md-5 m-4 margin-1 w-100"
+                                            data-bs-ride="carousel">
 
                                             <div id="info_screenshots" class="carousel-inner rounded">
                                                 <div class="carousel-item active">
@@ -463,16 +470,19 @@
                         </div>
                     </button>
                     <div id="VideoPlayerFrame">
-                        <iframe id="VideoPlayer" src="loading.htm" frameborder="no" allowfullscreen="" allow="autoplay *; fullscreen *">
+                        <iframe id="VideoPlayer" src="loading.htm" frameborder="no" allowfullscreen=""
+                            allow="autoplay *; fullscreen *">
                         </iframe>
                     </div>
                 </div>
-                
+
                 <button type="button" class="btn btn-secondary" id="closeDialogButton">X</button>
                 <button type="button" class="btn btn-secondary" title="PiP" id="pipDialogButton">
                     <svg width="50%" height="50%">
-                        <rect x="10%" y="10%" width="80%" height="80%" stroke-width="2" stroke="var(--bs-body-color)" fill="none" />
-                        <rect x="10%" y="10%" width="50%" id="ta_modal_pip_btn_mini" height="50%" stroke-width="2" stroke="var(--bs-body-color)" fill="none" />
+                        <rect x="10%" y="10%" width="80%" height="80%" stroke-width="2" stroke="var(--bs-body-color)"
+                            fill="none" />
+                        <rect x="10%" y="10%" width="50%" id="ta_modal_pip_btn_mini" height="50%" stroke-width="2"
+                            stroke="var(--bs-body-color)" fill="none" />
                     </svg>
                 </button>
             </div>
@@ -490,24 +500,28 @@
         ymab('metrika.97169372', 'init'/*, {clientFeatures}, {callback}*/);
     </script>
 
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-    m[i].l=1*new Date();
-    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
-    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
- 
-    ym(97169372, "init", {
-         clickmap:true,
-         trackLinks:true,
-         accurateTrackBounce:true,
-         webvisor:true
-    });
- </script>
- <noscript><div><img src="https://mc.yandex.ru/watch/97169372" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
- <!-- /Yandex.Metrika counter -->
-  
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (m, e, t, r, i, k, a) {
+            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
+            m[i].l = 1 * new Date();
+            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
+            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
+        })
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+        ym(97169372, "init", {
+            clickmap: true,
+            trackLinks: true,
+            accurateTrackBounce: true,
+            webvisor: true
+        });
+    </script>
+    <noscript>
+        <div><img src="https://mc.yandex.ru/watch/97169372" style="position:absolute; left:-9999px;" alt="" /></div>
+    </noscript>
+    <!-- /Yandex.Metrika counter -->
+
 </body>
 
 </html>
