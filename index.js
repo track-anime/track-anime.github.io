@@ -176,16 +176,14 @@ function setVideoInfo(e) {
 
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
-    console.log(VideoInfo.info.title.querySelectorAll("a"))
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     VideoInfo.info.title.querySelectorAll("a")[0].textContent = e.russian ? `${tv}` : "?";
-    VideoInfo.info.title.querySelectorAll("a")[0].href = e.russian ? `${window.location.origin + window.location.pathname}?kind=${encodeURIComponent(e.kind)}&seartch=${encodeURIComponent(e.russian)}` : "404.html";
     VideoInfo.info.title.querySelectorAll("a")[1].textContent = e.russian ? `${e.russian}` : "?";
-    VideoInfo.info.title.querySelectorAll("a")[1].href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${encodeURIComponent(e.russian)}` : "404.html";
-    // VideoInfo.info.title2.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
-
-    // VideoInfo.info.countries.textContent = e.countries ? e.countries : "?";
-    // VideoInfo.info.countries.href = e.countries ? `${window.location.origin + window.location.pathname}?countries=${e.material_data.countries ? e.material_data.countries : "404.html"}` : "404.html";
+    var url_get_tmp = new URL(window.location.origin+window.location.pathname)
+    url_get_tmp.searchParams.set("seartch", `${e.russian}`)
+    VideoInfo.info.title.querySelectorAll("a")[1].href = url_get_tmp.href;
+    url_get_tmp.searchParams.set("kind", `${e.kind}`)
+    VideoInfo.info.title.querySelectorAll("a")[0].href = url_get_tmp.href;
 
     var tmp346 = e.episodes_aired ? e.episodes_aired : "?";
     tmp346 = tmp346 + `/${e.episodes ? e.episodes : "?"}`;
@@ -193,7 +191,6 @@ function setVideoInfo(e) {
     VideoInfo.info.series.textContent = tmp346;
     VideoInfo.info.duration.textContent = `${window.counterToStringLabel(e?.duration)}`;
     VideoInfo.info.duration.min = VideoInfo?.e?.duration
-    // VideoInfo.info.countries.href = `${window.location.origin + window.location.pathname}?countries=${e.countries ? e.countries : "404.html"}`;
 
     VideoInfo.info.description.innerHTML = e.description_html ? e.description_html : "?";
 
