@@ -179,9 +179,9 @@ function setVideoInfo(e) {
     console.log(VideoInfo.info.title.querySelectorAll("a"))
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     VideoInfo.info.title.querySelectorAll("a")[0].textContent = e.russian ? `${tv}` : "?";
-    VideoInfo.info.title.querySelectorAll("a")[0].href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
+    VideoInfo.info.title.querySelectorAll("a")[0].href = e.russian ? `${window.location.origin + window.location.pathname}?kind=${encodeURIComponent(e.kind)}&seartch=${encodeURIComponent(e.russian)}` : "404.html";
     VideoInfo.info.title.querySelectorAll("a")[1].textContent = e.russian ? `${e.russian}` : "?";
-    VideoInfo.info.title.querySelectorAll("a")[1].href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
+    VideoInfo.info.title.querySelectorAll("a")[1].href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${encodeURIComponent(e.russian)}` : "404.html";
     // VideoInfo.info.title2.textContent = e.material_data.anime_title ? `${tv} ${e.material_data.anime_title}` : "?";
 
     // VideoInfo.info.countries.textContent = e.countries ? e.countries : "?";
