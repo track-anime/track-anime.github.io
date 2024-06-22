@@ -298,7 +298,7 @@ function setVideoInfo(e) {
             if (!data?.items?.[0]?.id?.videoId) return
             html2 = `
             <div class="carousel-item">
-                <iframe src="${location.protocol + el.player_url.replace("https:", "").replace("http:", "")}"
+                <iframe src="${location.protocol}//www.youtube.com/embed/${data?.items?.[0]?.id?.videoId}"
                     class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
                 </iframe>
                 <div class="carousel-caption vi_label">
