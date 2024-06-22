@@ -286,7 +286,16 @@ function setVideoInfo(e) {
                     </div>
         </div>
     ` });
-    console.log(e.screenshots)
+
+    fetch('//youtube.googleapis.com/youtube/v3/search?part=snippet&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ', {
+        headers: {
+          'Referer': location.href
+        }
+      })
+      .then(response => response.json())
+      .then(data => console.log(1,data))
+      .catch(error => console.error(1,'Error:', error));
+      
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
     e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
