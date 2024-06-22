@@ -287,7 +287,7 @@ function setVideoInfo(e) {
         </div>
     ` });
 
-    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" трейлер на русском")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" трейлер на русском anidub")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
             'Referer': location.href
         }
