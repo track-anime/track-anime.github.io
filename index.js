@@ -286,8 +286,8 @@ function setVideoInfo(e) {
                     </div>
         </div>
     ` });
-
-    fetch(`//youtube.googleapis.com/youtube/v3/search?channelId=UCOz4k6q0mDc8fReKXyC-KOQ&part=snippet&q=${e.russian}${encodeURIComponent(" трейлер на русском anidub")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+        //channelId=UCOz4k6q0mDc8fReKXyC-KOQ&
+    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
             'Referer': location.href
         }
