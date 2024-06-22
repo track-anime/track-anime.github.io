@@ -309,7 +309,7 @@ function setVideoInfo(e) {
                             class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
                         </iframe>
                         <div class="carousel-caption vi_label">
-                                    <p>${it+1} / ${data.items?.length} ${el.snippet.title}</p>
+                                    <p>[${it+1} / ${data.items?.length}] ${el.snippet.title}</p>
                                 </div>
                     </div>
                     `;
