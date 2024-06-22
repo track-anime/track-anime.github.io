@@ -38,6 +38,7 @@
     <script defer src="/scripts/moment.js"></script>
     <script defer src="/scripts/moment-with-locales.js"></script>
     <script defer src="/scripts/counterToStringLabel.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
 
     <script defer src="/shikimori_api.js"></script>
@@ -136,7 +137,9 @@
                         </button>
                         <ul class="dropdown-menu">
                             <!-- <li><a class="dropdown-item" href="#">Элемент меню</a></li> -->
-                            <li><button class="dropdown-item" id="User_cloud_sinc_button">Выгрузить в облако</button>
+                            <li><button class="dropdown-item"  id="User_cloud_sinc_button">Выгрузить в облако</button>
+                            </li>
+                            <li><button class="dropdown-item" id="User_clear_fav_button">Очистить базу</button>
                             </li>
                             <li><button class="dropdown-item" id="User_Fav_sinc_button">Избранное</button>
                             </li>
@@ -239,7 +242,7 @@
 
                         <div class="card mb-3 border-0">
                             <div class="row g-0">
-
+                                <button id="screenshotButton" class="hide">Take Screenshot</button>
                                 <div style="font-size: 1.4em" id="info_title">
                                     <a style="margin-left: 7px; text-decoration: none;" class="link-danger"
                                         target="_blank" href="./">Бурятский мультик</a>
@@ -248,7 +251,8 @@
                                 <hr>
                                 <div class="col-md-3 ">
                                     <div class="d-flex flex-column align-items-center">
-                                        <img id="info_cover" src="https://images-eu.ssl-images-amazon.com/images/I/41wflhP0eEL._UL1000_.jpg"
+                                        <img id="info_cover"
+                                            src="https://images-eu.ssl-images-amazon.com/images/I/41wflhP0eEL._UL1000_.jpg"
                                             class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded w-75">
                                         <!-- class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded min-w-350"> -->
 
@@ -338,7 +342,8 @@
                                             <p class="card-text">Длительность:
                                                 <!-- <a id="info_duration" style="cursor: pointer;" href="Anime-404.jpg" -->
                                                 <a id="info_duration" style="cursor: pointer;" href="404.html"
-                                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">600 тиков</a>
+                                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">600
+                                                    тиков</a>
                                             </p>
                                             <p class="card-text">Студия:
                                                 <a id="info_studios" href=""
@@ -347,17 +352,20 @@
 
                                             <p class="card-text">Год выхода:
                                                 <a id="info_year" href=""
-                                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">635 427 810</a>
+                                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">635
+                                                    427 810</a>
                                             </p>
                                             <p id="info_genres" class="card-text">Жанры:
                                                 <a href=""
-                                                    class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Психологичкеский хоррер</a>,
+                                                    class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Психологичкеский
+                                                    хоррер</a>,
                                                 <a href=""
                                                     class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Приключения</a>,
                                                 <a href=""
                                                     class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Хентай</a>,
                                                 <a href=""
-                                                    class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Симулятор смысла жизни</a>
+                                                    class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Симулятор
+                                                    смысла жизни</a>
                                             </p>
                                             <p class="card-text">Статус:
                                                 <a id="info_status" href=""
@@ -421,11 +429,12 @@
                                                 <div id="info_videos" class="carousel-inner rounded ">
                                                     <div class="carousel-item" data-interval="false">
                                                         <iframe src="//youtube.com/embed/BLbr6YbN5dw"
-                                                            class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
+                                                            class="d-block w-100" style="aspect-ratio: 16 / 9"
+                                                            alt="...">
                                                         </iframe>
                                                         <div class="carousel-caption vi_label">
-                                                                    <p>[${it+1} / ${data.items?.length}] ${el.snippet.title}</p>
-                                                                </div>
+                                                            <p>[${it+1} / ${data.items?.length}] ${el.snippet.title}</p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <button class="carousel-control-prev" type="button"

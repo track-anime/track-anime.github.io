@@ -7,6 +7,7 @@ window.moment.locale('ru')
 var HistoryIsActivy = true
 var TypePage = 0
 document.body.r = 2
+var FavCheckSave = false
 var url_get = new URL(window.location.href)
 const KeyTab = Math.floor(Math.random() * 10000000000)
 const VideoPlayerAnime = document.getElementById('VideoPlayerAnime');
@@ -23,6 +24,7 @@ const list_serch = document.getElementById("list_serch");
 const list_history = document.getElementById("list_history");
 const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
+
 
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
@@ -51,7 +53,7 @@ base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-window?.Notification?.requestPermission()
+// window?.Notification?.requestPermission()
 sh_api.get_user()
 // sh_api.get_key()
 if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) sh_api.get_key()
@@ -168,6 +170,8 @@ function TorrentURL() {
 document.querySelector("#pipDialogButton").addEventListener('click', () => {
     ta_pip()
 })
+
+
 
 
 function setVideoInfo(e) {
@@ -287,7 +291,7 @@ function setVideoInfo(e) {
                     </div>
         </div>
     ` });
-        //channelId=UCOz4k6q0mDc8fReKXyC-KOQ&
+    //channelId=UCOz4k6q0mDc8fReKXyC-KOQ&
     fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&relevanceLanguage=ru&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
             'Referer': location.href
@@ -310,11 +314,11 @@ function setVideoInfo(e) {
                             class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
                         </iframe>
                         <div class="carousel-caption vi_label">
-                                    <p>[${it+1} / ${data.items?.length}] ${el.snippet.title}</p>
+                                    <p>[${it + 1} / ${data.items?.length}] ${el.snippet.title}</p>
                                 </div>
                     </div>
                     `;
-                
+
             })
 
             VideoInfo.info.videos.innerHTML = a1 + html2;
@@ -455,6 +459,12 @@ document.addEventListener("search_another", function (e) {
         return
     }
     GetFavoriteList("search_another")
+
+
+    if (url_get.searchParams.get('shikimori_id') || FavCheckSave == true) {
+        FavCheckSave = false
+        return
+    }
     getChapter("#list_fav")
     HistoryIsActivy = false
 })
@@ -900,6 +910,8 @@ async function addCalendar() {
 
 async function add_push(e) {
     if (!GetFavorite(e.shikimori) && base_anime.fav.length > 0) return
+    showToast(e);
+    return
 
     const perm = await window?.Notification?.requestPermission()
 
@@ -999,16 +1011,30 @@ function AddFavorite(t) {
             break;
     }
 }
+document.getElementById("User_clear_fav_button").onclick = ClearFavorite
+
+function ClearFavorite() {
+    // alert("restart")
+    if (!confirm("Очистить локальную базу данных?")) return
+    base_anime.fav = [];
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    location.reload()
+}
 
 function SetFavorite(e) {
-    base_anime.fav.push(e)
+    console.log("SetFavorite", e)
+    FavCheckSave = true
+    base_anime.fav.push(e.toString())
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     sh_api.AddUserRates(Number(e), 0)
+
     return base_anime.fav
 }
 
 function DeleteFavorite(e) {
-    base_anime.fav = base_anime.fav.filter(item => !item.includes(e));
+    FavCheckSave = true
+    console.log("DeleteFavorite", e)
+    base_anime.fav = base_anime.fav.filter(item => !item.includes(e.toString()));
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     sh_api.AddUserRates(Number(e), 1)
     return base_anime.fav
@@ -1156,6 +1182,7 @@ function add_cart(e) {
     imgTop.appendChild(cartVoice);
 
     cartVoice.addEventListener("mouseover", (e1) => {
+
         if (AnimeScanID[e.shikimori])
             var tmp123 = ' | ';
         AnimeScanID[e.shikimori]?.forEach(e2 => {
@@ -1207,21 +1234,28 @@ function add_cart(e) {
     cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
 
     cart.addEventListener("mouseover", (ev) => {
-        cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+        if (sh_api.authorize) {
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori)[1]
+        } else {
+            cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+        }
+        // cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
     });
 
     cartFavorite.addEventListener("click", (ev) => {
+        console.log(ev)
         ev.stopPropagation();
-        if (GetFavorite(e.shikimori)) {
+        console.log(sh_api.get_fav_color(e.shikimori), GetFavorite(e.shikimori))
+        if (GetFavorite(e.shikimori) || sh_api?.get_fav_color(e.shikimori)?.[1] == "смотрю") {
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
             // cartFavorite.querySelector('svg').style.fill = "#ffffff"
             DeleteFavorite(e.shikimori)
             cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
-            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         } else {
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
             // cartFavorite.querySelector('svg').style.fill = "#ffdd00"
             SetFavorite(e.shikimori)
             cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
-            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         }
 
 
@@ -1289,7 +1323,7 @@ function formatDate(isoDateString) {
 }
 
 
-function showToast(e) {
+function showToast(e, fav) {
     // prompt("",JSON.stringify(e))
     var audio = new Audio();
     audio.preload = 'auto';
@@ -1302,7 +1336,7 @@ function showToast(e) {
     <div class="toast liveToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="user-select: none;">
     <div class="toast-header">
       <img src="${e.cover}" style="height: 75px;" class="imgs rounded me-2" alt="...">
-      <strong class="${encodeURIComponent(e.voice)} me-auto">${e.voice}</strong>
+      <strong class="${encodeURIComponent(e.voice)} me-auto">${fav ? fav : e.voice}</strong>
       <small class="text-muted">${e.date.string}</small>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
     </div>
