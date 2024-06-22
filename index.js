@@ -294,15 +294,16 @@ function setVideoInfo(e) {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(1, data)
-            console.log(VideoInfo.info.videos.innerHTML, html2)
+            // console.log(1, data)
+            // console.log(VideoInfo.info.videos.innerHTML, html2)
             html2 = VideoInfo.info.videos.innerHTML
+            var a1 = ""
             // if (!data?.items?.[0]?.id?.videoId) return
             data.items?.forEach((el, it) => {
 
                 // console.log(it)
                 // console.log(el)
-                html2 = html2 + `
+                html2 = `
                     <div class="carousel-item">
                         <iframe src="${location.protocol}//www.youtube.com/embed/${el.id?.videoId}"
                             class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
@@ -311,11 +312,12 @@ function setVideoInfo(e) {
                                     <p>${it} / ${data.items?.length}</p>
                                 </div>
                     </div>
-                    `;
+                    ` + a1;
                 
             })
-            VideoInfo.info.videos.innerHTML = html2;
-            console.log(VideoInfo.info.videos.innerHTML, html2)
+
+            VideoInfo.info.videos.innerHTML = a1 + html2;
+            // console.log(VideoInfo.info.videos.innerHTML, html2)
         })
         .catch(error => console.error(1, 'Error:', error));
 
