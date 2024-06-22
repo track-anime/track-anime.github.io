@@ -486,6 +486,7 @@ screen and (max-width: 992px) {
     left:0;
     right: 0;
     bottom: 0;
+    pointer-events: none;
 }
 
 .vi_label p {
