@@ -295,15 +295,15 @@ function setVideoInfo(e) {
         .then(response => response.json())
         .then(data => {
             console.log(1, data)
-            if (!data?.items?.[0]?.id?.videoId) return
-            data?.items?.forEach(el, it => {
+            // if (!data?.items?.[0]?.id?.videoId) return
+            data.items?.forEach(el, it => {
                 html2 = html2 + `
                     <div class="carousel-item">
                         <iframe src="${location.protocol}//www.youtube.com/embed/${el.id?.videoId}"
                             class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
                         </iframe>
                         <div class="carousel-caption vi_label">
-                                    <p>${it} / ${data?.items.length}</p>
+                                    <p>${it} / ${data.items?.length}</p>
                                 </div>
                     </div>
                     `;
