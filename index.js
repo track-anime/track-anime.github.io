@@ -278,7 +278,7 @@ function setVideoInfo(e) {
     e.videos?.forEach(el => {
         html2 = html2 + `
         <div class="carousel-item">
-            <iframe src="${location.protocol + el.player_url.replace("https:","").replace("http:","")}"
+            <iframe src="${location.protocol + el.player_url.replace("https:", "").replace("http:", "")}"
                 class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
             </iframe>
             <div class="carousel-caption vi_label">
@@ -287,15 +287,15 @@ function setVideoInfo(e) {
         </div>
     ` });
 
-    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent("О моём перерождении в слизь")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" русский трейлер")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
-          'Referer': location.href
+            'Referer': location.href
         }
-      })
-      .then(response => response.json())
-      .then(data => console.log(1,data))
-      .catch(error => console.error(1,'Error:', error));
-      
+    })
+        .then(response => response.json())
+        .then(data => console.log(1, data))
+        .catch(error => console.error(1, 'Error:', error));
+
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
     e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
