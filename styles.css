@@ -474,10 +474,22 @@ screen and (max-width: 992px) {
         width: 100%;
     }
 
-    #carouselExampleAutoplaying {
+    #carouselExampleAutoplaying,
+    #carouselExampleAutoplaying2 {
         margin: 4px !important;
     }
 
+}
+
+.vi_label{
+    background-color: #00000051 !important;
+    left:0;
+    right: 0;
+    bottom: 0;
+}
+
+.vi_label p {
+    color: white !important;
 }
 
 @media screen and (max-width: 992px) {
@@ -586,6 +598,8 @@ span.sr-only {
 
 #VoiceSettings_content {
     padding: 13px;
+    /* max-height: 90vh; */
+    /* flex-wrap: wrap; */
 }
 
 .cart-time {

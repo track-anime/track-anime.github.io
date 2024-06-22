@@ -82,6 +82,7 @@ VideoInfo.info = {
     "studios": VideoInfo.querySelector("#info_studios"),
     "updated_at": VideoInfo.querySelector("#info_updated_at"),
     "screenshots": VideoInfo.querySelector("#info_screenshots"),
+    "videos": VideoInfo.querySelector("#info_videos"),
     "info_status": VideoInfo.querySelector("#info_status"),
     "year": VideoInfo.querySelector("#info_year"),
     "rating_mpaa": VideoInfo.querySelector("#info_rating_mpaa"),
@@ -266,18 +267,33 @@ function setVideoInfo(e) {
         // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
     })
     html = ""
+    html2 = ""
     e.screenshots?.forEach(el => {
         html = html + `
-        <div class="carousel-item">
+        <div class="carousel-item w-100">
         <img src="https://shikimori.one${el.original}"
-            class="d-block w-100" alt="...">
+            class="d-block w-100"  alt="...">
     </div>
     ` });
-
+    e.videos?.forEach(el => {
+        html2 = html2 + `
+        <div class="carousel-item">
+            <iframe src="${el.player_url}"
+                class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
+            </iframe>
+            <div class="carousel-caption vi_label">
+                        <p>${el.name} / ${el.hosting}</p>
+                    </div>
+        </div>
+    ` });
+    console.log(e.screenshots)
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
+    e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
     VideoInfo.info.screenshots.innerHTML = html;
+    VideoInfo.info.videos.innerHTML = html2;
     VideoInfo.info.screenshots.querySelectorAll(".carousel-item")[0]?.classList.add("active");
+    VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
 
     html = "Жанры: "
     e.genres?.forEach(el => {
@@ -1183,7 +1199,7 @@ function add_cart(e) {
     // console.log(sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0])
     if (sh_api.authorize == true) {
         cart.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] : "none"
-    }else{
+    } else {
         cart.style.borderTopColor = GetFavorite(id) ? "#ffdd00" : "none"
     }
     return cart
