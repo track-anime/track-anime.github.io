@@ -297,6 +297,9 @@ function setVideoInfo(e) {
             console.log(1, data)
             // if (!data?.items?.[0]?.id?.videoId) return
             data.items?.forEach(el, it => {
+
+                console.log(it)
+                console.log(el)
                 html2 = html2 + `
                     <div class="carousel-item">
                         <iframe src="${location.protocol}//www.youtube.com/embed/${el.id?.videoId}"
