@@ -294,7 +294,7 @@ function setVideoInfo(e) {
     })
         .then(response => response.json())
         .then(data => {
-            // console.log(1, data)
+            console.log("yt: ", data)
             // console.log(VideoInfo.info.videos.innerHTML, html2)
             html2 = VideoInfo.info.videos.innerHTML
             var a1 = ""
