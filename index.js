@@ -318,6 +318,7 @@ function setVideoInfo(e) {
             })
 
             VideoInfo.info.videos.innerHTML = a1 + html2;
+            VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
             // console.log(VideoInfo.info.videos.innerHTML, html2)
         })
         .catch(error => console.error(1, 'Error:', error));
