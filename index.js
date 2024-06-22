@@ -303,7 +303,7 @@ function setVideoInfo(e) {
 
                 // console.log(it)
                 // console.log(el)
-                a1 = `
+                a1 = a1 + `
                     <div class="carousel-item">
                         <iframe src="${location.protocol}//www.youtube.com/embed/${el.id?.videoId}"
                             class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
@@ -312,7 +312,7 @@ function setVideoInfo(e) {
                                     <p>${it} / ${data.items?.length}</p>
                                 </div>
                     </div>
-                    ` + a1;
+                    `;
                 
             })
 
