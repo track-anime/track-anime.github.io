@@ -298,7 +298,7 @@ function setVideoInfo(e) {
             // console.log(VideoInfo.info.videos.innerHTML, html2)
             html2 = VideoInfo.info.videos.innerHTML
             var a1 = ""
-            // if (!data?.items?.[0]?.id?.videoId) return
+            if (!data?.items?.[0]?.id?.videoId) return
             data.items?.forEach((el, it) => {
 
                 // console.log(it)
