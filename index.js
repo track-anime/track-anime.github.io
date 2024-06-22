@@ -296,7 +296,7 @@ function setVideoInfo(e) {
         .then(data => {
             console.log(1, data)
             // if (!data?.items?.[0]?.id?.videoId) return
-            data.items?.forEach(el, it => {
+            data.items?.forEach((el, it) => {
 
                 console.log(it)
                 console.log(el)
