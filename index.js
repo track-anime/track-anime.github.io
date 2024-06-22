@@ -278,7 +278,7 @@ function setVideoInfo(e) {
     e.videos?.forEach(el => {
         html2 = html2 + `
         <div class="carousel-item">
-            <iframe src="${el.player_url}"
+            <iframe src="${location.protocol + el.player_url.replace("https:","").replace("http:","")}"
                 class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
             </iframe>
             <div class="carousel-caption vi_label">
