@@ -276,7 +276,7 @@ function setVideoInfo(e) {
     </div>
     ` });
     e.videos?.forEach(el => {
-        return
+        // return
         html2 = html2 + `
         <div class="carousel-item">
             <iframe src="${location.protocol + el.player_url.replace("https:", "").replace("http:", "")}"
