@@ -287,7 +287,7 @@ function setVideoInfo(e) {
         </div>
     ` });
         //channelId=UCOz4k6q0mDc8fReKXyC-KOQ&
-    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&relevanceLanguage=ru&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
             'Referer': location.href
         }
