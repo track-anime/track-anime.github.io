@@ -287,13 +287,26 @@ function setVideoInfo(e) {
         </div>
     ` });
 
-    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" русский трейлер")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&q=${e.russian}${encodeURIComponent(" трейлер на русском")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
             'Referer': location.href
         }
     })
         .then(response => response.json())
-        .then(data => console.log(1, data))
+        .then(data => {
+            console.log(1, data)
+            if (!data?.items?.[0]?.id?.videoId) return
+            html2 = `
+        <div class="carousel-item">
+            <iframe src="${location.protocol + el.player_url.replace("https:", "").replace("http:", "")}"
+                class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
+            </iframe>
+            <div class="carousel-caption vi_label">
+                        <p>${1} / ${data?.items.length}</p>
+                    </div>
+        </div>
+    ` + html2;
+        })
         .catch(error => console.error(1, 'Error:', error));
 
 
