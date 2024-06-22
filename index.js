@@ -287,7 +287,7 @@ function setVideoInfo(e) {
         </div>
     ` });
 
-    fetch(`//youtube.googleapis.com/youtube/v3/search?part="О моём перерождении в слизь"&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+    fetch(`//youtube.googleapis.com/youtube/v3/search?part=${encodeURIComponent("О моём перерождении в слизь")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
           'Referer': location.href
         }
