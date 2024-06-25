@@ -939,6 +939,7 @@ async function add_push(e) {
 }
 
 function AddFavorite(t) {
+    FavCheckSave = true
     console.log(t)
 
     var e1 = document.getElementById('btn_sh_save')
