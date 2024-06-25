@@ -759,6 +759,7 @@ VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
     document.title = "Track Anime By ДугДуг"
     url_get.searchParams.delete("shikimori_id")
     window.history.pushState({}, '', url_get);
+    SetColorCartFav()
 })
 
 
@@ -1126,7 +1127,7 @@ function RangeRaiting(r) {
 
     })
 }
-function SetColorCartFav() {
+async function SetColorCartFav() {
     document.querySelectorAll(".cart_").forEach(e => {
         if(e?.data?.shikimori==undefined) return
         if (sh_api.authorize == true) {
