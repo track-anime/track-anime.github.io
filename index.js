@@ -459,14 +459,15 @@ document.addEventListener("search_another", function (e) {
         return
     }
     GetFavoriteList("search_another")
-
-
+    SetColorCartFav()
     if (url_get.searchParams.get('shikimori_id') || FavCheckSave == true) {
         FavCheckSave = false
+        playSound("ok.mp3")
         return
     }
     getChapter("#list_fav")
     HistoryIsActivy = false
+    
 })
 
 document.addEventListener("sh_api_logout", function (e) { // (1)
@@ -475,6 +476,7 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
 })
 
 document.addEventListener("authorize", function (e) { // (1)
+    SetColorCartFav()
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 
@@ -1041,7 +1043,7 @@ function DeleteFavorite(e) {
 }
 
 function GetFavorite(e) {
-    let result = base_anime.fav.filter(item => item.toLowerCase().includes(e.toLowerCase()));
+    let result = base_anime.fav.filter(item => item.toString().toLowerCase().includes(e.toString().toLowerCase()));
     if (result.length > 0) {
         return true
     }
@@ -1123,10 +1125,23 @@ function RangeRaiting(r) {
 
     })
 }
+function SetColorCartFav() {
+    document.querySelectorAll(".cart_").forEach(e => {
+        if(e?.data?.shikimori==undefined) return
+        if (sh_api.authorize == true) {
+           e.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] : "none"
+            // e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
+        } else {
+            e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
+        }
+        // console.log(e?.data?.shikimori)
+    });
+}
 
 function add_cart(e) {
     const cart = document.createElement('div');
     cart.data = e;
+    // console.log(cart.data.shikimori)
     cart.classList.add('cart_', 'bg-dark', 'text-white');
     cart.r = e.raiting
     document.body.r > cart.r ? cart.classList.add('hide') : null;
@@ -1274,6 +1289,7 @@ function add_cart(e) {
     }
     return cart
 }
+
 function add_card_ned(e) {
     const cart = document.createElement('div');
     cart.classList.add("cart_")
@@ -1321,14 +1337,15 @@ function formatDate(isoDateString) {
     days.moment_7.add(7, 'days')
     return days;
 }
-
+function playSound(soundFile) {
+    var audioElement = new Audio(soundFile);
+    audioElement.preload = 'auto';
+    audioElement.play();
+  }
 
 function showToast(e, fav) {
     // prompt("",JSON.stringify(e))
-    var audio = new Audio();
-    audio.preload = 'auto';
-    audio.src = './meloboom.mp3';
-    audio.play();
+    audio.src = playSound('./meloboom.mp3');
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
 
