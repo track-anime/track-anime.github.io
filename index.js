@@ -142,7 +142,7 @@ hide_date_cart()
 url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
 
 document.getElementById('User_login_QR_code').addEventListener('click', () => {
-    get_qr_code(`${location.origin}?token=${sh_api.getCookie("sh_refresh_token")}`)
+    get_qr_code(`${location.origin}${location.pathname}?token=${sh_api.getCookie("sh_refresh_token")}`)
 })
 
 function add_token_connect(token) {
