@@ -121,6 +121,8 @@ sh_api.refresh_token = (r_token) => {
 
     if(r_token){
         document.cookie = `sh_refresh_token=${r_token}; path=/;`
+        document.cookie = `sh_access_token=""; path=/; max-age=-1;`
+        document.cookie = `_kawai_session=""; path=/; max-age=-1;`
     }
 
     if (sh_api.getCookie("sh_access_token")) {
@@ -139,7 +141,7 @@ sh_api.refresh_token = (r_token) => {
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Track Anime By DygDyg'
         },
-        body: `grant_type=refresh_token&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&refresh_token=${r_token?r_token:sh_api.getCookie("sh_refresh_token")}`
+        body: `grant_type=refresh_token&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&refresh_token=${sh_api.getCookie("sh_refresh_token")}`
     })
         .then(response => response.json())
         .then(data => {
