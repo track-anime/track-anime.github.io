@@ -155,10 +155,17 @@ function add_token_connect(token) {
 function get_qr_code(text, el) {
     var qr = el ? el : document.querySelector("#qrcode_main div")
     qr.innerHTML = ""
-    var qrcode = new QRCode(qr);
+    var qrcode = new QRCode(qr,{
+        text: text,
+        width: 512,
+        height: 512,
+        colorDark : "#000000",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+    });
     qrcode.makeCode(text);
-
-    // console.log(sh_api.getCookie("sh_refresh_token"))
+    
+    console.log("QR Code", text)
     // sh_refresh_token
     // url_get.searchParams.set("token", `${UserID}`)
 }
