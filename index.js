@@ -149,7 +149,7 @@ function add_token_connect(token) {
     url_get.searchParams.delete("token")
     window.history.pushState({}, '', url_get);
     sh_api.refresh_token(token)
-    location.reload()
+    // location.reload()
 }
 
 function get_qr_code(text, el) {
