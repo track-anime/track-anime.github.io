@@ -50,7 +50,8 @@ sh_api.getCookie = (name) => {
 }
 
 sh_api.get_key = () => {
-    window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+    // window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+    location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`
     return
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
@@ -112,7 +113,7 @@ sh_api.logout = () => {
     }, 1000);
 }
 
-sh_api.refresh_token = () => {
+sh_api.refresh_token = (r_token) => {
 
     if (sh_api.getCookie("sh_access_token")) {
         return sh_api.getCookie("sh_access_token")
@@ -130,7 +131,7 @@ sh_api.refresh_token = () => {
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Track Anime By DygDyg'
         },
-        body: `grant_type=refresh_token&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&refresh_token=${sh_api.getCookie("sh_refresh_token")}`
+        body: `grant_type=refresh_token&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&refresh_token=${r_token?r_token:sh_api.getCookie("sh_refresh_token")}`
     })
         .then(response => response.json())
         .then(data => {

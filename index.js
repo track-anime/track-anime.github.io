@@ -139,6 +139,24 @@ ChecDataCart.addEventListener('change', function () {
 
 hide_date_cart()
 
+url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
+
+document.getElementById('User_login_QR_code').addEventListener('click', () => get_qr_code(`${location.origin}?token=${sh_api.getCookie("sh_refresh_token")}`))
+function add_token_connect(token) {
+    url_get.searchParams.delete("token")
+    sh_api.refresh_token(token)
+}
+
+function get_qr_code(text) {
+   var qr = document.querySelector("#qrcode_main div")
+   qr.innerHTML = ""
+    var qrcode = new QRCode(qr);
+    qrcode.makeCode(text);
+    // console.log(sh_api.getCookie("sh_refresh_token"))
+    // sh_refresh_token
+    // url_get.searchParams.set("token", `${UserID}`)
+}
+
 function hide_date_cart(tr) {
     document.head.appendChild(styleDateCart)
     if (typeof tr != "boolean") {
@@ -467,7 +485,7 @@ document.addEventListener("search_another", function (e) {
     }
     getChapter("#list_fav")
     HistoryIsActivy = false
-    
+
 })
 
 document.addEventListener("sh_api_logout", function (e) { // (1)
@@ -1129,9 +1147,9 @@ function RangeRaiting(r) {
 }
 async function SetColorCartFav() {
     document.querySelectorAll(".cart_").forEach(e => {
-        if(e?.data?.shikimori==undefined) return
+        if (e?.data?.shikimori == undefined) return
         if (sh_api.authorize == true) {
-           e.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] : "none"
+            e.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] : "none"
             // e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
         } else {
             e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
@@ -1343,7 +1361,7 @@ function playSound(soundFile) {
     var audioElement = new Audio(soundFile);
     audioElement.preload = 'auto';
     audioElement.play();
-  }
+}
 
 function showToast(e, fav) {
     // prompt("",JSON.stringify(e))
