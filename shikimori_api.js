@@ -119,6 +119,10 @@ sh_api.logout = () => {
 
 sh_api.refresh_token = (r_token) => {
 
+    if(r_token){
+        document.cookie = `sh_refresh_token=${r_token}; path=/;`
+    }
+
     if (sh_api.getCookie("sh_access_token")) {
         return sh_api.getCookie("sh_access_token")
     }
