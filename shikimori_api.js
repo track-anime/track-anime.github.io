@@ -48,6 +48,10 @@ sh_api.getCookie = (name) => {
     var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
     return matches ? decodeURIComponent(matches[1]) : undefined;
 }
+sh_api.getCookie_time = (name) => {
+    var matches = document.cookie.match(new RegExp("(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 
 sh_api.get_key = () => {
     // window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
@@ -90,6 +94,7 @@ sh_api.add_token = () => {
         .then(data => {
             console.log("get", data);
             document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
+            document.cookie = `sh_access_token_max-age=${(new Date(Date.now()+ data.expires_in*1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
             document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; max-age=9999999999999999999;`
 
             sh_api.url_get.searchParams.delete("code")
@@ -120,8 +125,8 @@ sh_api.logout = () => {
 sh_api.refresh_token = (r_token) => {
 
     if(r_token){
-        document.cookie = `sh_refresh_token=${r_token}; path=/;`
-        document.cookie = `sh_access_token=""; path=/; max-age=-1;`
+        document.cookie = `sh_refresh_token=${r_token.split(":")[0]}; path=/;`
+        document.cookie = `sh_access_token=${r_token.split(":")[1]}; path=/; max-age=${r_token.split(":")[2]}`
         document.cookie = `_kawai_session=""; path=/; max-age=-1;`
     }
 
