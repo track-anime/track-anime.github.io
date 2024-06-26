@@ -146,6 +146,7 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 })
 
 function add_token_connect(token) {
+    if(sh_api.authorize) return sh_api.logout;
     url_get.searchParams.delete("token")
     window.history.pushState({}, '', url_get);
     sh_api.refresh_token(token)
