@@ -100,7 +100,11 @@ sh_api.add_token = () => {
             sh_api.authorize = true
             sh_api.get_user()
         })
-        .catch(error => console.error(error));
+        .catch(error => {
+            sh_api.url_get.searchParams.delete("code")
+            window.history.pushState({}, '', sh_api.url_get);
+            console.error(error)
+        });
 }
 sh_api.logout = () => {
     document.cookie = `sh_access_token=""; path=/; max-age=-1;`
