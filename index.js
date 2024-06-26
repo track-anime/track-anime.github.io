@@ -150,8 +150,8 @@ function add_token_connect(token) {
     location.reload()
 }
 
-function get_qr_code(text) {
-    var qr = document.querySelector("#qrcode_main div")
+function get_qr_code(text, el) {
+    var qr = el?el:document.querySelector("#qrcode_main div")
     qr.innerHTML = ""
     var qrcode = new QRCode(qr);
     qrcode.makeCode(text);
