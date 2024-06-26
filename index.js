@@ -141,7 +141,9 @@ hide_date_cart()
 
 url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
 
-document.getElementById('User_login_QR_code').addEventListener('click', () => get_qr_code(`${location.origin}?token=${sh_api.getCookie("sh_refresh_token")}`))
+document.getElementById('User_login_QR_code').addEventListener('click', () => {
+    get_qr_code(`${location.origin}?token=${sh_api.getCookie("sh_refresh_token")}`)
+})
 
 function add_token_connect(token) {
     url_get.searchParams.delete("token")
@@ -151,7 +153,7 @@ function add_token_connect(token) {
 }
 
 function get_qr_code(text, el) {
-    var qr = el?el:document.querySelector("#qrcode_main div")
+    var qr = el ? el : document.querySelector("#qrcode_main div")
     qr.innerHTML = ""
     var qrcode = new QRCode(qr);
     qrcode.makeCode(text);
