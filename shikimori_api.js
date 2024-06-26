@@ -94,7 +94,7 @@ sh_api.add_token = () => {
         .then(data => {
             console.log("get", data);
             document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
-            document.cookie = `sh_access_token_max-age=${(new Date(Date.now()+ data.expires_in*1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
+            document.cookie = `sh_access_token_max_age=${(new Date(Date.now()+ data.expires_in*1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
             document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; max-age=9999999999999999999;`
 
             sh_api.url_get.searchParams.delete("code")
@@ -113,6 +113,7 @@ sh_api.add_token = () => {
 }
 sh_api.logout = () => {
     document.cookie = `sh_access_token=""; path=/; max-age=-1;`
+    document.cookie = `sh_access_token_max_age=""; path=/; max-age=-1;`
     document.cookie = `sh_refresh_token=""; path=/; max-age=-1;`
     document.cookie = `_kawai_session=""; path=/; max-age=-1;`
     sh_api.authorize = false
@@ -125,8 +126,8 @@ sh_api.logout = () => {
 sh_api.refresh_token = (r_token) => {
 
     if(r_token){
-        document.cookie = `sh_refresh_token=${r_token.split(":")[0]}; path=/;`
-        document.cookie = `sh_access_token=${r_token.split(":")[1]}; path=/; max-age=${r_token.split(":")[2]}`
+        document.cookie = `sh_refresh_token=${r_token.split(";")[0]}; path=/;`
+        document.cookie = `sh_access_token=${r_token.split(";")[1]}; path=/; max-age=${r_token.split(";")[2]}`
         document.cookie = `_kawai_session=""; path=/; max-age=-1;`
     }
 
