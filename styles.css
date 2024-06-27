@@ -482,7 +482,8 @@ screen and (max-width: 992px) {
 
     #search_form,
     #User_Menu_Group,
-    #list_login_Button {
+    #list_login_Button,
+    #list_QRScan_Button {
         margin: 3px !important;
         width: 100%;
 
