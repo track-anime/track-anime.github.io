@@ -1388,6 +1388,7 @@ function playSound(soundFile, vol) {
     audioElement.preload = 'auto';
     audioElement.volue = vol?vol:1.0;
     audioElement.play();
+    console.log(audioElement.volue)
 }
 
 function showToast(e, fav) {
