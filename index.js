@@ -153,8 +153,8 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 })
 
 
-setTimeout(() => {
-    url_get.searchParams.delete("token")
+setTimeout(() => { //Фикс, удаляющий забытый ключ авторизации
+    url_get.searchParams.delete("code")
     window.history.pushState({}, '', url_get);
 }, 15000);
 
