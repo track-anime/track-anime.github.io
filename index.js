@@ -152,6 +152,8 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
     qrcode_modal.show()
 })
 
+
+
 function add_token_connect(token) {
     // if(sh_api.authorize) sh_api.logout();
 
@@ -506,7 +508,7 @@ document.addEventListener("search_another", function (e) {
     SetColorCartFav()
     if (url_get.searchParams.get('shikimori_id') || FavCheckSave == true) {
         FavCheckSave = false
-        playSound("ok.mp3")
+        playSound("ok.mp3", base_anime.Volume?base_anime.Volume:1.0)
         return
     }
     getChapter("#list_fav")
@@ -1393,7 +1395,7 @@ function playSound(soundFile, vol) {
 
 function showToast(e, fav) {
     // prompt("",JSON.stringify(e))
-    playSound('./meloboom.mp3');
+    playSound('meloboom.mp3',base_anime.Volume?base_anime.Volume:1.0);
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
 
@@ -1504,6 +1506,18 @@ function dialog_(e, info) {
 
     ta_pip(false)
 }
+
+document.getElementById("RangeVolume").value = base_anime.Volume?base_anime.Volume:1.0
+document.getElementById("RangeVolume").addEventListener("change", (e) => { 
+    var a_f = ["ok.mp3", "meloboom.mp3"]
+    // console.log(e.target.value, getRandomInt(2))
+    base_anime.Volume = e.target.value
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    playSound(a_f[getRandomInt(2)], base_anime.Volume?base_anime.Volume:1.0)
+})
+
+// RangeRaitingObj.addEventListener("input", RangeRaiting);
+// RangeRaitingObj.addEventListener("change", () => { GetKodi() });
 
 function ta_pip(flag) //picture to picture
 {
