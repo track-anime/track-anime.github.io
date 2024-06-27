@@ -151,7 +151,7 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 })
 
 function add_token_connect(token) {
-    if(sh_api.authorize) return sh_api.logout();
+    // if(sh_api.authorize) sh_api.logout();
 
     console.log(token.split(";"))
     document.cookie = `sh_refresh_token=${token.split(";")[0]}; path=/;`
