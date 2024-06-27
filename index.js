@@ -1385,7 +1385,7 @@ function formatDate(isoDateString) {
 }
 function playSound(soundFile, vol) {
     var audioElement = new Audio(soundFile);
-    audioElement.volue = vol?vol:1;
+    audioElement.volue = vol?vol:1.0;
     audioElement.preload = 'auto';
     audioElement.play();
 }
