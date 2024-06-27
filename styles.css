@@ -45,7 +45,7 @@ body {
     aspect-ratio: 1 / 1;
     padding: 10px;
     background-color: #ffffff;
-    border-radius: 13px;
+    border-radius: var(--bs-modal-inner-border-radius);
 }
 #qrcode_main div img{
     width: 100%;
