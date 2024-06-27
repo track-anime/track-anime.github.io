@@ -142,11 +142,19 @@ hide_date_cart()
 url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
 
 document.getElementById('User_login_QR_code').addEventListener('click', () => {
+    if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
     get_qr_code(`${location.origin}${location.pathname}?token=${sh_api.getCookie("sh_refresh_token")};${sh_api.getCookie("sh_access_token")};${encodeURIComponent(sh_api.getCookie("sh_access_token_max_age"))}`)
 })
 
 function add_token_connect(token) {
-    if(sh_api.authorize) return sh_api.logout;
+    if(sh_api.authorize) return sh_api.logout();
+
+    console.log(token.split(";"))
+    document.cookie = `sh_refresh_token=${token.split(";")[0]}; path=/;`
+    document.cookie = `sh_access_token=${token.split(";")[1]}; path=/; max-age=${token.split(";")[2]}`
+    document.cookie = `sh_access_token_max_age=${token.split(";")[2]}; path=/; max-age=${token.split(";")[2]};`
+    document.cookie = `_kawai_session=""; path=/; max-age=-1;`
+
     url_get.searchParams.delete("token")
     window.history.pushState({}, '', url_get);
     sh_api.refresh_token(token)

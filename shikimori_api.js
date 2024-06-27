@@ -123,15 +123,9 @@ sh_api.logout = () => {
     }, 1000);
 }
 
-sh_api.refresh_token = (r_token) => {
+sh_api.refresh_token = () => {
 
-    if(r_token){
-        console.log(r_token.split(";"))
-        document.cookie = `sh_refresh_token=${r_token.split(";")[0]}; path=/;`
-        document.cookie = `sh_access_token=${r_token.split(";")[1]}; path=/; max-age=${r_token.split(";")[2]}`
-        document.cookie = `_kawai_session=""; path=/; max-age=-1;`
-        return sh_api.getCookie("sh_access_token")
-    }
+
 
     if (sh_api.getCookie("sh_access_token")) {
         return sh_api.getCookie("sh_access_token")
