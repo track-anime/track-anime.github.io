@@ -1383,8 +1383,9 @@ function formatDate(isoDateString) {
     days.moment_7.add(7, 'days')
     return days;
 }
-function playSound(soundFile) {
+function playSound(soundFile, vol) {
     var audioElement = new Audio(soundFile);
+    audioElement.volue = vol?vol:1;
     audioElement.preload = 'auto';
     audioElement.play();
 }
