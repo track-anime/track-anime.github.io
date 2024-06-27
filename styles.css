@@ -797,10 +797,10 @@ span.sr-only {
 }
 
 .section_1 {
-    background-color: #ffffff;
+    background-color: #202428;
     padding: 50px 30px;
     border: 1.5px solid #b2b2b2;
-    border-radius: 0.25em;
+    border-radius: var(--bs-modal-border-width);
     box-shadow: 0 20px 25px rgba(0, 0, 0, 0.25);
 }
 
