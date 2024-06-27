@@ -176,7 +176,7 @@ function get_qr_code(text, el) {
         text: text,
         colorDark : "#000000",
         colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
+        correctLevel : QRCode.CorrectLevel.L
     });
     qrcode.makeCode(text);
     
