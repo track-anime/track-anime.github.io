@@ -1774,7 +1774,7 @@ document.getElementById("list_QRScan_Button").addEventListener('click', ()=>{
 
         // If found you qr code
         function onScanSuccess(decodeText, decodeResult) {
-            alert("You Qr is : " + decodeText, decodeResult);
+            // alert("You Qr is : " + decodeText, decodeResult);
             location.href = decodeText
         }
     
