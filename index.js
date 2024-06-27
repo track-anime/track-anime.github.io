@@ -338,7 +338,7 @@ function setVideoInfo(e) {
         </div>
     ` });
     //channelId=UCOz4k6q0mDc8fReKXyC-KOQ&
-    fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&relevanceLanguage=ru&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
+    /* fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&relevanceLanguage=ru&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
         headers: {
             'Referer': location.href
         }
@@ -372,7 +372,7 @@ function setVideoInfo(e) {
             // console.log(VideoInfo.info.videos.innerHTML, html2)
         })
         .catch(error => console.error(1, 'Error:', error));
-
+ */
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
     e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
