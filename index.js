@@ -153,6 +153,10 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 })
 
 
+setTimeout(() => {
+    url_get.searchParams.delete("token")
+    window.history.pushState({}, '', url_get);
+}, 15000);
 
 function add_token_connect(token) {
     // if(sh_api.authorize) sh_api.logout();
