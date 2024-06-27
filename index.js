@@ -956,7 +956,7 @@ async function addCalendar() {
 
 
 async function add_push(e) {
-    if (!GetFavorite(e.shikimori) && base_anime.fav.length > 0) return
+    if (!GetFavorite(e.shikimori)) return
     showToast(e);
     return
 
@@ -1391,7 +1391,7 @@ function playSound(soundFile) {
 
 function showToast(e, fav) {
     // prompt("",JSON.stringify(e))
-    audio.src = playSound('./meloboom.mp3');
+    playSound('./meloboom.mp3');
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
 
