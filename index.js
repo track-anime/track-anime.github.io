@@ -1776,6 +1776,7 @@ document.getElementById("list_QRScan_Button").addEventListener('click', ()=>{
         function onScanSuccess(decodeText, decodeResult) {
             // alert("You Qr is : " + decodeText, decodeResult);
             location.href = decodeText
+            htmlscanner.clear()
         }
     
         htmlscanner = new Html5QrcodeScanner(
