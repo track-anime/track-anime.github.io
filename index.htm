@@ -39,8 +39,8 @@
     <script defer src="/scripts/moment-with-locales.js"></script>
     <script defer src="/scripts/counterToStringLabel.js"></script>
     <script type="text/javascript" src="/scripts/qrcode.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
+    <script src="/scripts/html5-qrcode.min.js"></script>
 
     <script defer src="/shikimori_api.js"></script>
 
@@ -56,7 +56,23 @@
     </div>
 </div>
 
+
 <body>
+    <div class="modal fade" id="qrcode_scan_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="qrcode_scan_main">
+                    <div class="container_1">
+                        <!-- <h1>Scan QR Codes</h1> -->
+                        <div class="section_1">
+                            <div id="my-qr-reader">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="qrcode_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -147,6 +163,8 @@
                     </form>
                     <button id="list_login_Button" aria-current="page"
                         class="btn btn-outline-primary mx-2">Вход</button>
+                    <button id="list_QRScan_Button" aria-current="page"
+                        class="btn btn-outline-primary mx-2">QR Code</button>
 
                     <div class="btn-group" id="User_Menu_Group">
                         <button type="button" id="User_Menu_Button"
@@ -564,5 +582,7 @@
     <!-- /Yandex.Metrika counter -->
 
 </body>
+
+
 
 </html>

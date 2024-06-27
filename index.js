@@ -527,6 +527,8 @@ document.addEventListener("authorize", function (e) { // (1)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 
     document.getElementById("list_login_Button").classList.add('hide')
+    document.getElementById("list_QRScan_Button").classList.add('hide')
+
     document.getElementById("User_Menu_Button").classList.remove('hide')
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
     document.getElementById("User_Menu_Button").querySelector('span').textContent = sh_api.UserData.nickname
@@ -1761,6 +1763,46 @@ function GetKodiScan(data, revers) {
     });
 }
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+
+
+///////////////////////////////////////////
+var htmlscanner
+var qrcode_scan_modal = new bootstrap.Modal(document.getElementById("qrcode_scan_modal"))
+document.getElementById("list_QRScan_Button").addEventListener('click', ()=>{
+    qrcode_scan_modal.show()
+    domReady(function () {
+
+        // If found you qr code
+        function onScanSuccess(decodeText, decodeResult) {
+            alert("You Qr is : " + decodeText, decodeResult);
+            location.href = decodeText
+        }
+    
+        htmlscanner = new Html5QrcodeScanner(
+            "my-qr-reader",
+            { fps: 10, qrbos: 250 }
+        );
+        htmlscanner.render(onScanSuccess);
+    });
+})
+
+
+document.getElementById("qrcode_scan_modal").addEventListener('hidden.bs.modal', function (e) {
+    htmlscanner.clear()
+    // console.log(111)
+})
+
+function domReady(fn) {
+    if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+    ) {
+        setTimeout(fn, 1000);
+    } else {
+        document.addEventListener("DOMContentLoaded", fn);
+    }
+}
+
 
 
 
