@@ -148,6 +148,8 @@ url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('
 document.getElementById('User_login_QR_code').addEventListener('click', () => {
     if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
     get_qr_code(`${location.origin}${location.pathname}?token=${sh_api.getCookie("sh_refresh_token")};${sh_api.getCookie("sh_access_token")};${encodeURIComponent(sh_api.getCookie("sh_access_token_max_age"))}`)
+    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
+    qrcode_modal.show()
 })
 
 function add_token_connect(token) {
@@ -170,8 +172,6 @@ function get_qr_code(text, el) {
     qr.innerHTML = ""
     var qrcode = new QRCode(qr,{
         text: text,
-        width: 512,
-        height: 512,
         colorDark : "#000000",
         colorLight : "#ffffff",
         correctLevel : QRCode.CorrectLevel.H

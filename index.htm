@@ -57,10 +57,18 @@
 </div>
 
 <body>
-    <div id="qrcode_main">
-        <div>
+    <div class="modal fade" id="qrcode_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" id="qrcode_main">
+                    <a id="qrcode_label">QR Code</a>
+                    <div>
+
+                        <!-- <img src="favicon.png"></img> -->
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- <img src="favicon.png"></img> -->
     </div>
     <div aria-live="polite" aria-atomic="true" class="position-relative">
         <div id="ToastsMain" class="toast-container position-fixed bottom-0 p-3">
@@ -143,7 +151,7 @@
                         </button>
                         <ul class="dropdown-menu">
                             <!-- <li><a class="dropdown-item" href="#">Элемент меню</a></li> -->
-                            <li><button class="dropdown-item"  id="User_cloud_sinc_button">Выгрузить в облако</button>
+                            <li><button class="dropdown-item" id="User_cloud_sinc_button">Выгрузить в облако</button>
                             </li>
                             <li><button class="dropdown-item" id="User_clear_fav_button">Пофиксить базу</button>
                             </li>

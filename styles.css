@@ -22,7 +22,7 @@ body {
     position: absolute; */
 }
 
-#qrcode_main {
+/* #qrcode_main {
     position: absolute;
     left: 0;
     right: 0;
@@ -35,12 +35,21 @@ body {
     justify-content: center;
     align-items: center;
     pointer-events: none;
+} */
+#qrcode_main {
+    flex-direction: column;
 }
 
 #qrcode_main div {
+    width: 100%;
+    aspect-ratio: 1 / 1;
     padding: 10px;
     background-color: #ffffff;
     border-radius: 13px;
+}
+#qrcode_main div img{
+    width: 100%;
+    height: 100%;
 }
 
 .yellow:hover,
