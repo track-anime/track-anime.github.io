@@ -110,11 +110,19 @@ VideoInfo.info = {
 }
 
 // list_serch.children[4].scrollIntoView({behavior: "smooth"}) чтоб перейти к нужному объекту на странице
+if(url_get.searchParams.get('qrcode')){
+    alert(url_get.searchParams.get('qrcode'))
+    alert(url_get.searchParams.get('code'))
+    url_get.searchParams.delete('qrcode')
+    url_get.searchParams.delete('code')
+}
 
 document.addEventListener('DOMContentLoaded', function () {
 
     //////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
     setInterval(() => {
+        url_get.searchParams.delete("code")
+        window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
         GetKodi("", true)
     }, 30 * 1000);  //Автопроверка 
@@ -153,10 +161,6 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 })
 
 
-setTimeout(() => { //Фикс, удаляющий забытый ключ авторизации
-    url_get.searchParams.delete("code")
-    window.history.pushState({}, '', url_get);
-}, 10000);
 
 function add_token_connect(token) {
     // if(sh_api.authorize) sh_api.logout();
