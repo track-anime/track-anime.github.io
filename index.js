@@ -39,7 +39,8 @@ var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
 
 if(url_get.searchParams.get('qrcode')){
-    console.log(location.href)
+    var url_get = new URL(window.location.href)
+    console.log(123, location.href)
     // alert(url_get.searchParams.get('qrcode'))
     // alert(url_get.searchParams.get('code'))
     // if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
