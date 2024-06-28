@@ -530,7 +530,7 @@ p {
     }
 
     .cart_n {
-        height: 14rem !important;
+        height: 9rem !important;
         width: 100% !important;
         display: flex !important;
         align-content: center;
@@ -540,6 +540,7 @@ p {
     }
 
     .cart_n div {
+        font-size: 1.5em !important;
         margin: 0px !important;
         border-radius: 0px !important;
         padding: 0 !important;
@@ -548,6 +549,7 @@ p {
         display: inline-block;
     }
     .cart_n div div{
+        /* font-size: 0.7em !important; */
         display: inline-block;
         width: auto !important;
         height: auto !important;
