@@ -116,11 +116,11 @@ if(url_get.searchParams.get('qrcode')){
     // alert(url_get.searchParams.get('code'))
     // if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
     get_qr_code(`${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`)
+    url_get.searchParams.delete('qrcode')
+    url_get.searchParams.delete('code')
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
     qrcode_modal.show()
     
-    url_get.searchParams.delete('qrcode')
-    url_get.searchParams.delete('code')
 
 
 }
