@@ -38,7 +38,7 @@ var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
 
-if(url_get.searchParams.get('qrcode')){
+if (url_get.searchParams.get('qrcode')) {
     // alert("1")
     var url_get = new URL(window.location.href)
     var qrcode_link = document.getElementById("qrcode_link")
@@ -190,14 +190,14 @@ function add_token_connect(token) {
 function get_qr_code(text, el) {
     var qr = el ? el : document.querySelector("#qrcode_main div")
     qr.innerHTML = ""
-    var qrcode = new QRCode(qr,{
+    var qrcode = new QRCode(qr, {
         text: text,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.L
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.L
     });
     qrcode.makeCode(text);
-    
+
     console.log("QR Code", text)
     // sh_refresh_token
     // url_get.searchParams.set("token", `${UserID}`)
@@ -265,7 +265,7 @@ function setVideoInfo(e) {
     VideoInfo.info.description.innerHTML = e.description_html ? e.description_html : "?";
 
     VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
-    VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.anime_status ? e.anime_status : "404.html"}` : "404.html";
+    VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.status ? e.status : "404.html"}` : "404.html";
 
     VideoInfo.info.studios.textContent = e.studios[0]?.filtered_name ? e.studios[0].filtered_name : "?";
     VideoInfo.info.studios.href = e.studios[0]?.filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
@@ -526,7 +526,7 @@ document.addEventListener("search_another", function (e) {
     SetColorCartFav()
     if (url_get.searchParams.get('shikimori_id') || FavCheckSave == true) {
         FavCheckSave = false
-        playSound("ok.mp3", base_anime.Volume?base_anime.Volume:1.0)
+        playSound("ok.mp3", base_anime.Volume ? base_anime.Volume : 1.0)
         return
     }
     getChapter("#list_fav")
@@ -1190,7 +1190,7 @@ function RangeRaiting(r) {
     document.getElementById('RangeRaitingTitle').textContent = `Рейтинг: ${r.target.value}`
     document.body.querySelectorAll(".cart_").forEach(e => {
         // console.log(e?.data?.status=="anons")
-        (e.r < r.target.value&&e?.data?.status!="anons") ? e.classList.add('hide') : e.classList.remove('hide')
+        (e.r < r.target.value && e?.data?.status != "anons") ? e.classList.add('hide') : e.classList.remove('hide')
 
     })
 }
@@ -1213,8 +1213,26 @@ function add_cart(e) {
     // console.log(cart.data.shikimori)
     cart.classList.add('cart_', 'bg-dark', 'text-white');
     cart.r = e.raiting
+    cart.title = e?.status
     // console.log(e?.status)
     document.body.r > cart.r && e?.status != "anons" ? cart.classList.add('hide') : null;
+    // cart.style.borderBottomStyle = "dashed"
+    cart.style.borderBottomStyle = "dotted"
+    switch (e.status) {
+        case "anons":
+            cart.style.borderBottomColor = "#cc00cc"
+            break;
+        case "ongoing":
+            cart.style.borderBottomColor = "#52af00"
+            // 
+            break;
+        case "released":
+            // cart.style.borderBottomColor = "#00b5f8"
+            break;
+
+        default:
+            break;
+    }
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
@@ -1410,14 +1428,14 @@ function formatDate(isoDateString) {
 function playSound(soundFile, vol) {
     var audioElement = new Audio(soundFile);
     audioElement.preload = 'auto';
-    audioElement.volume = vol?vol:1.0;
+    audioElement.volume = vol ? vol : 1.0;
     audioElement.play();
     // console.log(audioElement.volume)
 }
 
 function showToast(e, fav) {
     // prompt("",JSON.stringify(e))
-    playSound('meloboom.mp3',base_anime.Volume?base_anime.Volume:1.0);
+    playSound('meloboom.mp3', base_anime.Volume ? base_anime.Volume : 1.0);
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
 
@@ -1529,13 +1547,13 @@ function dialog_(e, info) {
     ta_pip(false)
 }
 
-document.getElementById("RangeVolume").value = base_anime.Volume?base_anime.Volume:1.0
-document.getElementById("RangeVolume").addEventListener("change", (e) => { 
+document.getElementById("RangeVolume").value = base_anime.Volume ? base_anime.Volume : 1.0
+document.getElementById("RangeVolume").addEventListener("change", (e) => {
     var a_f = ["ok.mp3", "meloboom.mp3"]
     // console.log(e.target.value, getRandomInt(2))
     base_anime.Volume = e.target.value
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    playSound(a_f[getRandomInt(2)], base_anime.Volume?base_anime.Volume:1.0)
+    playSound(a_f[getRandomInt(2)], base_anime.Volume ? base_anime.Volume : 1.0)
 })
 
 // RangeRaitingObj.addEventListener("input", RangeRaiting);
@@ -1705,7 +1723,7 @@ function GetKodiScan(data, revers) {
             endid = endid2
             return
         }
-        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id  && e.material_data.countries != "Китай") {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
+        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id && e.material_data.countries != "Китай") {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
 
             if (VoiceTranslate(e.translation.title)) {
 
@@ -1735,20 +1753,7 @@ function GetKodiScan(data, revers) {
                 const cart = add_cart(e1)
                 // cart.style.borderBottomStyle = "dashed"
                 cart.style.borderBottomStyle = "dotted"
-                switch (e1.status) {
-                    case "anons":
-                        cart.style.borderBottomColor = "#cc00cc"
-                        break;
-                    case "ongoing":
-                        // cart.style.borderBottomColor = "#00b5f8"
-                        break;
-                    case "released":
-                        cart.style.borderBottomColor = "#52af00"
-                        break;
-                
-                    default:
-                        break;
-                }
+
 
                 if (revers && prev_page == null) {
                     targetFrame.prepend(cart)
@@ -1804,7 +1809,7 @@ localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////
 var htmlscanner
 var qrcode_scan_modal = new bootstrap.Modal(document.getElementById("qrcode_scan_modal"))
-document.getElementById("list_QRScan_Button").addEventListener('click', ()=>{
+document.getElementById("list_QRScan_Button").addEventListener('click', () => {
     qrcode_scan_modal.show()
     domReady(function () {
 
@@ -1814,7 +1819,7 @@ document.getElementById("list_QRScan_Button").addEventListener('click', ()=>{
             location.href = decodeText
             htmlscanner.clear()
         }
-    
+
         htmlscanner = new Html5QrcodeScanner(
             "my-qr-reader",
             { fps: 10, qrbos: 250 }
