@@ -36,7 +36,7 @@ var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camri
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
 
 if(url_get.searchParams.get('qrcode')){
     console.log(location.href)
