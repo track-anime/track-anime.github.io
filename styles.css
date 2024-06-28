@@ -497,7 +497,7 @@ p {
         left: 180px;
     }
     .cart-raiting {
-        width: 21px;
+        /* width: 21px; */
     }
     .cart-raiting div div {
         overflow: visible !important;
