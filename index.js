@@ -45,8 +45,8 @@ if(url_get.searchParams.get('qrcode')){
     var link = `${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`
     // console.log(222, location.href)
     get_qr_code(link)
-    // qrcode_link.href = link
-    // qrcode_link.textContent = "Ссылка на авторизацию. Не отправляйте другим людям."
+    qrcode_link.href = link
+    qrcode_link.textContent = "Ссылка на авторизацию. Не отправляйте другим людям."
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
 
     url_get.searchParams.delete('qrcode')
