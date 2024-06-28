@@ -67,10 +67,8 @@ sh_api.add_token = () => {
     /*     if (sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_access_token")!="undefined") {
             return sh_api.getCookie("sh_access_token")
         } */
-    console.log(111, sh_api.url_get.searchParams.get('qrcode'))
     if (sh_api.url_get.searchParams.get('qrcode')) return
     code = sh_api.url_get.searchParams.get('code')
-    console.log("ttttttttt", code)
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
         return "no_key"
         window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
@@ -283,6 +281,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 sh_api.get_anime = (id) => {
     var url = `https://shikimori.one/api/animes/${id}`
+    if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
         .then(response => {
             sh_api.another.status = response.status
