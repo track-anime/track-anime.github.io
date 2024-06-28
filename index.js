@@ -119,6 +119,7 @@ if(url_get.searchParams.get('qrcode')){
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
     url_get.searchParams.delete('qrcode')
     url_get.searchParams.delete('code')
+    window.history.pushState({}, '', url_get);
     qrcode_modal.show()
     
 
