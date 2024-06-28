@@ -168,6 +168,7 @@ body {
     border-color: #c6c6c6;
     justify-content: center;
     background-color: #5d5d5db5;
+    /* border: none; */
 }
 
 .ned_name {
@@ -559,6 +560,11 @@ p {
         margin-bottom: 33px !important;
         background-color: #ff000000 !important;
         padding: 0px !important;
+    }
+
+    .ned{
+        border: none;
+        background: none;
     }
 
 }
