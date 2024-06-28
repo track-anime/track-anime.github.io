@@ -1189,7 +1189,8 @@ function RangeRaiting(r) {
     r.target.title = `Фильтр по минимальному рейтингу: ${r.target.value}`
     document.getElementById('RangeRaitingTitle').textContent = `Рейтинг: ${r.target.value}`
     document.body.querySelectorAll(".cart_").forEach(e => {
-        e.r < r.target.value ? e.classList.add('hide') : e.classList.remove('hide')
+        // console.log(e?.data?.status=="anons")
+        (e.r < r.target.value&&e?.data?.status!="anons") ? e.classList.add('hide') : e.classList.remove('hide')
 
     })
 }
@@ -1212,7 +1213,8 @@ function add_cart(e) {
     // console.log(cart.data.shikimori)
     cart.classList.add('cart_', 'bg-dark', 'text-white');
     cart.r = e.raiting
-    document.body.r > cart.r ? cart.classList.add('hide') : null;
+    // console.log(e?.status)
+    document.body.r > cart.r && e?.status != "anons" ? cart.classList.add('hide') : null;
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
@@ -1731,6 +1733,22 @@ function GetKodiScan(data, revers) {
                 }
 
                 const cart = add_cart(e1)
+                // cart.style.borderBottomStyle = "dashed"
+                cart.style.borderBottomStyle = "dotted"
+                switch (e1.status) {
+                    case "anons":
+                        cart.style.borderBottomColor = "#cc00cc"
+                        break;
+                    case "ongoing":
+                        // cart.style.borderBottomColor = "#00b5f8"
+                        break;
+                    case "released":
+                        cart.style.borderBottomColor = "#52af00"
+                        break;
+                
+                    default:
+                        break;
+                }
 
                 if (revers && prev_page == null) {
                     targetFrame.prepend(cart)

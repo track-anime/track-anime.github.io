@@ -716,13 +716,14 @@ span.sr-only {
 }
 
 .cart_:hover {
-    border-color: rgb(255, 255, 255);
+    border-color: rgb(255, 255, 255) !important;
 
     .cart-title,
     .cart-fav {
-        visibility: visible;
+    visibility: visible;
     }
-
+;
+    border-style: solid !important;
 }
 
 @media (max-width: 600px) {
