@@ -181,6 +181,7 @@ body {
 }
 
 .cart-fav {
+    display: none;
     border-style: solid;
     border-width: 0.3rem 0rem 0.3rem 0.3rem;
     border-color: #ffffff00;
