@@ -180,6 +180,7 @@ body {
     user-select: none;
 }
 
+
 .cart-fav {
     display: none;
     border-style: solid;
@@ -197,7 +198,6 @@ body {
     padding: 4px 0px 4px 8px;
     z-index: 2;
     cursor: pointer;
-
 }
 
 .cart-fav:hover {
