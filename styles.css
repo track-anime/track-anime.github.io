@@ -448,7 +448,7 @@ p {
     .cart-img-top {
 
         width: 100% !important;
-        height: 14rem !important;
+        height: 10rem !important;
         background-position: left;
         display: flex;
         background-size: contain !important;
@@ -505,7 +505,7 @@ p {
     }
 
     .cart-raiting div div span {
-        font-size: 1.4em !important;
+        font-size: 1em !important;
         overflow: inherit !important;
         text-align: left !important;
         width: 100% !important;
@@ -530,7 +530,7 @@ p {
     }
 
     .cart_n {
-        height: 14rem !important;
+        height: 10rem !important;
         width: 100% !important;
         display: flex !important;
         align-content: center;
