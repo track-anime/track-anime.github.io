@@ -422,7 +422,7 @@ p {
 
     .cart-time {
         margin: 0;
-        font-size: 0.7em !important;
+        font-size: 0.8em !important;
         position: relative;
         padding: 6px 0px 0px 0px !important;
         left: 180px;
@@ -461,7 +461,7 @@ p {
     .cart-voice {
         margin: 0;
         /* position: relative; */
-        font-size: 0.7em !important;
+        font-size: 0.8em !important;
         padding: 6px 0px 0px 0px !important;
         left: 180px;
         top: auto !important;
@@ -490,7 +490,7 @@ p {
     .cart-series {
         margin: 0;
         /* font-size: 15px; */
-        font-size: 0.7em !important;
+        font-size: 0.8em !important;
         padding: 6px 0px 0px 0px !important;
         position: relative !important;
         background: rgba(255, 0, 0, 0) !important;
@@ -505,7 +505,7 @@ p {
     }
 
     .cart-raiting div div span {
-        font-size: 1.5em !important;
+        font-size: 1.4em !important;
         overflow: inherit !important;
         text-align: left !important;
         width: 100% !important;
