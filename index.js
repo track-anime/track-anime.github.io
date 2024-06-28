@@ -36,6 +36,20 @@ var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camri
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+if(url_get.searchParams.get('qrcode')){
+    console.log(location.href)
+    // alert(url_get.searchParams.get('qrcode'))
+    // alert(url_get.searchParams.get('code'))
+    // if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
+    get_qr_code(`${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`)
+    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
+    url_get.searchParams.delete('qrcode')
+    url_get.searchParams.delete('code')
+    window.history.pushState({}, '', url_get);
+    qrcode_modal.show()
+}
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
 var base_anime = localStorage.getItem('BaseAnime')
@@ -110,21 +124,7 @@ VideoInfo.info = {
 }
 
 // list_serch.children[4].scrollIntoView({behavior: "smooth"}) чтоб перейти к нужному объекту на странице
-if(url_get.searchParams.get('qrcode')){
-    console.log(location.href)
-    // alert(url_get.searchParams.get('qrcode'))
-    // alert(url_get.searchParams.get('code'))
-    // if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
-    get_qr_code(`${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`)
-    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
-    url_get.searchParams.delete('qrcode')
-    url_get.searchParams.delete('code')
-    window.history.pushState({}, '', url_get);
-    qrcode_modal.show()
-    
 
-
-}
 
 document.addEventListener('DOMContentLoaded', function () {
 
