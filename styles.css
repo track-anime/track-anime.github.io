@@ -431,7 +431,7 @@ p {
     }
 
     .cart-cal::before {
-        content: ", ";
+        /* content: ", "; */
     }
 
     .cart-cal {
@@ -442,7 +442,7 @@ p {
         /* left: 180px; */
         background: rgba(255, 0, 0, 0) !important;
         text-align: left !important;
-        display: inline-block;
+        /* display: inline-block; */
     }
 
     .cart-img-top {
