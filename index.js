@@ -1314,7 +1314,7 @@ function add_cart(e) {
 
     cart.addEventListener("mouseover", (ev) => {
         if (sh_api.authorize) {
-            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori)[1]
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori)?.[1]
         } else {
             cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
         }
