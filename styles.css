@@ -557,20 +557,7 @@ p {
         background-color: #ff000000 !important;
         padding: 0px !important;
     }
-    .cart_n div:nth-child(1)
-    /* {
-        width: 100% !important;
-        height: 50% !important;
-    } */
-    .cart_n div div .br{
-        display: none !important;
-    }
-    /* .cart_n div:nth-child(2)
-    {
-        width: 100% !important;
-        height: 50% !important;
-    }
-     */
+
 }
 
 @media screen and (min-height: 900px) {
