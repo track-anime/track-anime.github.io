@@ -41,9 +41,14 @@ var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&
 if(url_get.searchParams.get('qrcode')){
     // alert("1")
     var url_get = new URL(window.location.href)
+    var qrcode_link = document.getElementById("qrcode_link")
+    var link = `${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`
     // console.log(222, location.href)
-    get_qr_code(`${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`)
+    get_qr_code(link)
+    // qrcode_link.href = link
+    // qrcode_link.textContent = "Ссылка на авторизацию. Не отправляйте другим людям."
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
+
     url_get.searchParams.delete('qrcode')
     url_get.searchParams.delete('code')
     window.history.pushState({}, '', url_get);
