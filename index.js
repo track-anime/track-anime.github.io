@@ -113,8 +113,15 @@ VideoInfo.info = {
 if(url_get.searchParams.get('qrcode')){
     alert(url_get.searchParams.get('qrcode'))
     alert(url_get.searchParams.get('code'))
+    if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
+    get_qr_code(`${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`)
+    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
+    qrcode_modal.show()
+    
     url_get.searchParams.delete('qrcode')
     url_get.searchParams.delete('code')
+
+
 }
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -154,10 +161,8 @@ hide_date_cart()
 url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
 
 document.getElementById('User_login_QR_code').addEventListener('click', () => {
-    if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
-    get_qr_code(`${location.origin}${location.pathname}?token=${sh_api.getCookie("sh_refresh_token")};${sh_api.getCookie("sh_access_token")};${encodeURIComponent(sh_api.getCookie("sh_access_token_max_age"))}`)
-    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
-    qrcode_modal.show()
+    location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&response_type=code&redirect_uri=${window.location.origin}${window.location.pathname}?qrcode=true`
+
 })
 
 
