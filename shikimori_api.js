@@ -8,8 +8,8 @@ sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
 sh_api.search_another = new Event("search_another", { bubbles: true })
 sh_api.logout_ev = new Event("sh_api_logout", { bubbles: true })
-sh_api.search_ev = new CustomEvent("sh_api_search", {  bubbles: true })
-sh_api.get_anime_ev = new CustomEvent("sh_get_anime", {  bubbles: true })
+sh_api.search_ev = new CustomEvent("sh_api_search", { bubbles: true })
+sh_api.get_anime_ev = new CustomEvent("sh_get_anime", { bubbles: true })
 
 sh_api.code = sh_api.url_get.searchParams.get('code')
 sh_api.status_lable = [
@@ -63,12 +63,14 @@ sh_api.get_key = () => {
 }
 
 sh_api.add_token = () => {
-
+    sh_api.url_get = new URL(window.location.href)
     /*     if (sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_access_token")!="undefined") {
             return sh_api.getCookie("sh_access_token")
         } */
-
+    console.log(111, sh_api.url_get.searchParams.get('qrcode'))
+    if (sh_api.url_get.searchParams.get('qrcode')) return
     code = sh_api.url_get.searchParams.get('code')
+    console.log("ttttttttt", code)
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
         return "no_key"
         window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
@@ -94,7 +96,7 @@ sh_api.add_token = () => {
         .then(data => {
             console.log("get", data);
             document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
-            document.cookie = `sh_access_token_max_age=${(new Date(Date.now()+ data.expires_in*1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
+            document.cookie = `sh_access_token_max_age=${(new Date(Date.now() + data.expires_in * 1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
             document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; max-age=9999999999999999999;`
 
             sh_api.url_get.searchParams.delete("code")
@@ -201,7 +203,7 @@ sh_api.get_user = (user, isanother) => {
 }
 sh_api.get_fav_color = (id) => {  //Возвращает по id цвет избранного
     if (!sh_api?.authorize) return
-    if(!sh_api?.Favorits?.data) return
+    if (!sh_api?.Favorits?.data) return
     id_status = sh_api.Favorits?.data?.find(e => e.anime.id == id)?.status
 
     return [id_status ? sh_api.status_color[id_status][0] : "#ffffff", id_status ? sh_api.status_color[id_status][1] : "не добавлено"]
@@ -279,8 +281,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 
 
-sh_api.get_anime = (id) =>
-{
+sh_api.get_anime = (id) => {
     var url = `https://shikimori.one/api/animes/${id}`
     fetch(url)
         .then(response => {
@@ -312,8 +313,7 @@ sh_api.get_anime = (id) =>
         });
 }
 
-sh_api.search = (seartch) =>
-{
+sh_api.search = (seartch) => {
     var url = `https://shikimori.one/api/animes?with_material_data=true&limit=50&search=${seartch}`
 
     fetch(url)

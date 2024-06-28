@@ -39,11 +39,9 @@ var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
 
 if(url_get.searchParams.get('qrcode')){
+    // alert("1")
     var url_get = new URL(window.location.href)
-    console.log(123, location.href)
-    // alert(url_get.searchParams.get('qrcode'))
-    // alert(url_get.searchParams.get('code'))
-    // if(!sh_api.getCookie("sh_access_token_max_age")) return sh_api.logout();
+    // console.log(222, location.href)
     get_qr_code(`${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`)
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
     url_get.searchParams.delete('qrcode')
@@ -165,7 +163,6 @@ url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('
 
 document.getElementById('User_login_QR_code').addEventListener('click', () => {
     location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&response_type=code&redirect_uri=${window.location.origin}${window.location.pathname}?qrcode=true`
-
 })
 
 
