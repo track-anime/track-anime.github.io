@@ -422,7 +422,7 @@ p {
 
     .cart-time {
         margin: 0;
-        font-size: 1em !important;
+        font-size: 0.7em !important;
         position: relative;
         padding: 6px 0px 0px 0px !important;
         left: 180px;
@@ -461,8 +461,7 @@ p {
     .cart-voice {
         margin: 0;
         /* position: relative; */
-        font-size: 1em !important;
-
+        font-size: 0.7em !important;
         padding: 6px 0px 0px 0px !important;
         left: 180px;
         top: auto !important;
@@ -473,7 +472,7 @@ p {
     }
 
     .cart-title {
-        font-size: 1.5em !important;
+        font-size: 1em !important;
         margin: 0;
         width: calc(90% - 180px);
         padding: 6px 0px 0px 0px !important;
@@ -491,7 +490,7 @@ p {
     .cart-series {
         margin: 0;
         /* font-size: 15px; */
-        font-size: 1em !important;
+        font-size: 0.7em !important;
         padding: 6px 0px 0px 0px !important;
         position: relative !important;
         background: rgba(255, 0, 0, 0) !important;
