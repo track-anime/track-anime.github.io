@@ -36,6 +36,10 @@ body {
     align-items: center;
     pointer-events: none;
 } */
+
+#copy_discord{
+
+}
 .btn-discord{
     width: 10px !important;
     left: 0;
