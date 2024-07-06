@@ -355,42 +355,7 @@ function setVideoInfo(e) {
                     </div>
         </div>
     ` });
-    //channelId=UCOz4k6q0mDc8fReKXyC-KOQ&
-    /* fetch(`//youtube.googleapis.com/youtube/v3/search?part=snippet&relevanceLanguage=ru&q=${e.russian}${encodeURIComponent(" трейлер русская озвучка")}&key=AIzaSyAQS-Vh1GcuAYoKYy-1wOt0CSwTDEB39wQ`, {
-        headers: {
-            'Referer': location.href
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log("yt: ", data)
-            // console.log(VideoInfo.info.videos.innerHTML, html2)
-            html2 = VideoInfo.info.videos.innerHTML
-            var a1 = ""
-            if (!data?.items?.[0]?.id?.videoId) return
-            data.items?.forEach((el, it) => {
 
-                // console.log(it)
-                // console.log(el)
-                a1 = a1 + `
-                    <div class="carousel-item" data-interval="false">
-                        <iframe src="//youtube.com/embed/${el.id?.videoId}"
-                            class="d-block w-100" style="aspect-ratio: 16 / 9" alt="...">
-                        </iframe>
-                        <div class="carousel-caption vi_label">
-                                    <p>[${it + 1} / ${data.items?.length}] ${el.snippet.title}</p>
-                                </div>
-                    </div>
-                    `;
-
-            })
-
-            VideoInfo.info.videos.innerHTML = a1 + html2;
-            VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
-            // console.log(VideoInfo.info.videos.innerHTML, html2)
-        })
-        .catch(error => console.error(1, 'Error:', error));
- */
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
     e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
@@ -1513,24 +1478,31 @@ document.addEventListener("sh_get_anime", function (e) {
     setVideoInfo(e.anime)
 })
 function copy_discord(e) {
-
-    console.log("copy_discord", e)
+    var screen = ""
+    e.screenshots?.forEach((el,i) => {
+        console.log(i, el)
+        screen = screen+` [scr${i+1}](https://shikimori.one${el.original})`
+    })
+    screen = ""
+    console.log("copy_discord", e, screen)
     copyToClipboard(`
         [Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
         [Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
         # ${VideoInfo.info.title}
 
-        >>> **Серии:** ${VideoInfo.info.series.textContent}  
-        **Длительность:** ${VideoInfo.info.duration.textContent} ${VideoInfo.info.shikimori_votes.textContent}
-        **Студия:** ${VideoInfo.info.studios.textContent} 
-        **Год выхода:** ${VideoInfo.info.year.textContent}
-        **Жанры:** Экшен, Приключения, Комедия, Фэнтези, Сёнен  
-        **Статус:** ${VideoInfo.info.info_status.textContent}  
-        **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
-
-        **Рейтинг shikimori:** VideoInfo.info.shikimori_rating.textContent (2478 проголосовавших)
+        > **Серии:** ${VideoInfo.info.series.textContent}  
+        > **Длительность:** ${VideoInfo.info.duration.textContent} ${VideoInfo.info.shikimori_votes.textContent}
+        > **Студия:** ${VideoInfo.info.studios.textContent} 
+        > **Год выхода:** ${VideoInfo.info.year.textContent}
+        > **Жанры:** Экшен, Приключения, Комедия, Фэнтези, Сёнен  
+        > **Статус:** ${VideoInfo.info.info_status.textContent}  
+        > **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
+> 
+        > **Рейтинг shikimori:** VideoInfo.info.shikimori_rating.textContent (2478 проголосовавших)
 
         [Обложка](${VideoInfo.info.cover.src})
+        ${screen}
+        
     `)
     playSound("ok.mp3")
 }
