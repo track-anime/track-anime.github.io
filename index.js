@@ -475,6 +475,15 @@ document.getElementById('search_form').addEventListener('submit', function (e) {
 
     // GetKodi(encodeURI(e.target.value))
 })
+var timersearch
+document.getElementById('search_input').addEventListener('input', function (e) {
+    clearTimeout(timersearch)
+    timersearch = setTimeout(() => {
+        console.log(e.target.value)
+        GetKodi(encodeURI(e.target.value))
+    }, 500);
+
+})
 
 
 document.getElementById("VideoInfoBtn").addEventListener('click', () => {
