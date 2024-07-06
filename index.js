@@ -1398,7 +1398,7 @@ function playSound(soundFile, vol) {
     // console.log(audioElement.volume)
 }
 
-function showToast(e, fav) {
+function showToast(e, t) {
     // prompt("",JSON.stringify(e))
     playSound('meloboom.mp3', base_anime.Volume ? base_anime.Volume : 1.0);
     var toast0 = document.createElement('div');
@@ -1408,7 +1408,7 @@ function showToast(e, fav) {
     <div class="toast liveToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="user-select: none;">
     <div class="toast-header">
       <img src="${e.cover}" style="height: 75px;" class="imgs rounded me-2" alt="...">
-      <strong class="${encodeURIComponent(e.voice)} me-auto">${fav ? fav : e.voice}</strong>
+      <strong class="${encodeURIComponent(e.voice)} me-auto">${e.voice}</strong>
       <small class="text-muted">${e.date.string}</small>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
     </div>
@@ -1420,6 +1420,8 @@ function showToast(e, fav) {
 
 
     var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
+    console.log(typeof t)
+    if(typeof t == "number") setTimeout(() => toast0.remove(), t*1000);
 
     toast0.addEventListener('hidden.bs.toast', function (e) {
         toast0.remove()
@@ -1499,7 +1501,15 @@ function copy_discord(e) {
         ${screen}
         
     `)
-    playSound("ok.mp3")
+    // playSound("ok.mp3")
+    showToast({
+        cover: "discord_logo.png",
+        title: "Описание скопировано в буфер обмена в формате discord",
+        date: {
+            string: "",
+        },
+        voice: "Описание скопировано",
+    }, 5)
 }
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
