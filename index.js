@@ -380,7 +380,6 @@ function setVideoInfo(e) {
         btn_sh_save.classList.add("hide")
         return
     }
-    console.log(123, e.id)
     btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.id)
 
     btn_sh_save.classList.remove("hide")
@@ -821,7 +820,6 @@ async function get_settings() {
             `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
             `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
         )
-        console.log(1, e)
         if (e.code == "404") {
             url_get.searchParams.delete("id")
             url_get.searchParams.delete("shikimori_id")
@@ -847,7 +845,6 @@ async function get_settings() {
             "e": e,
 
         }
-        console.log(3, ed)
         dialog_(ed, true)
     }
 }
@@ -1480,11 +1477,9 @@ document.addEventListener("sh_get_anime", function (e) {
 function copy_discord(e) {
     var screen = ""
     e.screenshots?.forEach((el,i) => {
-        console.log(i, el)
         screen = screen+` [scr${i+1}](https://shikimori.one${el.original})`
     })
     screen = ""
-    console.log("copy_discord", e, screen)
     copyToClipboard(`
         [Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
         [Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
@@ -1527,7 +1522,6 @@ function dialog_(e, info) {
         return
     }
     // console.log(e.shikimori, info)
-    console.log(2, e)
     sh_api.get_anime(e.shikimori)
     load.show(true)
     // setVideoInfo(e)
