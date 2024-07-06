@@ -1421,7 +1421,7 @@ function showToast(e, t) {
 
     var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
     console.log(typeof t)
-    if(typeof t == "number") setTimeout(() => toast0.remove(), t*1000);
+    if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);
 
     toast0.addEventListener('hidden.bs.toast', function (e) {
         toast0.remove()
@@ -1478,28 +1478,27 @@ document.addEventListener("sh_get_anime", function (e) {
 })
 function copy_discord(e) {
     var screen = ""
-    e.screenshots?.forEach((el,i) => {
-        screen = screen+` [scr${i+1}](https://shikimori.one${el.original})`
+    e.screenshots?.forEach((el, i) => {
+        screen = screen + ` [scr${i + 1}](https://shikimori.one${el.original})`
     })
     screen = ""
     copyToClipboard(`
-        [Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
-        [Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
-        # ${VideoInfo.info.title}
+[Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
+[Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
+#  [${e.kind.toUpperCase()}] ${e.russian} 
+[${VideoInfo.info.updated_at.textContent}]
 
-        > **Серии:** ${VideoInfo.info.series.textContent}  
-        > **Длительность:** ${VideoInfo.info.duration.textContent} ${VideoInfo.info.shikimori_votes.textContent}
-        > **Студия:** ${VideoInfo.info.studios.textContent} 
-        > **Год выхода:** ${VideoInfo.info.year.textContent}
-        > **Жанры:** Экшен, Приключения, Комедия, Фэнтези, Сёнен  
-        > **Статус:** ${VideoInfo.info.info_status.textContent}  
-        > **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
+> **Серии:** ${VideoInfo.info.series.textContent}  
+> **Длительность:** ${VideoInfo.info.duration.textContent} ${VideoInfo.info.shikimori_votes.textContent}
+> **Студия:** ${VideoInfo.info.studios.textContent} 
+> **Год выхода:** ${VideoInfo.info.year.textContent}
+> **Жанры:** Экшен, Приключения, Комедия, Фэнтези, Сёнен  
+> **Статус:** ${VideoInfo.info.info_status.textContent}  
+> **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
 > 
-        > **Рейтинг shikimori:** VideoInfo.info.shikimori_rating.textContent (2478 проголосовавших)
+> **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent} (2478 проголосовавших)
 
-        [Обложка](${VideoInfo.info.cover.src})
-        ${screen}
-        
+[Обложка](${VideoInfo.info.cover.src})
     `)
     // playSound("ok.mp3")
     showToast({
