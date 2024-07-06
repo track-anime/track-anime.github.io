@@ -465,6 +465,9 @@ function setVideoInfo(e) {
             btn_sh_save.classList.add("btn-outline-light")
             break;
     }
+    document.getElementById("btn_copy_discord").addEventListener('click', () => {
+        copy_discord(e)
+    })
 
 }
 
@@ -1509,6 +1512,35 @@ document.addEventListener("sh_get_anime", function (e) {
     }
     setVideoInfo(e.anime)
 })
+function copy_discord(e) {
+
+    console.log("copy_discord", e)
+    copyToClipboard(`
+        [Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
+        [Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
+        # ${VideoInfo.info.title}
+
+        >>> **Серии:** ${VideoInfo.info.series.textContent}  
+        **Длительность:** ${VideoInfo.info.duration.textContent} ${VideoInfo.info.shikimori_votes.textContent}
+        **Студия:** ${VideoInfo.info.studios.textContent} 
+        **Год выхода:** ${VideoInfo.info.year.textContent}
+        **Жанры:** Экшен, Приключения, Комедия, Фэнтези, Сёнен  
+        **Статус:** ${VideoInfo.info.info_status.textContent}  
+        **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
+
+        **Рейтинг shikimori:** VideoInfo.info.shikimori_rating.textContent (2478 проголосовавших)
+
+        [Обложка](${VideoInfo.info.cover.src})
+`)
+
+}
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        console.log('Текст успешно скопирован в буфер обмена', text);
+    }).catch(err => {
+        console.error('Не удалось скопировать текст: ', err);
+    });
+}
 
 function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
