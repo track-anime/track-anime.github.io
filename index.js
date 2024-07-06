@@ -1493,7 +1493,7 @@ function copy_discord(e) {
     screen = ""
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
-#  [${e?.kind?.toUpperCase()}] ${e.russian} 
+#  [${e.kind?e?.kind?.toUpperCase():"?"}] ${e.russian} 
 [${VideoInfo.info.updated_at.textContent}]
 
 > **Серии:** ${VideoInfo.info.series.textContent}  
