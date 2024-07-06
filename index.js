@@ -1400,7 +1400,7 @@ function playSound(soundFile, vol) {
 
 function showToast(e, t) {
     // prompt("",JSON.stringify(e))
-    playSound('meloboom.mp3', base_anime.Volume ? base_anime.Volume : 1.0);
+    playSound('meloboom.mp3');
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
 
