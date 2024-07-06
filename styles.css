@@ -38,12 +38,15 @@ body {
 } */
 
 #copy_discord{
-
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-around;
 }
 .btn-discord{
-    width: 10px !important;
-    left: 0;
-    right: auto;
+    width: 38px;
+    height: 38px;
     background-image: url(discord_logo.png);
     background-size: contain;
     background-repeat: no-repeat;
