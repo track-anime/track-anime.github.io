@@ -1483,8 +1483,6 @@ function copy_discord(e) {
     })
     screen = ""
     copyToClipboard(`
-[Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
-[Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
 #  [${e.kind.toUpperCase()}] ${e.russian} 
 [${VideoInfo.info.updated_at.textContent}]
 
@@ -1497,6 +1495,9 @@ function copy_discord(e) {
 > **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
 > 
 > **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent} (2478 проголосовавших)
+
+[Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
+[Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
 
 [Обложка](${VideoInfo.info.cover.src})
     `)
