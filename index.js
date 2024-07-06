@@ -1492,6 +1492,7 @@ function copy_discord(e) {
     })
     screen = ""
     copyToClipboard(`
+__                                                                                                                                                                                          __
 #  [${e.kind.toUpperCase()}] ${e.russian} 
 [${VideoInfo.info.updated_at.textContent}]
 
