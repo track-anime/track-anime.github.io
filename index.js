@@ -529,7 +529,7 @@ document.addEventListener("search_another", function (e) {
     SetColorCartFav()
     if (url_get.searchParams.get('shikimori_id') || FavCheckSave == true) {
         FavCheckSave = false
-        playSound("ok.mp3", base_anime.Volume ? base_anime.Volume : 1.0)
+        playSound("ok.mp3")
         return
     }
     getChapter("#list_fav")
@@ -1431,7 +1431,7 @@ function formatDate(isoDateString) {
 function playSound(soundFile, vol) {
     var audioElement = new Audio(soundFile);
     audioElement.preload = 'auto';
-    audioElement.volume = vol ? vol : 1.0;
+    audioElement.volume = vol ? vol : (base_anime.Volume ? base_anime.Volume : 1.0);
     audioElement.play();
     // console.log(audioElement.volume)
 }
@@ -1531,8 +1531,8 @@ function copy_discord(e) {
         **Рейтинг shikimori:** VideoInfo.info.shikimori_rating.textContent (2478 проголосовавших)
 
         [Обложка](${VideoInfo.info.cover.src})
-`)
-
+    `)
+    playSound("ok.mp3")
 }
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
