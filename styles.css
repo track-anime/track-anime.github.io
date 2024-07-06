@@ -36,6 +36,11 @@ body {
     align-items: center;
     pointer-events: none;
 } */
+.btn-discord{
+    width: 10px !important;
+    left: 0;
+    right: auto;
+}
 #qrcode_main {
     flex-direction: column;
 }
@@ -835,21 +840,16 @@ span.sr-only {
     border-color: rgba(0, 0, 0, 0);
     /* border-color: rgb(255, 255, 255); */
     overflow: hidden;
-    border-radius: 15px;
+    border-radius: 5px;
     border-style: solid;
     border-width: 0.3rem;
     margin: 5px;
-
     scale: 1;
-
     /* scale: 0;
     transition: scale 0.5s ease; */
-
     user-select: none;
-
     /* opacity: 0%;
     transition: opacity 2s ease; */
-
 }
 
 .cart_n {
@@ -871,7 +871,7 @@ span.sr-only {
     border-color: #212529;
     border-style: solid;
     border-width: 0.3rem;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 
 .cart_spawn {
