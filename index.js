@@ -430,9 +430,9 @@ function setVideoInfo(e) {
             btn_sh_save.classList.add("btn-outline-light")
             break;
     }
-    document.getElementById("btn_copy_discord").addEventListener('click', () => {
-        copy_discord()
-    })
+    // document.getElementById("btn_copy_discord").addEventListener('click', () => {
+    //     copy_discord()
+    // })
 
 }
 
