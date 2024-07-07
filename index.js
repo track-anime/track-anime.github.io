@@ -1,6 +1,7 @@
 var data, dat, targetFrame, endid, endid2, prev_page, SH_UserData, SH_Favorite, cart_data, backgrounds
 var ld = false, SH_isAvtorize = false;
 var AnimeScanID = {}
+var AnimeInfo = {}
 const scrollM = 2000;
 var ignoreVoice = false
 window.moment.locale('ru')
@@ -430,7 +431,7 @@ function setVideoInfo(e) {
             break;
     }
     document.getElementById("btn_copy_discord").addEventListener('click', () => {
-        copy_discord(e)
+        copy_discord()
     })
 
 }
@@ -1446,6 +1447,7 @@ function showToast(e, t) {
 }
 document.addEventListener("sh_get_anime", function (e) {
     console.log("sh_get_anime", e.anime)
+    AnimeInfo = e.anime
     // console.log(`https://shikimori.one${e.anime.image.original}`)
     const e1 = {
         "title": e.anime.anime_title,
@@ -1485,15 +1487,16 @@ document.addEventListener("sh_get_anime", function (e) {
     }
     setVideoInfo(e.anime)
 })
-function copy_discord(e) {
+function copy_discord() {
     var screen = ""
-    e.screenshots?.forEach((el, i) => {
+    AnimeInfo.screenshots?.forEach((el, i) => {
         screen = screen + ` [scr${i + 1}](https://shikimori.one${el.original})`
     })
     screen = ""
+    
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
-#  [${e.kind?e?.kind?.toUpperCase():"?"}] ${e.russian} 
+#  [${AnimeInfo.kind?AnimeInfo?.kind?.toUpperCase():"?"}] ${AnimeInfo.russian} 
 [${VideoInfo.info.updated_at.textContent}]
 
 > **Серии:** ${VideoInfo.info.series.textContent}  
@@ -1506,8 +1509,8 @@ function copy_discord(e) {
 > 
 > **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent} (2478 проголосовавших)
 
-[Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${e.id}>)
-[Открыть на shikimori](<https://shikimori.one/animes/${e.id}>)
+[Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}>)
+[Открыть на shikimori](<https://shikimori.one/animes/${AnimeInfo.id}>)
 
 [Обложка](${VideoInfo.info.cover.src})
     `)
@@ -1521,6 +1524,7 @@ function copy_discord(e) {
         voice: "Описание скопировано",
     }, 5)
 }
+
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
         console.log('Текст успешно скопирован в буфер обмена', text);
