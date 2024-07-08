@@ -1303,6 +1303,7 @@ function add_cart(e) {
     </div>
   </div>
     `
+    !e.raiting?cartRaiting.classList.add("hide"):null
     cartRaiting.r = e.raiting
     cartRaiting.title = `Рейтинг шикимори: ${e.raiting}`
     cartRaiting.label = cartRaiting.querySelector(".sr-only")
