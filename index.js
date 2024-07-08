@@ -433,8 +433,8 @@ function setVideoInfo(e) {
     // document.getElementById("btn_copy_discord").addEventListener('click', () => {
     //     copy_discord()
     // })
-    document.querySelector("#copy_discord div").classList.add("hide")
-    document.querySelector("#copy_discord div").innerHTML = VK.Share.button({
+    // document.querySelector("#copy_discord div").classList.add("hide")
+    /* document.querySelector("#copy_discord div").innerHTML = VK.Share.button({
         url: `https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}`,
         title: `[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} | Серии: ${VideoInfo.info.series.textContent}`,
         image: VideoInfo.info.cover.src,
@@ -443,11 +443,21 @@ function setVideoInfo(e) {
         {
             type: "custom",
             text: `<img src="https://vk.com/images/share_32_2x.png" width="32" height="32" alt="share icon" />`
-        });
+        }); */
 }
 
 function vk_share() {
-    document.querySelector("#copy_discord div a").click();
+
+    var url = new URL("https://vk.com/share.php")
+    url.searchParams.set("url", `https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}`)
+    url.searchParams.set("title", `[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} | Серии: ${VideoInfo.info.series.textContent}`)
+    url.searchParams.set("image", `${VideoInfo.info.cover.src}`)
+    url.searchParams.set("noparse", true)
+    url.searchParams.set("description", "test123")
+    console.log(url)
+    window.open(url, "shared", 'width=600,height=400')
+    return url
+    // document.querySelector("#copy_discord div a").click();
 }
 
 document.getElementById('User_Fav_sinc_button').addEventListener('mousedown', (e) => {
