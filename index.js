@@ -450,7 +450,7 @@ function vk_share() {
 
     var url = new URL("https://vk.com/share.php")
     url.searchParams.set("url", `https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}`)
-    url.searchParams.set("title", `[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} | Серии: ${VideoInfo.info.series.textContent}`)
+    url.searchParams.set("title", `Серии: ${VideoInfo.info.series.textContent}|[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian}`)
     url.searchParams.set("image", `${VideoInfo.info.cover.src}`)
     url.searchParams.set("noparse", true)
     url.searchParams.set("description", "test123")
