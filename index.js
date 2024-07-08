@@ -450,12 +450,12 @@ function vk_share() {
 
     var url = new URL("https://vk.com/share.php")
     url.searchParams.set("url", `https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}`)
-    url.searchParams.set("title", `Серии: ${VideoInfo.info.series.textContent}|[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian}`)
+    url.searchParams.set("title", `Серии: ${VideoInfo.info.series.textContent} | [${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian}`)
     url.searchParams.set("image", `${VideoInfo.info.cover.src}`)
     url.searchParams.set("noparse", true)
     url.searchParams.set("description", "test123")
     console.log(url)
-    window.open(url, "shared", 'width=600,height=400')
+    window.open(url, "shared")
     return url
     // document.querySelector("#copy_discord div a").click();
 }
