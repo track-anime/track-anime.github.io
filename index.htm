@@ -39,6 +39,7 @@
     <script defer src="/scripts/moment-with-locales.js"></script>
     <script defer src="/scripts/counterToStringLabel.js"></script>
     <script type="text/javascript" src="/scripts/qrcode.min.js"></script>
+    <script type="text/javascript" src="https://vk.com/js/api/share.js?168" charset="windows-1251"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
     <script src="/scripts/html5-qrcode.min.js"></script>
 
@@ -298,8 +299,20 @@
                                             class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded w-75">
                                         <!-- class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded min-w-350"> -->
                                         <div style="width: 100%;" class="btn-group mt-3">
-                                            <div id="copy_discord"><button type="button" id="btn_copy_discord"
-                                                    class="btn btn-primary btn-discord"
+                                            <div id="copy_discord">
+                                                <div></div>
+                                                <button 
+                                                    type="button" 
+                                                    id="btn_vk_share"
+                                                    class="btn btn-primary btn-vk-share"
+                                                    onclick="document.querySelector(`#copy_discord div a`).click()"
+                                                    title="Поделиться в VK"
+                                                    aria-expanded="false">
+                                                </button>
+                                                <button 
+                                                    type="button" 
+                                                    id="btn_copy_discord"
+                                                    class="btn btn-primary btn-discord" 
                                                     onclick="copy_discord()"
                                                     title="Скопировать в буфер для вставки в discord"
                                                     aria-expanded="false">

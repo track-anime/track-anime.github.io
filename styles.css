@@ -42,7 +42,7 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    justify-content: space-around;
+    justify-content: center;
 }
 .btn-discord{
     width: 38px;
@@ -50,7 +50,20 @@ body {
     background-image: url(discord_logo.png);
     background-size: contain;
     background-repeat: no-repeat;
+    margin-left: 4px;
+    margin-right: 4px;
 }
+
+.btn-vk-share{
+    width: 38px;
+    height: 38px;
+    background-image: url(vk_share.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+
 #qrcode_main {
     flex-direction: column;
 }
