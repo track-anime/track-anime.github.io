@@ -545,11 +545,8 @@ p {
     }
 
     .cart_ {
-
         width: 99% !important;
-
         margin: 1px !important;
-
         border-radius: 0px !important;
 
         /* height: ; */
@@ -866,7 +863,7 @@ span.sr-only {
     border-radius: 5px;
     border-style: solid;
     border-width: 0.3rem;
-    margin: 5px;
+    margin: 2px;
     scale: 1;
     /* scale: 0;
     transition: scale 0.5s ease; */
