@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
         window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
         GetKodi("", true)
-        if(sh_api.authorize==true) SetColorCartFav()
+        if(sh_api?.authorize==true) sh_api.get_user()
     }, 30 * 1000);  //Автопроверка 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -1196,7 +1196,6 @@ async function SetColorCartFav() {
         } else {
             e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
         }
-        // console.log(e?.data?.shikimori)
     });
 }
 
