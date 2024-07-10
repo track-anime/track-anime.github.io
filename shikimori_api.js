@@ -94,7 +94,7 @@ sh_api.add_token = () => {
         .then(data => {
             console.log("get", data);
             document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
-            document.cookie = `sh_access_token_max_age=${(new Date(Date.now() + data.expires_in * 1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
+            // document.cookie = `sh_access_token_max_age=${(new Date(Date.now() + data.expires_in * 1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
             document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; max-age=9999999999999999999;`
 
             sh_api.url_get.searchParams.delete("code")
@@ -113,7 +113,7 @@ sh_api.add_token = () => {
 }
 sh_api.logout = () => {
     document.cookie = `sh_access_token=""; path=/; max-age=-1;`
-    document.cookie = `sh_access_token_max_age=""; path=/; max-age=-1;`
+    // document.cookie = `sh_access_token_max_age=""; path=/; max-age=-1;`
     document.cookie = `sh_refresh_token=""; path=/; max-age=-1;`
     document.cookie = `_kawai_session=""; path=/; max-age=-1;`
     sh_api.authorize = false
@@ -121,6 +121,30 @@ sh_api.logout = () => {
     setTimeout(() => {
         location.reload()
     }, 1000);
+}
+sh_api.ClearCookie = () =>{
+    if (sh_api.getCookie("sh_refresh_token")=='undefined'){
+        document.cookie = `sh_refresh_token=""; path=/; max-age=-1;`
+        console.log("sh_api clear sh_refresh_token")
+        tmp_Clean_Cookie = true
+    }
+    
+    if (sh_api.getCookie("sh_access_token")=='undefined'){
+        document.cookie = `sh_access_token=""; path=/; max-age=-1;`
+        console.log("sh_api clear sh_access_token")
+        tmp_Clean_Cookie = true
+    }
+/*     if (sh_api.getCookie("sh_access_token_max_age")=='undefined'){
+        document.cookie = `sh_access_token_max_age=""; path=/; max-age=-1;`
+        console.log("sh_api clear sh_access_token_max_age")
+        tmp_Clean_Cookie = true
+    } */
+    if (sh_api.getCookie("_kawai_session")=='undefined'){
+        document.cookie = `_kawai_session=""; path=/; max-age=-1;`
+        console.log("sh_api clear _kawai_session")
+        tmp_Clean_Cookie = true
+    }
+    if(tmp_Clean_Cookie==true) navigator.reload()
 }
 
 sh_api.refresh_token = () => {

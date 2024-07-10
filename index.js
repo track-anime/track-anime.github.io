@@ -71,18 +71,21 @@ base_anime.fav = base_anime.fav ? base_anime.fav : []
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+if(location.hostname=="127.0.0.1"){
+    
+}
+
 
 // window?.Notification?.requestPermission()
 sh_api.get_user()
 // sh_api.get_key()
+let tmp_Clean_Cookie = false
 if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) {
     base_anime.authorize = false;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    sh_api.get_key()
+    console.log("clear sh_refresh_token")
+    tmp_Clean_Cookie = true
 }
-setTimeout(() => {
-}, 1500);
-
 
 const voice = [
     "AniStar",
@@ -174,12 +177,11 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 
 
 function add_token_connect(token) {
-    // if(sh_api.authorize) sh_api.logout();
 
     console.log(token.split(";"))
     document.cookie = `sh_refresh_token=${token.split(";")[0]}; path=/;`
     document.cookie = `sh_access_token=${token.split(";")[1]}; path=/; max-age=${token.split(";")[2]}`
-    document.cookie = `sh_access_token_max_age=${token.split(";")[2]}; path=/; max-age=${token.split(";")[2]};`
+    // document.cookie = `sh_access_token_max_age=${token.split(";")[2]}; path=/; max-age=${token.split(";")[2]};`
     document.cookie = `_kawai_session=""; path=/; max-age=-1;`
 
     url_get.searchParams.delete("token")
@@ -430,20 +432,6 @@ function setVideoInfo(e) {
             btn_sh_save.classList.add("btn-outline-light")
             break;
     }
-    // document.getElementById("btn_copy_discord").addEventListener('click', () => {
-    //     copy_discord()
-    // })
-    // document.querySelector("#copy_discord div").classList.add("hide")
-    /* document.querySelector("#copy_discord div").innerHTML = VK.Share.button({
-        url: `https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}`,
-        title: `[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} | Серии: ${VideoInfo.info.series.textContent}`,
-        image: VideoInfo.info.cover.src,
-        noparse: true,
-    },
-        {
-            type: "custom",
-            text: `<img src="https://vk.com/images/share_32_2x.png" width="32" height="32" alt="share icon" />`
-        }); */
 }
 
 function vk_share() {
@@ -601,6 +589,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
 
 function GetFavoriteList(type) {
+    console.log("test")
     var sh_f = type == "search_another" ? sh_api.another : sh_api
 
     // if (type == "search_another") sh_f = sh_api.another
@@ -1303,7 +1292,7 @@ function add_cart(e) {
     </div>
   </div>
     `
-    !e.raiting?cartRaiting.classList.add("hide"):null
+    !e.raiting ? cartRaiting.classList.add("hide") : null
     cartRaiting.r = e.raiting
     cartRaiting.title = `Рейтинг шикимори: ${e.raiting}`
     cartRaiting.label = cartRaiting.querySelector(".sr-only")
