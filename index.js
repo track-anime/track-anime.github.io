@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!HistoryIsActivy || ld) return
         GetKodi("", true)
         // if(sh_api?.authorize==true) sh_api.get_user()
-        if(sh_api?.authorize==true) SetColorCartFav()
+        sh_api?.authorize==true ? sh_api.get_user() : SetColorCartFav()
     }, 30 * 1000);  //Автопроверка 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
