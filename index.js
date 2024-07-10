@@ -147,7 +147,8 @@ document.addEventListener('DOMContentLoaded', function () {
         window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
         GetKodi("", true)
-        if(sh_api?.authorize==true) sh_api.get_user()
+        // if(sh_api?.authorize==true) sh_api.get_user()
+        if(sh_api?.authorize==true) SetColorCartFav()
     }, 30 * 1000);  //Автопроверка 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
