@@ -1515,6 +1515,10 @@ function copy_discord() {
         screen = screen + ` [scr${i + 1}](https://shikimori.one${el.original})`
     })
     screen = ""
+    var genres = ""
+    AnimeInfo.genres.forEach(e => {
+        genres = `${genres} ${e.russian}`
+    });
 
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
@@ -1525,7 +1529,7 @@ function copy_discord() {
 > **Длительность:** ${VideoInfo.info.duration.textContent} ${VideoInfo.info.shikimori_votes.textContent}
 > **Студия:** ${VideoInfo.info.studios.textContent} 
 > **Год выхода:** ${VideoInfo.info.year.textContent}
-> **Жанры:** Экшен, Приключения, Комедия, Фэнтези, Сёнен  
+> **Жанры:** ${genres} 
 > **Статус:** ${VideoInfo.info.info_status.textContent}  
 > **Возрастной рейтинг:** ${VideoInfo.info.rating_mpaa.textContent}
 > 
