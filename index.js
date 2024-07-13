@@ -498,7 +498,10 @@ var timersearch
 document.getElementById('search_input').addEventListener('input', function (e) {
     clearTimeout(timersearch)
     timersearch = setTimeout(() => {
-        console.log(e.target.value)
+        if(e.target.value=="") {
+            url_get.searchParams.delete("seartch")
+            window.history.pushState({}, '', url_get);
+        }
         GetKodi(encodeURI(e.target.value))
     }, 500);
 
@@ -881,6 +884,7 @@ async function get_settings() {
 
 async function getHome(iss) {
     // location.reload()
+    
     HistoryIsActivy = true
     TypePage = 0
     getChapter("#list_serch")
