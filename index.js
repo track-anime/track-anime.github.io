@@ -600,7 +600,6 @@ document.addEventListener("authorize", function (e) { // (1)
 
 
 function GetFavoriteList(type) {
-    console.log("test")
     var sh_f = type == "search_another" ? sh_api.another : sh_api
 
     // if (type == "search_another") sh_f = sh_api.another

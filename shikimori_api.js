@@ -293,7 +293,6 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
         .then(response => response.json())
         .then(data => {
             console.log("AddUserRates", data)
-            console.log(url_get.searchParams.get('sh_user_fav'))
             sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'), true)
         })
         .catch(error => console.error(error));
