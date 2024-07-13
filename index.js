@@ -344,6 +344,7 @@ function setVideoInfo(e) {
         VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
         // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
     })
+    VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
     html = ""
     html2 = ""
     e.screenshots?.forEach(el => {
@@ -1593,8 +1594,8 @@ function dialog_(e, info) {
     //     return
     // }
 
-    VideoPlayer.contentWindow.location.href = e.link
-
+    // VideoPlayer.contentWindow.location.href = e.link?e.link:"loading.htm"
+    console.log(e.link)
     info ? DialogVideoInfo.classList.add("DialogVideoInfoScroll") : DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
 
     ta_pip(false)
