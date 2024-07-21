@@ -73,9 +73,9 @@ base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
-if(location.hostname=="127.0.0.1"){
+if (location.hostname == "127.0.0.1") {
     document.getElementById("fav").href = "favicon_local.png"
-}else{
+} else {
     document.getElementById("fav").href = "favicon.png"
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -148,7 +148,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!HistoryIsActivy || ld) return
         GetKodi("", true)
         // if(sh_api?.authorize==true) sh_api.get_user()
-        sh_api?.authorize==true ? sh_api.get_user() : SetColorCartFav()
+        sh_api?.authorize == true ? sh_api.get_user() : SetColorCartFav()
     }, 30 * 1000);  //Автопроверка 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -499,7 +499,7 @@ var timersearch
 document.getElementById('search_input').addEventListener('input', function (e) {
     clearTimeout(timersearch)
     timersearch = setTimeout(() => {
-        if(e.target.value=="") {
+        if (e.target.value == "") {
             url_get.searchParams.delete("seartch")
             window.history.pushState({}, '', url_get);
         }
@@ -884,7 +884,7 @@ async function get_settings() {
 
 async function getHome(iss) {
     // location.reload()
-    
+
     HistoryIsActivy = true
     TypePage = 0
     getChapter("#list_serch")
@@ -904,6 +904,7 @@ async function getHome(iss) {
 }
 
 async function getCalendar() {
+    getCalendarSh()
     nav_panel_buttons.querySelectorAll('button').forEach((e) => {
         e.classList.remove("active")
     })
@@ -1170,17 +1171,67 @@ async function httpGet(theUrl) {
     return data
 }
 
-async function getcalendar() {
+async function getCalendarSh() {
+    const ned_shikimori = document.querySelector(".ned_shikimori")
+    // ned_shikimori.innerHTML = ""
+    ned_shikimori.classList.add("ned_shikimori")
     var response = await fetch("https://shikimori.one/api/calendar");
     const data = await response.json();
-    return data
+
+    data.forEach(e => {
+        // console.log(e)
+        
+        const e1 = {
+            "title": e.anime.russian,
+            "cover": `https://shikimori.one${e.anime.image.original}`,
+            // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
+            "date": formatDate(e.next_episode_at),
+            "voice": formatDate(e.next_episode_at).moment.format('dddd'),
+            "series": e.next_episode ? e.next_episode : "M",
+
+            "link": null,
+            "kp": null,
+            "imdb": null,
+            "shikimori": e.id,
+            "status": e.anime.status,
+            "raiting": e.anime.score,
+            "material_data": e.material_data,
+            "id": e.anime.id,
+            "screenshots": null,
+            "e": e,
+        }
+        ned_shikimori.appendChild(add_cart(e1))
+    });
+    console.log(data)
 }
-/* function httpGet(theUrl) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open("GET", theUrl, false); // false for synchronous request
-    xmlHttp.send(null);
-    return xmlHttp;
-} */
+/* const e1 = {
+     "title": e.material_data.anime_title,
+     "cover": `${e.material_data.poster_url}`,
+     // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
+     "date": formatDate(e.material_data.next_episode_at),
+     // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+     "voice": formatDate(e.material_data.next_episode_at).moment.format('dddd'),
+     "series": e.episodes_count ? e.episodes_count : "M",
+
+     "link": e.link,
+     "kp": e.kinopoisk_id,
+     "imdb": e.imdb_id,
+     "shikimori": e.shikimori_id,
+     "status": e.material_data.all_status,
+     "raiting": e.material_data.shikimori_rating,
+     "material_data": e.material_data,
+     "id": e.id,
+     "screenshots": e.screenshots,
+     "e": e,
+ }
+
+ const cart = add_cart(e1)
+ document.querySelector(".getcalendar")
+ */
+// ned_shikimori
+// return data
+
+
 
 
 RangeRaitingObj = document.getElementById('RangeRaiting')
