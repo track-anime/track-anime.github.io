@@ -26,8 +26,6 @@ const list_history = document.getElementById("list_history");
 const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
 
-
-
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 
 
@@ -80,6 +78,7 @@ if (location.hostname == "127.0.0.1") {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
 
@@ -87,6 +86,7 @@ setInterval(() => {
         url_get.searchParams.delete('sh_user_fav')
         window.history.pushState({}, '', url_get);
     }; 
+    console.log(document.getElementById("list_calendar").classList.contains('hide'))
     if(document.getElementById("list_calendar").classList.contains('hide')){
         url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
@@ -175,7 +175,6 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-url_get.searchParams.get('calendar')?getCalendar():null   // Открываем календарь, если есть гет параметр
 URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
 
 
@@ -896,6 +895,7 @@ async function get_settings() {
 // url_get.searchParams.delete("seartch")
 
 async function getHome(iss) {
+    console.log("home")
     // location.reload()
 
     HistoryIsActivy = true
@@ -1834,8 +1834,13 @@ async function GetKodi(seartch, revers) {
 }
 // }
 
-url_get.searchParams.get('sh_user_fav') ? GetFavUsersList(url_get.searchParams.get('sh_user_fav')) : GetKodi(url_get.searchParams.get('seartch'))
-
+if(url_get.searchParams.get('calendar')){  // Открываем календарь, если есть гет параметр
+    getCalendar()
+    HistoryIsActivy = false
+}   else{
+    url_get.searchParams.get('sh_user_fav') ? GetFavUsersList(url_get.searchParams.get('sh_user_fav')) : GetKodi(url_get.searchParams.get('seartch'))
+    
+}
 
 
 
