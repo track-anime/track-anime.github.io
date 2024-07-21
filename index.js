@@ -82,15 +82,15 @@ if (location.hostname == "127.0.0.1") {
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
 
-    if(document.getElementById("list_fav").classList.contains('hide')){
+    if (document.getElementById("list_fav").classList.contains('hide')) {
         url_get.searchParams.delete('sh_user_fav')
         window.history.pushState({}, '', url_get);
-    }; 
+    };
     console.log(document.getElementById("list_calendar").classList.contains('hide'))
-    if(document.getElementById("list_calendar").classList.contains('hide')){
+    if (document.getElementById("list_calendar").classList.contains('hide')) {
         url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
-    }; 
+    };
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // window?.Notification?.requestPermission()
@@ -987,7 +987,7 @@ async function addCalendar() {
     var ned_num = formatDate().moment.day() > 0 ? formatDate().moment.day() - 1 : 6
     list_calendar.getElementsByClassName('ned_spoiler')[ned_num].open = true
     list_calendar.getElementsByClassName('ned_name')[ned_num].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
-    document.getElementById("load").classList.add("hide") 
+    document.getElementById("load").classList.add("hide")
 }
 
 
@@ -1197,7 +1197,7 @@ async function getCalendarSh() {
 
     data.forEach(e => {
         // console.log(e.anime.russian, e)
-        
+
         const e1 = {
             "title": e.anime.russian,
             "cover": `https://shikimori.one${e.anime.image.original}`,
@@ -1834,13 +1834,16 @@ async function GetKodi(seartch, revers) {
 }
 // }
 
-if(url_get.searchParams.get('calendar')){  // Открываем календарь, если есть гет параметр
+if (url_get.searchParams.get('calendar')) {  // Открываем календарь, если есть гет параметр
     getCalendar()
     HistoryIsActivy = false
-}   else{
-    url_get.searchParams.get('sh_user_fav') ? GetFavUsersList(url_get.searchParams.get('sh_user_fav')) : GetKodi(url_get.searchParams.get('seartch'))
-    
+} else if (url_get.searchParams.get('sh_user_fav')) {
+    GetFavUsersList(url_get.searchParams.get('sh_user_fav'))
+
+} else {
+    GetKodi(url_get.searchParams.get('seartch'))
 }
+
 
 
 
