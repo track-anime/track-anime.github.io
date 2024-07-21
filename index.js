@@ -1169,6 +1169,12 @@ async function httpGet(theUrl) {
     const data = await response.json();
     return data
 }
+
+async function getcalendar() {
+    var response = await fetch("https://shikimori.one/api/calendar");
+    const data = await response.json();
+    return data
+}
 /* function httpGet(theUrl) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.open("GET", theUrl, false); // false for synchronous request
