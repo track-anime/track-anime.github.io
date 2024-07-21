@@ -80,7 +80,19 @@ if (location.hostname == "127.0.0.1") {
 }
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
+setInterval(() => {
 
+    if(document.getElementById("list_fav").classList.contains('hide')){
+        url_get.searchParams.delete('sh_user_fav')
+        window.history.pushState({}, '', url_get);
+    }; 
+    if(document.getElementById("list_calendar").classList.contains('hide')){
+        url_get.searchParams.delete('calendar')
+        window.history.pushState({}, '', url_get);
+    }; 
+}, 1000);
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // window?.Notification?.requestPermission()
 sh_api.get_user()
 // sh_api.get_key()
@@ -163,6 +175,7 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+url_get.searchParams.get('calendar')?getCalendar():null   // Открываем календарь, если есть гет параметр
 URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
 
 
@@ -904,6 +917,8 @@ async function getHome(iss) {
 }
 
 async function getCalendar() {
+    url_get.searchParams.set('calendar', true)
+    window.history.pushState({}, '', url_get);
     nav_panel_buttons.querySelectorAll('button').forEach((e) => {
         e.classList.remove("active")
     })
@@ -1170,6 +1185,8 @@ async function httpGet(theUrl) {
     const data = await response.json();
     return data
 }
+
+
 
 async function getCalendarSh() {
     const ned_shikimori = document.querySelector(".ned_shikimori")
