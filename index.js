@@ -904,7 +904,6 @@ async function getHome(iss) {
 }
 
 async function getCalendar() {
-    getCalendarSh()
     nav_panel_buttons.querySelectorAll('button').forEach((e) => {
         e.classList.remove("active")
     })
@@ -921,6 +920,7 @@ async function getCalendar() {
 }
 
 async function addCalendar() {
+    getCalendarSh()
     document.getElementById('search_input').value = ""
     getChapter("#list_calendar")
 
@@ -972,7 +972,7 @@ async function addCalendar() {
     var ned_num = formatDate().moment.day() > 0 ? formatDate().moment.day() - 1 : 6
     list_calendar.getElementsByClassName('ned_spoiler')[ned_num].open = true
     list_calendar.getElementsByClassName('ned_name')[ned_num].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
-    document.getElementById("load").classList.add("hide")
+    document.getElementById("load").classList.add("hide") 
 }
 
 
@@ -1173,13 +1173,13 @@ async function httpGet(theUrl) {
 
 async function getCalendarSh() {
     const ned_shikimori = document.querySelector(".ned_shikimori")
-    // ned_shikimori.innerHTML = ""
+    ned_shikimori.innerHTML = ""
     ned_shikimori.classList.add("ned_shikimori")
     var response = await fetch("https://shikimori.one/api/calendar");
     const data = await response.json();
 
     data.forEach(e => {
-        // console.log(e)
+        // console.log(e.anime.russian, e)
         
         const e1 = {
             "title": e.anime.russian,
@@ -1192,17 +1192,17 @@ async function getCalendarSh() {
             "link": null,
             "kp": null,
             "imdb": null,
-            "shikimori": e.id,
+            "shikimori": e.anime.id,
             "status": e.anime.status,
             "raiting": e.anime.score,
             "material_data": e.material_data,
             "id": e.anime.id,
-            "screenshots": null,
+            "screenshots": [],
             "e": e,
         }
         ned_shikimori.appendChild(add_cart(e1))
     });
-    console.log(data)
+    // console.log(data)
 }
 /* const e1 = {
      "title": e.material_data.anime_title,

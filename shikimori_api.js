@@ -303,6 +303,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 
 sh_api.get_anime = (id) => {
+    // console.log(id)
     var url = `https://shikimori.one/api/animes/${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
