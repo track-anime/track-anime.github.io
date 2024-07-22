@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Пример с Bootstrap</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .preview {
+            position: absolute;
+            display: none;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            padding: 5px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="element" data-image="https://via.placeholder.com/150">
+            Наведи на меня
+        </div>
+        <div class="preview" id="image-preview"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const e1 = document.querySelector('.element');
+            const preview = document.getElementById('image-preview-window');
+
+            e1.addEventListener('mouseenter', function(e) {
+                const imageUrl = e1.getAttribute('data-image');
+                preview.innerHTML = `<img src="${imageUrl}" alt="Preview" style="max-width: 200px;">`;
+                preview.style.display = 'block';
+                preview.style.left = `${e.pageX + 10}px`;
+                preview.style.top = `${e.pageY + 10}px`;
+            });
+
+            e1.addEventListener('mousemove', function(e) {
+                preview.style.left = `${e.pageX + 10}px`;
+                preview.style.top = `${e.pageY + 10}px`;
+            });
+
+            e1.addEventListener('mouseleave', function() {
+                preview.style.display = 'none';
+            });
+        });
+    </script>
+</body>
+</html>

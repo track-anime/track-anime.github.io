@@ -81,12 +81,10 @@ if (location.hostname == "127.0.0.1") {
 
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
-
     if (document.getElementById("list_fav").classList.contains('hide')) {
         url_get.searchParams.delete('sh_user_fav')
         window.history.pushState({}, '', url_get);
     };
-    console.log(document.getElementById("list_calendar").classList.contains('hide'))
     if (document.getElementById("list_calendar").classList.contains('hide')) {
         url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
@@ -125,6 +123,7 @@ VideoInfo.info = {
     "genres": VideoInfo.querySelector("#info_genres"),
     "series": VideoInfo.querySelector("#info_series"),
     "studios": VideoInfo.querySelector("#info_studios"),
+    "fandubbers": VideoInfo.querySelector("#info_fandubbers"),
     "updated_at": VideoInfo.querySelector("#info_updated_at"),
     "screenshots": VideoInfo.querySelector("#info_screenshots"),
     "videos": VideoInfo.querySelector("#info_videos"),
@@ -196,8 +195,6 @@ document.getElementById('User_login_QR_code').addEventListener('click', () => {
 
 
 function add_token_connect(token) {
-
-    console.log(token.split(";"))
     document.cookie = `sh_refresh_token=${token.split(";")[0]}; path=/;`
     document.cookie = `sh_access_token=${token.split(";")[1]}; path=/; max-age=${token.split(";")[2]}`
     // document.cookie = `sh_access_token_max_age=${token.split(";")[2]}; path=/; max-age=${token.split(";")[2]};`
@@ -258,12 +255,41 @@ document.querySelector("#pipDialogButton").addEventListener('click', () => {
 })
 
 
+function setIImgPreview() {
+    console.log("setIImgPreview")
+    var img_preview = document.querySelectorAll(".img-preview")
+    var preview = document.getElementById('image-preview-window');
+    // console.log(img_preview)
 
+    img_preview.forEach(e1 => {
+        if (!e1.classList.contains("ipa")) {
+            // console.log(e1.src)
+            e1.addEventListener('mouseenter', function (e) {
+                preview.innerHTML = `<img src="${e1.src}" alt="Preview" style="max-width: 200px;">`;
+                preview.style.display = 'block';
+                preview.style.left = `${e.pageX + 10}px`;
+                preview.style.top = `${e.pageY + 10}px`;
+            });
+
+            e1.addEventListener('mousemove', function (e) {
+                // preview.style.display = 'block !important';
+                preview.style.left = `${e.pageX + 10}px`;
+                preview.style.top = `${e.pageY + 10}px`;
+            });
+
+            e1.addEventListener('mouseleave', function () {
+                preview.style.display = 'none';
+            });
+            e1.classList.add("ipa")
+        }
+    });
+}
 
 function setVideoInfo(e) {
     // console.log(e)
     load.show(false)
     var html
+    var tmp45353 = ""
 
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
@@ -286,12 +312,33 @@ function setVideoInfo(e) {
 
     VideoInfo.info.description.innerHTML = e.description_html ? e.description_html : "?";
 
-    VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
-    VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.status ? e.status : "404.html"}` : "404.html";
+    // VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
+    // VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.status ? e.status : "404.html"}` : "404.html";
 
-    VideoInfo.info.studios.textContent = e.studios[0]?.filtered_name ? e.studios[0].filtered_name : "?";
-    VideoInfo.info.studios.href = e.studios[0]?.filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
+    tmp45353 = ""
 
+    e.studios.forEach(e1 => {
+        console.log(e1)
+        tmp45353 = tmp45353 != "" ? tmp45353 + ", " : tmp45353
+        tmp45353 = tmp45353 + `<a style="cursor: pointer;"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><img class="img-preview"style="height: 20px;" src="${e1.image ? `https://shikimori.one/${e1.image}` : ""}"> ${e1.name}</a>`
+    });
+
+    VideoInfo.info.studios.innerHTML = `<p class="card-text">Студии: ${tmp45353}</p>`
+
+    // console.log("studios",VideoInfo.e.studios.length)
+
+    // VideoInfo.info.studios.textContent = e.studios[0]?.filtered_name ? e.studios[0].filtered_name : "?";
+    // VideoInfo.info.studios.href = e.studios[0]?.filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
+
+    tmp45353 = ""
+
+    e.fandubbers.forEach(e1 => {
+        tmp45353 = tmp45353 != "" ? tmp45353 + ", " : tmp45353
+        tmp45353 = tmp45353 + `<a style="cursor: pointer;"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">${e1}</a>`
+
+    });
+
+    VideoInfo.info.fandubbers.innerHTML = `<p class="card-text">Дабберы: ${tmp45353}</p>`
     VideoInfo.info.year.textContent = e.aired_on ? e.aired_on.split("-")[0] : "?";
     VideoInfo.info.year.href = e.year ? `${window.location.origin + window.location.pathname}?year=${e.year ? e.year : "404.html"}` : "404.html";
 
@@ -363,7 +410,7 @@ function setVideoInfo(e) {
         html = html + `
         <div class="carousel-item w-100">
         <img src="https://shikimori.one${el.original}"
-            class="d-block w-100"  alt="...">
+            class="d-block w-100 img-preview"  alt="...">
     </div>
     ` });
     e.videos?.forEach(el => {
@@ -397,61 +444,63 @@ function setVideoInfo(e) {
 
     var btn_sh_save = document.getElementById('btn_sh_save')
     btn_sh_save.ids = e.id ? e.id : null;
+
     if (sh_api.authorize) {
         sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'))
+        btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.id)
+
+        btn_sh_save.classList.remove("hide")
+        btn_sh_save.classList.remove("btn-outline-light")
+        btn_sh_save.classList.remove("btn-primary")
+        btn_sh_save.classList.remove("yellow")
+        btn_sh_save.classList.remove("yellow_bg")
+        btn_sh_save.classList.remove("btn-success")
+        btn_sh_save.classList.remove("btn-danger")
+        btn_sh_save.classList.remove("btn-warning")
+        btn_sh_save.classList.remove("pink")
+        btn_sh_save.classList.remove("pink-bg")
+        btn_sh_save.classList.remove("btn-info")
+
+        switch (btn_sh_save?.sh_fv?.status) {
+            case "watching":
+                btn_sh_save.textContent = "смотрю"
+                btn_sh_save.classList.add("yellow")
+                btn_sh_save.classList.add("yellow_bg")
+                btn_sh_save.classList.add("btn-primary")
+                break;
+            case "completed":
+                btn_sh_save.textContent = "просмотренно"
+                btn_sh_save.classList.add("btn-success")
+
+                break;
+            case "dropped":
+                btn_sh_save.textContent = "брошено"
+                btn_sh_save.classList.add("btn-danger")
+                break;
+            case "on_hold":
+                btn_sh_save.textContent = "отложено"
+                btn_sh_save.classList.add("btn-warning")
+                break;
+            case "planned":
+                btn_sh_save.textContent = "запланировано"
+                // btn_sh_save.classList.add("btn-secondary")
+                btn_sh_save.classList.add("pink")
+                btn_sh_save.classList.add("pink_bg")
+                break;
+            case "rewatching":
+                btn_sh_save.textContent = "пересматриваю"
+                btn_sh_save.classList.add("btn-info")
+                break;
+            default:
+                btn_sh_save.textContent = "Добавить"
+                btn_sh_save.classList.add("btn-outline-light")
+                break;
+        }
     } else {
         btn_sh_save.classList.add("hide")
-        return
     }
-    btn_sh_save.sh_fv = sh_api?.Favorits?.data?.find(item => item.anime.id == e.id)
 
-    btn_sh_save.classList.remove("hide")
-    btn_sh_save.classList.remove("btn-outline-light")
-    btn_sh_save.classList.remove("btn-primary")
-    btn_sh_save.classList.remove("yellow")
-    btn_sh_save.classList.remove("yellow_bg")
-    btn_sh_save.classList.remove("btn-success")
-    btn_sh_save.classList.remove("btn-danger")
-    btn_sh_save.classList.remove("btn-warning")
-    btn_sh_save.classList.remove("pink")
-    btn_sh_save.classList.remove("pink-bg")
-    btn_sh_save.classList.remove("btn-info")
-
-    switch (btn_sh_save?.sh_fv?.status) {
-        case "watching":
-            btn_sh_save.textContent = "смотрю"
-            btn_sh_save.classList.add("yellow")
-            btn_sh_save.classList.add("yellow_bg")
-            btn_sh_save.classList.add("btn-primary")
-            break;
-        case "completed":
-            btn_sh_save.textContent = "просмотренно"
-            btn_sh_save.classList.add("btn-success")
-
-            break;
-        case "dropped":
-            btn_sh_save.textContent = "брошено"
-            btn_sh_save.classList.add("btn-danger")
-            break;
-        case "on_hold":
-            btn_sh_save.textContent = "отложено"
-            btn_sh_save.classList.add("btn-warning")
-            break;
-        case "planned":
-            btn_sh_save.textContent = "запланировано"
-            // btn_sh_save.classList.add("btn-secondary")
-            btn_sh_save.classList.add("pink")
-            btn_sh_save.classList.add("pink_bg")
-            break;
-        case "rewatching":
-            btn_sh_save.textContent = "пересматриваю"
-            btn_sh_save.classList.add("btn-info")
-            break;
-        default:
-            btn_sh_save.textContent = "Добавить"
-            btn_sh_save.classList.add("btn-outline-light")
-            break;
-    }
+    setIImgPreview()
 }
 
 function vk_share() {
@@ -1196,8 +1245,6 @@ async function getCalendarSh() {
     const data = await response.json();
 
     data.forEach(e => {
-        // console.log(e.anime.russian, e)
-
         const e1 = {
             "title": e.anime.russian,
             "cover": `https://shikimori.one${e.anime.image.original}`,

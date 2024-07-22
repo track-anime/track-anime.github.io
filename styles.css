@@ -186,6 +186,14 @@ body {
     border-radius: 0;
 }
 
+.img_preview {
+    position: absolute;
+    /* display: none; */
+    border: 1px solid #ccc;
+    background-color: #fff;
+    padding: 5px;
+    z-index: 999999999999999999;
+}
 
 .ned, .ned_shikimori {
     display: flex;
