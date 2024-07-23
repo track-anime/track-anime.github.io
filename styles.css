@@ -186,9 +186,10 @@ body {
     border-radius: 0;
 }
 
-.img_preview {
+#image-preview-window{
+    pointer-events: none;
     position: absolute;
-    /* display: none; */
+    display: none;
     border: 1px solid #ccc;
     background-color: #fff;
     padding: 5px;

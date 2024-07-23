@@ -89,6 +89,7 @@ setInterval(() => {
         url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
     };
+    setIImgPreview()
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // window?.Notification?.requestPermission()
@@ -256,27 +257,70 @@ document.querySelector("#pipDialogButton").addEventListener('click', () => {
 
 
 function setIImgPreview() {
-    console.log("setIImgPreview")
     var img_preview = document.querySelectorAll(".img-preview")
     var preview = document.getElementById('image-preview-window');
-    // console.log(img_preview)
+
 
     img_preview.forEach(e1 => {
         if (!e1.classList.contains("ipa")) {
-            // console.log(e1.src)
             e1.addEventListener('mouseenter', function (e) {
-                preview.innerHTML = `<img src="${e1.src}" alt="Preview" style="max-width: 200px;">`;
-                preview.style.display = 'block';
-                preview.style.left = `${e.pageX + 10}px`;
-                preview.style.top = `${e.pageY + 10}px`;
+                preview.src = e1.img_pre ? e1.img_pre : e1.src
+                if (!e1.classList.contains("ipa-shift") || e.shiftKey) {
+                    // preview.innerHTML = `<img src="${e1.src}" alt="Preview" >`;
+                    preview.style.display = 'block';
+
+                } else {
+                    preview.style.display = 'none';
+                }
+                if (e1.getAttribute("img-preview-height")) {
+                    preview.style.maxHeight = "auto"
+                    preview.style.height = `${e1.getAttribute("img-preview-height")}`
+                } else {
+                    preview.style.maxHeight = "320px"
+                    preview.style.height = "auto"
+                }
+                if(e.clientX<window.screen.availWidth/2){
+                    preview.style.left = `${e.clientX + 10}px`;
+                }else{
+                    preview.style.left = `${e.clientX - preview.offsetWidth - 10}px`;
+                }
+
+                if(e.clientY<window.screen.availHeight/2){
+                    preview.style.top = `${e.clientY + 10}px`;
+                }else{
+                    preview.style.top = `${e.clientY - 10 - preview.offsetHeight}px`;
+                }               
             });
 
             e1.addEventListener('mousemove', function (e) {
-                // preview.style.display = 'block !important';
-                preview.style.left = `${e.pageX + 10}px`;
-                preview.style.top = `${e.pageY + 10}px`;
-            });
+                if(preview.offsetWidth<20) return
+                if (!e1.classList.contains("ipa-shift") || e.shiftKey) {
+                    preview.style.display = 'block';
+                } else {
+                    preview.style.display = 'none';
+                }
 
+                if (e1.getAttribute("img-preview-height")) {
+                    preview.style.maxHeight = "auto"
+                    preview.style.height = `${e1.getAttribute("img-preview-height")}`
+                } else {
+                    preview.style.maxHeight = "320px"
+                    preview.style.height = "auto"
+                }
+                
+                if(e.clientX<window.screen.availWidth/2){
+                    preview.style.left = `${e.clientX + 10}px`;
+                }else{
+                    preview.style.left = `${e.clientX - preview.offsetWidth - 10}px`;
+                }
+                if(e.clientY<window.screen.availHeight/2){
+                    preview.style.top = `${e.clientY + 10}px`;
+                }else{
+                    preview.style.top = `${e.clientY - 10 - preview.offsetHeight}px`;
+                } 
+
+                // console.log(e.clientY, preview.offsetWidth, window.screen.availWidth)
+            });
             e1.addEventListener('mouseleave', function () {
                 preview.style.display = 'none';
             });
@@ -410,7 +454,8 @@ function setVideoInfo(e) {
         html = html + `
         <div class="carousel-item w-100">
         <img src="https://shikimori.one${el.original}"
-            class="d-block w-100 img-preview"  alt="...">
+            class="d-block w-100 img-preview"  
+            alt="...">
     </div>
     ` });
     e.videos?.forEach(el => {
@@ -1356,6 +1401,10 @@ function add_cart(e) {
     imgTop.style.backgroundImage = `url(${e.cover}`;
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
+    imgTop.classList.add('img-preview');
+    imgTop.classList.add('ipa-shift');
+    imgTop.setAttribute("img-preview-height", "720px")
+    imgTop.img_pre = e.cover
     imgTop.alt = 'cover';
     cart.appendChild(imgTop);
 
