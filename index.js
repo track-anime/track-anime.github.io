@@ -1610,7 +1610,7 @@ function showToast(e, t) {
     toast0.innerHTML = `
     <div class="toast liveToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="user-select: none;">
     <div class="toast-header">
-      <img src="${e.cover}" style="height: 75px;" class="imgs rounded me-2 image_preview" alt="...">
+      <img src="${e.cover}" style="height: 75px;" class="imgs rounded me-2 img-preview" alt="...">
       <strong class="${encodeURIComponent(e.voice)} me-auto">${e.voice}</strong>
       <small class="text-muted">${e.date.string}</small>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
