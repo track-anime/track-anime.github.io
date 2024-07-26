@@ -112,6 +112,7 @@ const voice = [
     "JAM",
     "AniLibria.TV",
     "SHIZA Project",
+    "РуАниме / DEEP",
 ]
 
 VideoInfo.info = {
