@@ -195,7 +195,6 @@ CheckCalendarType.addEventListener('change', function () {
     // hide_date_cart(this.checked)
     base_anime.CalendarType = this.checked
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    console.log(typeof base_anime.CalendarType)
     if(url_get.searchParams.get("calendar")) addCalendar()
 })
 if(typeof base_anime.CalendarType=="boolean")
