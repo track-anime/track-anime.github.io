@@ -1107,7 +1107,7 @@ async function addCalendar() {
     });
     // formatDate().moment.isoWeekday()-1
 
-    list_calendar.querySelectorAll('ned_spoiler').forEach(e => {
+    list_calendar.querySelectorAll('.ned_spoiler').forEach(e => {
         e.open = true
     });
 
