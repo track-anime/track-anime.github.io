@@ -61,16 +61,16 @@ if (base_anime) {
     base_anime = JSON.parse(base_anime)
 } else {
     base_anime = {}
-    base_anime.CalendarType = true // Задаю календарь shikimori по умолчанию
-
-    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
+base_anime.CalendarType=base_anime.CalendarType?base_anime.CalendarType:base_anime.CalendarType = true // Задаю календарь shikimori по умолчанию
+
 if (base_anime.base) {
     delete base_anime.base;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
 base_anime.fav = base_anime.fav ? base_anime.fav : []
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
+localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
