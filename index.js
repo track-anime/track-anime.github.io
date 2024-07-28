@@ -25,6 +25,7 @@ const list_serch = document.getElementById("list_serch");
 const list_history = document.getElementById("list_history");
 const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
+const CheckCalendarType = document.getElementById("CheckCalendarType")
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 
@@ -60,6 +61,7 @@ if (base_anime) {
     base_anime = JSON.parse(base_anime)
 } else {
     base_anime = {}
+    base_anime.CalendarType = true // Задаю календарь shikimori по умолчанию
 }
 if (base_anime.base) {
     delete base_anime.base;
@@ -185,8 +187,20 @@ load.show = (bool) => bool ? load.classList.remove("hide") : load.classList.add(
 ChecDataCart.addEventListener('change', function () {
     hide_date_cart(this.checked)
 })
-
 hide_date_cart()
+
+CheckCalendarType.addEventListener('change', function () {
+    // hide_date_cart(this.checked)
+    base_anime.CalendarType = this.checked
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    console.log(typeof base_anime.CalendarType)
+    if(url_get.searchParams.get("calendar")) addCalendar()
+})
+if(typeof base_anime.CalendarType=="boolean")
+{
+    CheckCalendarType.checked = base_anime.CalendarType
+}
+
 
 url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
 
@@ -1030,13 +1044,18 @@ async function getCalendar() {
 }
 
 async function addCalendar() {
+    document.getElementById("load").classList.remove("hide")
     document.getElementById('search_input').value = ""
     getChapter("#list_calendar")
-    if (true == true) {
+    if (base_anime.CalendarType == true) {
         getCalendarSh()
         // document.getElementById("load").classList.add("hide")
         return
     }
+    document.querySelectorAll(".ned_spoiler.nd .ned").forEach(e => {
+        e.textContent = ""
+        e.parentElement.open = false
+    });
     var URLCalendarAdd = URLCalendar;
     var data = []
     var d1
