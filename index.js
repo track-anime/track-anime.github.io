@@ -62,6 +62,8 @@ if (base_anime) {
 } else {
     base_anime = {}
     base_anime.CalendarType = true // Задаю календарь shikimori по умолчанию
+    
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
 if (base_anime.base) {
     delete base_anime.base;
