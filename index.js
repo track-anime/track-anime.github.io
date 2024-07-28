@@ -280,21 +280,21 @@ function setIImgPreview() {
                     preview.style.maxHeight = "320px"
                     preview.style.height = "auto"
                 }
-                if(e.clientX<window.screen.availWidth/2){
+                if (e.clientX < window.screen.availWidth / 2) {
                     preview.style.left = `${e.clientX + 10}px`;
-                }else{
+                } else {
                     preview.style.left = `${e.clientX - preview.offsetWidth - 10}px`;
                 }
 
-                if(e.clientY<window.screen.availHeight/2){
+                if (e.clientY < window.screen.availHeight / 2) {
                     preview.style.top = `${e.clientY + 10}px`;
-                }else{
+                } else {
                     preview.style.top = `${e.clientY - 10 - preview.offsetHeight}px`;
-                }               
+                }
             });
 
             e1.addEventListener('mousemove', function (e) {
-                if(preview.offsetWidth<20) return
+                if (preview.offsetWidth < 20) return
                 if (!e1.classList.contains("ipa-shift") || e.shiftKey) {
                     preview.style.display = 'block';
                 } else {
@@ -308,17 +308,17 @@ function setIImgPreview() {
                     preview.style.maxHeight = "320px"
                     preview.style.height = "auto"
                 }
-                
-                if(e.clientX<window.screen.availWidth/2){
+
+                if (e.clientX < window.screen.availWidth / 2) {
                     preview.style.left = `${e.clientX + 10}px`;
-                }else{
+                } else {
                     preview.style.left = `${e.clientX - preview.offsetWidth - 10}px`;
                 }
-                if(e.clientY<window.screen.availHeight/2){
+                if (e.clientY < window.screen.availHeight / 2) {
                     preview.style.top = `${e.clientY + 10}px`;
-                }else{
+                } else {
                     preview.style.top = `${e.clientY - 10 - preview.offsetHeight}px`;
-                } 
+                }
 
                 // console.log(e.clientY, preview.offsetWidth, window.screen.availWidth)
             });
@@ -1030,10 +1030,13 @@ async function getCalendar() {
 }
 
 async function addCalendar() {
-    getCalendarSh()
     document.getElementById('search_input').value = ""
     getChapter("#list_calendar")
-
+    if (true == true) {
+        getCalendarSh()
+        // document.getElementById("load").classList.add("hide")
+        return
+    }
     var URLCalendarAdd = URLCalendar;
     var data = []
     var d1
@@ -1284,15 +1287,21 @@ async function httpGet(theUrl) {
 
 
 async function getCalendarSh() {
-    const ned_shikimori = document.querySelector(".ned_shikimori")
-    ned_shikimori.innerHTML = ""
-    ned_shikimori.classList.add("ned_shikimori")
+    document.getElementById("load").classList.remove("hide")
+    var tmp_ned = document.querySelectorAll(".ned_spoiler.nd .ned") 
+    tmp_ned.forEach(e => {
+        e.textContent = ""
+        e.parentElement.open = false
+    });
+    // const ned_shikimori = document.querySelector(".ned_shikimori")
+    // ned_shikimori.textContent = ""
+    // ned_shikimori.classList.add("ned_shikimori")
     var response = await fetch("https://shikimori.one/api/calendar");
     const data = await response.json();
 
     data.forEach(e => {
         const e1 = {
-            "title": e.anime.russian,
+            "title": `${e.anime.russian} ${formatDate(e.next_episode_at).moment.isoWeekday()}`,
             "cover": `https://shikimori.one${e.anime.image.original}`,
             // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
             "date": formatDate(e.next_episode_at),
@@ -1310,9 +1319,17 @@ async function getCalendarSh() {
             "screenshots": [],
             "e": e,
         }
-        ned_shikimori.appendChild(add_cart(e1))
+        
+        tmp_ned[formatDate(e.next_episode_at).moment.isoWeekday()-1].appendChild(add_cart(e1))
+        // ned_shikimori.appendChild(add_cart(e1))
     });
     // console.log(data)
+    // tmp_ned[formatDate().moment.isoWeekday()-1].parentElement.open = true
+    tmp_ned.forEach(e => {
+        e.parentElement.open = true
+    });
+    tmp_ned[formatDate().moment.isoWeekday()-1].parentElement.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
+    document.getElementById("load").classList.add("hide")
 }
 /* const e1 = {
      "title": e.material_data.anime_title,
