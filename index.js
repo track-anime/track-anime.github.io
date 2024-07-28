@@ -62,7 +62,7 @@ if (base_anime) {
 } else {
     base_anime = {}
     base_anime.CalendarType = true // Задаю календарь shikimori по умолчанию
-    
+
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
 if (base_anime.base) {
@@ -1058,6 +1058,7 @@ async function addCalendar() {
         e.textContent = ""
         e.parentElement.open = false
     });
+
     var URLCalendarAdd = URLCalendar;
     var data = []
     var d1
@@ -1100,12 +1101,18 @@ async function addCalendar() {
                 "e": e,
             }
             const cart = add_cart(e1)
-            formatDate(e.material_data.next_episode_at).moment.day() == 0 ? d3[6].appendChild(cart) : d3[formatDate(e.material_data.next_episode_at).moment.day() - 1].appendChild(cart)
+            // formatDate(e.material_data.next_episode_at).moment.day() == 0 ? d3[6].appendChild(cart) : d3[formatDate(e.material_data.next_episode_at).moment.day() - 1].appendChild(cart)
+            d3[formatDate(e.material_data.next_episode_at).moment.isoWeekday()-1].appendChild(cart)
         }
     });
-    var ned_num = formatDate().moment.day() > 0 ? formatDate().moment.day() - 1 : 6
-    list_calendar.getElementsByClassName('ned_spoiler')[ned_num].open = true
-    list_calendar.getElementsByClassName('ned_name')[ned_num].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
+    // formatDate().moment.isoWeekday()-1
+
+    list_calendar.querySelectorAll('ned_spoiler').forEach(e => {
+        e.open = true
+    });
+
+    list_calendar.getElementsByClassName('ned_spoiler')[formatDate().moment.isoWeekday()-1].open = true
+    list_calendar.getElementsByClassName('ned_name')[formatDate().moment.isoWeekday()-1].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
     document.getElementById("load").classList.add("hide")
 }
 
