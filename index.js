@@ -96,7 +96,6 @@ setInterval(() => {
     setIImgPreview()
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// window?.Notification?.requestPermission()
 sh_api.get_user()
 // sh_api.get_key()
 let tmp_Clean_Cookie = false
@@ -1657,7 +1656,7 @@ function showToast(e, t) {
     toast0.innerHTML = `
     <div class="toast liveToast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-autohide="false" style="user-select: none;">
     <div class="toast-header">
-      <img src="${e.cover}" style="height: 75px;" class="imgs rounded me-2 img-preview" alt="...">
+      <img src="${e.cover}" style="height: 75px;" class="imgs rounded me-2" alt="...">
       <strong class="${encodeURIComponent(e.voice)} me-auto">${e.voice}</strong>
       <small class="text-muted">${e.date.string}</small>
       <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Закрыть"></button>
@@ -1667,8 +1666,8 @@ function showToast(e, t) {
     </div>
   </div>
     `;
-
-
+    if(e.cover !='discord_logo.png') toast0.querySelector("img").classList.add("img-preview")
+        
     var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
     console.log(typeof t)
     if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);
