@@ -62,7 +62,7 @@ if (base_anime) {
 } else {
     base_anime = {}
 }
-base_anime.CalendarType=base_anime.CalendarType!=undefined?base_anime.CalendarType:true // Задаю календарь shikimori по умолчанию
+base_anime.CalendarType=typeof base_anime.CalendarType=="undefined"?true:base_anime.CalendarType // Задаю календарь shikimori по умолчанию
 
 if (base_anime.base) {
     delete base_anime.base;
