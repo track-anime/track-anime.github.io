@@ -1329,7 +1329,7 @@ async function getCalendarSh() {
 
     data.forEach(e => {
         const e1 = {
-            "title": `${e.anime.russian} ${formatDate(e.next_episode_at).moment.isoWeekday()}`,
+            "title": `${e.anime.russian}`,
             "cover": `https://shikimori.one${e.anime.image.original}`,
             // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
             "date": formatDate(e.next_episode_at),
