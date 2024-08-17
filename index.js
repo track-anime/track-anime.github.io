@@ -50,8 +50,7 @@ if (url_get.searchParams.get('qrcode')) {
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
 
     url_get.searchParams.delete('qrcode')
-    url_get.searchParams.delete('code')
-    window.history.pushState({}, '', url_get);
+    
     qrcode_modal.show()
 }
 
@@ -662,6 +661,8 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
 })
 
 document.addEventListener("authorize", function (e) { // (1)
+    url_get.searchParams.delete('code')
+    window.history.pushState({}, '', url_get);
     SetColorCartFav()
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
