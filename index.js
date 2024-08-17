@@ -95,6 +95,17 @@ setInterval(() => {
     setIImgPreview()
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+check_ver() 
+async function check_ver() {
+    var response = await fetch('vers.info');
+    if(!response.status) return
+    var text =  await response.text()
+    console.log(text)
+    document.querySelector('.ver_info').title = `build: ${text}`
+
+}
+
 sh_api.get_user()
 // sh_api.get_key()
 let tmp_Clean_Cookie = false
