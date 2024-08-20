@@ -453,8 +453,17 @@ p {
 
 }
 
+@media screen and (orientation: landscape) {
+    #VideoPlayerAnime>div {
+        width: 80%;
+        max-width: 80%;
+        aspect-ratio: 16 / 9;
 
+        height: 80%;
+    }
+}
 @media screen and (orientation: portrait) {
+
     .anime_list {
         flex-direction: column;
 
@@ -756,6 +765,7 @@ screen and (max-width: 992px) {
 
 
 @media screen and (min-width: 992px) {
+
     #VideoPlayerAnime {
         /* transition:  right, bottom 1s ease; */
         /* transition: width, height 1s ease; */
@@ -768,13 +778,7 @@ screen and (max-width: 992px) {
         top: 0px;
     }
 
-    #VideoPlayerAnime>div {
-        width: 80%;
-        max-width: 80%;
-        aspect-ratio: 16 / 9;
 
-        height: 80%;
-    }
 
     #VideoPlayerAnime>div>div {
         width: 100%;
