@@ -2133,10 +2133,3 @@ function domReady(fn) {
         document.addEventListener("DOMContentLoaded", fn);
     }
 }
-
-
-
-
-
-
-

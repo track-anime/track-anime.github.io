@@ -1202,7 +1202,6 @@ function AddFavorite(t) {
             break;
     }
 }
-// document.getElementById("User_clear_fav_button").onclick = ClearFavorite
 
 function ClearFavorite() {
     // alert("restart")
@@ -2026,10 +2025,3 @@ function domReady(fn) {
         document.addEventListener("DOMContentLoaded", fn);
     }
 }
-
-
-
-
-
-
-
