@@ -63,10 +63,12 @@ if (base_anime) {
 }
 base_anime.CalendarType=typeof base_anime.CalendarType=="boolean"?base_anime.CalendarType:true // Задаю календарь shikimori по умолчанию
 
-if (base_anime.base) {
-    delete base_anime.base;
+if (base_anime.base) delete base_anime.base;
+if (base_anime.fav) delete base_anime.fav;
+    
+    
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-}
+
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
