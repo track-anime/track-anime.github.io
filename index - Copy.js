@@ -67,6 +67,7 @@ if (base_anime.base) {
     delete base_anime.base;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
+base_anime.fav = base_anime.fav ? base_anime.fav : []
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -685,7 +686,11 @@ document.addEventListener("authorize", function (e) { // (1)
     document.getElementById("User_Menu_Button").querySelector('span').textContent = sh_api.UserData.nickname
 
     const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
+    const difference = base_anime.fav.filter(element => !set2.has(element));
 
+    difference.length == 0 ? document.getElementById("User_cloud_sinc_button").classList.add("hide") : document.getElementById("User_cloud_sinc_button").classList.remove("hide")
+
+    if (difference.length != 0) console.log("Несохранённых данных:", difference.length, difference)
     GetFavoriteList("authorize")
     btn_sh_save?.classList.remove("hide")
 
@@ -735,6 +740,7 @@ function GetFavoriteList(type) {
     // if (type == "search_another") sh_f = sh_api.another
 
 
+    // document.getElementById("User_cloud_sinc_button")
     sh_f.status = sh_f.status ? sh_f.status : {
         name: {
 
@@ -775,6 +781,10 @@ function GetFavoriteList(type) {
     });
 
     sh_f.Favorits.data.forEach(e => {
+        if (e.status == "watching" && !base_anime.fav.includes(e.anime.id.toString()) && type == "authorize") {
+            base_anime.fav.push(e.anime.id.toString())
+            localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        }  //sh_f.Favorits.ids.push(e.anime.id)
 
         const e1 = {
             "title": e.anime.russian,
@@ -924,7 +934,21 @@ document.getElementById("list_login_Button").addEventListener('click', async () 
 document.getElementById("User_Logaut_button").addEventListener('click', async () => {
     sh_api.logout()
 });
-
+document.getElementById("User_cloud_sinc_button").addEventListener('click', async () => {
+    load.classList.remove("hide")
+    if (confirm(`Выгрузить все ваши лайки в "смотрю"?`)) {
+        base_anime.fav.forEach((e, i) => {
+            console.log(i, base_anime.fav.length)
+            if (!sh_api.Favorits.ids.includes(base_anime.fav)) {
+                setTimeout(() => {
+                    sh_api.AddUserRates(e.toString(), 0);
+                    console.log("Выгружено ", e, 500 * i);
+                }, 500 * i)
+            };
+            if (base_anime.fav.length == i + 1) setTimeout(() => load.classList.add("hide"), (500 * i) + 100)
+        });
+    }
+});
 
 /* VideoPlayerAnime.addEventListener("close", () => {
     document.title = "Track Anime By ДугДуг"
@@ -1106,7 +1130,7 @@ async function addCalendar() {
 
 
 async function add_push(e) {
-    if (sh_api?.authorize==false) return
+    if (!GetFavorite(e.shikimori)) return
     showToast(e);
     return
 
@@ -1157,8 +1181,10 @@ function AddFavorite(t) {
             e1.classList.add("btn-primary")
             e1.classList.add("yellow")
             e1.classList.add("yellow_bg")
+            SetFavorite(e1.ids)
             break;
         case 1:
+            DeleteFavorite(e1.ids)
             e1.textContent = "просмотренно"
             e1.classList.add("btn-success")
 
@@ -1166,6 +1192,7 @@ function AddFavorite(t) {
         case 2:
             e1.textContent = "брошено"
             e1.classList.add("btn-danger")
+            DeleteFavorite(e1.ids)
             setTimeout(() => {
                 sh_api.AddUserRates(Number(e1.ids), t)
             }, 500);
@@ -1173,6 +1200,7 @@ function AddFavorite(t) {
         case 3:
             e1.textContent = "отложено"
             e1.classList.add("btn-warning")
+            DeleteFavorite(e1.ids)
             setTimeout(() => {
                 sh_api.AddUserRates(Number(e1.ids), t)
             }, 500);
@@ -1182,6 +1210,7 @@ function AddFavorite(t) {
             // e1.classList.add("btn-secondary")
             e1.classList.add("pink")
             e1.classList.add("pink_bg")
+            DeleteFavorite(e1.ids)
             setTimeout(() => {
                 sh_api.AddUserRates(Number(e1.ids), t)
             }, 500);
@@ -1189,6 +1218,7 @@ function AddFavorite(t) {
         case 5:
             e1.textContent = "пересматриваю"
             e1.classList.add("btn-info")
+            DeleteFavorite(e1.ids)
             setTimeout(() => {
                 sh_api.AddUserRates(Number(e1.ids), t)
             }, 500);
@@ -1196,23 +1226,49 @@ function AddFavorite(t) {
         default:
             e1.textContent = "Добавить"
             e1.classList.add("btn-outline-light")
+            DeleteFavorite(e1.ids)
             setTimeout(() => {
                 sh_api.AddUserRates(Number(e1.ids), t)
             }, 500);
             break;
     }
 }
-// document.getElementById("User_clear_fav_button").onclick = ClearFavorite
+document.getElementById("User_clear_fav_button").onclick = ClearFavorite
 
 function ClearFavorite() {
     // alert("restart")
     if (!confirm("Очистить локальную базу данных?")) return
-    delete base_anime.fav
+    base_anime.fav = [];
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     location.reload()
 }
 
+function SetFavorite(e) {
+    console.log("SetFavorite", e)
+    FavCheckSave = true
+    base_anime.fav.push(e.toString())
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    sh_api.AddUserRates(Number(e), 0)
 
+    return base_anime.fav
+}
+
+function DeleteFavorite(e) {
+    FavCheckSave = true
+    console.log("DeleteFavorite", e)
+    base_anime.fav = base_anime.fav.filter(item => !item.includes(e.toString()));
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    sh_api.AddUserRates(Number(e), 1)
+    return base_anime.fav
+}
+
+function GetFavorite(e) {
+    let result = base_anime.fav.filter(item => item.toString().toLowerCase().includes(e.toString().toLowerCase()));
+    if (result.length > 0) {
+        return true
+    }
+    return false
+}
 function VoiceSettingsMenu() {
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
@@ -1365,6 +1421,9 @@ async function SetColorCartFav() {
         if (e?.data?.shikimori == undefined) return
         if (sh_api.authorize == true) {
             e.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === e?.data?.shikimori.toString())?.status]?.[0] : "none"
+            // e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
+        } else {
+            e.style.borderTopColor = GetFavorite(e?.data?.shikimori) ? "#ffdd00" : "none"
         }
     });
 }
@@ -1490,9 +1549,57 @@ function add_cart(e) {
     cartSeries.style.color = e.status == "released" ? "#a9ffb4" : "#ffffff"
     imgTop.appendChild(cartSeries);
 
+
+    const cartFavorite = document.createElement('div');
+    cartFavorite.classList.add('cart-fav');
+    // cartFavorite.textContent = "♥";
+    cartFavorite.innerHTML = `<svg style="fill: rgb(255 255 255); stroke: rgb(255, 255, 255); stroke-width: 1; width: 30px; height: 40px;" class="heart-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+  </svg>`
+    // cartFavorite.title = e.series;
+    cart.appendChild(cartFavorite);
+    // cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+    cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+    cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
+
+    cart.addEventListener("mouseover", (ev) => {
+        if (sh_api.authorize) {
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori)?.[1]
+        } else {
+            cartFavorite.querySelector('svg').style.fill = GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+        }
+        // cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+    });
+
+    cartFavorite.addEventListener("click", (ev) => {
+        console.log(ev)
+        ev.stopPropagation();
+        console.log(sh_api.get_fav_color(e.shikimori), GetFavorite(e.shikimori))
+        if (GetFavorite(e.shikimori) || sh_api?.get_fav_color(e.shikimori)?.[1] == "смотрю") {
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+            // cartFavorite.querySelector('svg').style.fill = "#ffffff"
+            DeleteFavorite(e.shikimori)
+            cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
+        } else {
+            cartFavorite.querySelector('svg').style.fill = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[0] : GetFavorite(e.shikimori) ? "#ffdd00" : "#ffffff"
+            // cartFavorite.querySelector('svg').style.fill = "#ffdd00"
+            SetFavorite(e.shikimori)
+            cartFavorite.title = sh_api.get_fav_color(e.shikimori) ? sh_api.get_fav_color(e.shikimori)[1] : GetFavorite(e.shikimori) ? "В избранном" : "не добавлено";
+        }
+
+
+    })
+    // setTimeout(() => cart.classList.add("cart_spawn"), 0)
+    //border-top-color: green;
+    // cart.style.borderTopColor = 
+    // console.log(e)
     var id = e.shikimori ? e.shikimori : e.id
+    // console.log(sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status)
+    // console.log(sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0])
     if (sh_api.authorize == true) {
         cart.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] : "none"
+    } else {
+        cart.style.borderTopColor = GetFavorite(id) ? "#ffdd00" : "none"
     }
     return cart
 }
