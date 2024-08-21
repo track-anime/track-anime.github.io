@@ -26,12 +26,14 @@ const list_history = document.getElementById("list_history");
 const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
+const CheckСensored = document.getElementById("CheckСensored")
+
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 
 
 
-const URLSearch = "https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&title="
+// const URLSearch = "https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&title="
 var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
@@ -65,12 +67,9 @@ if (base_anime) {
     base_anime = {}
 }
 base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true // Задаю календарь shikimori по умолчанию
-
+base_anime.censored = base_anime.censored ? base_anime.censored : false
 if (base_anime.base) delete base_anime.base;
 if (base_anime.fav) delete base_anime.fav;
-
-
-localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -222,9 +221,18 @@ CheckCalendarType.addEventListener('change', function () {
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     if (url_get.searchParams.get("calendar")) addCalendar()
 })
+CheckСensored.addEventListener('change', function () {
+    // hide_date_cart(this.checked)
+    base_anime.censored = this.checked
+    // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+})
 
 if (typeof base_anime.CalendarType == "boolean") {
     CheckCalendarType.checked = base_anime.CalendarType
+}
+if (typeof base_anime.censored == "boolean") {
+    CheckСensored.checked = base_anime.censored
 }
 
 
@@ -1294,9 +1302,9 @@ async function getCalendarSh() {
     // const ned_shikimori = document.querySelector(".ned_shikimori")
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
-    var response = await fetch("https://shikimori.one/api/calendar");
+    var response = await fetch("https://shikimori.one/api/calendar?censored=true");
     const data = await response.json();
-
+    console.log("dasdasdasdasd", data)
     data.forEach(e => {
         const e1 = {
             "title": `${e.anime.russian}`,
@@ -1390,7 +1398,7 @@ function add_cart(e) {
     cart.classList.add('cart_', 'bg-dark', 'text-white');
     cart.r = e.raiting
     cart.title = e?.status
-    // console.log(e?.status)
+    console.log("test",e)
     document.body.r > cart.r && e?.status != "anons" ? cart.classList.add('hide') : null;
     // cart.style.borderBottomStyle = "dashed"
     cart.style.borderBottomStyle = "dotted"
@@ -1438,9 +1446,24 @@ function add_cart(e) {
 
     const cartTitle = document.createElement('h5');
     cartTitle.classList.add('cart-title');
-    cartTitle.textContent = e.title;
+    cartTitle.textContent = `${e.title}`;
     cartTitle.title = e.title;
     imgTop.appendChild(cartTitle);
+
+    
+    const cartBG = document.createElement('div');
+    cartBG.classList.add('cart-BG');
+    cartBG.innerHTML  = `<span style="font-size: 20px;">${e.title}</span><hr>
+    ${e.e.material_data?"":"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"}
+    Серии: ${e.e.material_data?(e?.e?.material_data?.episodes_aired):"?"}/${e.e.material_data?(e?.e?.material_data?.episodes_total):"?"}<br>
+    Рейтинг: ${e.e.material_data?(e?.e?.material_data?.rating_mpaa):"?"}<br>
+    Статус: ${e.e.material_data?(e?.e?.material_data?.anime_status):"?"}<br>
+    Жанры: ${e.e.material_data?(e?.e?.material_data?.anime_genres?.map(genre => genre).join(', ')):"?"}<br>
+    
+    <br>${e?.e?.material_data?.anime_description?e?.e?.material_data?.anime_description:""}<br>
+    `;
+    // cartBG.title = e.title;
+    imgTop.appendChild(cartBG);
 
 
     const cartTime = document.createElement('h5');
@@ -1827,7 +1850,7 @@ function get_seartch(search) {
     window.history.pushState({}, '', url_get);
 
     load.show(true)
-    sh_api.search(search)
+    sh_api.search(search, base_anime.censored?base_anime.censored:false)
 }
 
 // get_seartch("мастера меча онлайн")
@@ -1863,14 +1886,14 @@ async function GetKodi(seartch, revers) {
             targetFrame = document.getElementById('list_history')
             getChapter("#list_history")
             targetFrame.innerHTML = ""
-            dat1 = await httpGet(`${URLSearch}${seartch}`)
+            // dat1 = await httpGet(`${URLSearch}${seartch}`)
             dat = {}
 
-            dat.results = dat1.results.filter((value, index, self) =>
+            /* dat.results = dat1.results.filter((value, index, self) =>
                 index === self.findIndex((t) => (
                     t.shikimori_id === value.shikimori_id
                 ))
-            );
+            ); */
 
             url_get = new URL(window.location.href)
             url_get.searchParams.set("seartch", `${seartch}`)

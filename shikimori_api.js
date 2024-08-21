@@ -336,8 +336,8 @@ sh_api.get_anime = (id) => {
         });
 }
 
-sh_api.search = (seartch) => {
-    var url = `https://shikimori.one/api/animes?with_material_data=true&limit=50&search=${seartch}`
+sh_api.search = (seartch, censored=true) => {
+    var url = `https://shikimori.one/api/animes?with_material_data=true&censored=${censored}&limit=50&search=${seartch}`
 
     fetch(url)
         .then(response => {

@@ -572,6 +572,7 @@ p {
         left: 0 !important;
         margin-bottom: 6px;
     }
+
     
     .cart_:hover {
         transform: rotateY(0) !important;
@@ -579,7 +580,15 @@ p {
             transform: rotateY(0) !important;
             visibility: visible !important;
         }
+        .cart-BG{
+            display: none;
+        }
+  
     }
+    .cart-BG{
+        display: none;
+    }
+    
 
     .cart_ {
         width: 99% !important;
@@ -819,7 +828,7 @@ screen and (max-width: 992px) {
     bottom: 0;
     position: fixed;
     writing-mode: vertical-rl;
-    padding: 5px;
+    padding: 1px;
     text-align: center;
     margin: 0px;
     z-index: 1;
@@ -939,9 +948,21 @@ span.sr-only {
     /* opacity: 100%; */
 }
 
-
+.cart-BG {
+    visibility: hidden;
+    padding-left: 30px;
+    padding-right: 37px;
+    line-height: 1;
+    text-shadow: 0px 4px 7px #000000;
+}
 
 .cart_:hover {
+    .cart-BG {
+        backdrop-filter: blur(5px) brightness(0.5); 
+        position: fixed;
+        inset: 0; /* */
+        transform: rotateY(180deg);
+    }
 
     background-color: transparent !important;
 
@@ -962,7 +983,8 @@ span.sr-only {
     z-index: 2;
 
     .cart-time,
-    .cart-title,
+    /* .cart-title, */
+    .cart-BG,
     .cart-fav {
         visibility: visible;
         transform: rotateY(180deg);
@@ -985,6 +1007,7 @@ span.sr-only {
             visibility: visible;
         }
     }
+
 }
 
 #ToastsMain {
