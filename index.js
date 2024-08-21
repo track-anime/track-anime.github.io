@@ -1398,7 +1398,7 @@ function add_cart(e) {
     cart.classList.add('cart_', 'bg-dark', 'text-white');
     cart.r = e.raiting
     cart.title = e?.status
-    console.log("test",e)
+    // console.log("test",e)
     document.body.r > cart.r && e?.status != "anons" ? cart.classList.add('hide') : null;
     // cart.style.borderBottomStyle = "dashed"
     cart.style.borderBottomStyle = "dotted"
