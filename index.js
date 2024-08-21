@@ -50,9 +50,12 @@ if (url_get.searchParams.get('qrcode')) {
     var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
 
     url_get.searchParams.delete('qrcode')
-    
+
     qrcode_modal.show()
 }
+
+
+
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
 var base_anime = localStorage.getItem('BaseAnime')
@@ -61,13 +64,13 @@ if (base_anime) {
 } else {
     base_anime = {}
 }
-base_anime.CalendarType=typeof base_anime.CalendarType=="boolean"?base_anime.CalendarType:true // Задаю календарь shikimori по умолчанию
+base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true // Задаю календарь shikimori по умолчанию
 
 if (base_anime.base) delete base_anime.base;
 if (base_anime.fav) delete base_anime.fav;
-    
-    
-    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+
+
+localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -97,11 +100,22 @@ setInterval(() => {
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-check_ver() 
+
+////////////////////////////////////// Костыль на вход в учётку /////////////////////////////////////////////
+setTimeout(() => {
+    if (base_anime.authorize==true && sh_api.authorize==false ) {
+
+    }
+
+}, 10 * 1000);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+check_ver()
 async function check_ver() {
     var response = await fetch('vers.info');
-    if(!response.status) return
-    var text =  await response.text()
+    if (!response.status) return
+    var text = await response.text()
     console.log(text)
     document.querySelector('.ver_info').title = `build: ${text}`
 
@@ -206,11 +220,10 @@ CheckCalendarType.addEventListener('change', function () {
     base_anime.CalendarType = this.checked
     console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    if(url_get.searchParams.get("calendar")) addCalendar()
+    if (url_get.searchParams.get("calendar")) addCalendar()
 })
 
-if(typeof base_anime.CalendarType=="boolean")
-{
+if (typeof base_anime.CalendarType == "boolean") {
     CheckCalendarType.checked = base_anime.CalendarType
 }
 
@@ -1092,7 +1105,7 @@ async function addCalendar() {
             }
             const cart = add_cart(e1)
             // formatDate(e.material_data.next_episode_at).moment.day() == 0 ? d3[6].appendChild(cart) : d3[formatDate(e.material_data.next_episode_at).moment.day() - 1].appendChild(cart)
-            d3[formatDate(e.material_data.next_episode_at).moment.isoWeekday()-1].appendChild(cart)
+            d3[formatDate(e.material_data.next_episode_at).moment.isoWeekday() - 1].appendChild(cart)
         }
     });
     // formatDate().moment.isoWeekday()-1
@@ -1101,14 +1114,14 @@ async function addCalendar() {
         e.open = true
     });
 
-    list_calendar.getElementsByClassName('ned_spoiler')[formatDate().moment.isoWeekday()-1].open = true
-    list_calendar.getElementsByClassName('ned_name')[formatDate().moment.isoWeekday()-1].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
+    list_calendar.getElementsByClassName('ned_spoiler')[formatDate().moment.isoWeekday() - 1].open = true
+    list_calendar.getElementsByClassName('ned_name')[formatDate().moment.isoWeekday() - 1].scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
     document.getElementById("load").classList.add("hide")
 }
 
 
 async function add_push(e) {
-    if (sh_api?.authorize==false) return
+    if (sh_api?.authorize == false) return
     showToast(e);
     return
 
@@ -1273,7 +1286,7 @@ async function httpGet(theUrl) {
 
 async function getCalendarSh() {
     document.getElementById("load").classList.remove("hide")
-    var tmp_ned = document.querySelectorAll(".ned_spoiler.nd .ned") 
+    var tmp_ned = document.querySelectorAll(".ned_spoiler.nd .ned")
     tmp_ned.forEach(e => {
         e.textContent = ""
         e.parentElement.open = false
@@ -1304,8 +1317,8 @@ async function getCalendarSh() {
             "screenshots": [],
             "e": e,
         }
-        
-        tmp_ned[formatDate(e.next_episode_at).moment.isoWeekday()-1].appendChild(add_cart(e1))
+
+        tmp_ned[formatDate(e.next_episode_at).moment.isoWeekday() - 1].appendChild(add_cart(e1))
         // ned_shikimori.appendChild(add_cart(e1))
     });
     // console.log(data)
@@ -1313,7 +1326,7 @@ async function getCalendarSh() {
     tmp_ned.forEach(e => {
         e.parentElement.open = true
     });
-    tmp_ned[formatDate().moment.isoWeekday()-1].parentElement.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
+    tmp_ned[formatDate().moment.isoWeekday() - 1].parentElement.scrollIntoView({ behavior: "smooth", block: "start", inline: "start" })
     document.getElementById("load").classList.add("hide")
 }
 /* const e1 = {
@@ -1572,8 +1585,8 @@ function showToast(e, t) {
     </div>
   </div>
     `;
-    if(e.cover !='discord_logo.png') toast0.querySelector("img").classList.add("img-preview")
-        
+    if (e.cover != 'discord_logo.png') toast0.querySelector("img").classList.add("img-preview")
+
     var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
     console.log(typeof t)
     if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);

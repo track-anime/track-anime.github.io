@@ -95,7 +95,7 @@ sh_api.add_token = () => {
             console.log("get", data);
             document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
             // document.cookie = `sh_access_token_max_age=${(new Date(Date.now() + data.expires_in * 1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
-            document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; max-age=9999999999999999999;`
+            document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT"`
 
             sh_api.url_get.searchParams.delete("code")
             window.history.pushState({}, '', sh_api.url_get);
@@ -172,8 +172,8 @@ sh_api.refresh_token = () => {
         .then(response => response.json())
         .then(data => {
             console.log("rf", data);
-            document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in}`
-            document.cookie = `sh_refresh_token=${data.refresh_token}; path=/;`
+            document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
+            document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT"`
             if (data.error == "invalid_grant") window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
             sh_api.authorize = true
             sh_api.get_user()
