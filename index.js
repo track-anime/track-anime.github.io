@@ -1390,6 +1390,22 @@ async function SetColorCartFav() {
         }
     });
 }
+// JavaScript
+/* document.addEventListener('mousemove', (e) => {
+    const { innerWidth: width, innerHeight: height } = window;
+    const { clientX: mouseX, clientY: mouseY } = e;
+
+    const moveX = ((mouseX / width) * 10) - 5;
+    const moveY = ((mouseY / height) * 10) - 5;
+
+    const elements = document.querySelectorAll('.paralax-bg');
+
+    elements.forEach((element) => {
+        element.style.backgroundPosition = `${50 + moveX}% ${50 + moveY}%`;
+    });
+}); */
+
+
 
 function add_cart(e) {
     const cart = document.createElement('div');
@@ -1418,15 +1434,25 @@ function add_cart(e) {
             break;
     }
 
+    // cart.addEventListener("mousemove", fCardRotate);
+    // cart.addEventListener("mouseout", fCardDefault);
+
+    const target = document.createElement('div');
+    target.classList.add('cart-target');
+    cart.appendChild(target);
+
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
     imgTop.classList.add('img-preview');
     imgTop.classList.add('ipa-shift');
+    imgTop.classList.add('paralax-bg');
     imgTop.setAttribute("img-preview-height", "720px")
     imgTop.img_pre = e.cover
     imgTop.alt = 'cover';
+
+
     cart.appendChild(imgTop);
 
     imgTop.addEventListener("mousedown", (event) => {
@@ -1458,7 +1484,7 @@ function add_cart(e) {
     Серии: ${e.e.material_data?(e?.e?.material_data?.episodes_aired):"?"}/${e.e.material_data?(e?.e?.material_data?.episodes_total):"?"}<br>
     Рейтинг: ${e.e.material_data?(e?.e?.material_data?.rating_mpaa):"?"}<br>
     Статус: ${e.e.material_data?(e?.e?.material_data?.anime_status):"?"}<br>
-    Жанры: ${e.e.material_data?(e?.e?.material_data?.anime_genres?.map(genre => genre).join(', ')):"?"}<br>
+    Жанры: ${e?.e?.material_data?.anime_genres?.map(genre => genre)?.join(', ') ?? "?"}<br>
     
     <br>${e?.e?.material_data?.anime_description?e?.e?.material_data?.anime_description:""}<br>
     `;
