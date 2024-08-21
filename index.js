@@ -1302,7 +1302,7 @@ async function getCalendarSh() {
     // const ned_shikimori = document.querySelector(".ned_shikimori")
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
-    var response = await fetch("https://shikimori.one/api/calendar?censored=true");
+    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored?base_anime.censored:false}`);
     const data = await response.json();
     console.log("dasdasdasdasd", data)
     data.forEach(e => {
