@@ -1453,7 +1453,7 @@ function add_cart(e) {
     
     const cartBG = document.createElement('div');
     cartBG.classList.add('cart-BG');
-    cartBG.innerHTML  = `<span style="font-size: 20px;">${e.title}</span><hr>
+    cartBG.innerHTML  = `<span style="font-size: 20px;text-align: center;display: block;">${e.title}</span><hr style="margin: 6px 0 6px 0;">
     ${e.e.material_data?"":"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"}
     Серии: ${e.e.material_data?(e?.e?.material_data?.episodes_aired):"?"}/${e.e.material_data?(e?.e?.material_data?.episodes_total):"?"}<br>
     Рейтинг: ${e.e.material_data?(e?.e?.material_data?.rating_mpaa):"?"}<br>
