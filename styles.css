@@ -799,11 +799,11 @@ screen and (max-width: 992px) {
     --background-pos-x: 50%;
     --background-pos-y: 50%;
 }
-.paralax-bg{
+/* .paralax-bg{ */
 
     /* background-size: 130% !important; */
     /* background-position: var(--background-pos-x) var(--background-pos-y); */
-} 
+/* }  */
 
 .cart-img-top {
     transition: transform 0.3s cubic-bezier(0.4, 0, 1, 1);
@@ -916,6 +916,7 @@ span.sr-only {
 
 .cart_ {
     /* transition: transform 0.3s ease, border-color 0.1s 0.2s; */
+    background-color: transparent !important;
     border-color: rgba(0, 0, 0, 0);
     /* border-color: rgb(255, 255, 255); */
     overflow: hidden;
@@ -960,6 +961,7 @@ span.sr-only {
 
 .cart-BG {
     visibility: hidden;
+    transition: visibility 0s 0.15s;
     padding-left: 30px;
     padding-right: 37px;
     line-height: 1;
@@ -967,6 +969,7 @@ span.sr-only {
     position: fixed;
     inset: 0;
     transform: rotateY(180deg);
+    backdrop-filter: blur(5px) brightness(0.5); 
 }
 
 .cart_:hover {
@@ -976,10 +979,7 @@ span.sr-only {
     .progress-bar>span{
         writing-mode: vertical-lr;
     }
-    .cart-BG {
-        backdrop-filter: blur(5px) brightness(0.5); 
-    
-    }
+
 
     background-color: transparent !important;
 
@@ -1004,7 +1004,8 @@ span.sr-only {
     .cart-BG,
     .cart-fav {
         visibility: visible;
-        transform: rotateY(180deg);
+        transition: visibility 0s 0.15s;
+
     }
 
     .cart-series {
