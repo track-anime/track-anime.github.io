@@ -577,8 +577,10 @@ p {
     .cart_:hover {
         transform: rotateY(0) !important;
         .cart-img-top, .cart-time, .cart-title, .cart-fav, .cart-series{
+            
             transform: rotateY(0) !important;
             visibility: visible !important;
+            transition: visibility 0s 0.15s;
         }
         .cart-BG{
             display: none;
@@ -884,6 +886,7 @@ span.sr-only {
 
 .cart-time {
     /* background-color: #5d5d5dde; */
+    transition: transform 0s 0.15s;
     background: linear-gradient(0deg, rgb(69, 69, 69, 0.8) 0%, rgba(69, 69, 69, 0.8) 80%, rgba(191, 191, 191, 0) 100%);
     padding: 25px 0px 10px 0px;
     text-align: center;
@@ -894,6 +897,7 @@ span.sr-only {
 }
 
 .cart-series {
+    transition: visibility 0s 0.15s;
     position: absolute;
     right: 0px;
     background-color: #353434bd;
@@ -1003,12 +1007,14 @@ span.sr-only {
     /* .cart-title, */
     .cart-BG,
     .cart-fav {
+        transform: rotateY(180deg);
         visibility: visible;
-        transition: visibility 0s 0.15s;
+        transition: visibility 0s 0.15s, transform 0s 0.15s;
 
     }
 
     .cart-series {
+        transition: visibility 0s 0.15s;
         visibility: hidden;
     }
 
