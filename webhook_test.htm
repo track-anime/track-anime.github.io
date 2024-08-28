@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Отправка изображений в Discord через Webhook</title>
+    <style>
+        /* Общие стили для тёмной темы */
+        body {
+            background-color: #121212;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        /* Стили для заголовка */
+        h1 {
+            color: #bb86fc;
+        }
+
+        /* Стили для области перетаскивания файла */
+        #dropArea {
+            border: 2px dashed #bb86fc;
+            background-color: #1e1e1e;
+            padding: 20px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        /* Изменение стиля при перетаскивании файла */
+        #dropArea.dragover {
+            background-color: #333;
+        }
+
+        /* Скрываем input для выбора файла, так как будет использоваться область перетаскивания */
+        #file {
+            display: none;
+        }
+
+        /* Стили для контейнера превью */
+        #previewContainer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        /* Стили для каждого изображения превью */
+        .previewImage {
+            max-width: 100px;
+            max-height: 100px;
+            border: 1px solid #bb86fc;
+            border-radius: 5px;
+        }
+
+        /* Стили для кнопки отправки */
+        button {
+            background-color: #bb86fc;
+            color: #121212;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #985eff;
+        }
+    </style>
+</head>
+<body>
+    <h1>Отправка изображений в Discord через Webhook</h1>
+    
+    <!-- Форма для отправки данных в вебхук -->
+    <form id="webhookForm">
+        <!-- Поле для ввода URL вебхука (заблокировано для редактирования, т.к. URL фиксирован) -->
+        <label for="webhookUrl">Webhook URL:</label><br>
+        <input type="text" id="webhookUrl" name="webhookUrl" value="https://discord.com/api/webhooks/627316395075567616/f51PMQc4CiUR0XBFEHoYeh25nYpceK5UI0qPHpQDUqqgfe4q3u3Z4Tv1whhKZRIdPBJ0" required readonly><br><br>
+
+        <!-- Поле для ввода текста сообщения -->
+        <label for="content">Сообщение:</label><br>
+        <input type="text" id="content" name="content" required><br><br>
+
+        <!-- Область для перетаскивания или выбора файлов -->
+        <div id="dropArea">
+            Перетащите изображения сюда или нажмите, чтобы выбрать файлы.
+        </div>
+        
+        <!-- Поле для выбора файлов (скрыто) -->
+        <input type="file" id="file" name="file" accept="image/*" multiple required><br><br>
+
+        <!-- Контейнер для превью изображений -->
+        <div id="previewContainer"></div><br>
+
+        <!-- Кнопка для отправки данных на сервер -->
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script>
+        // Получаем элементы страницы
+        const dropArea = document.getElementById('dropArea');
+        const fileInput = document.getElementById('file');
+        const previewContainer = document.getElementById('previewContainer');
+
+        // Добавляем обработчик для события перетаскивания файла над областью
+        dropArea.addEventListener('dragover', (event) => {
+            event.preventDefault();  // Отменяем стандартное поведение браузера
+            dropArea.classList.add('dragover');  // Добавляем класс, чтобы изменить стиль области
+        });
+
+        // Убираем стиль области, когда файл больше не перетаскивается
+        dropArea.addEventListener('dragleave', () => {
+            dropArea.classList.remove('dragover');
+        });
+
+        // Обработка события сброса файлов на область
+        dropArea.addEventListener('drop', (event) => {
+            event.preventDefault();  // Отменяем стандартное поведение браузера
+            dropArea.classList.remove('dragover');  // Убираем стиль области
+
+            const files = event.dataTransfer.files;  // Получаем файлы из события
+            if (files.length > 0) {
+                fileInput.files = files;  // Устанавливаем файлы в input
+                updatePreviews(files);  // Обновляем превью изображений
+            }
+        });
+
+        // Обработка клика на область для открытия диалога выбора файлов
+        dropArea.addEventListener('click', () => {
+            fileInput.click();  // Имитируем клик по скрытому input для выбора файлов
+        });
+
+        // Обновление превью при выборе файлов через диалог
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                updatePreviews(fileInput.files);  // Обновляем превью изображений
+            }
+        });
+
+        // Функция для обновления превью изображений
+        function updatePreviews(files) {
+            previewContainer.innerHTML = '';  // Очищаем контейнер с превью
+            for (let file of files) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.classList.add('previewImage');
+                    previewContainer.appendChild(img);  // Добавляем изображение в контейнер
+                };
+                reader.readAsDataURL(file);  // Читаем файл как DataURL для отображения превью
+            }
+        }
+
+        // Обработка отправки формы
+        document.getElementById('webhookForm').addEventListener('submit', function(event) {
+            event.preventDefault();  // Отменяем стандартную отправку формы
+
+            const webhookUrl = document.getElementById('webhookUrl').value;
+            const content = document.getElementById('content').value;
+            const files = fileInput.files;
+
+            const formData = new FormData();
+            formData.append('content', content);  // Добавляем текст сообщения
+
+            for (let i = 0; i < files.length; i++) {
+                formData.append(`file${i + 1}`, files[i]);  // Добавляем файлы в FormData
+            }
+
+            // Отправляем POST-запрос на сервер
+            fetch(webhookUrl, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Изображения успешно отправлены!');
+                    // Сброс формы и превью после успешной отправки
+                    dropArea.textContent = 'Перетащите изображения сюда или нажмите, чтобы выбрать файлы.';
+                    fileInput.value = '';  // Очищаем input
+                    previewContainer.innerHTML = '';  // Очищаем контейнер с превью
+                } else {
+                    alert('Ошибка отправки: ' + response.statusText);
+                }
+            })
+            .catch(error => {
+                alert('Произошла ошибка: ' + error);  // Выводим ошибку в случае сбоя
+            });
+        });
+    </script>
+</body>
+</html>
