@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточка пользователя</title>
+    <link href="scripts/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .user-card {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+        .card-body {
+            flex: 1;
+        }
+        .links {
+            margin: 10px 0;
+        }
+        .btn-hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="user-card">
+            <img src="pedro.gif" id="User_inf_ava" alt="Avatar" class="avatar">
+            <div class="card-body">
+                <h5 class="card-title">Имя пользователя</h5>
+                <p>Возраст: 25 лет</p>
+                <div class="links">
+                    <a href="#" class="d-block">Социальная сеть</a>
+                    <a href="#" class="d-block">Страница пользователя</a>
+                </div>
+                <button type="button" class="btn btn-primary mb-2">Показать список друзей</button>
+                <button type="button" class="btn btn-secondary mb-2">Добавить в друзья</button>
+                <button type="button" class="btn btn-danger btn-hidden" id="remove-friend">Удалить из друзей</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/bootstrap.bundle.min.js"></script>
+    <script>
+        // Пример переключения кнопки "Удалить из друзей"
+        document.querySelector('.btn-secondary').addEventListener('click', function() {
+            document.querySelector('#remove-friend').classList.toggle('btn-hidden');
+        });
+    </script>
+</body>
+</html>
