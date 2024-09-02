@@ -1968,7 +1968,7 @@ function GetKodiScan(data, revers) {
             endid = endid2
             return
         }
-        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id && e.material_data.countries != "Китай") {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
+        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id ) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
 
             if (VoiceTranslate(e.translation.title)) {
 
