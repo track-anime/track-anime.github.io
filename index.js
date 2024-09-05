@@ -1975,8 +1975,8 @@ function GetKodiScan(data, revers) {
 
                 if (!e.shikimori_id) return
                 const e1 = {
-                    "title": e?.material_data?.anime_title,
-                    "cover": `${e?.material_data?.poster_url}`,
+                    "title": e?.material_data?.anime_title?e?.material_data?.anime_title:"?",
+                    "cover": e?.material_data?.poster_url?e?.material_data?.poster_url:"cover.jpg",
                     // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
                     "date": formatDate(e.updated_at),
                     // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),

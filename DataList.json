@@ -400,6 +400,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "598b635c2c50a2653e425a984dc30429f69eee",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "59d2f132dd3361b3e8c74ab79cd503f9f05673",
                                     "suffix": "",
                                     "type": "file"
@@ -1840,6 +1845,11 @@
                                 },
                                 {
                                     "name": "b447d76d6fceafe3a27cbffdd51fe46a1141ec",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "e1435fb65ab46c33e7c316a0f5e1a347494317",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -3527,6 +3537,11 @@
                                 },
                                 {
                                     "name": "1f0ebc4fbbbf566f0b2ea9acab18186c19276f",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "326ea2e0010f7a45a8bc173665965975f8ba28",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -5919,6 +5934,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "75b6fde9926ca45f01fff2d542ecd4f0ae567f",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "f1709404ac5fa377a6854cb0a37b6f841a1375",
                                     "suffix": "",
                                     "type": "file"
@@ -7514,6 +7534,11 @@
                                 },
                                 {
                                     "name": "8441c787cc2bfb887d90ee60d913ba72c643e2",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "c10e7bd1f331abc5a4fb982cd917add435555f",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -9613,6 +9638,11 @@
                     "type": "file"
                 }
             ]
+        },
+        {
+            "name": "cover.jpg",
+            "suffix": ".jpg",
+            "type": "file"
         },
         {
             "name": "DataList.json",
