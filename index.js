@@ -557,37 +557,37 @@ function setVideoInfo(e) {
 
         switch (btn_sh_save?.sh_fv?.status) {
             case "watching":
-                btn_sh_save.textContent = "смотрю"
                 btn_sh_save.classList.add("yellow")
                 btn_sh_save.classList.add("yellow_bg")
                 btn_sh_save.classList.add("btn-primary")
+                btn_sh_save.textContent = "смотрю"
                 break;
             case "completed":
-                btn_sh_save.textContent = "просмотренно"
                 btn_sh_save.classList.add("btn-success")
+                btn_sh_save.textContent = "просмотренно"
 
                 break;
             case "dropped":
-                btn_sh_save.textContent = "брошено"
                 btn_sh_save.classList.add("btn-danger")
+                btn_sh_save.textContent = "брошено"
                 break;
             case "on_hold":
-                btn_sh_save.textContent = "отложено"
                 btn_sh_save.classList.add("btn-warning")
+                btn_sh_save.textContent = "отложено"
                 break;
             case "planned":
-                btn_sh_save.textContent = "запланировано"
                 // btn_sh_save.classList.add("btn-secondary")
                 btn_sh_save.classList.add("pink")
                 btn_sh_save.classList.add("pink_bg")
+                btn_sh_save.textContent = "запланировано"
                 break;
             case "rewatching":
-                btn_sh_save.textContent = "пересматриваю"
                 btn_sh_save.classList.add("btn-info")
+                btn_sh_save.textContent = "пересматриваю"
                 break;
             default:
-                btn_sh_save.textContent = "Добавить"
                 btn_sh_save.classList.add("btn-outline-light")
+                btn_sh_save.textContent = "Добавить"
                 break;
         }
     } else {
@@ -714,7 +714,8 @@ document.addEventListener("authorize", function (e) { // (1)
 
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.duration, 'minutes').asMilliseconds())
-    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() === VideoInfo.e.id)?.status) {
+    console.log("Статус", sh_api.Favorits.data.find(item => item.anime.id.toString() == VideoInfo.e.id)?.status)
+    switch (sh_api.Favorits.data.find(item => item.anime.id.toString() == VideoInfo.e.id)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
             btn_sh_save.classList.add("btn-primary")
