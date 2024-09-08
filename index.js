@@ -1184,46 +1184,33 @@ function AddFavorite(t) {
         case 1:
             e1.textContent = "просмотренно"
             e1.classList.add("btn-success")
-
             break;
         case 2:
             e1.textContent = "брошено"
             e1.classList.add("btn-danger")
-            setTimeout(() => {
-                sh_api.AddUserRates(Number(e1.ids), t)
-            }, 500);
             break;
         case 3:
             e1.textContent = "отложено"
             e1.classList.add("btn-warning")
-            setTimeout(() => {
-                sh_api.AddUserRates(Number(e1.ids), t)
-            }, 500);
             break;
         case 4:
             e1.textContent = "запланировано"
             // e1.classList.add("btn-secondary")
             e1.classList.add("pink")
             e1.classList.add("pink_bg")
-            setTimeout(() => {
-                sh_api.AddUserRates(Number(e1.ids), t)
-            }, 500);
             break;
         case 5:
             e1.textContent = "пересматриваю"
             e1.classList.add("btn-info")
-            setTimeout(() => {
-                sh_api.AddUserRates(Number(e1.ids), t)
-            }, 500);
             break;
         default:
             e1.textContent = "Добавить"
             e1.classList.add("btn-outline-light")
-            setTimeout(() => {
-                sh_api.AddUserRates(Number(e1.ids), t)
-            }, 500);
             break;
     }
+    setTimeout(() => {
+        sh_api.AddUserRates(Number(e1.ids), t)
+    }, 500);
 }
 
 function ClearFavorite() {
