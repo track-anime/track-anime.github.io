@@ -1832,6 +1832,7 @@ function VoiceTranslate(name) {
         return  base_anime.translationActive.some(item => item.title === name);
     } else {
         // base_anime.translationActive.title = voice;
+        console.log(voice)
         return voice.includes(name)
     }
 
