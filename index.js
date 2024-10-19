@@ -2099,7 +2099,7 @@ function GetKodiScan(data, revers) {
             if (typeof base_anime.translation[0] == "string") base_anime.translation = []
             if (typeof base_anime.translationActive[0] == "string") base_anime.translationActive = []
             console.log(voice)
-            if (!base_anime.translationActive) base_anime.translationActive = voice;
+            // if (!base_anime.translationActive) base_anime.translationActive = voice;
             // console.log(e.translation.title)
             // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
             // console.log()
