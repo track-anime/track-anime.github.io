@@ -136,16 +136,63 @@ if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh
 }
 
 const voice = [
-    "AniStar",
-    "Dream Cast",
-    "AnimeVost",
-    "AniDub Online",
-    "AniDUB",
-    "JAM",
-    "AniLibria.TV",
-    "SHIZA Project",
-    "РуАниме / DEEP",
-]
+    {
+      "id": 1978,
+      "title": "Dream Cast",
+      "type": "voice"
+    },
+    {
+      "id": 557,
+      "title": "JAM",
+      "type": "voice"
+    },
+    {
+      "id": 2023,
+      "title": "РуАниме / DEEP",
+      "type": "voice"
+    },
+    {
+      "id": 923,
+      "title": "AnimeVost",
+      "type": "voice"
+    },
+    {
+      "id": 610,
+      "title": "AniLibria.TV",
+      "type": "voice"
+    },
+    {
+      "id": 767,
+      "title": "SHIZA Project",
+      "type": "voice"
+    },
+    {
+      "id": 910,
+      "title": "AniStar",
+      "type": "voice"
+    },
+    {
+      "id": 3293,
+      "title": "VF-Studio",
+      "type": "voice"
+    },
+    {
+      "id": 2674,
+      "title": "AniDub Online",
+      "type": "voice"
+    },
+    {
+      "id": 609,
+      "title": "AniDUB",
+      "type": "voice"
+    },
+    {
+      "id": 704,
+      "title": "Дублированный",
+      "type": "voice"
+    }
+  ]
+
 
 VideoInfo.info = {
     "cover": VideoInfo.querySelector("#info_cover"),
@@ -2052,7 +2099,7 @@ function GetKodiScan(data, revers) {
             if(typeof base_anime.translation[0]=="string") base_anime.translation = []
             if(typeof base_anime.translationActive[0]=="string") base_anime.translationActive = []
             console.log(voice)
-            // if (!base_anime.translationActive) base_anime.translationActive = voice;
+            if (!base_anime.translationActive) base_anime.translationActive = voice;
             // console.log(e.translation.title)
             // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
             // console.log()
