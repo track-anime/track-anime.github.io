@@ -76,7 +76,7 @@ if (base_anime.fav) delete base_anime.fav;
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+console.log("translation",base_anime?.translation[0]=="string", base_anime?.translationActive[0]=="string")
 if(typeof base_anime?.translation[0]=="string") base_anime.translation = []
 if(typeof base_anime?.translationActive[0]=="string") base_anime.translationActive = []
 
