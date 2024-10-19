@@ -1293,7 +1293,8 @@ function VoiceSettingsMenu() {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.id = `voice-${index}`;
-        checkbox.className = 'form-check-input';
+        checkbox.classList.add("form-check-input");
+        checkbox.classList.add("voice_name_check");
         
         // checkbox.checked = base_anime.translationActive.includes(voice.title);
         checkbox.checked = base_anime.translationActive.some(item => item.title === voice.title);
@@ -1301,7 +1302,7 @@ function VoiceSettingsMenu() {
         const checkboxLabel = document.createElement('label');
         checkboxLabel.htmlFor = `voice-${index}`;
         checkboxLabel.className = 'form-check-label';
-        checkboxLabel.className = 'voice_name';
+        // checkboxLabel.className = 'voice_name';
         checkboxLabel.textContent = voice.title;
         checkboxLabel.classList.add(encodeURIComponent(voice.title));
 
@@ -1320,13 +1321,12 @@ function VoiceSettingsMenu() {
     VoiceSettings.prepend(saveButton)
     saveButton.addEventListener('click', () => {
         base_anime.translationActive = [];
-        const checkboxes = document.querySelectorAll('.voice_name');
+        const checkboxes = document.querySelectorAll('.voice_name_check');
 
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
                 // base_anime.translationActive.push(checkbox.nextElementSibling.textContent);
                 if (base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent)) base_anime.translationActive.push(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent));
-
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -2102,7 +2102,7 @@ function GetKodiScan(data, revers) {
             // if (!base_anime.translationActive) base_anime.translationActive = voice;
             // console.log(e.translation.title)
             // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
-            console.log(e.translation)
+            // console.log(base_anime.translation.push(e.translation))
             if (!base_anime.translation.some(item => item.title === e.translation.title) && e.type.includes("anime")) base_anime.translation.push(e.translation);
 
         }
