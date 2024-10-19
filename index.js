@@ -1302,7 +1302,6 @@ function VoiceSettingsMenu() {
         const checkboxLabel = document.createElement('label');
         checkboxLabel.htmlFor = `voice-${index}`;
         checkboxLabel.className = 'form-check-label';
-        // checkboxLabel.className = 'voice_name';
         checkboxLabel.textContent = voice.title;
         checkboxLabel.classList.add(encodeURIComponent(voice.title));
 
@@ -1875,13 +1874,12 @@ function ta_pip(flag) //picture to picture
 
 
 function VoiceTranslate(name) {
-
     if (ignoreVoice || base_anime.translationActive < 1) return true
     if (base_anime.translationActive) {
         // return base_anime.translationActive.includes(name)
         return base_anime.translationActive.some(item => item.title === name);
     } else {
-        // base_anime.translationActive.title = voice;
+        base_anime.translationActive.title = voice;
         return voice.includes(name)
     }
 }
@@ -2099,10 +2097,6 @@ function GetKodiScan(data, revers) {
 
             if (typeof base_anime.translation[0] == "string") base_anime.translation = []
             if (typeof base_anime.translationActive[0] == "string") base_anime.translationActive = []
-            // if (!base_anime.translationActive) base_anime.translationActive = voice;
-            // console.log(e.translation.title)
-            // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
-            // console.log(base_anime.translation.push(e.translation))
             if (!base_anime.translation.some(item => item.title === e.translation.title) && e.type.includes("anime")) base_anime.translation.push(e.translation);
 
         }
