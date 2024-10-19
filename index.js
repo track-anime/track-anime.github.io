@@ -203,6 +203,15 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+translation_id = ""
+
+base_anime.translationActive.forEach(e => {
+    if(!translation_id=="")translation_id=translation_id+","
+    translation_id = `${translation_id}${e.id}`
+});
+console.log(translation_id)
+URLList = !translation_id=="" ? `${URLList}&translation_id=${translation_id}` : URLList
+
 URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
 
 
@@ -1233,7 +1242,8 @@ function VoiceSettingsMenu() {
         checkbox.type = 'checkbox';
         checkbox.id = `voice-${index}`;
         checkbox.className = 'form-check-input';
-        checkbox.checked = base_anime.translationActive.includes(voice.title);
+        // checkbox.checked = base_anime.translationActive.includes(voice.title);
+        checkbox.checked = base_anime.translationActive.some(item => item.title === voice.title);
 
         const checkboxLabel = document.createElement('label');
         checkboxLabel.htmlFor = `voice-${index}`;
@@ -1260,7 +1270,8 @@ function VoiceSettingsMenu() {
 
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
-                base_anime.translationActive.push(checkbox.nextElementSibling.textContent);
+                // base_anime.translationActive.push(checkbox.nextElementSibling.textContent);
+                if(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent)) base_anime.translationActive.push(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent));
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -1812,9 +1823,10 @@ function VoiceTranslate(name) {
 
     if (ignoreVoice || base_anime.translationActive < 1) return true
     if (base_anime.translationActive) {
-        return base_anime.translationActive.includes(name)
+        // return base_anime.translationActive.includes(name)
+        return  base_anime.translationActive.some(item => item.title === name);
     } else {
-        base_anime.translationActive = voice;
+        base_anime.translationActive.title = voice;
         return voice.includes(name)
     }
 
@@ -2034,7 +2046,8 @@ function GetKodiScan(data, revers) {
             if (!base_anime.translationActive) base_anime.translationActive = voice;
             // console.log(e.translation.title)
             // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
-            if (!base_anime.translation.some(item => item.title === e.translation.title)) base_anime.translation.push(e.translation);
+            // console.log()
+            if (!base_anime.translation.some(item => item.title === e.translation.title)&& e.type.includes("anime")) base_anime.translation.push(e.translation);
 
         }
 

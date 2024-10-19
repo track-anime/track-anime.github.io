@@ -255,7 +255,7 @@ sh_api.get_favorit = (sh_user, isanother) => {
                 document.dispatchEvent(sh_api.search_another);
             } else {
                 if (!isanother) sh_api.authorize = true
-                console.log("anime_rates", data);
+                // console.log("anime_rates", data);
                 if (sh_user) {
                     sh_api.Favorits[sh_user] = data
                 } else {
