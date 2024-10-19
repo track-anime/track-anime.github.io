@@ -1326,6 +1326,7 @@ function VoiceSettingsMenu() {
             if (checkbox.checked) {
                 // base_anime.translationActive.push(checkbox.nextElementSibling.textContent);
                 if (base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent)) base_anime.translationActive.push(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent));
+                
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
