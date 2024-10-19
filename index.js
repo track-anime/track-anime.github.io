@@ -1831,7 +1831,7 @@ function VoiceTranslate(name) {
         // return base_anime.translationActive.includes(name)
         return  base_anime.translationActive.some(item => item.title === name);
     } else {
-        base_anime.translationActive.title = voice;
+        // base_anime.translationActive.title = voice;
         return voice.includes(name)
     }
 
