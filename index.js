@@ -1233,13 +1233,13 @@ function VoiceSettingsMenu() {
         checkbox.type = 'checkbox';
         checkbox.id = `voice-${index}`;
         checkbox.className = 'form-check-input';
-        checkbox.checked = base_anime.translationActive.includes(voice);
+        checkbox.checked = base_anime.translationActive.includes(voice.title);
 
         const checkboxLabel = document.createElement('label');
         checkboxLabel.htmlFor = `voice-${index}`;
         checkboxLabel.className = 'form-check-label';
-        checkboxLabel.textContent = voice;
-        checkboxLabel.classList.add(encodeURIComponent(voice));
+        checkboxLabel.textContent = voice.title;
+        checkboxLabel.classList.add(encodeURIComponent(voice.title));
 
         const checkboxDiv = document.createElement('div');
         checkboxDiv.className = 'form-check';
@@ -2030,8 +2030,12 @@ function GetKodiScan(data, revers) {
                 };
             }
             if (!base_anime.translation) base_anime.translation = [];
+            if(typeof base_anime.translation[0]=="string") base_anime.translation = []
             if (!base_anime.translationActive) base_anime.translationActive = voice;
-            if (!base_anime.translation.includes(e.translation.title)) base_anime.translation.push(e.translation.title);
+            // console.log(e.translation.title)
+            // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
+            if (!base_anime.translation.some(item => item.title === e.translation.title)) base_anime.translation.push(e.translation);
+
         }
 
     });
