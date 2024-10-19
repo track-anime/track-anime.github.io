@@ -1326,7 +1326,7 @@ function VoiceSettingsMenu() {
             if (checkbox.checked) {
                 // base_anime.translationActive.push(checkbox.nextElementSibling.textContent);
                 if (base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent)) base_anime.translationActive.push(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent));
-                
+
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -2102,7 +2102,7 @@ function GetKodiScan(data, revers) {
             // if (!base_anime.translationActive) base_anime.translationActive = voice;
             // console.log(e.translation.title)
             // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
-            // console.log(base_anime.translation.push(e.translation))
+            console.log(e.translation)
             if (!base_anime.translation.some(item => item.title === e.translation.title) && e.type.includes("anime")) base_anime.translation.push(e.translation);
 
         }
