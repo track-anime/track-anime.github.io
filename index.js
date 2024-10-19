@@ -76,9 +76,9 @@ if (base_anime.fav) delete base_anime.fav;
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-console.log("translation",base_anime?.translation[0]=="string", base_anime?.translationActive[0]=="string")
-if(typeof base_anime?.translation[0]=="string") base_anime.translation = []
-if(typeof base_anime?.translationActive[0]=="string") base_anime.translationActive = []
+console.log("translation", base_anime?.translation[0] == "string", base_anime?.translationActive[0] == "string")
+if (typeof base_anime?.translation[0] == "string") base_anime.translation = []
+if (typeof base_anime?.translationActive[0] == "string") base_anime.translationActive = []
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
@@ -107,7 +107,7 @@ setInterval(() => {
 
 ////////////////////////////////////// Костыль на вход в учётку /////////////////////////////////////////////
 setTimeout(() => {
-    if (base_anime.authorize==true && sh_api.authorize==false ) {
+    if (base_anime.authorize == true && sh_api.authorize == false) {
 
     }
 
@@ -137,61 +137,61 @@ if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh
 
 const voice = [
     {
-      "id": 1978,
-      "title": "Dream Cast",
-      "type": "voice"
+        "id": 1978,
+        "title": "Dream Cast",
+        "type": "voice"
     },
     {
-      "id": 557,
-      "title": "JAM",
-      "type": "voice"
+        "id": 557,
+        "title": "JAM",
+        "type": "voice"
     },
     {
-      "id": 2023,
-      "title": "РуАниме / DEEP",
-      "type": "voice"
+        "id": 2023,
+        "title": "РуАниме / DEEP",
+        "type": "voice"
     },
     {
-      "id": 923,
-      "title": "AnimeVost",
-      "type": "voice"
+        "id": 923,
+        "title": "AnimeVost",
+        "type": "voice"
     },
     {
-      "id": 610,
-      "title": "AniLibria.TV",
-      "type": "voice"
+        "id": 610,
+        "title": "AniLibria.TV",
+        "type": "voice"
     },
     {
-      "id": 767,
-      "title": "SHIZA Project",
-      "type": "voice"
+        "id": 767,
+        "title": "SHIZA Project",
+        "type": "voice"
     },
     {
-      "id": 910,
-      "title": "AniStar",
-      "type": "voice"
+        "id": 910,
+        "title": "AniStar",
+        "type": "voice"
     },
     {
-      "id": 3293,
-      "title": "VF-Studio",
-      "type": "voice"
+        "id": 3293,
+        "title": "VF-Studio",
+        "type": "voice"
     },
     {
-      "id": 2674,
-      "title": "AniDub Online",
-      "type": "voice"
+        "id": 2674,
+        "title": "AniDub Online",
+        "type": "voice"
     },
     {
-      "id": 609,
-      "title": "AniDUB",
-      "type": "voice"
+        "id": 609,
+        "title": "AniDUB",
+        "type": "voice"
     },
     {
-      "id": 704,
-      "title": "Дублированный",
-      "type": "voice"
+        "id": 704,
+        "title": "Дублированный",
+        "type": "voice"
     }
-  ]
+]
 
 
 VideoInfo.info = {
@@ -258,11 +258,11 @@ URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${
 translation_id = ""
 
 base_anime.translationActive.forEach(e => {
-    if(!translation_id=="")translation_id=translation_id+","
+    if (!translation_id == "") translation_id = translation_id + ","
     translation_id = `${translation_id}${e.id}`
 });
 console.log(translation_id)
-URLList = !translation_id=="" ? `${URLList}&translation_id=${translation_id}` : URLList
+URLList = !translation_id == "" ? `${URLList}&translation_id=${translation_id}` : URLList
 
 URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
 
@@ -1323,7 +1323,7 @@ function VoiceSettingsMenu() {
         checkboxes.forEach((checkbox) => {
             if (checkbox.checked) {
                 // base_anime.translationActive.push(checkbox.nextElementSibling.textContent);
-                if(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent)) base_anime.translationActive.push(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent));
+                if (base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent)) base_anime.translationActive.push(base_anime.translation.find(item => item.title == checkbox.nextElementSibling.textContent));
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -1353,7 +1353,7 @@ async function getCalendarSh() {
     // const ned_shikimori = document.querySelector(".ned_shikimori")
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
-    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored?base_anime.censored:false}`);
+    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}`);
     const data = await response.json();
     console.log("dasdasdasdasd", data)
     data.forEach(e => {
@@ -1527,17 +1527,17 @@ function add_cart(e) {
     cartTitle.title = e.title;
     imgTop.appendChild(cartTitle);
 
-    
+
     const cartBG = document.createElement('div');
     cartBG.classList.add('cart-BG');
-    cartBG.innerHTML  = `<span style="font-size: 20px;text-align: center;display: block;">${e.title}</span><hr style="margin: 6px 0 6px 0;">
-    ${e.e.material_data?"":"<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"}
-    Серии: ${e.e.material_data?(e?.e?.material_data?.episodes_aired):"?"}/${e.e.material_data?(e?.e?.material_data?.episodes_total):"?"}<br>
-    Рейтинг: ${e.e.material_data?(e?.e?.material_data?.rating_mpaa):"?"}<br>
-    Статус: ${e.e.material_data?(e?.e?.material_data?.anime_status):"?"}<br>
+    cartBG.innerHTML = `<span style="font-size: 20px;text-align: center;display: block;">${e.title}</span><hr style="margin: 6px 0 6px 0;">
+    ${e.e.material_data ? "" : "<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>"}
+    Серии: ${e.e.material_data ? (e?.e?.material_data?.episodes_aired) : "?"}/${e.e.material_data ? (e?.e?.material_data?.episodes_total) : "?"}<br>
+    Рейтинг: ${e.e.material_data ? (e?.e?.material_data?.rating_mpaa) : "?"}<br>
+    Статус: ${e.e.material_data ? (e?.e?.material_data?.anime_status) : "?"}<br>
     Жанры: ${e?.e?.material_data?.anime_genres?.map(genre => genre)?.join(', ') ?? "?"}<br>
     
-    <br>${e?.e?.material_data?.anime_description?e?.e?.material_data?.anime_description:""}<br>
+    <br>${e?.e?.material_data?.anime_description ? e?.e?.material_data?.anime_description : ""}<br>
     `;
     // cartBG.title = e.title;
     imgTop.appendChild(cartBG);
@@ -1876,7 +1876,7 @@ function VoiceTranslate(name) {
     if (ignoreVoice || base_anime.translationActive < 1) return true
     if (base_anime.translationActive) {
         // return base_anime.translationActive.includes(name)
-        return  base_anime.translationActive.some(item => item.title === name);
+        return base_anime.translationActive.some(item => item.title === name);
     } else {
         // base_anime.translationActive.title = voice;
         console.log(voice)
@@ -1929,7 +1929,7 @@ function get_seartch(search) {
     window.history.pushState({}, '', url_get);
 
     load.show(true)
-    sh_api.search(search, base_anime.censored?base_anime.censored:false)
+    sh_api.search(search, base_anime.censored ? base_anime.censored : false)
 }
 
 // get_seartch("мастера меча онлайн")
@@ -2021,15 +2021,15 @@ function GetKodiScan(data, revers) {
             endid = endid2
             return
         }
-        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id ) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
+        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
 
             if (VoiceTranslate(e.translation.title)) {
 
 
                 if (!e.shikimori_id) return
                 const e1 = {
-                    "title": e?.material_data?.anime_title?e?.material_data?.anime_title:"404",
-                    "cover": e?.material_data?.poster_url?e?.material_data?.poster_url:"404.jpg",
+                    "title": e?.material_data?.anime_title ? e?.material_data?.anime_title : "404",
+                    "cover": e?.material_data?.poster_url ? e?.material_data?.poster_url : "404.jpg",
                     // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
                     "date": formatDate(e.updated_at),
                     // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
@@ -2095,15 +2095,15 @@ function GetKodiScan(data, revers) {
                 };
             }
             if (!base_anime.translation) base_anime.translation = [];
-            
-            if(typeof base_anime.translation[0]=="string") base_anime.translation = []
-            if(typeof base_anime.translationActive[0]=="string") base_anime.translationActive = []
+
+            if (typeof base_anime.translation[0] == "string") base_anime.translation = []
+            if (typeof base_anime.translationActive[0] == "string") base_anime.translationActive = []
             console.log(voice)
             if (!base_anime.translationActive) base_anime.translationActive = voice;
             // console.log(e.translation.title)
             // if (!base_anime.translation.includes(e.translation)) base_anime.translation.push(e.translation);
             // console.log()
-            if (!base_anime.translation.some(item => item.title === e.translation.title)&& e.type.includes("anime")) base_anime.translation.push(e.translation);
+            if (!base_anime.translation.some(item => item.title === e.translation.title) && e.type.includes("anime")) base_anime.translation.push(e.translation);
 
         }
 
