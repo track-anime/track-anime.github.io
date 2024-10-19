@@ -42,6 +42,21 @@ var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&
 
 
 
+if (url_get.searchParams.get('qrcode')) {
+    // alert("1")
+    var url_get = new URL(window.location.href)
+    var qrcode_link = document.getElementById("qrcode_link")
+    var link = `${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`
+    // console.log(222, location.href)
+    get_qr_code(link)
+    qrcode_link.href = link
+    qrcode_link.textContent = "Ссылка на авторизацию. Не отправляйте другим людям."
+    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
+
+    url_get.searchParams.delete('qrcode')
+
+    qrcode_modal.show()
+}
 
 
 
@@ -62,23 +77,8 @@ base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-if(typeof base_anime?.translation[0]=="string") base_anime?.translation = []
-if(typeof base_anime?.translationActive[0]=="string") base_anime?.translationActive = []
-if (url_get.searchParams.get('qrcode')) {
-    // alert("1")
-    var url_get = new URL(window.location.href)
-    var qrcode_link = document.getElementById("qrcode_link")
-    var link = `${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`
-    // console.log(222, location.href)
-    get_qr_code(link)
-    qrcode_link.href = link
-    qrcode_link.textContent = "Ссылка на авторизацию. Не отправляйте другим людям."
-    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
-
-    url_get.searchParams.delete('qrcode')
-
-    qrcode_modal.show()
-}
+if(typeof base_anime?.translation[0]=="string") base_anime.translation = []
+if(typeof base_anime?.translationActive[0]=="string") base_anime.translationActive = []
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
