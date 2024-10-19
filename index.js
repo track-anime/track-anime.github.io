@@ -1286,12 +1286,12 @@ function ClearFavorite() {
 
 
 function VoiceSettingsMenu() {
-    if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
+/*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
         base_anime.translation = [];
     }
     if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
         base_anime.translationActive = [];
-    }
+    } */
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
