@@ -258,7 +258,7 @@ URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${
 
 translation_id = ""
 
-base_anime.translationActive.forEach(e => {
+base_anime?.translationActive?.forEach(e => {
     if (!translation_id == "") translation_id = translation_id + ","
     translation_id = `${translation_id}${e.id}`
 });
@@ -1285,13 +1285,24 @@ function ClearFavorite() {
 }
 
 
-function VoiceSettingsMenu() {
-/*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
-        base_anime.translation = [];
+function ClearBase() {
+    if (confirm("Очистить базу данных?")) {
+        base_anime = []
+        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        location.reload()
     }
-    if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
-        base_anime.translationActive = [];
-    } */
+}
+document.querySelector('#ClearButtonMenu').addEventListener('click', () => {
+    ClearBase()
+})
+
+function VoiceSettingsMenu() {
+    /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
+            base_anime.translation = [];
+        }
+        if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
+            base_anime.translationActive = [];
+        } */
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
@@ -1302,7 +1313,7 @@ function VoiceSettingsMenu() {
         checkbox.id = `voice-${index}`;
         checkbox.classList.add("form-check-input");
         checkbox.classList.add("voice_name_check");
-        
+
         // checkbox.checked = base_anime.translationActive.includes(voice.title);
         checkbox.checked = base_anime.translationActive.some(item => item.title === voice.title);
 
@@ -1886,7 +1897,8 @@ function VoiceTranslate(name) {
         // return base_anime.translationActive.includes(name)
         return base_anime.translationActive.some(item => item.title === name);
     } else {
-        base_anime.translationActive.title = voice;
+        if(!base_anime) base_anime = []
+        base_anime.translationActive = voice;
         return voice.includes(name)
     }
 }
