@@ -4,9 +4,11 @@ cd /D %~dp0
 
 
 scan.exe
-for /f "tokens=1-4 delims=. " %%a in ('echo %date%') do set dt=%%a-%%b-%%c
-for /f "tokens=1-4 delims=:., " %%a in ('echo %time%') do set tm=%%a-%%b-%%c
-set datetime=%dt%_%tm%
+@REM for /f "tokens=1-4 delims=. " %%a in ('echo %date%') do set dt=%%a-%%b-%%c
+@REM for /f "tokens=1-4 delims=:., " %%a in ('echo %time%') do set tm=%%a-%%b-%%c
+@REM set datetime=%dt%_%tm%
+for /f "delims=" %%a in ('powershell -Command "(Get-Date).ToUniversalTime().ToString('yyyy-MM-dd HH:mm:ss')"') do set datetime=%%a
+
 echo %datetime%
 echo %datetime% >vers.info
 git add .
