@@ -130,8 +130,10 @@ async function check_ver() {
     var response = await fetch('vers.info');
     if (!response.status) return
     var text = await response.text()
+    text = formatDate(text).moment.fromNow()
     console.log(text)
-    document.querySelector('.ver_info').title = `build: ${text}`
+    // document.querySelector('.ver_info').title = `build: ${text}`
+    document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
 
 }
 
