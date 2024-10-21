@@ -77,10 +77,10 @@ base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
         ///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
 if (base_anime?.translation) {
-    base_anime.translation.filter(item => typeof item !== 'string')
+    base_anime.translation = base_anime.translation.filter(item => typeof item !== 'string')
 }
 if (base_anime?.translationActive) {
-    base_anime.translationActive.filter(item => typeof item !== 'string')
+    base_anime.translationActive = base_anime.translationActive.filter(item => typeof item !== 'string');
 }
 
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
