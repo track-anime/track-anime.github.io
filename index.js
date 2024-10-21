@@ -74,6 +74,15 @@ if (base_anime.base) delete base_anime.base;
 if (base_anime.fav) delete base_anime.fav;
 
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
+
+        ///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
+if (base_anime?.translation) {
+    base_anime.translation.filter(item => typeof item !== 'string')
+}
+if (base_anime?.translationActive) {
+    base_anime.translationActive.filter(item => typeof item !== 'string')
+}
+
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // console.log("translation", base_anime?.translation[0] == "string", base_anime?.translationActive[0] == "string")
@@ -1296,6 +1305,21 @@ document.querySelector('#ClearButtonMenu').addEventListener('click', () => {
     ClearBase()
 })
 
+if (base_anime?.translation) {
+    if (typeof base_anime.translation[0] !== "string") {
+        // ClearBase()
+    }
+}
+if (base_anime?.translationActive) {
+    if (typeof base_anime.translationActive[0] !== "string") {
+        // ClearBase()
+    }
+}
+
+/*     if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
+        base_anime.translationActive = [];
+    } */
+
 function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
@@ -1897,7 +1921,7 @@ function VoiceTranslate(name) {
         // return base_anime.translationActive.includes(name)
         return base_anime.translationActive.some(item => item.title === name);
     } else {
-        if(!base_anime) base_anime = []
+        if (!base_anime) base_anime = []
         base_anime.translationActive = voice;
         return voice.includes(name)
     }
