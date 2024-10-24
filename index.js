@@ -460,6 +460,8 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
+    if(VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = "404.png"
+    console.log(e.image.original)
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
@@ -1538,8 +1540,11 @@ function add_cart(e) {
     target.classList.add('cart-target');
     cart.appendChild(target);
 
+    if(e.cover.includes("missing_original.jpg")) e.cover = "404.png"
+
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
+
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
     imgTop.classList.add('img-preview');
