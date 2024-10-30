@@ -1237,6 +1237,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "a75cb8a46f4e62ea58551a22ca7c5ba799bd34",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "e2741334a455d2a90833703cbd8c32ddf38f8f",
                                     "suffix": "",
                                     "type": "file"
@@ -4578,6 +4583,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "49778c7838c8a9089d4e5ca627d5dca1c77953",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "5eee09e8128627b8d7d3881b8b4c93d12e659b",
                                     "suffix": "",
                                     "type": "file"
@@ -7209,6 +7219,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "adee6596e1d8ed9a134a7ffbc1c9cf2f07c411",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "b26a95e99399c109bb6554019b0940fbf607e0",
                                     "suffix": "",
                                     "type": "file"
@@ -7598,6 +7613,11 @@
                             "children": [
                                 {
                                     "name": "0db6a621eeb5f029bfc80a97ff4caed53ce805",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "229c5b04dfa9bdf0c564d7d5d1fd363417edc1",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -9441,6 +9461,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "6dcf56636f590e0333c05be1648e2513cfc711",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "c2220c2e5c07c33246b0d05a9b4ff0c75ab2eb",
                                     "suffix": "",
                                     "type": "file"
@@ -10996,6 +11021,11 @@
         {
             "name": "shikimori_api.js",
             "suffix": ".js",
+            "type": "file"
+        },
+        {
+            "name": "shikimoru_graphql.htm",
+            "suffix": ".htm",
             "type": "file"
         },
         {

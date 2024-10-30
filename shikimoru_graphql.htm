@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>shikimoru_graphql</title>
+</head>
+<style>
+    body {
+        color: azure;
+        background-color: rgb(35, 35, 35);
+    }
+</style>
+
+<body>
+    <div>shikimoru_graphql</div>
+</body>
+<script>
+    async function fetchData() {
+  const query = `
+    query {
+      animes(page: 1, perPage: 5) {
+        nodes {
+          id
+          title {
+            romaji
+            english
+          }
+          episodes
+        }
+      }
+    }
+  `;
+
+  try {
+    const response = await fetch('//shikimori.one/api/doc/graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ query })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error('Ошибка:', error);
+  }
+}
+
+fetchData();
+
+</script>
+
+</html>
