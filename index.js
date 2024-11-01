@@ -564,8 +564,14 @@ function setVideoInfo(e) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`
+        console.log(e.id)
         if (ev.shiftKey) {
-            VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
+            window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
+            return
+            // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
+
+        }else{
+
         }
     })
 
@@ -578,9 +584,15 @@ function setVideoInfo(e) {
 
 
 
-    VideoInfo.info.KodikPlayer.addEventListener('click', () => {
+    VideoInfo.info.KodikPlayer.addEventListener('click', (ee) => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        console.log(e.id)
+        if(ee.shiftKey)
+        {
+            window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
+            return
+        }
 
         // VideoPlayer.contentWindow.location.href = e.link;
         VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
