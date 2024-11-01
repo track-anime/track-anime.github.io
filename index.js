@@ -976,7 +976,7 @@ async function sendWebhookMessageNoCover(id) {
                 username: sh_api.authorize ? sh_api.UserData.nickname : "нонейм",
                 avatar_url: sh_api.authorize ? sh_api.UserData.image.x32: "https://track-anime.github.io/favicon.png",
 
-                content: `Сообщение с ID: ${id} \n https://shikimori.one/animes/${id}`,
+                content: `ID: ${id} \n https://shikimori.one/animes/${id}`,
             }),
         });
 
