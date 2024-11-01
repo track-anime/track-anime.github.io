@@ -956,8 +956,10 @@ function getRandomInt(max) {
 }
 function getCover(id)
 {
+    
     if(covers_base[id]==undefined)
     {
+        console.log("getCover", id, `https://shikimori.one/animes/${id}`)
         sendWebhookMessageNoCover(id)
         return "404_static.png"
     }
