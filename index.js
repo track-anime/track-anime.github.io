@@ -958,9 +958,32 @@ function getCover(id)
 {
     if(covers_base[id]==undefined)
     {
+        sendWebhookMessageNoCover(id)
         return "404_static.png"
     }
     return covers_base[id]
+}
+
+async function sendWebhookMessageNoCover(id) {
+    try {
+        const response = await fetch(" '//discord.com/api/webhooks/1301792415442538607/n_w6Dsl94EPDLgiFapybqFhG4RE2WU8lnUBPp7LhC5Q2jmSi-Np-unKT6lRpJ32mxqZF'", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                content: `Сообщение с ID: ${id}`,
+            }),
+        });
+
+        if (!response.ok) {
+            throw new Error(`Ошибка при отправке webhook: ${response.statusText}`);
+        }
+
+        console.log('Сообщение успешно отправлено через webhook');
+    } catch (error) {
+        console.error('Ошибка при отправке webhook:', error);
+    }
 }
 
 getBackground()
