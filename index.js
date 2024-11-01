@@ -27,6 +27,7 @@ const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
 const CheckСensored = document.getElementById("CheckСensored")
+var  covers_base = []
 
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
@@ -37,6 +38,7 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
+get_covers_base() 
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
 
@@ -134,7 +136,21 @@ async function check_ver() {
     console.log(text)
     // document.querySelector('.ver_info').title = `build: ${text}`
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
+}
 
+async function get_covers_base() {
+    try {
+        const response = await fetch('covers.json'); 
+        if (!response.ok) {
+            throw new Error("!!!!!!!!!!!!!!!", `HTTP error! status: ${response.status}`);
+        }
+        // console.log("covers_base",response.text());
+        covers_base = await response.json();
+        console.log("covers_base",covers_base);
+        return covers_base; 
+    } catch (error) {
+        console.error('Ошибка загрузки данных:', error);
+    }
 }
 
 sh_api.get_user()
@@ -460,7 +476,7 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
-    if(VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = "404_static.png"
+    if(VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = getCover(e.id)
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
@@ -938,6 +954,15 @@ function GetFavUsersList(sh_user_fav) {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
+function getCover(id)
+{
+    if(covers_base[id]==undefined)
+    {
+        return "404_static.png"
+    }
+    return covers_base[id]
+}
+
 getBackground()
 function getBackground() {
     background = []
@@ -1538,8 +1563,7 @@ function add_cart(e) {
     const target = document.createElement('div');
     target.classList.add('cart-target');
     cart.appendChild(target);
-
-    if(e.cover.includes("missing_original.jpg")) e.cover = "404_static.png"
+    if(e.cover.includes("missing_original.jpg")) e.cover = getCover(e.shikimori)
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
