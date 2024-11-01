@@ -965,14 +965,15 @@ function getCover(id)
 }
 
 async function sendWebhookMessageNoCover(id) {
+    
     try {
-        const response = await fetch(" '//discord.com/api/webhooks/1301792415442538607/n_w6Dsl94EPDLgiFapybqFhG4RE2WU8lnUBPp7LhC5Q2jmSi-Np-unKT6lRpJ32mxqZF'", {
+        const response = await fetch("https://discord.com/api/webhooks/1301792415442538607/n_w6Dsl94EPDLgiFapybqFhG4RE2WU8lnUBPp7LhC5Q2jmSi-Np-unKT6lRpJ32mxqZF", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                content: `Сообщение с ID: ${id}`,
+                content: `Сообщение с ID: ${id} \n https://shikimori.one/animes/${id}`,
             }),
         });
 
