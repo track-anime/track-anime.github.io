@@ -973,6 +973,9 @@ async function sendWebhookMessageNoCover(id) {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
+                username: sh_api.authorize ? sh_api.UserData.nickname : "нонейм",
+                avatar_url: sh_api.authorize ? sh_api.UserData.image.x32: "https://track-anime.github.io/favicon.png",
+
                 content: `Сообщение с ID: ${id} \n https://shikimori.one/animes/${id}`,
             }),
         });
