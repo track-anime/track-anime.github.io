@@ -76,9 +76,7 @@ if (base_anime.base) delete base_anime.base;
 if (base_anime.fav) delete base_anime.fav;
 base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true  // Задаю календарь shikimori по умолчанию
 base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру по умолчанию
-console.log("CheckRepeats_", base_anime.CheckRepeats)
 base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов по умолчанию
-console.log("CheckRepeats_", base_anime.CheckRepeats)
 
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
@@ -138,7 +136,7 @@ async function check_ver() {
     var response = await fetch('vers.info');
     if (!response.status) return
     var text = await response.text()
-    text = formatDate(text).moment.fromNow()
+    text = moment(text, "YYYY-MM-DD HH:mm:ss").fromNow()
     console.log(text)
     // document.querySelector('.ver_info').title = `build: ${text}`
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
@@ -152,7 +150,7 @@ async function get_covers_base() {
         }
         // console.log("covers_base",response.text());
         covers_base = await response.json();
-        console.log("covers_base", covers_base);
+        // console.log("covers_base", covers_base);
         return covers_base;
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
@@ -295,7 +293,6 @@ base_anime?.translationActive?.forEach(e => {
     if (!translation_id == "") translation_id = translation_id + ","
     translation_id = `${translation_id}${e.id}`
 });
-console.log(translation_id)
 URLList = !translation_id == "" ? `${URLList}&translation_id=${translation_id}` : URLList
 
 URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
@@ -337,7 +334,6 @@ if (typeof base_anime.censored == "boolean") {
     CheckСensored.checked = base_anime.censored
 }
 if (typeof base_anime.CheckRepeats == "boolean") {
-    console.log("CheckRepeats_", base_anime.CheckRepeats)
     CheckRepeats_.checked = base_anime.CheckRepeats
 }
 
@@ -486,7 +482,7 @@ function setIImgPreview() {
 
 function CheckRepeats(id) {
     if(!base_anime.CheckRepeats) return
-    console.log("tttttt")
+    // console.log("tttttt")
     if (!anime_list_id.includes(id)) {
         anime_list_id.push(id)
         return false
