@@ -27,7 +27,9 @@ const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
 const CheckСensored = document.getElementById("CheckСensored")
-var  covers_base = []
+const CheckRepeats_ = document.getElementById("CheckRepeats")
+var anime_list_id = []
+var covers_base = []
 
 
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
@@ -38,7 +40,7 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
-get_covers_base() 
+get_covers_base()
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
 
@@ -70,14 +72,18 @@ if (base_anime) {
 } else {
     base_anime = {}
 }
-base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true // Задаю календарь shikimori по умолчанию
-base_anime.censored = base_anime.censored ? base_anime.censored : false
 if (base_anime.base) delete base_anime.base;
 if (base_anime.fav) delete base_anime.fav;
+base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true  // Задаю календарь shikimori по умолчанию
+base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру по умолчанию
+console.log("CheckRepeats_", base_anime.CheckRepeats)
+base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов по умолчанию
+console.log("CheckRepeats_", base_anime.CheckRepeats)
 
 base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
-        ///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
+///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
+
 if (base_anime?.translation) {
     base_anime.translation = base_anime.translation.filter(item => typeof item !== 'string')
 }
@@ -140,14 +146,14 @@ async function check_ver() {
 
 async function get_covers_base() {
     try {
-        const response = await fetch('covers.json'); 
+        const response = await fetch('covers.json');
         if (!response.ok) {
             throw new Error("!!!!!!!!!!!!!!!", `HTTP error! status: ${response.status}`);
         }
         // console.log("covers_base",response.text());
         covers_base = await response.json();
-        console.log("covers_base",covers_base);
-        return covers_base; 
+        console.log("covers_base", covers_base);
+        return covers_base;
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
     }
@@ -316,12 +322,23 @@ CheckСensored.addEventListener('change', function () {
     // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 })
+CheckRepeats_.addEventListener('change', function () {
+    // hide_date_cart(this.checked)
+    base_anime.CheckRepeats = this.checked
+    // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    console.log("CheckRepeats_", base_anime.CheckRepeats)
+})
 
 if (typeof base_anime.CalendarType == "boolean") {
     CheckCalendarType.checked = base_anime.CalendarType
 }
 if (typeof base_anime.censored == "boolean") {
     CheckСensored.checked = base_anime.censored
+}
+if (typeof base_anime.CheckRepeats == "boolean") {
+    console.log("CheckRepeats_", base_anime.CheckRepeats)
+    CheckRepeats_.checked = base_anime.CheckRepeats
 }
 
 
@@ -467,6 +484,18 @@ function setIImgPreview() {
     });
 }
 
+function CheckRepeats(id) {
+    if(!base_anime.CheckRepeats) return
+    console.log("tttttt")
+    if (!anime_list_id.includes(id)) {
+        anime_list_id.push(id)
+        return false
+    } else {
+        // console.log(id)
+        return true
+    }
+}
+
 function setVideoInfo(e) {
     // console.log(e)
     load.show(false)
@@ -476,7 +505,7 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
-    if(VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = getCover(e.id)
+    if (VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = getCover(e.id)
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
@@ -570,7 +599,7 @@ function setVideoInfo(e) {
             return
             // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
-        }else{
+        } else {
 
         }
     })
@@ -588,8 +617,7 @@ function setVideoInfo(e) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         console.log(e.id)
-        if(ee.shiftKey)
-        {
+        if (ee.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
             return
         }
@@ -966,11 +994,9 @@ function GetFavUsersList(sh_user_fav) {
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
-function getCover(id)
-{
-    
-    if(covers_base[id]==undefined)
-    {
+function getCover(id) {
+
+    if (covers_base[id] == undefined) {
         console.log("getCover", id, `https://shikimori.one/animes/${id}`)
         sendWebhookMessageNoCover(id)
         return "404_static.png"
@@ -979,7 +1005,7 @@ function getCover(id)
 }
 
 async function sendWebhookMessageNoCover(id) {
-    
+
     try {
         const response = await fetch("https://discord.com/api/webhooks/1301792415442538607/n_w6Dsl94EPDLgiFapybqFhG4RE2WU8lnUBPp7LhC5Q2jmSi-Np-unKT6lRpJ32mxqZF", {
             method: 'POST',
@@ -988,7 +1014,7 @@ async function sendWebhookMessageNoCover(id) {
             },
             body: JSON.stringify({
                 username: sh_api.authorize ? sh_api.UserData.nickname : "нонейм",
-                avatar_url: sh_api.authorize ? sh_api.UserData.image.x32: "https://track-anime.github.io/favicon.png",
+                avatar_url: sh_api.authorize ? sh_api.UserData.image.x32 : "https://track-anime.github.io/favicon.png",
 
                 content: `ID: ${id} \n https://shikimori.one/animes/${id}`,
             }),
@@ -1365,7 +1391,7 @@ function ClearFavorite() {
 
 function ClearBase() {
     if (confirm("Очистить базу данных?")) {
-        base_anime = []
+        base_anime = {}
         localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
         location.reload()
     }
@@ -1604,7 +1630,7 @@ function add_cart(e) {
     const target = document.createElement('div');
     target.classList.add('cart-target');
     cart.appendChild(target);
-    if(e.cover.includes("missing_original.jpg")) e.cover = getCover(e.shikimori)
+    if (e.cover.includes("missing_original.jpg")) e.cover = getCover(e.shikimori)
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
@@ -1992,7 +2018,7 @@ function VoiceTranslate(name) {
         // return base_anime.translationActive.includes(name)
         return base_anime.translationActive.some(item => item.title === name);
     } else {
-        if (!base_anime) base_anime = []
+        if (!base_anime) base_anime = {}
         base_anime.translationActive = voice;
         return voice.includes(name)
     }
@@ -2136,7 +2162,7 @@ function GetKodiScan(data, revers) {
             return
         }
         if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
-
+            if (CheckRepeats(e.shikimori_id)) return
             if (VoiceTranslate(e.translation.title)) {
 
                 if (!e.shikimori_id) return
