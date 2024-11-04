@@ -66,20 +66,22 @@ if (url_get.searchParams.get('qrcode')) {
 
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
-var base_anime = localStorage.getItem('BaseAnime')
-if (base_anime) {
-    base_anime = JSON.parse(base_anime)
-} else {
-    base_anime = {}
+function Get_base_anime() {
+    var base_anime = localStorage.getItem('BaseAnime')
+    if (base_anime) {
+        base_anime = JSON.parse(base_anime)
+    } else {
+        base_anime = {}
+    }
+    if (base_anime.base) delete base_anime.base;
+    if (base_anime.fav) delete base_anime.fav;
+    base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true  // Задаю календарь shikimori по умолчанию
+    base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру по умолчанию
+    base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов по умолчанию
+
+    base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 }
-if (base_anime.base) delete base_anime.base;
-if (base_anime.fav) delete base_anime.fav;
-base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true  // Задаю календарь shikimori по умолчанию
-base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру по умолчанию
-base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов по умолчанию
-
-base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
-
+Get_base_anime()
 ///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
 
 if (base_anime?.translation) {
@@ -117,6 +119,7 @@ setInterval(() => {
         window.history.pushState({}, '', url_get);
     };
     setIImgPreview()
+    Get_base_anime()
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -481,7 +484,7 @@ function setIImgPreview() {
 }
 
 function CheckRepeats(id) {
-    if(!base_anime.CheckRepeats) return
+    if (!base_anime.CheckRepeats) return
     // console.log("tttttt")
     if (!anime_list_id.includes(id)) {
         anime_list_id.push(id)
