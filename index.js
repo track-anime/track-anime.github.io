@@ -28,6 +28,7 @@ const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
 const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
+var base_anime = {}
 var anime_list_id = []
 var covers_base = []
 
@@ -67,7 +68,7 @@ if (url_get.searchParams.get('qrcode')) {
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
 function Get_base_anime() {
-    var base_anime = localStorage.getItem('BaseAnime')
+    base_anime = localStorage.getItem('BaseAnime')
     if (base_anime) {
         base_anime = JSON.parse(base_anime)
     } else {
@@ -80,6 +81,17 @@ function Get_base_anime() {
     base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов по умолчанию
 
     base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
+
+    if (typeof base_anime.CalendarType == "boolean") {
+        CheckCalendarType.checked = base_anime.CalendarType
+    }
+    if (typeof base_anime.censored == "boolean") {
+        CheckСensored.checked = base_anime.censored
+    }
+    if (typeof base_anime.CheckRepeats == "boolean") {
+        CheckRepeats_.checked = base_anime.CheckRepeats
+    }
+    
 }
 Get_base_anime()
 ///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
