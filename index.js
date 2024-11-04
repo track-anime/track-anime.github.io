@@ -136,7 +136,7 @@ async function check_ver() {
     var response = await fetch('vers.info');
     if (!response.status) return
     var text = await response.text()
-    text = moment.utc(text, "YYYY-MM-DD HH:mm:ss").fromNow()
+    text = moment.utc(text, "YYYY-MM-DD HH:mm:ss").local().fromNow()
     console.log(text)
     // document.querySelector('.ver_info').title = `build: ${text}`
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
