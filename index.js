@@ -91,7 +91,7 @@ function Get_base_anime() {
     if (typeof base_anime.CheckRepeats == "boolean") {
         CheckRepeats_.checked = base_anime.CheckRepeats
     }
-    
+
 }
 Get_base_anime()
 ///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
@@ -322,20 +322,17 @@ ChecDataCart.addEventListener('change', function () {
 hide_date_cart()
 
 CheckCalendarType.addEventListener('change', function () {
-    // hide_date_cart(this.checked)
     base_anime.CalendarType = this.checked
     console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     if (url_get.searchParams.get("calendar")) addCalendar()
 })
 CheckСensored.addEventListener('change', function () {
-    // hide_date_cart(this.checked)
     base_anime.censored = this.checked
     // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 })
 CheckRepeats_.addEventListener('change', function () {
-    // hide_date_cart(this.checked)
     base_anime.CheckRepeats = this.checked
     // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -388,7 +385,6 @@ function get_qr_code(text, el) {
     // sh_refresh_token
     // url_get.searchParams.set("token", `${UserID}`)
 }
-
 function hide_date_cart(tr) {
     document.head.appendChild(styleDateCart)
     if (typeof tr != "boolean") {
@@ -398,6 +394,7 @@ function hide_date_cart(tr) {
     // console.log(121, tr)
 
     // ChecDataCart.checked = tr
+    
 
     if (tr == true) {
         styleDateCart.textContent = `
@@ -1762,8 +1759,10 @@ function add_cart(e) {
     }
     return cart
 }
-
+var hide_date_cart_num = 0
 function add_card_ned(e) {
+
+
     const cart = document.createElement('div');
     cart.classList.add("cart_")
     // cart.classList.add("bg-dark")
@@ -1779,6 +1778,12 @@ function add_card_ned(e) {
         ${e.cart_data_new.dat}<br class="br">►</div>
     </div>
     `
+    if (hide_date_cart_num < 15) {
+        hide_date_cart_num = hide_date_cart_num + 1
+    } else {
+        // console.log(hide_date_cart_num)
+        cart.setAttribute("style", "display: none !important;");
+    }
     return cart
 }
 
