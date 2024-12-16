@@ -28,6 +28,8 @@ const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
 const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
+// const getCoverURL = "http://107.173.19.4/cover.php?id="
+const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
 var base_anime = {}
 var anime_list_id = []
 var covers_base = []
@@ -513,7 +515,7 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
-    if (VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = `http://107.173.19.4/cover.php?id=${e.id}`
+    if (VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
@@ -1638,7 +1640,7 @@ function add_cart(e) {
     const target = document.createElement('div');
     target.classList.add('cart-target');
     cart.appendChild(target);
-    if (e.cover.includes("missing_original.jpg")) e.cover = `http://107.173.19.4/cover.php?id=${e.shikimori}`
+    if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
