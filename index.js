@@ -1643,7 +1643,7 @@ function add_cart(e) {
     if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
 
     const imgTop = document.createElement('div');
-    imgTop.style.backgroundImage = `url(${e.cover}`;
+    imgTop.style.backgroundImage = `url(${e.cover}), url(404.jpg)`;
     
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
