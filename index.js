@@ -1643,7 +1643,6 @@ function add_cart(e) {
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}`;
     
-
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
     imgTop.classList.add('img-preview');
