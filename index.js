@@ -30,7 +30,7 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://track-anime.dygdyg.ru:4443?id="
+const getCoverURL = "https://track-anime.dygdyg.ru:4443/cover.php?id="
 var base_anime = {}
 var anime_list_id = []
 var covers_base = []
