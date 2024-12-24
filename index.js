@@ -1642,7 +1642,9 @@ function add_cart(e) {
     const target = document.createElement('div');
     target.classList.add('cart-target');
     cart.appendChild(target);
-    if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
+    // if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
+    e.cover = `${getCoverURL}${e.shikimori}`
+
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}), url(404.jpg)`;
