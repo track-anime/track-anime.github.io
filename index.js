@@ -30,7 +30,8 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://server.dygdyg.ru/cover.php?id="
+// const getCoverURL = "https://server.dygdyg.ru/cover.php?id="
+const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
 var covers_base = []
@@ -508,14 +509,15 @@ function CheckRepeats(id) {
 }
 
 function setVideoInfo(e) {
-    // console.log(e)
+    console.log(111, e)
     load.show(false)
     var html
     var tmp45353 = ""
 
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
-    VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
+    VideoInfo.info.cover.src = `${getCoverURL}${e.id}.jpg`;
+    // console.log(`${getCoverURL}${e.id}`)
     // VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     // if (VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
@@ -1642,8 +1644,8 @@ function add_cart(e) {
     const target = document.createElement('div');
     target.classList.add('cart-target');
     cart.appendChild(target);
-    if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
-    // e.cover = `${getCoverURL}${e.shikimori}`
+    // if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
+    e.cover = `${getCoverURL}${e.shikimori}.jpg`
 
 
     const imgTop = document.createElement('div');
