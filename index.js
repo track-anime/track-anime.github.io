@@ -515,10 +515,12 @@ function setVideoInfo(e) {
 
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
-    // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
+    
     // console.log(`${getCoverURL}${e.id}`)
-    // VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
+    VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
+    console.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
+    VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
