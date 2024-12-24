@@ -517,6 +517,8 @@ function setVideoInfo(e) {
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
     
     // console.log(`${getCoverURL}${e.id}`)
+
+    VideoInfo.info.cover.src = `cover.jpg`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     console.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
@@ -1074,16 +1076,6 @@ function getChapter(name) {
     name ? document.querySelector(name).classList.remove("hide") : null
 }
 
-closeDialogButton.addEventListener('click', () => {
-    VideoPlayerAnime.modal.hide();
-    DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
-    url_get.searchParams.delete("shikimori_id")
-    url_get.searchParams.delete("id")
-
-    window.history.pushState({}, '', url_get);
-    VideoPlayer.contentWindow.location.href = "loading.htm";
-    return
-});
 
 document.getElementById("list_calendar_Button").addEventListener('mousedown', async (e) => {
 
@@ -1131,17 +1123,36 @@ document.getElementById("User_Logaut_button").addEventListener('click', async ()
 });
 
 
-/* VideoPlayerAnime.addEventListener("close", () => {
-    document.title = "Track Anime By ДугДуг"
-}); */
+// VideoPlayerAnime.addEventListener("close", () => {
+//     document.title = "Track Anime By ДугДуг"
+// });
 
 VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
-    // VideoPlayerAnime.modal.focus()
-    document.title = "Track Anime By ДугДуг"
-    url_get.searchParams.delete("shikimori_id")
-    window.history.pushState({}, '', url_get);
-    SetColorCartFav()
+    closeDialogButtonEvent()
+    return
 })
+
+closeDialogButton.addEventListener('click', () => {
+    closeDialogButtonEvent()
+    return
+});
+
+function closeDialogButtonEvent()
+{
+    VideoPlayerAnime.modal.hide();
+    DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
+    url_get.searchParams.delete("shikimori_id")
+    url_get.searchParams.delete("id")
+
+    window.history.pushState({}, '', url_get);
+    VideoPlayer.contentWindow.location.href = "loading.htm";
+    VideoInfo.info.cover.src = `cover.jpg`;
+
+
+    document.title = "Track Anime By ДугДуг"
+    SetColorCartFav()
+}
+
 
 
 // window.onscroll = function () {
