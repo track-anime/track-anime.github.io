@@ -516,7 +516,6 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
     
-    // console.log(`${getCoverURL}${e.id}`)
 
     VideoInfo.info.cover.src = `cover.jpg`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
@@ -1661,7 +1660,7 @@ function add_cart(e) {
 
 
     const imgTop = document.createElement('div');
-    imgTop.style.backgroundImage = `url(${e.cover}), url(404.jpg)`;
+    imgTop.style.backgroundImage = `url(${getCoverURL}${e.shikimori}), url(${e.cover}),  url(404.jpg)`;
     
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
