@@ -1660,7 +1660,7 @@ function add_cart(e) {
 
 
     const imgTop = document.createElement('div');
-    imgTop.style.backgroundImage = `url(${getCoverURL}${e.shikimori}), url(${e.cover}),  url(404.jpg)`;
+    imgTop.style.backgroundImage = `url(${e.cover}),  url(404.jpg)`;
     
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
