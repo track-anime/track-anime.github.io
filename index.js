@@ -28,6 +28,8 @@ const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
 const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
+const CheckReleased_ = document.getElementById("CheckReleased")
+
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
 const getCoverURL = "https://server.dygdyg.ru/cover.php?id="
@@ -79,9 +81,10 @@ function Get_base_anime() {
     }
     if (base_anime.base) delete base_anime.base;
     if (base_anime.fav) delete base_anime.fav;
-    base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true  // Задаю календарь shikimori по умолчанию
-    base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру по умолчанию
-    base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов по умолчанию
+    base_anime.CalendarType = typeof base_anime.CalendarType == "boolean" ? base_anime.CalendarType : true  // Задаю календарь shikimori (по умолчанию включено)
+    base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру (по умолчанию выключено)
+    base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов (по умолчанию выключено)
+    base_anime.CheckReleased = typeof base_anime.CheckReleased == "boolean" ? base_anime.CheckReleased : false // Задаёт вывод только релизнутых аниме (по умолчанию выключено)
 
     base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
@@ -93,6 +96,10 @@ function Get_base_anime() {
     }
     if (typeof base_anime.CheckRepeats == "boolean") {
         CheckRepeats_.checked = base_anime.CheckRepeats
+    }
+    if (typeof base_anime.CheckReleased == "boolean") {
+        CheckReleased_.checked = base_anime.CheckReleased
+
     }
 
 }
@@ -313,6 +320,8 @@ base_anime?.translationActive?.forEach(e => {
 });
 URLList = !translation_id == "" ? `${URLList}&translation_id=${translation_id}` : URLList
 
+URLList = base_anime.CheckReleased == true ? `${URLList}&anime_status=released` : URLList
+
 URLListStart = URLList  // Обновляем ссылку после пррименения гет запросов
 
 
@@ -341,6 +350,13 @@ CheckRepeats_.addEventListener('change', function () {
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     console.log("CheckRepeats_", base_anime.CheckRepeats)
 })
+CheckReleased_.addEventListener('change', function () {
+    base_anime.CheckReleased = this.checked
+    // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    console.log("CheckReleased_", base_anime.CheckReleased)
+    location.reload()
+})
 
 if (typeof base_anime.CalendarType == "boolean") {
     CheckCalendarType.checked = base_anime.CalendarType
@@ -350,6 +366,9 @@ if (typeof base_anime.censored == "boolean") {
 }
 if (typeof base_anime.CheckRepeats == "boolean") {
     CheckRepeats_.checked = base_anime.CheckRepeats
+}
+if (typeof base_anime.CheckReleased == "boolean") {
+    CheckReleased_.checked = base_anime.CheckReleased
 }
 
 
@@ -1519,7 +1538,7 @@ async function getCalendarSh() {
     // ned_shikimori.classList.add("ned_shikimori")
     var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}`);
     const data = await response.json();
-    console.log("dasdasdasdasd", data)
+    // console.log("dasdasdasdasd", data)
     data.forEach(e => {
         const e1 = {
             "title": `${e.anime.russian}`,
@@ -2130,7 +2149,7 @@ async function GetKodi(seartch, revers) {
                 endid = endid ? endid : dat.results[0].id
 
             }
-
+            console.log(dat)
         } else {
 
             getHome(true)
