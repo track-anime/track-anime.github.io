@@ -1895,6 +1895,10 @@ function showToast(e, t) {
         toast1.hide();
     })
 
+    setTimeout(() => {
+        toast1.hide();
+    }, 60+60+1000);
+
     // toast0.show();
     // toast.dispose()
 }
