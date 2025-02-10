@@ -33,6 +33,7 @@ const CheckReleased_ = document.getElementById("CheckReleased")
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
 const getCoverURL = "https://server.dygdyg.ru/cover.php?id="
+// const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
 var covers_base = []
@@ -1676,7 +1677,7 @@ function add_cart(e) {
     target.classList.add('cart-target');
     cart.appendChild(target);
     if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
-    e.cover = `${getCoverURL}${e.shikimori}`
+    // e.cover = `${getCoverURL}${e.shikimori}`
 
 
     const imgTop = document.createElement('div');
