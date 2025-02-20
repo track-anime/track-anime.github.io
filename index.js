@@ -543,7 +543,7 @@ function setVideoInfo(e) {
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
     }else{
-        VideoInfo.info.cover.src = `${getCoverURL}${e.id}%url=${VideoInfo.info.cover.src}`
+        VideoInfo.info.cover.src = `${getCoverURL}${e.id}&url=${VideoInfo.info.cover.src}`
     }
     
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
