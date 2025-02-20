@@ -132,6 +132,10 @@ if (location.hostname == "127.0.0.1") {
 } else {
     document.getElementById("fav").href = "favicon.png"
 }
+if(url_get.searchParams.get('proxy')){
+    document.getElementById("fav").href = "favicon_proxy.png"
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
