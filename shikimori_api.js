@@ -12,6 +12,9 @@ sh_api.search_ev = new CustomEvent("sh_api_search", { bubbles: true })
 sh_api.get_anime_ev = new CustomEvent("sh_get_anime", { bubbles: true })
 
 sh_api.code = sh_api.url_get.searchParams.get('code')
+is_proxy = sh_api.url_get.searchParams.get('proxy')
+proxy = sh_api.url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy.php?url=":""
+console.log("proxy", is_proxy, proxy)
 sh_api.status_lable = [
     "watching",
     "completed",
@@ -54,8 +57,8 @@ sh_api.getCookie_time = (name) => {
 }
 
 sh_api.get_key = () => {
-    // window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
-    location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`
+    // window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+    location.href = `${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`
     return
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
@@ -71,7 +74,7 @@ sh_api.add_token = () => {
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
         return "no_key"
-        window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+        window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
         return
     }
     /* 
@@ -82,7 +85,7 @@ sh_api.add_token = () => {
             return
         } */
 
-    fetch('https://shikimori.one/oauth/token', {
+    fetch('${proxy}https://shikimori.one/oauth/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -100,7 +103,7 @@ sh_api.add_token = () => {
             sh_api.url_get.searchParams.delete("code")
             window.history.pushState({}, '', sh_api.url_get);
 
-            // if (data.error == "invalid_grant") window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+            // if (data.error == "invalid_grant") window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
             // location.reload()
             sh_api.authorize = true
             sh_api.get_user()
@@ -159,10 +162,10 @@ sh_api.refresh_token = () => {
     if (!sh_api.getCookie("sh_refresh_token")) {
         sh_api.authorize = false
         return "No_Authorize"
-        window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+        window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
     }
 
-    fetch('https://shikimori.one/oauth/token', {
+    fetch('${proxy}https://shikimori.one/oauth/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -175,7 +178,7 @@ sh_api.refresh_token = () => {
             console.log("rf", data);
             if(typeof data.access_token=="string")document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
             if(typeof data.refresh_token=="string")document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT"`
-            if (data.error == "invalid_grant") window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
+            if (data.error == "invalid_grant") window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
             sh_api.authorize = true
             sh_api.get_user()
             // location.reload()
@@ -190,8 +193,8 @@ sh_api.get_user = (user, isanother) => {
         if (ot == "No_Authorize" || ot == "await") return ot
     }
     // console.log(encodeURI(user))
-    var url = `https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
-    if (isanother) url = `https://shikimori.one/api/users/${encodeURI(user)}`
+    var url = `${proxy}https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `${proxy}https://shikimori.one/api/users/${encodeURI(user)}`
     fetch(url)
         .then(response => {
             sh_api.another.status = response.status
@@ -237,8 +240,8 @@ sh_api.get_favorit = (sh_user, isanother) => {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
     }
-    var url = `https://shikimori.one/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000&access_token=${sh_api.getCookie("sh_access_token")}`
-    if (isanother) url = `https://shikimori.one/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000`
+    var url = `${proxy}https://shikimori.one/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000&access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `${proxy}https://shikimori.one/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000`
 
     fetch(url)
         .then(response => {
@@ -276,7 +279,7 @@ sh_api.get_favorit = (sh_user, isanother) => {
 
 sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет аниме в избранном
     if (!sh_api.authorize) return console.log("Вы не авторизированы")
-    var url = `https://shikimori.one/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
+    var url = `${proxy}https://shikimori.one/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'POST',
         // credentials: 'include',
@@ -305,7 +308,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 sh_api.get_anime = (id) => {
     // console.log(id)
-    var url = `https://shikimori.one/api/animes/${id}`
+    var url = `${proxy}https://shikimori.one/api/animes/${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
         .then(response => {
@@ -338,7 +341,7 @@ sh_api.get_anime = (id) => {
 }
 
 sh_api.search = (seartch, censored=true) => {
-    var url = `https://shikimori.one/api/animes?with_material_data=true&censored=${censored}&limit=50&search=${seartch}`
+    var url = `${proxy}https://shikimori.one/api/animes?with_material_data=true&censored=${censored}&limit=50&search=${seartch}`
 
     fetch(url)
         .then(response => {
@@ -375,7 +378,7 @@ sh_api.search = (seartch, censored=true) => {
 ///////////////////////
 
 sh_api.DelUserRates = (id, sl) => {
-    var url = `https://shikimori.one/api/v2/user_rates/${id}?access_token=${sh_api.getCookie("sh_access_token")}`
+    var url = `${proxy}https://shikimori.one/api/v2/user_rates/${id}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'DELETE',
 
