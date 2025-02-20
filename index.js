@@ -547,6 +547,7 @@ function setVideoInfo(e) {
     }
     
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
+    
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
@@ -1464,14 +1465,23 @@ if (base_anime?.translationActive) {
 /*     if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
         base_anime.translationActive = [];
     } */
+async function get_translate_kodik_list()
+{
+    if (!base_anime?.translation)base_anime.translation = [];
+        dat = await httpGet("https://kodikapi.com/translations?token=45c53578f11ecfb74e31267b634cc6a8")
+        console.log(dat, base_anime?.translation)
+    base_anime.translation = dat
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime))
+}
 
-function VoiceSettingsMenu() {
+async function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
         }
         if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
             base_anime.translationActive = [];
         } */
+    await get_translate_kodik_list()
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
