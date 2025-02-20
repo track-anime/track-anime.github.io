@@ -2372,6 +2372,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "29626aa55f57c638e97916a9c7c10211d1465d",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "2dd63f9f50e4c06534b074cbc6ffdd1f2fe6ba",
                                     "suffix": "",
                                     "type": "file"
@@ -7945,6 +7950,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "7f5884bbb9404a31a9030e47f3ce7f92f8c119",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "d16894b7b8af3eaed0cf44ff9df35d169153d3",
                                     "suffix": "",
                                     "type": "file"
@@ -8069,6 +8079,11 @@
                                 },
                                 {
                                     "name": "1b92eb455f9cbb62dcfdcf6ca9eae35d73a878",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "3e07ac28157c05d7660ebbfb8e789b73e87261",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -8249,6 +8264,11 @@
                                 },
                                 {
                                     "name": "832425075b08ee55449e69ece3d0cad6465215",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "aa768f87c5de059a621be0da400d6f2827a9cd",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -8856,6 +8876,11 @@
                                 },
                                 {
                                     "name": "a4886530eabe257c057bebdee3e0b66fdc2dad",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "b78abf8cd992f690a8342f76944d7c3b1dfac5",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -9480,6 +9505,11 @@
                                 },
                                 {
                                     "name": "f90bd5872e40533d14477c542dedf3a7c889e4",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "fbf56829653d8495683a12589cdf0fdd095a62",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -13576,8 +13606,18 @@
             "type": "file"
         },
         {
+            "name": "Desktop.ini",
+            "suffix": ".ini",
+            "type": "file"
+        },
+        {
             "name": "discord_logo.png",
             "suffix": ".png",
+            "type": "file"
+        },
+        {
+            "name": "favicon.ico",
+            "suffix": ".ico",
             "type": "file"
         },
         {
@@ -13648,6 +13688,11 @@
         {
             "name": "pedro.gif",
             "suffix": ".gif",
+            "type": "file"
+        },
+        {
+            "name": "qfmhy1pgi6.ico",
+            "suffix": ".ico",
             "type": "file"
         },
         {
