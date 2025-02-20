@@ -12,9 +12,7 @@ sh_api.search_ev = new CustomEvent("sh_api_search", { bubbles: true })
 sh_api.get_anime_ev = new CustomEvent("sh_get_anime", { bubbles: true })
 
 sh_api.code = sh_api.url_get.searchParams.get('code')
-is_proxy = sh_api.url_get.searchParams.get('proxy')
 proxy = sh_api.url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy.php?url=":""
-console.log("proxy", is_proxy, proxy)
 sh_api.status_lable = [
     "watching",
     "completed",
