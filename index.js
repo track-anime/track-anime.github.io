@@ -30,12 +30,6 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
 
-
-proxy = sh_api.proxy?sh_api.proxy:url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy.php?url=":""
-// url_get.searchParams.delete('proxy')
-// console.log(11111111, sh_api.proxy)
-// proxy = url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy_new.php?url=":""
-// console.log("proxy2", proxy)
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
 const getCoverURL = "https://server.dygdyg.ru/cover.php?id="
@@ -50,11 +44,9 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 // const URLSearch = "https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&title="
-var URLList = `https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8`//&countries=Япония"
-var URLCalendar = `https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing`//&anime_kind=tv`//&countries=Япония`
-var URLListStart = `https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8`
-// URLList = proxy + URLList
-// console.log(URLList)
+var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
+var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
 get_covers_base()
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
@@ -136,10 +128,6 @@ if (location.hostname == "127.0.0.1") {
 } else {
     document.getElementById("fav").href = "favicon.png"
 }
-if(url_get.searchParams.get('proxy')){
-    document.getElementById("fav").href = "favicon_proxy.png"
-}
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -550,7 +538,7 @@ function setVideoInfo(e) {
     
 
     VideoInfo.info.cover.src = `cover.jpg`;
-    VideoInfo.info.cover.src = `${proxy}https://shikimori.one${e.image.original}`;
+    VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     console.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
@@ -559,7 +547,6 @@ function setVideoInfo(e) {
     }
     
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
-    
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
     VideoInfo.info.title.querySelector("a").href = e.russian ? `${window.location.origin + window.location.pathname}?seartch=${e.russian ? encodeURIComponent(e.russian) : "404.html"}` : "404.html";
@@ -586,7 +573,7 @@ function setVideoInfo(e) {
     e.studios.forEach(e1 => {
         console.log(e1)
         tmp45353 = tmp45353 != "" ? tmp45353 + ", " : tmp45353
-        tmp45353 = tmp45353 + `<a style="cursor: pointer;"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><img class="img-preview"style="height: 20px;" src="${e1.image ? `${proxy}https://shikimori.one/${e1.image}` : ""}"> ${e1.name}</a>`
+        tmp45353 = tmp45353 + `<a style="cursor: pointer;"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><img class="img-preview"style="height: 20px;" src="${e1.image ? `https://shikimori.one/${e1.image}` : ""}"> ${e1.name}</a>`
     });
 
     VideoInfo.info.studios.innerHTML = `<p class="card-text">Студии: ${tmp45353}</p>`
@@ -686,12 +673,12 @@ function setVideoInfo(e) {
     e.screenshots?.forEach(el => {
         html = html + `
         <div class="carousel-item w-100">
-        <img src="${proxy}https://shikimori.one${el.original}"
+        <img src="https://shikimori.one${el.original}"
             class="d-block w-100 img-preview"  
             alt="...">
     </div>
     ` });
-    /*e.videos?.forEach(el => {
+    e.videos?.forEach(el => {
         // return
         html2 = html2 + `
         <div class="carousel-item">
@@ -702,15 +689,15 @@ function setVideoInfo(e) {
                         <p>${el.name} / ${el.hosting}</p>
                     </div>
         </div>
-    ` });*/
+    ` });
 
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
-    // e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
+    e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
     VideoInfo.info.screenshots.innerHTML = html;
-    // VideoInfo.info.videos.innerHTML = html2;
+    VideoInfo.info.videos.innerHTML = html2;
     VideoInfo.info.screenshots.querySelectorAll(".carousel-item")[0]?.classList.add("active");
-    // VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
+    VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
 
     html = "Жанры: "
     e.genres?.forEach(el => {
@@ -1213,8 +1200,8 @@ async function get_settings() {
                     `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
                 ) */
         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
-            `${proxy}https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
-            `${proxy}https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
+            `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
+            `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
         )
         if (e.code == "404") {
             url_get.searchParams.delete("id")
@@ -1463,11 +1450,6 @@ document.querySelector('#ClearButtonMenu').addEventListener('click', () => {
     ClearBase()
 })
 
-document.querySelector('#proxy_enable').addEventListener('click', () => {
-    let a =(new URL(window.location.href))
-    a.searchParams.set("proxy", true)
-    window.open(a.href, '_blank')
-})
 if (base_anime?.translation) {
     if (typeof base_anime.translation[0] !== "string") {
         // ClearBase()
@@ -1482,23 +1464,14 @@ if (base_anime?.translationActive) {
 /*     if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
         base_anime.translationActive = [];
     } */
-async function get_translate_kodik_list()
-{
-    if (!base_anime?.translation)base_anime.translation = [];
-        dat = await httpGet("https://kodikapi.com/translations?token=45c53578f11ecfb74e31267b634cc6a8")
-        console.log(dat, base_anime?.translation)
-    base_anime.translation = dat
-    localStorage.setItem('BaseAnime', JSON.stringify(base_anime))
-}
 
-async function VoiceSettingsMenu() {
+function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
         }
         if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
             base_anime.translationActive = [];
         } */
-    await get_translate_kodik_list()
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
@@ -1569,7 +1542,7 @@ async function getCalendarSh() {
     // const ned_shikimori = document.querySelector(".ned_shikimori")
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
-    var response = await fetch(`${proxy}https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}`);
+    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}`);
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {

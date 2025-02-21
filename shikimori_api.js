@@ -67,12 +67,20 @@ sh_api.add_token = () => {
     /*     if (sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_access_token")!="undefined") {
             return sh_api.getCookie("sh_access_token")
         } */
+    if (sh_api.url_get.searchParams.get('qrcode')) return
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
         return "no_key"
         window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
         return
     }
+    /* 
+        if (!sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_refresh_token") && sh_api.getCookie("sh_refresh_token")!="undefined") {
+            console.log("reload_token")
+            sh_api.refresh_token()
+    
+            return
+        } */
 
     fetch('https://shikimori.one/oauth/token', {
         method: 'POST',
@@ -80,7 +88,7 @@ sh_api.add_token = () => {
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Track Anime By DygDyg'
         },
-        body: `grant_type=authorization_code&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&code=${code}&redirect_uri=${window.location.origin}${window.location.pathname}${proxy?"?proxy=true":""}`
+        body: `grant_type=authorization_code&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&code=${code}&redirect_uri=${window.location.origin}${window.location.pathname}`
     })
         .then(response => response.json())
         .then(data => {
