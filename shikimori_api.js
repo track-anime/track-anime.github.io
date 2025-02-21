@@ -56,7 +56,7 @@ sh_api.getCookie_time = (name) => {
 
 sh_api.get_key = () => {
     // window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
-    location.href = `${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`
+    location.href = `${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${proxy}${window.location.origin}${window.location.pathname}&response_type=code`
     return
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
@@ -82,14 +82,14 @@ sh_api.add_token = () => {
     
             return
         } */
-
+    
     fetch(`${proxy}https://shikimori.one/oauth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
             'User-Agent': 'Track Anime By DygDyg'
         },
-        body: `grant_type=authorization_code&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&code=${code}&redirect_uri=${window.location.origin}${window.location.pathname}`
+        body: `grant_type=authorization_code&client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&client_secret=4lyibuneC2Z34-EBoyX0tgs2ytagD4hda-SiFfpSUAo&code=${code}&redirect_uri=${proxy}${window.location.origin}${window.location.pathname}`
     })
         .then(response => response.json())
         .then(data => {
@@ -162,7 +162,7 @@ sh_api.refresh_token = () => {
         return "No_Authorize"
         window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
     }
-
+    
     fetch(`${proxy}https://shikimori.one/oauth/token`, {
         method: 'POST',
         headers: {
@@ -191,6 +191,7 @@ sh_api.get_user = (user, isanother) => {
         if (ot == "No_Authorize" || ot == "await") return ot
     }
     // console.log(encodeURI(user))
+    
     var url = `${proxy}https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
     if (isanother) url = `${proxy}https://shikimori.one/api/users/${encodeURI(user)}`
     fetch(url)
