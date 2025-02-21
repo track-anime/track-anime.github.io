@@ -83,7 +83,7 @@ sh_api.add_token = () => {
             return
         } */
 
-    fetch('${proxy}https://shikimori.one/oauth/token', {
+    fetch(`${proxy}https://shikimori.one/oauth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
