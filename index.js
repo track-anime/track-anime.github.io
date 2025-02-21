@@ -30,7 +30,11 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
 
-proxy = url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy.php?url=":""
+
+proxy = sh_api.proxy?sh_api.proxy:url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy.php?url=":""
+// url_get.searchParams.delete('proxy')
+// console.log(11111111, sh_api.proxy)
+// proxy = url_get.searchParams.get('proxy')?"https://server.dygdyg.ru/proxy_new.php?url=":""
 // console.log("proxy2", proxy)
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
