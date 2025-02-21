@@ -163,7 +163,7 @@ sh_api.refresh_token = () => {
         window.open(`${proxy}https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
     }
 
-    fetch('${proxy}https://shikimori.one/oauth/token', {
+    fetch(`${proxy}https://shikimori.one/oauth/token`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
