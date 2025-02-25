@@ -3242,6 +3242,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "c9144a1188d3d0aea0ca584cb81e39ce7eae48",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "ca5b382d1d0fcb0d0b50ec54cb31a80aae2aa3",
                                     "suffix": "",
                                     "type": "file"
@@ -6011,6 +6016,11 @@
                                     "name": "fb2efc04c472fbc4f738537cc6ce3ff5fadff2",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "fe9d59df5eb173e100ecd5f1f1f43726688c2a",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -7425,6 +7435,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "cd347d88465f8d3f978535cd1f55cb16741535",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "f1ca238a82766c2d60fcc7b6fcdb54437a671a",
                                     "suffix": "",
                                     "type": "file"
@@ -8824,6 +8839,11 @@
                                 },
                                 {
                                     "name": "d1c9da6a7d582dd1b811a3127369b306b2015c",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "d5ff3366c7358eaf70863398f58d1ffbb7f656",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -14064,6 +14084,113 @@
             "name": "covers.json",
             "suffix": ".json",
             "type": "file"
+        },
+        {
+            "name": "cursor",
+            "suffix": "",
+            "type": "directory",
+            "children": [
+                {
+                    "name": "cursor1.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor10.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor11.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor12.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor13.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor14.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor15.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor16.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor17.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor18.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor19.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor2.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor20.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor3.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor4.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor5.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor6.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor7.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor8.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                },
+                {
+                    "name": "cursor9.webp",
+                    "suffix": ".webp",
+                    "type": "file"
+                }
+            ]
         },
         {
             "name": "DataList.json",

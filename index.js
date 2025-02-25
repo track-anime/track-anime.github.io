@@ -313,6 +313,46 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const cursor = document.getElementById('cursor');
+let isMoving = false;
+let cursorX = 0;
+let cursorY = 0;
+let CURSOR_MAX = 20;  // Сколько всего курсоров в папке
+
+// Функция выбора случайного курсора
+function getRandomCursor() {
+    const randomIndex = Math.floor(Math.random() * CURSOR_MAX) + 1; // Генерируем число от 1 до 6
+    return `cursor/cursor${randomIndex}.webp`; // Формируем имя файла
+}
+
+function updateCursor() {
+    cursor.style.left = `${cursorX}px`;  // Левый верхний угол
+    cursor.style.top = `${cursorY}px`;   // Левый верхний угол
+    isMoving = false;
+}
+
+document.addEventListener('mousemove', (e) => {
+    cursorX = e.pageX;
+    cursorY = e.pageY;
+
+    if (!isMoving) {
+        isMoving = true;
+        requestAnimationFrame(updateCursor);
+        cursor.style.display = 'block'; // Показываем курсор при входе в окно
+        
+    }
+});
+
+document.addEventListener('mouseenter', () => {
+    cursor.style.display = 'block'; // Показываем курсор при входе в окно
+    cursor.style.backgroundImage = `url('${getRandomCursor()}')`;
+    // cursor.style.backgroundImage = `url('cursor/cursor18.webp')`;
+});
+
+document.addEventListener('mouseleave', () => {
+    cursor.style.display = 'none'; // Прячем курсор при выходе из окна
+});
+
 translation_id = ""
 
 base_anime?.translationActive?.forEach(e => {
@@ -417,7 +457,7 @@ function hide_date_cart(tr) {
     // console.log(121, tr)
 
     // ChecDataCart.checked = tr
-    
+
 
     if (tr == true) {
         styleDateCart.textContent = `
@@ -535,17 +575,17 @@ function setVideoInfo(e) {
 
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
-    
+
 
     VideoInfo.info.cover.src = `cover.jpg`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     console.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
-    }else{
+    } else {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}&url=${VideoInfo.info.cover.src}`
     }
-    
+
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
@@ -1161,8 +1201,7 @@ closeDialogButton.addEventListener('click', () => {
     return
 });
 
-function closeDialogButtonEvent()
-{
+function closeDialogButtonEvent() {
     VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     url_get.searchParams.delete("shikimori_id")
@@ -1684,7 +1723,7 @@ function add_cart(e) {
 
     if (e.cover.includes("missing_original.jpg")) {
         e.cover = `${getCoverURL}${e.shikimori}`
-    }else{
+    } else {
         e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
     }
     // e.cover = `${getCoverURL}${e.shikimori}`
@@ -1692,7 +1731,7 @@ function add_cart(e) {
 
     const imgTop = document.createElement('div');
     imgTop.style.backgroundImage = `url(${e.cover}),  url(404.jpg)`;
-    
+
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
     imgTop.classList.add('img-preview');
@@ -1909,7 +1948,7 @@ function showToast(e, t) {
 
     setTimeout(() => {
         toast1.hide();
-    }, 60+60+1000);
+    }, 60 + 60 + 1000);
 
     // toast0.show();
     // toast.dispose()

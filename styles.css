@@ -4,8 +4,21 @@
 html {
     color-scheme: light dark;
 }
+.custom-cursor {
+    position: absolute;
+    width: 32px; /* Размер курсора */
+    height: 32px;
+    background-image: url("cursor/cursor6.webp");
+    background-size: cover;
+    pointer-events: none; /* Курсор не мешает взаимодействию с элементами */
+    z-index: 9999;
+    display: none; /* По умолчанию скрыт */
+}
 
 body {
+    /* cursor: none; */
+    /* cursor: url("cursor/cursor2.webp"), auto; */
+    /* cursor: url(https://play.vsthemes.org/t-cursors/70655/6c24c665bde4efc5166fe06fc4394471.webp), auto; */
     background-color: rgb(66, 66, 66);
     /* display: flex; */
     flex-wrap: wrap;
@@ -621,6 +634,7 @@ p {
 
 
     .cart_ {
+        /* cursor: url("cursor/pointer.webp"); */
         width: 99% !important;
         margin: 1px !important;
         border-radius: 0px !important;
