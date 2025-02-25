@@ -322,40 +322,47 @@ let isMoving = false;
 let cursorX = 0;
 let cursorY = 0;
 
-// Функция выбора случайного курсора
-function getRandomCursor() {
-    const randomIndex = Math.floor(Math.random() * CURSOR_MAX) + 1; // Генерируем число от 1 до 6
-    return `cursor/cursor${randomIndex}.webp`; // Формируем имя файла
-}
+// Проверяем, есть ли поддержка сенсорного экрана
+const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-function updateCursor() {
-    cursor.style.left = `${cursorX}px`;  // Левый верхний угол
-    cursor.style.top = `${cursorY}px`;   // Левый верхний угол
-    isMoving = false;
-}
+if (!isTouchDevice) { // Если устройство не тач-скрин, включаем курсор
 
-document.addEventListener('mousemove', (e) => {
-    cursorX = e.pageX;
-    cursorY = e.pageY;
-
-    if (!isMoving) {
-        isMoving = true;
-        requestAnimationFrame(updateCursor);
-        // console.log(cursor.style.display)
-        if (cursor.style.display!="block") cursor.style.display = 'block'; // Показываем курсор при входе в окно
-        
+    // Функция выбора случайного курсора
+    function getRandomCursor() {
+        const randomIndex = Math.floor(Math.random() * CURSOR_MAX) + 1; // Генерируем число от 1 до 6
+        return `cursor/cursor${randomIndex}.webp`; // Формируем имя файла
     }
-});
 
-document.addEventListener('mouseenter', () => {
-    cursor.style.display = 'block'; // Показываем курсор при входе в окно
-    cursor.style.backgroundImage = `url('${getRandomCursor()}')`;
-    // cursor.style.backgroundImage = `url('cursor/cursor18.webp')`;
-});
+    function updateCursor() {
+        cursor.style.left = `${cursorX}px`;  // Левый верхний угол
+        cursor.style.top = `${cursorY}px`;   // Левый верхний угол
+        isMoving = false;
+    }
 
-document.addEventListener('mouseleave', () => {
-    cursor.style.display = 'none'; // Прячем курсор при выходе из окна
-});
+    document.addEventListener('mousemove', (e) => {
+        cursorX = e.pageX;
+        cursorY = e.pageY;
+
+        if (!isMoving) {
+            isMoving = true;
+            requestAnimationFrame(updateCursor);
+            // console.log(cursor.style.display)
+            if (cursor.style.display != "block") cursor.style.display = 'block'; // Показываем курсор при входе в окно
+
+        }
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursor.style.display = 'block'; // Показываем курсор при входе в окно
+        cursor.style.backgroundImage = `url('${getRandomCursor()}')`;
+        // cursor.style.backgroundImage = `url('cursor/cursor18.webp')`;
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursor.style.display = 'none'; // Прячем курсор при выходе из окна
+    });
+
+}
 
 translation_id = ""
 
