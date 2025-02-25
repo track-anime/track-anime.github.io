@@ -9,6 +9,10 @@ var HistoryIsActivy = true
 var TypePage = 0
 document.body.r = 2
 var FavCheckSave = false
+
+let CURSOR_MAX = 22;  // Сколько всего курсоров в папке
+
+
 var url_get = new URL(window.location.href)
 const KeyTab = Math.floor(Math.random() * 10000000000)
 const VideoPlayerAnime = document.getElementById('VideoPlayerAnime');
@@ -317,7 +321,6 @@ const cursor = document.getElementById('cursor');
 let isMoving = false;
 let cursorX = 0;
 let cursorY = 0;
-let CURSOR_MAX = 20;  // Сколько всего курсоров в папке
 
 // Функция выбора случайного курсора
 function getRandomCursor() {
@@ -338,7 +341,8 @@ document.addEventListener('mousemove', (e) => {
     if (!isMoving) {
         isMoving = true;
         requestAnimationFrame(updateCursor);
-        cursor.style.display = 'block'; // Показываем курсор при входе в окно
+        // console.log(cursor.style.display)
+        if (cursor.style.display!="block") cursor.style.display = 'block'; // Показываем курсор при входе в окно
         
     }
 });
