@@ -738,11 +738,11 @@ function setVideoInfo(e) {
 
 
     e.screenshots || e.screenshots ? VideoInfo.info.screenshots.parentNode.classList.remove("hide") : VideoInfo.info.screenshots.parentNode.classList.add("hide")
-    e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
+    // e.videos || e.videos ? VideoInfo.info.videos.parentNode.classList.remove("hide") : VideoInfo.info.videos.parentNode.classList.add("hide")
     VideoInfo.info.screenshots.innerHTML = html;
-    VideoInfo.info.videos.innerHTML = html2;
+    // VideoInfo.info.videos.innerHTML = html2;
     VideoInfo.info.screenshots.querySelectorAll(".carousel-item")[0]?.classList.add("active");
-    VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
+    // VideoInfo.info.videos.querySelectorAll(".carousel-item")[0]?.classList.add("active");
 
     html = "Жанры: "
     e.genres?.forEach(el => {
