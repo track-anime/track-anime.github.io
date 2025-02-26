@@ -317,7 +317,7 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const cursor = document.getElementById('cursor');
+/////////////////////////////////////////////////////////////// Аниме курсор ///////////////////////////////////////////////////
 let isMoving = false;
 let cursorX = 0;
 let cursorY = 0;
@@ -329,22 +329,18 @@ if (!isTouchDevice) { // Если устройство не тач-скрин, �
 
     // Функция выбора случайного курсора
     function getRandomCursor() {
+        //Выдаёт случайное изображение курсора //
         const randomIndex = Math.floor(Math.random() * CURSOR_MAX) + 1; // Генерируем число от 1 до 6
         return `cursor/cursor${randomIndex}.webp`; // Формируем имя файла
-    }
-
-    function updateCursor() {
-        cursor.style.left = `${cursorX}px`;  // Левый верхний угол
-        cursor.style.top = `${cursorY}px`;   // Левый верхний угол
-        isMoving = false;
     }
 
     document.addEventListener('mousemove', (e) => {
         cursorX = e.pageX;
         cursorY = e.pageY;
+        isMoving = true;
 
         cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
-        if (cursor.style.display != "block") cursor.style.display = 'block'; // Показываем курсор при входе в окно
+        if (isMoving) cursor.style.display = 'block'; // Показываем курсор при входе в окно
     });
 
     document.addEventListener('mouseenter', () => {
@@ -354,10 +350,13 @@ if (!isTouchDevice) { // Если устройство не тач-скрин, �
     });
 
     document.addEventListener('mouseleave', () => {
+        isMoving = false;
         cursor.style.display = 'none'; // Прячем курсор при выходе из окна
     });
 
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 translation_id = ""
 
