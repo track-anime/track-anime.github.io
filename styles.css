@@ -28,8 +28,8 @@ html {
 }
 
 body {
-    cursor: none;
-    /* cursor: url("cursor/cursor.webp"), auto; */
+    /* cursor: none; */
+    cursor: url("cursor/cursor.webp"), auto;
     /* cursor: url(https://play.vsthemes.org/t-cursors/70655/6c24c665bde4efc5166fe06fc4394471.webp), auto; */
     background-color: rgb(66, 66, 66);
     /* display: flex; */
