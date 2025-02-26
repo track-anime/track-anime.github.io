@@ -13,6 +13,7 @@ html {
     pointer-events: none; /* Курсор не мешает взаимодействию с элементами */
     z-index: 9999;
     display: none; /* По умолчанию скрыт */
+    will-change: transform; /* Оптимизация рендеринга */
 }
 
 body {
