@@ -343,13 +343,8 @@ if (!isTouchDevice) { // Если устройство не тач-скрин, �
         cursorX = e.pageX;
         cursorY = e.pageY;
 
-        if (!isMoving) {
-            isMoving = true;
-            requestAnimationFrame(updateCursor);
-            // console.log(cursor.style.display)
-            if (cursor.style.display != "block") cursor.style.display = 'block'; // Показываем курсор при входе в окно
-
-        }
+        cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
+        if (cursor.style.display != "block") cursor.style.display = 'block'; // Показываем курсор при входе в окно
     });
 
     document.addEventListener('mouseenter', () => {
