@@ -15,6 +15,17 @@ html {
     display: none; /* По умолчанию скрыт */
     will-change: transform; /* Оптимизация рендеринга */
 }
+.custom-cursor_sub {
+    /* position: absolute; */
+    width: 32px; /* Размер курсора */
+    height: 32px;
+    background-image: url("cursor/cursor.webp");
+    background-size: cover;
+    pointer-events: none; /* Курсор не мешает взаимодействию с элементами */
+    /* z-index: 9999; */
+    /* display: none; По умолчанию скрыт */
+    /* will-change: transform; Оптимизация рендеринга */
+}
 
 body {
     cursor: none;
