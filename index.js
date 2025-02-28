@@ -325,7 +325,7 @@ let cursorY = 0;
 // Проверяем, есть ли поддержка сенсорного экрана
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-if (!isTouchDevice) { // Если устройство не тач-скрин, включаем курсор
+if (!isTouchDevice && true!=true) { // Если устройство не тач-скрин, включаем курсор
 
     // Функция выбора случайного курсора
     function getRandomCursor() {

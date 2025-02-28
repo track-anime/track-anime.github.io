@@ -567,6 +567,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "c97f9d115f27a29ee8e03f97f0ab09906a52c8",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "d70b858821e51441c309fe791757d2d644efba",
                                     "suffix": "",
                                     "type": "file"
@@ -10999,6 +11004,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "9fe25cc469c526dd0484cf88ddf4c6fb4a9d5f",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "a832fdbef8a74e9a362402816039e4619a082a",
                                     "suffix": "",
                                     "type": "file"
@@ -11718,6 +11728,11 @@
                                 },
                                 {
                                     "name": "678c133df285bb9017e8c8a5cfedf96cd6555a",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "72ae57952335e081168683328b2a00daca90a8",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -12449,6 +12464,11 @@
                                 },
                                 {
                                     "name": "7d17abfd0f7937e72ddfa7951258248a73551c",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "8a4c5420675f7d59bb450d524fbba6f746c928",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -13220,6 +13240,11 @@
                                     "name": "ceb2638c5008140d5d515de3c6f9d2ec32f108",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "f6ceb2ee65c398eaefcd22cb11b8a0632ef4ee",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -13404,6 +13429,11 @@
             "suffix": "",
             "type": "directory",
             "children": [
+                {
+                    "name": "settings.json",
+                    "suffix": ".json",
+                    "type": "file"
+                },
                 {
                     "name": "tasks.json",
                     "suffix": ".json",
