@@ -487,6 +487,8 @@ document.querySelector("#pipDialogButton").addEventListener('click', () => {
 })
 
 
+
+
 function setIImgPreview() {
     var img_preview = document.querySelectorAll(".img-preview")
     var preview = document.getElementById('image-preview-window');
@@ -2057,10 +2059,15 @@ function copyToClipboard(text) {
 function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
     if (e.shift) {
+        // console.log(e.shikimori, info)
         // return
-        if (confirm(`Добавить аниме "${e.title}" в список "смотрю" на shikimori?`)) {
+        // window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
+        // return
+        if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {
             // AddUserRates(e.shikimori)
+            window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
         };
+
 
         //showToast(e);
         // add_push(e)
