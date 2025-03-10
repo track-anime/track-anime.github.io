@@ -390,13 +390,18 @@ dialog::backdrop {
     left: 0% !important;
 }
 
+.DialogVideoInfoHiden
+{
+    height: 0% !important;
+}
 
 #DialogVideoInfo {
     position: absolute;
     width: 200%;
     height: 95%;
     left: -100%;
-    transition: left 1s ease;
+    transition: left 1s ease, height 1s ease;
+    transition-behavior: allow-discrete;
 }
 
 .progress-bar .sr-only {
