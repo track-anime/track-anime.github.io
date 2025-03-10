@@ -722,7 +722,7 @@ function setVideoInfo(e) {
         html = html + `
         <div class="carousel-item w-100">
         <img src="https://shikimori.one${el.original}"
-            class="d-block w-100 img-preview"  
+            class="d-block w-100"  
             alt="...">
     </div>
     ` });
@@ -1595,7 +1595,8 @@ async function getCalendarSh() {
     // const ned_shikimori = document.querySelector(".ned_shikimori")
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
-    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}`);
+
+    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {
@@ -1748,7 +1749,7 @@ function add_cart(e) {
 
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
-    imgTop.classList.add('img-preview');
+    // imgTop.classList.add('img-preview');
     imgTop.classList.add('ipa-shift');
     imgTop.classList.add('paralax-bg');
     imgTop.setAttribute("img-preview-height", "720px")

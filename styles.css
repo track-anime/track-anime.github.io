@@ -399,7 +399,7 @@ iframe#VideoPlayer {
     margin: 0;
     padding: 0;
     overflow: hidden;
-    padding: 34px;
+    padding: 15px 0px 0px 15px;
     background-color: #212529;
     aspect-ratio: 16 / 9;
     top: 0%;
@@ -762,7 +762,7 @@ screen and (max-width: 992px) {
     }
 
     #info_cover {
-        width: 100%;
+        width: 90% !important;
     }
 
     #VideoInfo>div>div>div>div {
@@ -772,8 +772,17 @@ screen and (max-width: 992px) {
     #carouselExampleAutoplaying,
     #carouselExampleAutoplaying2 {
         margin: 4px !important;
+        width: 100% !important;
     }
 
+}
+
+#info_cover {
+    width: 60% ;
+}
+
+#carouselExampleAutoplaying{
+    width: 50%;
 }
 
 .vi_label {
