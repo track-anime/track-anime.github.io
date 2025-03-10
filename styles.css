@@ -212,7 +212,7 @@ body {
     z-index: 999999999999999999;
     /* backdrop-filter: blur(2px); */
     display: flex;
-    display: none;
+    /* display: none; */
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -354,7 +354,7 @@ body {
     top: 64px;
     width: 45px;
     height: 45px;
-    z-index: 99999999999;
+    z-index: 999999;
 }
 
 #pipDialogButton {
