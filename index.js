@@ -680,6 +680,7 @@ function setVideoInfo(e) {
 
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        DialogVideoInfo.classList.remove("d-none");
         VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`
         console.log(e.id)
         if (ev.shiftKey) {
@@ -1209,8 +1210,9 @@ closeDialogButton.addEventListener('click', () => {
 });
 
 function closeDialogButtonEvent() {
-    VideoPlayerAnime.modal.hide();
+    // VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
+    DialogVideoInfo.classList.add("d-none")
     url_get.searchParams.delete("shikimori_id")
     url_get.searchParams.delete("id")
 
@@ -2080,10 +2082,10 @@ function dialog_(e, info) {
     url_get.searchParams.set("shikimori_id", `${e.shikimori}`)
     window.history.pushState({}, '', url_get);
     document.title = `TA: ${e.title}`
+    DialogVideoInfo.classList.remove("d-none")
 
 
-
-    VideoPlayerAnime.modal.show();
+    // VideoPlayerAnime.modal.show();
 
     // if ((e.imdb || e.kp) && e.shift) {
     //     VideoPlayer.contentWindow.location.href = e.kp ? `//dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&kinopoiskID=${e.kp}` : `//dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
