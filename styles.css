@@ -212,6 +212,7 @@ body {
     z-index: 999999999999999999;
     /* backdrop-filter: blur(2px); */
     display: flex;
+    display: none;
     flex-direction: column;
     flex-wrap: nowrap;
     justify-content: center;
@@ -348,9 +349,9 @@ body {
 }
 
 #closeDialogButton {
-    position: absolute;
-    right: 6px;
-    top: 6px;
+    position: fixed;
+    right: 25px;
+    top: 64px;
     width: 45px;
     height: 45px;
     z-index: 99999999999;
@@ -393,7 +394,7 @@ dialog::backdrop {
 #DialogVideoInfo {
     position: absolute;
     width: 200%;
-    height: 100%;
+    height: 95%;
     left: -100%;
     transition: left 1s ease;
 }
@@ -741,7 +742,7 @@ screen and (max-width: 992px) {
     } */
 
     iframe#VideoPlayer {
-        height: 100dvh;
+        height: 100%;
     }
 
     #VideoPlayerAnime,

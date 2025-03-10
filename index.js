@@ -835,6 +835,7 @@ document.getElementById('User_Fav_sinc_button').addEventListener('mousedown', (e
     switch (e.button) {
         case 0:
             GetFavBtn(sh_api.UserData.id)
+            DialogVideoInfo.classList.add("d-none")
             break;
         case 1:
             tmp = url_get
@@ -866,7 +867,6 @@ document.getElementById('search_form').addEventListener('submit', function (e) {
     formdata.forEach((val, key) => {
         GetKodi(encodeURI(val))
     });
-
     // GetKodi(encodeURI(e.target.value))
 })
 var timersearch
@@ -877,6 +877,8 @@ document.getElementById('search_input').addEventListener('input', function (e) {
             url_get.searchParams.delete("seartch")
             window.history.pushState({}, '', url_get);
         }
+        DialogVideoInfo.classList.add("d-none")
+
         GetKodi(encodeURI(e.target.value))
     }, 500);
 
@@ -1154,6 +1156,7 @@ document.getElementById("list_calendar_Button").addEventListener('mousedown', as
     switch (e.button) {
         case 0:
             window.getCalendar()
+            DialogVideoInfo.classList.add("d-none")
             break;
         case 1:
             nTab = window.open(window.location.href, "_blank");
@@ -1173,6 +1176,7 @@ document.getElementById("list_home_Button").addEventListener('mousedown', async 
     switch (e.button) {
         case 0:
             window.getHome()
+            DialogVideoInfo.classList.add("d-none")
             break;
         case 1:
             nTab = window.open(window.location.href, "_blank");
