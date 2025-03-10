@@ -1217,6 +1217,7 @@ function closeDialogButtonEvent() {
     // VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     DialogVideoInfo.classList.add("d-none")
+    document.getElementById("load").classList.add("hide")
     url_get.searchParams.delete("shikimori_id")
     url_get.searchParams.delete("id")
 

@@ -354,7 +354,7 @@ body {
     top: 64px;
     width: 45px;
     height: 45px;
-    z-index: 999999;
+    z-index: 9999999999;
 }
 
 #pipDialogButton {
