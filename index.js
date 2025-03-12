@@ -1742,6 +1742,8 @@ function add_cart(e) {
 
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
+        if(!e.cover.startsWith('http')) e.cover = "https://shikimori.one"+e.cover
+        // console.log(e.cover)
         e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
         // e.cover = `${getCoverURL}${e.shikimori}`
     }
