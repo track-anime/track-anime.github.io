@@ -36,7 +36,7 @@ const CheckReleased_ = document.getElementById("CheckReleased")
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://server.dygdyg.ru/cover.php?id="
+const getCoverURL = "https://server.dygdyg.ru/cover2.php?id="
 // const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
@@ -1737,9 +1737,13 @@ function add_cart(e) {
     // if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
 
     if (e.cover.includes("missing_original.jpg")) {
+
         e.cover = `${getCoverURL}${e.shikimori}`
+
+        // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
         e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
+        // e.cover = `${getCoverURL}${e.shikimori}`
     }
     // e.cover = `${getCoverURL}${e.shikimori}`
 
