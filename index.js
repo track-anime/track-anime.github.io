@@ -1253,8 +1253,8 @@ async function get_settings() {
                     `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
                 ) */
         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
-            `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
-            `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
+            `https://server.dygdyg.ru/shikimori/api/animes/?id=${url_get.searchParams.get('shikimori_id')}` :
+            `https://server.dygdyg.ru/shikimori/api/animes/?id=${url_get.searchParams.get('id')}`
         )
         if (e.code == "404") {
             url_get.searchParams.delete("id")

@@ -190,8 +190,8 @@ sh_api.get_user = (user, isanother) => {
         if (ot == "No_Authorize" || ot == "await") return ot
     }
     // console.log(encodeURI(user))
-    var url = `https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
-    if (isanother) url = `https://shikimori.one/api/users/${encodeURI(user)}`
+    var url = `https://server.dygdyg.ru/shikimori/api/users/${user ? "?id="+encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `https://server.dygdyg.ru/shikimori/api/users/?id=${encodeURI(user)}`
     fetch(url)
         .then(response => {
             sh_api.another.status = response.status
@@ -305,7 +305,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 sh_api.get_anime = (id) => {
     // console.log(id)
-    var url = `https://shikimori.one/api/animes/${id}`
+    var url = `https://server.dygdyg.ru/shikimori/api/animes/?id=${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
         .then(response => {
