@@ -190,8 +190,8 @@ sh_api.get_user = (user, isanother) => {
         if (ot == "No_Authorize" || ot == "await") return ot
     }
     // console.log(encodeURI(user))
-    var url = `https://server.dygdyg.ru/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
-    if (isanother) url = `https://server.dygdyg.ru/api/users/${encodeURI(user)}`
+    var url = `https://server.dygdyg.ru/sh_api/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `https://server.dygdyg.ru/sh_api/api/users/${encodeURI(user)}`
     fetch(url)
         .then(response => {
             sh_api.another.status = response.status
@@ -237,8 +237,8 @@ sh_api.get_favorit = (sh_user, isanother) => {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
     }
-    var url = `https://server.dygdyg.ru/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000&access_token=${sh_api.getCookie("sh_access_token")}`
-    if (isanother) url = `https://server.dygdyg.ru/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000`
+    var url = `https://server.dygdyg.ru/sh_api/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000&access_token=${sh_api.getCookie("sh_access_token")}`
+    if (isanother) url = `https://server.dygdyg.ru/sh_api/api/users/${sh_user ? encodeURI(sh_user) : encodeURI(sh_api.UserData.id)}/anime_rates?limit=5000`
 
     fetch(url)
         .then(response => {
@@ -276,7 +276,7 @@ sh_api.get_favorit = (sh_user, isanother) => {
 
 sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет аниме в избранном
     if (!sh_api.authorize) return console.log("Вы не авторизированы")
-    var url = `https://server.dygdyg.ru/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
+    var url = `https://server.dygdyg.ru/sh_api/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'POST',
         // credentials: 'include',
@@ -305,7 +305,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 sh_api.get_anime = (id) => {
     // console.log(id)
-    var url = `https://server.dygdyg.ru/api/animes/${id}`
+    var url = `https://server.dygdyg.ru/sh_api/api/animes/${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
         .then(response => {
@@ -338,7 +338,7 @@ sh_api.get_anime = (id) => {
 }
 
 sh_api.search = (seartch, censored=true) => {
-    var url = `https://server.dygdyg.ru/api/animes?with_material_data=true&censored=${censored}&limit=50&search=${seartch}`
+    var url = `https://server.dygdyg.ru/sh_api/api/animes?with_material_data=true&censored=${censored}&limit=50&search=${seartch}`
 
     fetch(url)
         .then(response => {
@@ -375,7 +375,7 @@ sh_api.search = (seartch, censored=true) => {
 ///////////////////////
 
 sh_api.DelUserRates = (id, sl) => {
-    var url = `https://server.dygdyg.ru/api/v2/user_rates/${id}?access_token=${sh_api.getCookie("sh_access_token")}`
+    var url = `https://server.dygdyg.ru/sh_api/api/v2/user_rates/${id}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'DELETE',
 
