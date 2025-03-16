@@ -2083,9 +2083,22 @@ function dialog_(e, info) {
         // };
         return
     }
+    Loading_skip.addEventListener('click', function (event) {
+        console.log("skip..")
+        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+        DialogVideoInfo.classList.remove("d-none");
+        load.show(false)
+    })
     // console.log(e.shikimori, info)
     sh_api.get_anime(e.shikimori)
     load.show(true)
+    Loading_skip.classList.add("hide")
+
+    setTimeout(() => {
+        Loading_skip.classList.remove("hide")
+    }, 5000);
     // setVideoInfo(e)
     url_get.searchParams.set("shikimori_id", `${e.shikimori}`)
     window.history.pushState({}, '', url_get);
@@ -2129,13 +2142,13 @@ function ta_pip(flag) //picture to picture
         document.querySelector("#VideoPlayerAnime").classList.add("ta_modal")
         document.querySelector("#VideoPlayerAnime").classList.remove("modal")
         document.querySelector(".modal-backdrop").classList.add("ta_modal-backdrop_hide")
-        document.querySelector("#DialogVideoInfo").classList.remove("DialogVideoInfoScroll")
+        // document.querySelector("#DialogVideoInfo").classList.remove("DialogVideoInfoScroll")
     }
     if (VideoPlayerAnime.pip == false) {
         // VideoPlayerAnime.pip = false
         document.querySelector("#VideoPlayerAnime").classList.remove("ta_modal")
         document.querySelector("#VideoPlayerAnime").classList.add("modal")
-        document.querySelector(".modal-backdrop").classList.remove("ta_modal-backdrop_hide")
+        // document.querySelector(".modal-backdrop").classList.remove("ta_modal-backdrop_hide")
         // document.querySelector("#DialogVideoInfo").classList.add("DialogVideoInfoScroll")
     }
     return VideoPlayerAnime.pip
