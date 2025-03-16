@@ -685,6 +685,7 @@ function setVideoInfo(e) {
         console.log(e.id)
         if (ev.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
+            
             return
             // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
@@ -2073,18 +2074,13 @@ function copyToClipboard(text) {
 function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
     if (e.shift) {
-        // console.log(e.shikimori, info)
-        // return
-        // window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
-        // return
-        if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {
-            // AddUserRates(e.shikimori)
-            window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
-        };
-
-
-        //showToast(e);
-        // add_push(e)
+        // if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {
+            let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+            DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+            VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+            DialogVideoInfo.classList.remove("d-none");
+            // window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
+        // };
         return
     }
     // console.log(e.shikimori, info)
