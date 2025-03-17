@@ -82,7 +82,7 @@ sh_api.add_token = () => {
             return
         } */
 
-    fetch('https://server.dygdyg.ru/oauth/token', {
+    fetch('https://server.dygdyg.ru/sh_api/oauth/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
@@ -415,7 +415,7 @@ if (sh_api.code) sh_api.add_token()
 
 
 /*     
-https://server.dygdyg.ru/api/doc/1.0
-https://server.dygdyg.ru/api/doc/2.0
+https://shikimori.one/api/doc/1.0
+https://shikimori.one/api/doc/2.0
 https://shikimori.one/oauth/applications
 */
