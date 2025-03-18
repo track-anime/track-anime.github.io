@@ -1597,7 +1597,8 @@ async function getCalendarSh() {
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
 
-    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
+    // var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
+    var response = await fetch(`https://server.dygdyg.ru/calendar.php`);
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {
