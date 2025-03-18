@@ -1254,8 +1254,8 @@ async function get_settings() {
                     `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
                 ) */
         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
-            `https://server.dygdyg.ru/sh_api/api/animes/${url_get.searchParams.get('shikimori_id')}` :
-            `https://server.dygdyg.ru/sh_api/api/animes/${url_get.searchParams.get('id')}`
+            `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
+            `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
         )
         if (e.code == "404") {
             url_get.searchParams.delete("id")
@@ -1597,7 +1597,7 @@ async function getCalendarSh() {
     // ned_shikimori.textContent = ""
     // ned_shikimori.classList.add("ned_shikimori")
 
-    var response = await fetch(`https://server.dygdyg.ru/sh_api/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
+    var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {
