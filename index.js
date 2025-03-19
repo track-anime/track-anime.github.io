@@ -1328,6 +1328,7 @@ async function getCalendar() {
 }
 
 async function addCalendar() {
+    
     document.getElementById("load").classList.remove("hide")
     document.getElementById('search_input').value = ""
     getChapter("#list_calendar")
@@ -1336,6 +1337,7 @@ async function addCalendar() {
         // document.getElementById("load").classList.add("hide")
         return
     }
+
     document.querySelectorAll(".ned_spoiler.nd .ned").forEach(e => {
         e.textContent = ""
         e.parentElement.open = false
@@ -1351,6 +1353,7 @@ async function addCalendar() {
     }
 
     // return
+    
     while (URLCalendarAdd) {
         d1 = await httpGet(URLCalendarAdd)
         var d2 = data
@@ -1359,8 +1362,9 @@ async function addCalendar() {
         URLCalendarAdd = d1.next_page
     }
     data.forEach(e => {
-        if ((e.type == 'anime-serial') && e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай") {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
+        if ((e.type == 'anime-serial') && e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай" ) {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
             if (id.includes(e.shikimori_id)) return
+            
             id.push(e.shikimori_id)
             const e1 = {
                 "title": e.material_data.anime_title,
@@ -1602,6 +1606,8 @@ async function getCalendarSh() {
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {
+        if(e.anime.status=="anons") return
+
         const e1 = {
             "title": `${e.anime.russian}`,
             "cover": `https://shikimori.one${e.anime.image.original}`,
