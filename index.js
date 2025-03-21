@@ -640,7 +640,8 @@ function setVideoInfo(e) {
 
     VideoInfo.info.fandubbers.innerHTML = `<p class="card-text">Дабберы: ${tmp45353}</p>`
     VideoInfo.info.year.textContent = e.aired_on ? e.aired_on.split("-")[0] : "?";
-    VideoInfo.info.year.href = e.year ? `${window.location.origin + window.location.pathname}?year=${e.year ? e.year : "404.html"}` : "404.html";
+    console.log(e.aired_on, e.year, e.aired_on.split("-")[0])
+    VideoInfo.info.year.href = e.aired_on.split("-")[0] ? `${window.location.origin + window.location.pathname}?year=${e.aired_on.split("-")[0] ? e.aired_on.split("-")[0] : "404.html"}` : "404.html";
 
     VideoInfo.info.rating_mpaa.textContent = e.rating ? e.rating : "?";
     VideoInfo.info.rating_mpaa.href = e.rating ? `${window.location.origin + window.location.pathname}?rating_mpaa=${e.rating ? e.rating : "404.html"}` : "404.html";
