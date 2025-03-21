@@ -1776,6 +1776,8 @@ function add_cart(e) {
     imgTop.addEventListener("mousedown", (event) => {
         var a = new URL(window.location.href)
         a.searchParams.set("shikimori_id", `${e.shikimori}`)
+        // console.log(event.button, a.href)
+        // return
         if (event.button == 1) {
             var newTab = window.open(a.href, '_blank')
             return

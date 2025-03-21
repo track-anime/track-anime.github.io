@@ -868,7 +868,7 @@ screen and (max-width: 992px) {
     /*background-color: #5d5d5dde; */
     text-align: center;
     padding: 10px 0px 25px 0px;
-    visibility: hidden;
+    /* visibility: hidden; */
     z-index: 2;
     /* height: 125px; */
 }
@@ -1026,6 +1026,10 @@ span.sr-only {
 }
 
 .cart_:hover {
+    .cart-title{
+        visibility: hidden;
+    }
+
     .cart-voice {
         writing-mode: vertical-lr;
     }
