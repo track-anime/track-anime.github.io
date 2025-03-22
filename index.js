@@ -48,6 +48,7 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 // const URLSearch = "https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&title="
+var URLKodikTranslations = "https://kodikapi.com/translations?token=45c53578f11ecfb74e31267b634cc6a8"
 var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
@@ -109,16 +110,7 @@ function Get_base_anime() {
 
 }
 Get_base_anime()
-///////////////////////////////////////// Удаление данных из старой базы ///////////////////////////
 
-if (base_anime?.translation) {
-    base_anime.translation = base_anime.translation.filter(item => typeof item !== 'string')
-}
-if (base_anime?.translationActive) {
-    base_anime.translationActive = base_anime.translationActive.filter(item => typeof item !== 'string');
-}
-
-localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 // console.log("translation", base_anime?.translation[0] == "string", base_anime?.translationActive[0] == "string")
 
@@ -1524,17 +1516,83 @@ if (base_anime?.translationActive) {
         base_anime.translationActive = [];
     } */
 
-function VoiceSettingsMenu() {
+async function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
-        }
-        if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string") {
-            base_anime.translationActive = [];
-        } */
+        }*/
+        if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string" || typeof base_anime.translationActive=="undefined") {
+            base_anime.translationActive = [
+                {
+                    "id": 609,
+                    "title": "AniDUB",
+                    "type": "voice"
+                },
+                {
+                    "id": 2674,
+                    "title": "AniDub Online",
+                    "type": "voice"
+                },
+                {
+                    "id": 610,
+                    "title": "AniLibria.TV",
+                    "type": "voice"
+                },
+                {
+                    "id": 923,
+                    "title": "AnimeVost",
+                    "type": "voice"
+                },
+                {
+                    "id": 910,
+                    "title": "AniStar",
+                    "type": "voice"
+                },
+                {
+                    "id": 1978,
+                    "title": "Dream Cast",
+                    "type": "voice"
+                },
+                {
+                    "id": 557,
+                    "title": "JAM",
+                    "type": "voice"
+                },
+                {
+                    "id": 3293,
+                    "title": "VF-Studio",
+                    "type": "voice"
+                },
+                {
+                    "id": 704,
+                    "title": "Дублированный",
+                    "type": "voice"
+                },
+                {
+                    "id": 3002,
+                    "title": "Дублированный 18+",
+                    "type": "voice"
+                },
+                {
+                    "id": 2023,
+                    "title": "РуАниме / DEEP",
+                    "type": "voice"
+                },
+                {
+                    "id": 3717,
+                    "title": "РуАниме / DEEP 18+",
+                    "type": "voice"
+                }
+            ];
+            localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        } 
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
-
+    console.log(base_anime.translation)
+    tr_list = await httpGet(URLKodikTranslations)
+    console.log(tr_list)
+    base_anime.translation = tr_list;
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     base_anime.translation.sort().forEach((voice, index) => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -2260,7 +2318,6 @@ async function GetKodi(seartch, revers) {
                     return;
                 }
                 dat = await httpGet(URLList)
-                console.log(dat.next_page, typeof(dat.next_page), typeof(URLList))
                 URLList = dat.next_page
                 endid = endid ? endid : dat.results[0].id
 
