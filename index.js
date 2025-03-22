@@ -2244,7 +2244,23 @@ async function GetKodi(seartch, revers) {
                 dat = await httpGet(URLListStart)
                 endid2 = dat.results[0].id
             } else {
+                if(typeof(URLList)!="string") {
+                    console.log("конец истории");
+                    if(!document.querySelector(".cart_end")){
+                        document.getElementById("list_serch").insertAdjacentHTML('beforeend', `<div class="cart_ cart_end">
+                            <div class="cart_n">
+                                <div align="center" style=" font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 5px 0px 0px 5px;">
+                                    <div align="center" style="height: 25%;background-color: hwb(230.37deg 0% 0% / 18.04%);">ALL
+                            </div><br class="br">◄</div>
+                                <div align="center" style="font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 0px 5px 5px 0px;">
+                                    <div align="center" style="height: 25%;background-color: hwb(298.57deg 42.09% 49.46% / 18.04%);">END</div><br class="br">X</div>
+                            </div>
+                            </div>`)
+                        }
+                    return;
+                }
                 dat = await httpGet(URLList)
+                console.log(dat.next_page, typeof(dat.next_page), typeof(URLList))
                 URLList = dat.next_page
                 endid = endid ? endid : dat.results[0].id
 
