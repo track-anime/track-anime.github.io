@@ -1520,7 +1520,9 @@ async function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
         }*/
-        if (!base_anime?.translationActive || typeof base_anime.translationActive[0] !== "string" || typeof base_anime.translationActive=="undefined") {
+        if (!base_anime?.translationActive || typeof base_anime.translationActive[0]?.title !== "string" || typeof base_anime.translationActive=="undefined") {
+            console.log(!base_anime?.translationActive, typeof base_anime.translationActive[0]?.title !== "string", typeof base_anime.translationActive=="undefined")
+
             base_anime.translationActive = [
                 {
                     "id": 609,
@@ -1665,7 +1667,8 @@ async function getCalendarSh() {
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {
-        if(e.anime.status=="anons") return
+        // Скрывает анонсы (ещё не вышедшие аниме) anons
+        // if(e.anime.status=="anons") return    
 
         const e1 = {
             "title": `${e.anime.russian}`,
@@ -2003,6 +2006,7 @@ function playSound(soundFile, vol) {
 }
 
 function showToast(e, t) {
+    return
     // prompt("",JSON.stringify(e))
     playSound('meloboom.mp3');
     var toast0 = document.createElement('div');
