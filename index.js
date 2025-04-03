@@ -48,7 +48,7 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 // const URLSearch = "https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&title="
-var URLKodikTranslations = "https://kodikapi.com/translations?token=45c53578f11ecfb74e31267b634cc6a8"
+var URLKodikTranslations = "https://kodikapi.com/translations/v2?token=45c53578f11ecfb74e31267b634cc6a8&types=anime-serial"
 var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
 var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
@@ -1592,7 +1592,8 @@ async function VoiceSettingsMenu() {
     const buttonContainer = document.getElementById('button-container');
     console.log(base_anime.translation)
     tr_list = await httpGet(URLKodikTranslations)
-    console.log(tr_list)
+    console.log(tr_list, tr_list["results"])
+    tr_list = tr_list["results"]
     base_anime.translation = tr_list;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     base_anime.translation.sort().forEach((voice, index) => {
