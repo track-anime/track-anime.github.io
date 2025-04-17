@@ -470,9 +470,9 @@ function hide_date_cart(tr) {
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 }
 
-function TorrentURL() {
-    window.open(`https://darklibria.it/search?find=${VideoInfo.info.TorrentPlayer.title}`)
-};
+// function TorrentURL() {
+//     window.open(`https://darklibria.it/search?find=${VideoInfo.info.TorrentPlayer.title}`)
+// };
 
 document.querySelector("#pipDialogButton").addEventListener('click', () => {
     ta_pip()
@@ -706,9 +706,10 @@ function setVideoInfo(e) {
 
 
 
-    VideoInfo.info.TorrentPlayer.title = e.russian
-    VideoInfo.info.TorrentPlayer.removeEventListener('click', TorrentURL, false)
-    VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
+    // VideoInfo.info.TorrentPlayer.title = e.russian
+    // VideoInfo.info.TorrentPlayer.removeEventListener('click', TorrentURL, false)
+    // VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
+
     // VideoInfo.info.TorrentPlayer.en = true;
 
 
