@@ -1,0 +1,6 @@
+Поиск по названию
+https://anilibria.top/api/v1/app/search/releases?query=%D0%9F%D0%B5%D1%81%D0%BD%D1%8C%20%D0%BD%D0%BE%D1%87%D0%BD%D1%8B%D1%85%20%D1%81%D0%BE%D0%B2
+
+ПОлучить по id описание аниме
+https://anilibria.top/api/v1/anime/releases/9217
+

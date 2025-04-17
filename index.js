@@ -274,7 +274,7 @@ VideoInfo.info = {
     "shikimori_link": VideoInfo.querySelector("#info_shikimori_link"),
     "IMDB_link": VideoInfo.querySelector("#info_IMDB_link"),
     "AlohaPlayer": VideoInfo.querySelector("#info_AlohaPlayer"),
-    "TorrentPlayer": VideoInfo.querySelector("#info_TorrentPlayer"),
+    "AnilibriaPlayer": VideoInfo.querySelector("#info_AnilibriaPlayer"),
     "KodikPlayer": VideoInfo.querySelector("#info_KodikPlayer"),
     "duration": VideoInfo.querySelector("#info_duration"),
     "TorrentURL": null,
@@ -678,6 +678,23 @@ function setVideoInfo(e) {
         console.log(e.id)
         if (ev.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
+            
+            return
+            // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
+
+        } else {
+
+        }
+    })
+    VideoInfo.info.AnilibriaPlayer.addEventListener('click', (ev) => {
+
+        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        DialogVideoInfo.classList.remove("d-none");
+        VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`
+        console.log(e.id)
+        if (ev.shiftKey) {
+            window.open(`https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
             
             return
             // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
