@@ -47,11 +47,11 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 
-// const URLSearch = "https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&title="
-var URLKodikTranslations = "https://kodikapi.com/translations/v2?token=45c53578f11ecfb74e31267b634cc6a8&types=anime-serial"
-var URLList = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"//&countries=Япония"
-var URLCalendar = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "https://kodikapi.com/list?limit=100&with_material_data=true&camrip=false&token=45c53578f11ecfb74e31267b634cc6a8"
+
+var URLKodikTranslations = "//server.dygdyg.ru/kodik.php?method=translations&types=anime-serial"
+var URLList = "//server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
+var URLCalendar = "//server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "//server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
 get_covers_base()
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
@@ -1260,10 +1260,6 @@ get_settings()
 async function get_settings() {
     if (url_get.searchParams.get('id') || url_get.searchParams.get('shikimori_id')) {
 
-        /*         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
-                    `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&shikimori_id=${url_get.searchParams.get('shikimori_id')}` :
-                    `https://kodikapi.com/search?token=45c53578f11ecfb74e31267b634cc6a8&with_material_data=true&id=${url_get.searchParams.get('id')}`
-                ) */
         e = await httpGet(url_get.searchParams.get('shikimori_id') ?
             `https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id')}` :
             `https://shikimori.one/api/animes/${url_get.searchParams.get('id')}`
