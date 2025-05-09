@@ -2124,15 +2124,14 @@ function copy_discord() {
 #  [${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} 
 [${VideoInfo.info.updated_at.textContent}]
 
-> **Серии:** ${VideoInfo.info.series.textContent}  
-> **Длительность:** ${VideoInfo.info.duration.textContent}
-> **Студия:** [${VideoInfo.info.studios.textContent}](<https://track-anime.github.io/?anime_studios=${encodeURIComponent(VideoInfo.info.studios.textContent)}>) 
-> **Год выхода:** ${VideoInfo.info.year.textContent}
-> **Жанры:** ${genres} 
-> **Статус:** ${VideoInfo.info.info_status.textContent}  
-> **Возрастной рейтинг:** [${VideoInfo.info.rating_mpaa.textContent}](<https://track-anime.github.io/?rating_mpaa=${encodeURIComponent(VideoInfo.info.rating_mpaa.textContent)}>)
-> 
-> **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent}
+> 🎬 **Серии:** ${VideoInfo.info.series.textContent}  
+> ⏰ **Длительность:** ${VideoInfo.info.duration.textContent}
+> 🎨 **Студия:** [${VideoInfo.info.studios.textContent}](<https://track-anime.github.io/?anime_studios=${encodeURIComponent(VideoInfo.info.studios.textContent)}>) 
+> 📅 **Год выхода:** ${VideoInfo.info.year.textContent}
+> 🏷️ **Жанры:** ${genres} 
+> 📌 **Статус:** ${VideoInfo.info.info_status.textContent}  
+> 🎯 **Возрастной рейтинг:** [${VideoInfo.info.rating_mpaa.textContent}](<https://track-anime.github.io/?rating_mpaa=${encodeURIComponent(VideoInfo.info.rating_mpaa.textContent)}>)
+> 🌟 **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent}
 
 [Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}>)
 [Открыть на shikimori](<https://shikimori.one/animes/${AnimeInfo.id}>)
@@ -2165,20 +2164,19 @@ function copy_telegram() {
 // \`\`\`${AnimeInfo.description}\`\`\`
     copyToClipboard(`
 
-[Обложка] ||${VideoInfo.info.cover.src}||
-📽️ **[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}]**  \`${AnimeInfo.russian}\`
-🕒 [__${VideoInfo.info.updated_at.textContent}__]
+**[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}]**  \`${AnimeInfo.russian}\`
+        [__${VideoInfo.info.updated_at.textContent}__]
 
->🎬 **Серии:** __${VideoInfo.info.series.textContent}__
-> ⏱ **Длительность:** __${VideoInfo.info.duration.textContent}__
-> 🎨 **${VideoInfo.info.studios.textContent}**
-> 📅 **Год выхода:** __${VideoInfo.info.year.textContent}__
-> 🏷️ **Жанры:** __${genres}__ 
-> 📌 **Статус:** __${VideoInfo.info.info_status.textContent}__ 
+||🖼️ [Обложка] ${VideoInfo.info.cover.src}||
 
-> 🎯 **Возрастной рейтинг:** __${VideoInfo.info.rating_mpaa.textContent}__
-> 
-> 🌟 **Рейтинг shikimori:** __${VideoInfo.info.shikimori_rating.textContent}__
+    | 🎬 **Серии:** __${VideoInfo.info.series.textContent}__
+    | ⏱ **Длительность:** __${VideoInfo.info.duration.textContent}__
+    | 🎨 **${VideoInfo.info.studios.textContent}**
+    | 📅 **Год выхода:** __${VideoInfo.info.year.textContent}__
+    | 🏷️ **Жанры:** __${genres}__ 
+    | 📌 **Статус:** __${VideoInfo.info.info_status.textContent}__ 
+    | 🎯 **Возрастной рейтинг:** __${VideoInfo.info.rating_mpaa.textContent}__
+    | 🌟 **Рейтинг shikimori:** __${VideoInfo.info.shikimori_rating.textContent}__
 
 🔗 [Track Anime By ДугДуг]: https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}
 🌐 [shikimori]: https://shikimori.one/animes/${AnimeInfo.id}
