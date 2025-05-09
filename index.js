@@ -48,10 +48,10 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 
-var URLKodikTranslations = "//server.dygdyg.ru/kodik.php?method=translations&types=anime-serial"
-var URLList = "//server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
-var URLCalendar = "//server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "//server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
+var URLKodikTranslations = "https://server.dygdyg.ru/kodik.php?method=translations&types=anime-serial"
+var URLList = "https://server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
+var URLCalendar = "https://server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "https://server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
 get_covers_base()
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
@@ -317,7 +317,7 @@ let cursorY = 0;
 // Проверяем, есть ли поддержка сенсорного экрана
 const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
-if (!isTouchDevice && true!=true) { // Если устройство не тач-скрин, включаем курсор
+if (!isTouchDevice && true != true) { // Если устройство не тач-скрин, включаем курсор
 
     // Функция выбора случайного курсора
     function getRandomCursor() {
@@ -678,7 +678,7 @@ function setVideoInfo(e) {
         console.log(e.id)
         if (ev.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
-            
+
             return
             // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
@@ -695,7 +695,7 @@ function setVideoInfo(e) {
         console.log(e.id)
         if (ev.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
-            
+
             return
             // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
@@ -1335,7 +1335,7 @@ async function getCalendar() {
 }
 
 async function addCalendar() {
-    
+
     document.getElementById("load").classList.remove("hide")
     document.getElementById('search_input').value = ""
     getChapter("#list_calendar")
@@ -1360,7 +1360,7 @@ async function addCalendar() {
     }
 
     // return
-    
+
     while (URLCalendarAdd) {
         d1 = await httpGet(URLCalendarAdd)
         var d2 = data
@@ -1369,9 +1369,9 @@ async function addCalendar() {
         URLCalendarAdd = d1.next_page
     }
     data.forEach(e => {
-        if ((e.type == 'anime-serial') && e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай" ) {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
+        if ((e.type == 'anime-serial') && e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай") {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
             if (id.includes(e.shikimori_id)) return
-            
+
             id.push(e.shikimori_id)
             const e1 = {
                 "title": e.material_data.anime_title,
@@ -1534,73 +1534,73 @@ async function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
         }*/
-        if (!base_anime?.translationActive || typeof base_anime.translationActive[0]?.title !== "string" || typeof base_anime.translationActive=="undefined") {
-            console.log(!base_anime?.translationActive, typeof base_anime.translationActive[0]?.title !== "string", typeof base_anime.translationActive=="undefined")
+    if (!base_anime?.translationActive || typeof base_anime.translationActive[0]?.title !== "string" || typeof base_anime.translationActive == "undefined") {
+        console.log(!base_anime?.translationActive, typeof base_anime.translationActive[0]?.title !== "string", typeof base_anime.translationActive == "undefined")
 
-            base_anime.translationActive = [
-                {
-                    "id": 609,
-                    "title": "AniDUB",
-                    "type": "voice"
-                },
-                {
-                    "id": 2674,
-                    "title": "AniDub Online",
-                    "type": "voice"
-                },
-                {
-                    "id": 610,
-                    "title": "AniLibria.TV",
-                    "type": "voice"
-                },
-                {
-                    "id": 923,
-                    "title": "AnimeVost",
-                    "type": "voice"
-                },
-                {
-                    "id": 910,
-                    "title": "AniStar",
-                    "type": "voice"
-                },
-                {
-                    "id": 1978,
-                    "title": "Dream Cast",
-                    "type": "voice"
-                },
-                {
-                    "id": 557,
-                    "title": "JAM",
-                    "type": "voice"
-                },
-                {
-                    "id": 3293,
-                    "title": "VF-Studio",
-                    "type": "voice"
-                },
-                {
-                    "id": 704,
-                    "title": "Дублированный",
-                    "type": "voice"
-                },
-                {
-                    "id": 3002,
-                    "title": "Дублированный 18+",
-                    "type": "voice"
-                },
-                {
-                    "id": 2023,
-                    "title": "РуАниме / DEEP",
-                    "type": "voice"
-                },
-                {
-                    "id": 3717,
-                    "title": "РуАниме / DEEP 18+",
-                    "type": "voice"
-                }
-            ];
-            localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-        } 
+        base_anime.translationActive = [
+            {
+                "id": 609,
+                "title": "AniDUB",
+                "type": "voice"
+            },
+            {
+                "id": 2674,
+                "title": "AniDub Online",
+                "type": "voice"
+            },
+            {
+                "id": 610,
+                "title": "AniLibria.TV",
+                "type": "voice"
+            },
+            {
+                "id": 923,
+                "title": "AnimeVost",
+                "type": "voice"
+            },
+            {
+                "id": 910,
+                "title": "AniStar",
+                "type": "voice"
+            },
+            {
+                "id": 1978,
+                "title": "Dream Cast",
+                "type": "voice"
+            },
+            {
+                "id": 557,
+                "title": "JAM",
+                "type": "voice"
+            },
+            {
+                "id": 3293,
+                "title": "VF-Studio",
+                "type": "voice"
+            },
+            {
+                "id": 704,
+                "title": "Дублированный",
+                "type": "voice"
+            },
+            {
+                "id": 3002,
+                "title": "Дублированный 18+",
+                "type": "voice"
+            },
+            {
+                "id": 2023,
+                "title": "РуАниме / DEEP",
+                "type": "voice"
+            },
+            {
+                "id": 3717,
+                "title": "РуАниме / DEEP 18+",
+                "type": "voice"
+            }
+        ];
+        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    }
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
@@ -1827,7 +1827,7 @@ function add_cart(e) {
 
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
-        if(!e.cover.startsWith('http')) e.cover = "https://shikimori.one"+e.cover
+        if (!e.cover.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
         // console.log(e.cover)
         e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
         // e.cover = `${getCoverURL}${e.shikimori}`
@@ -2132,7 +2132,7 @@ function copy_discord() {
 > **Статус:** ${VideoInfo.info.info_status.textContent}  
 > **Возрастной рейтинг:** [${VideoInfo.info.rating_mpaa.textContent}](<https://track-anime.github.io/?rating_mpaa=${encodeURIComponent(VideoInfo.info.rating_mpaa.textContent)}>)
 > 
-> **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent} (2478 проголосовавших)
+> **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent}
 
 [Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}>)
 [Открыть на shikimori](<https://shikimori.one/animes/${AnimeInfo.id}>)
@@ -2143,6 +2143,53 @@ function copy_discord() {
     showToast({
         cover: "discord_logo.png",
         title: "Описание скопировано в буфер обмена в формате discord",
+        date: {
+            string: "",
+        },
+        voice: "Описание скопировано",
+    }, 5)
+}
+
+function copy_telegram() {
+    var screen = ""
+    AnimeInfo.screenshots?.forEach((el, i) => {
+        screen = screen + ` [scr${i + 1}](https://shikimori.one${el.original})`
+    })
+    screen = ""
+    var genres = ""
+
+    AnimeInfo.genres.forEach(e => {
+        genres = `${genres} ${e.russian}`
+    });
+// _______________________________________________________________
+// \`\`\`${AnimeInfo.description}\`\`\`
+    copyToClipboard(`
+
+[Обложка] ||${VideoInfo.info.cover.src}||
+📽️ **[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}]**  \`${AnimeInfo.russian}\`
+🕒 [__${VideoInfo.info.updated_at.textContent}__]
+
+>🎬 **Серии:** __${VideoInfo.info.series.textContent}__
+> ⏱ **Длительность:** __${VideoInfo.info.duration.textContent}__
+> 🎨 **${VideoInfo.info.studios.textContent}**
+> 📅 **Год выхода:** __${VideoInfo.info.year.textContent}__
+> 🏷️ **Жанры:** __${genres}__ 
+> 📌 **Статус:** __${VideoInfo.info.info_status.textContent}__ 
+
+> 🎯 **Возрастной рейтинг:** __${VideoInfo.info.rating_mpaa.textContent}__
+> 
+> 🌟 **Рейтинг shikimori:** __${VideoInfo.info.shikimori_rating.textContent}__
+
+🔗 [Track Anime By ДугДуг]: https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}
+🌐 [shikimori]: https://shikimori.one/animes/${AnimeInfo.id}
+
+__${AnimeInfo.description?AnimeInfo.description.replace(/\[character=\d+\]/g, '__ **').replace(/\[\/character\]/g, '** __'):'*'}__
+
+    `)
+    // playSound("ok.mp3")
+    showToast({
+        cover: "telegram_logo.png",
+        title: "Описание скопировано в буфер обмена в формате telegram",
         date: {
             string: "",
         },
@@ -2162,11 +2209,11 @@ function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
     if (e.shift) {
         // if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {
-            let DialogVideoInfo = document.getElementById('DialogVideoInfo');
-            DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-            VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
-            DialogVideoInfo.classList.remove("d-none");
-            // window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
+        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
+        VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+        DialogVideoInfo.classList.remove("d-none");
+        // window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
         // };
         return
     }
@@ -2321,9 +2368,9 @@ async function GetKodi(seartch, revers) {
                 dat = await httpGet(URLListStart)
                 endid2 = dat.results[0].id
             } else {
-                if(typeof(URLList)!="string") {
+                if (typeof (URLList) != "string") {
                     console.log("конец истории");
-                    if(!document.querySelector(".cart_end")){
+                    if (!document.querySelector(".cart_end")) {
                         document.getElementById("list_serch").insertAdjacentHTML('beforeend', `<div class="cart_ cart_end">
                             <div class="cart_n">
                                 <div align="center" style=" font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 5px 0px 0px 5px;">
@@ -2333,7 +2380,7 @@ async function GetKodi(seartch, revers) {
                                     <div align="center" style="height: 25%;background-color: hwb(298.57deg 42.09% 49.46% / 18.04%);">END</div><br class="br">X</div>
                             </div>
                             </div>`)
-                        }
+                    }
                     return;
                 }
                 dat = await httpGet(URLList)
