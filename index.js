@@ -576,7 +576,7 @@ function setVideoInfo(e) {
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
 
 
-    VideoInfo.info.cover.src = `cover.jpg`;
+    VideoInfo.info.cover.src = `cover.png`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
     console.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
@@ -1235,7 +1235,7 @@ function closeDialogButtonEvent() {
 
     window.history.pushState({}, '', url_get);
     VideoPlayer.contentWindow.location.href = "loading.htm";
-    VideoInfo.info.cover.src = `cover.jpg`;
+    VideoInfo.info.cover.src = `cover.png`;
 
 
     document.title = "Track Anime By ДугДуг"
