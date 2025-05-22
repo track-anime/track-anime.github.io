@@ -1659,7 +1659,21 @@ async function VoiceSettingsMenu() {
 
 }
 async function httpGet(theUrl) {
-    var response = await fetch(theUrl);
+    try {
+        const response = await fetch(theUrl);
+        // console.log('Код выполнения:', response.status); // Например, 200
+        // console.log('Текст статуса:', response.statusText); // Например, "OK"
+
+        if (!response.ok) {
+            throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
+        }
+        const data = await response.json(); // Парсинг ответа, если ожидается JSON
+        console.log('Данные:', data);
+        return data
+    } catch (error) {
+        console.error('Ошибка:', error.message);
+        prompt(`Ошибка: ${error.message}. Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`, ".dygdyg @DygDyg")
+    }
     const data = await response.json();
     return data
 }
@@ -2160,8 +2174,8 @@ function copy_telegram() {
     AnimeInfo.genres.forEach(e => {
         genres = `${genres} ${e.russian}`
     });
-// _______________________________________________________________
-// \`\`\`${AnimeInfo.description}\`\`\`
+    // _______________________________________________________________
+    // \`\`\`${AnimeInfo.description}\`\`\`
     copyToClipboard(`
 
 **[${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}]**  \`${AnimeInfo.russian}\`
@@ -2181,7 +2195,7 @@ function copy_telegram() {
 🔗 [Track Anime By ДугДуг]: https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}
 🌐 [shikimori]: https://shikimori.one/animes/${AnimeInfo.id}
 
-__${AnimeInfo.description?AnimeInfo.description.replace(/\[character=\d+\]/g, '__ **').replace(/\[\/character\]/g, '** __'):'*'}__
+__${AnimeInfo.description ? AnimeInfo.description.replace(/\[character=\d+\]/g, '__ **').replace(/\[\/character\]/g, '** __') : '*'}__
 
     `)
     // playSound("ok.mp3")
@@ -2364,6 +2378,7 @@ async function GetKodi(seartch, revers) {
 
             if (revers) {
                 dat = await httpGet(URLListStart)
+
                 endid2 = dat.results[0].id
             } else {
                 if (typeof (URLList) != "string") {
