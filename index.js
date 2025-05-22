@@ -36,7 +36,7 @@ const CheckReleased_ = document.getElementById("CheckReleased")
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://server.dygdyg.ru/cover2.php?id="
+const getCoverURL = "https://dygdyg.duckdns.org/cover2.php?id="
 // const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
@@ -48,10 +48,10 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 
-var URLKodikTranslations = "https://server.dygdyg.ru/kodik.php?method=translations&types=anime-serial"
-var URLList = "https://server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
-var URLCalendar = "https://server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "https://server.dygdyg.ru/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
+var URLKodikTranslations = "https://dygdyg.duckdns.org/kodik.php?method=translations&types=anime-serial"
+var URLList = "https://dygdyg.duckdns.org/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
+var URLCalendar = "https://dygdyg.duckdns.org/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "https://dygdyg.duckdns.org/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
 get_covers_base()
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
@@ -1702,7 +1702,7 @@ async function getCalendarSh() {
     // ned_shikimori.classList.add("ned_shikimori")
 
     // var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
-    var response = await fetch(`https://server.dygdyg.ru/calendar.json`);
+    var response = await fetch(`https://dygdyg.duckdns.org/calendar.json`);
     const data = await response.json();
     // console.log("dasdasdasdasd", data)
     data.forEach(e => {
