@@ -10,10 +10,14 @@ var TypePage = 0
 document.body.r = 2
 var FavCheckSave = false
 
+// var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
+
 let CURSOR_MAX = 22;  // Сколько всего курсоров в папке
 
 
 var url_get = new URL(window.location.href)
+
+const MyServerURL = url_get.searchParams.get('MyServerURL')?url_get.searchParams.get('MyServerURL'):'server.dygdyg.ru' //'dygdyg.duckdns.org'
 const KeyTab = Math.floor(Math.random() * 10000000000)
 const VideoPlayerAnime = document.getElementById('VideoPlayerAnime');
 VideoPlayerAnime.modal = new bootstrap.Modal(VideoPlayerAnime);
@@ -34,9 +38,10 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
 
+
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://dygdyg.duckdns.org/cover2.php?id="
+const getCoverURL = "https://"+MyServerURL+"/cover2.php?id="
 // const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
@@ -48,10 +53,10 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 
-var URLKodikTranslations = "https://dygdyg.duckdns.org/kodik.php?method=translations&types=anime-serial"
-var URLList = "https://dygdyg.duckdns.org/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
-var URLCalendar = "https://dygdyg.duckdns.org/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "https://dygdyg.duckdns.org/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
+var URLKodikTranslations = "https://"+MyServerURL+"/kodik.php?method=translations&types=anime-serial"
+var URLList = "https://"+MyServerURL+"/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
+var URLCalendar = "https://"+MyServerURL+"/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "https://"+MyServerURL+"/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
 get_covers_base()
 
 ////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
