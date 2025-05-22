@@ -1676,7 +1676,7 @@ async function httpGet(theUrl) {
         console.error('Ошибка:', error.message);
         showToast({
             cover: "rkn.png",
-            title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`,
+            title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов`,
             date: {
                 string: "",
             },
@@ -2075,7 +2075,7 @@ function showToast(e, t, click) {
     })
     toast1.show();
 
-    toast0.querySelector(".toast-header").addEventListener("click", (ev) => {
+    toast0.querySelector(".toast.liveToast.fade.show").addEventListener("click", (ev) => {
 
         if(click && ev.delegateTarget==undefined){
             window.open(click, '_blank');
