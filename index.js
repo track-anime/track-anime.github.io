@@ -1412,7 +1412,7 @@ async function addCalendar() {
 
 async function add_push(e) {
     if (sh_api?.authorize == false) return
-    showToast(e);
+    // showToast(e);
     return
 
     const perm = await window?.Notification?.requestPermission()
@@ -1671,8 +1671,18 @@ async function httpGet(theUrl) {
         console.log('Данные:', data);
         return data
     } catch (error) {
+        const url = new URL(theUrl)
+        console.log(url)
         console.error('Ошибка:', error.message);
-        prompt(`Ошибка: ${error.message}. Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`, ".dygdyg @DygDyg")
+        showToast({
+            cover: "rkn.png",
+            title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`,
+            date: {
+                string: "",
+            },
+            voice: `Ошибка доступа к ${url.hostname}`,
+        }, "15", "/contact.htm")
+        // prompt(`Ошибка: ${error.message}. Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`, ".dygdyg @DygDyg")
     }
     const data = await response.json();
     return data
@@ -2034,8 +2044,8 @@ function playSound(soundFile, vol) {
     // console.log(audioElement.volume)
 }
 
-function showToast(e, t) {
-    return
+function showToast(e, t, click) {
+
     // prompt("",JSON.stringify(e))
     playSound('meloboom.mp3');
     var toast0 = document.createElement('div');
@@ -2057,7 +2067,7 @@ function showToast(e, t) {
     if (e.cover != 'discord_logo.png') toast0.querySelector("img").classList.add("img-preview")
 
     var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
-    console.log(typeof t)
+    // console.log(typeof t)
     if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);
 
     toast0.addEventListener('hidden.bs.toast', function (e) {
@@ -2066,11 +2076,16 @@ function showToast(e, t) {
     toast1.show();
 
     toast0.querySelector(".toast-header").addEventListener("click", (ev) => {
-        toast1.hide();
+
+        if(click && ev.delegateTarget==undefined){
+            window.open(click, '_blank');
+        }else{
+            toast1.hide();
+        }
     })
 
     setTimeout(() => {
-        toast1.hide();
+        // toast1.hide();
     }, 60 + 60 + 1000);
 
     // toast0.show();
