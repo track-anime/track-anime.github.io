@@ -1676,7 +1676,7 @@ async function httpGet(theUrl) {
         console.error('Ошибка:', error.message);
         showToast({
             cover: "rkn.png",
-            title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов`,
+            title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов.`,
             date: {
                 string: "",
             },
