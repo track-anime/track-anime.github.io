@@ -2061,7 +2061,7 @@ function showToast(e, t, click, t_start) {
   </div>
     `;
     if (e.cover != 'discord_logo.png') toast0.querySelector("img").classList.add("img-preview")
-    t_start = t_start?t_start:0
+    t_start = t_start ? t_start : 0
     setTimeout(() => {
         var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
         // console.log(typeof t)
@@ -2087,7 +2087,7 @@ function showToast(e, t, click, t_start) {
 
         // toast0.show();
         // toast.dispose()
-    }, t_start*1000)
+    }, t_start * 1000)
 }
 document.addEventListener("sh_get_anime", function (e) {
     console.log("sh_get_anime", e.anime)
@@ -2594,7 +2594,8 @@ function raitnig_user() {
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
-        // console.log(e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e.anime})
+        // console.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e.anime})
+
         var raitnig_user_local = 0
         if (e.anime.aired_on) {
             raitnig_user_local += currentYear - parseFloat(e.anime.aired_on.split('-'));
@@ -2604,7 +2605,14 @@ function raitnig_user() {
             raitnig_user_local += currentYear - 2010;
         }
         raitnig_user_local += parseFloat(e.anime.score)
-        raitnig_user_local += e.anime.episodes
+        if (e.anime.episodes) {
+            raitnig_user_local += e.anime.episodes
+        }else if (e.anime.episodes_aired) {
+            raitnig_user_local += e.anime.episodes_aired
+        } else {
+            raitnig_user_local += 12
+        }
+
         if (e.anime.kind == "movie") raitnig_user_local += 20
         if (e.anime.kind == "muvie") raitnig_user_local += 20
 
@@ -2634,11 +2642,16 @@ function raitnig_user() {
 
         raitnig_user += raitnig_user_local
 
+        // if (e.anime.id == 21) {
+        //     console.log("a", e.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, { "e": e.anime })
+        //     console.log("t", raitnig_user_local)
+        // }
+
     });
     return Math.round(raitnig_user);
 }
 
-function reiting_popup(){
+function reiting_popup() {
     showToast({
         cover: sh_api.UserData.image.x160 ? sh_api.UserData.image.x160 : sh_api.UserData.avatar,
         title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других фаторов.",
