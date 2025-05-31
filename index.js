@@ -2599,9 +2599,13 @@ function raitnig_user() {
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
-        // console.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e.anime})
+        console.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e.anime})
 
         var raitnig_user_local = 0
+        if (e.anime.score) {
+            raitnig_user_local += parseFloat(e.anime.score);
+        }
+
         if (e.anime.aired_on) {
             raitnig_user_local += currentYear - parseFloat(e.anime.aired_on.split('-'));
         } else if (e.anime.released_on) {
