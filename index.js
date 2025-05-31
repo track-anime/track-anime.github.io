@@ -17,7 +17,7 @@ let CURSOR_MAX = 22;  // Сколько всего курсоров в папк�
 
 var url_get = new URL(window.location.href)
 
-const MyServerURL = url_get.searchParams.get('MyServerURL')?url_get.searchParams.get('MyServerURL'):'server.dygdyg.ru' //'dygdyg.duckdns.org'
+const MyServerURL = url_get.searchParams.get('MyServerURL') ? url_get.searchParams.get('MyServerURL') : 'server.dygdyg.ru' //'dygdyg.duckdns.org'
 const KeyTab = Math.floor(Math.random() * 10000000000)
 const VideoPlayerAnime = document.getElementById('VideoPlayerAnime');
 VideoPlayerAnime.modal = new bootstrap.Modal(VideoPlayerAnime);
@@ -41,7 +41,7 @@ const CheckReleased_ = document.getElementById("CheckReleased")
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://"+MyServerURL+"/cover2.php?id="
+const getCoverURL = "https://" + MyServerURL + "/cover2.php?id="
 // const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
@@ -53,32 +53,11 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 
-var URLKodikTranslations = "https://"+MyServerURL+"/kodik.php?method=translations&types=anime-serial"
-var URLList = "https://"+MyServerURL+"/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
-var URLCalendar = "https://"+MyServerURL+"/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "https://"+MyServerURL+"/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
+var URLKodikTranslations = "https://" + MyServerURL + "/kodik.php?method=translations&types=anime-serial"
+var URLList = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
+var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
 get_covers_base()
-
-////////////////////////////// проверяется, есть ли запрос на показ QR Code и его вывод ////////////////////
-
-
-
-if (url_get.searchParams.get('qrcode')) {
-    // alert("1")
-    var url_get = new URL(window.location.href)
-    var qrcode_link = document.getElementById("qrcode_link")
-    var link = `${location.origin}${location.pathname}?token=${url_get.searchParams.get('code')}`
-    // console.log(222, location.href)
-    get_qr_code(link)
-    qrcode_link.href = link
-    qrcode_link.textContent = "Ссылка на авторизацию. Не отправляйте другим людям."
-    var qrcode_modal = new bootstrap.Modal(document.getElementById('qrcode_modal'))
-
-    url_get.searchParams.delete('qrcode')
-
-    qrcode_modal.show()
-}
-
 
 
 
@@ -932,18 +911,29 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
 })
 
 document.addEventListener("authorize", function (e) { // (1)
-    url_get.searchParams.delete('code')
+    var _raitnig_user = raitnig_user()
+    console.log(`Рейтинг пользователя: ${_raitnig_user}`)
+    // url_get.searchParams.delete('code')
     window.history.pushState({}, '', url_get);
     SetColorCartFav()
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 
     document.getElementById("list_login_Button").classList.add('hide')
-    document.getElementById("list_QRScan_Button").classList.add('hide')
 
     document.getElementById("User_Menu_Button").classList.remove('hide')
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
-    document.getElementById("User_Menu_Button").querySelector('span').textContent = sh_api.UserData.nickname
+    document.getElementById("User_Menu_Button").querySelector('span').textContent = `${sh_api.UserData.nickname}: ⭐️${_raitnig_user}`
+
+    setTimeout(() => showToast({
+        cover: sh_api.UserData.image.x160 ? sh_api.UserData.image.x160 : sh_api.UserData.avatar,
+        title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других фаторов.",
+        date: {
+            string: "",
+        },
+        voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
+        sound_mute: true,
+    }, 10, null, 1), 1 * 1000);
 
     const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
 
@@ -2049,10 +2039,13 @@ function playSound(soundFile, vol) {
     // console.log(audioElement.volume)
 }
 
-function showToast(e, t, click) {
+
+// Отправляет всплывающий алерт, всплывающее сообщение. (alert popup tooltips)
+function showToast(e, t, click, t_start) {
 
     // prompt("",JSON.stringify(e))
-    playSound('meloboom.mp3');
+    console.log(e)
+    if (!e.sound_mute) playSound('meloboom.mp3');
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
 
@@ -2070,31 +2063,33 @@ function showToast(e, t, click) {
   </div>
     `;
     if (e.cover != 'discord_logo.png') toast0.querySelector("img").classList.add("img-preview")
-
-    var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
-    // console.log(typeof t)
-    if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);
-
-    toast0.addEventListener('hidden.bs.toast', function (e) {
-        toast0.remove()
-    })
-    toast1.show();
-
-    toast0.querySelector(".toast.liveToast.fade.show").addEventListener("click", (ev) => {
-
-        if(click && ev.delegateTarget==undefined){
-            window.open(click, '_blank');
-        }else{
-            toast1.hide();
-        }
-    })
-
+    t_start = t_start?t_start:0
     setTimeout(() => {
-        // toast1.hide();
-    }, 60 + 60 + 1000);
+        var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
+        // console.log(typeof t)
+        if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);
 
-    // toast0.show();
-    // toast.dispose()
+        toast0.addEventListener('hidden.bs.toast', function (e) {
+            toast0.remove()
+        })
+        toast1.show();
+
+        toast0.querySelector(".toast.liveToast.fade.show").addEventListener("click", (ev) => {
+
+            if (click && ev.delegateTarget == undefined && ev.delegateTarget == null) {
+                window.open(click, '_blank');
+            } else {
+                toast1.hide();
+            }
+        })
+
+        setTimeout(() => {
+            // toast1.hide();
+        }, 60 + 60 + 1000);
+
+        // toast0.show();
+        // toast.dispose()
+    }, t_start*1000)
 }
 document.addEventListener("sh_get_anime", function (e) {
     console.log("sh_get_anime", e.anime)
@@ -2575,24 +2570,7 @@ localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 ///////////////////////////////////////////
 var htmlscanner
 var qrcode_scan_modal = new bootstrap.Modal(document.getElementById("qrcode_scan_modal"))
-document.getElementById("list_QRScan_Button").addEventListener('click', () => {
-    qrcode_scan_modal.show()
-    domReady(function () {
 
-        // If found you qr code
-        function onScanSuccess(decodeText, decodeResult) {
-            // alert("You Qr is : " + decodeText, decodeResult);
-            location.href = decodeText
-            htmlscanner.clear()
-        }
-
-        htmlscanner = new Html5QrcodeScanner(
-            "my-qr-reader",
-            { fps: 10, qrbos: 250 }
-        );
-        htmlscanner.render(onScanSuccess);
-    });
-})
 
 
 document.getElementById("qrcode_scan_modal").addEventListener('hidden.bs.modal', function (e) {
@@ -2609,4 +2587,55 @@ function domReady(fn) {
     } else {
         document.addEventListener("DOMContentLoaded", fn);
     }
+}
+
+
+/// Функция по созданию рейтинга пользователя
+
+function raitnig_user() {
+    var raitnig_user = 0
+    const currentYear = new Date().getFullYear()
+    sh_api.Favorits.data.forEach(e => {
+        // console.log(e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e.anime})
+        var raitnig_user_local = 0
+        if (e.anime.aired_on) {
+            raitnig_user_local += currentYear - parseFloat(e.anime.aired_on.split('-'));
+        } else if (e.anime.released_on) {
+            raitnig_user_local += currentYear - parseFloat(e.anime.released_on.split('-'));
+        } else {
+            raitnig_user_local += currentYear - 2010;
+        }
+        raitnig_user_local += parseFloat(e.anime.score)
+        raitnig_user_local += e.anime.episodes
+        if (e.anime.kind == "movie") raitnig_user_local += 20
+        if (e.anime.kind == "muvie") raitnig_user_local += 20
+
+        switch (e.status) {
+            case "watching":
+                raitnig_user_local = raitnig_user_local * 0.7;
+                break;
+            case "completed":
+                raitnig_user_local = raitnig_user_local * 1;
+                break;
+            case "dropped":
+                raitnig_user_local = raitnig_user_local * 0.3;
+                break;
+            case "on_hold":
+                raitnig_user_local = raitnig_user_local * 0.5;
+                break;
+            case "planned":
+                raitnig_user_local = raitnig_user_local * 0.3;
+                break;
+            case "rewatching":
+                raitnig_user_local = raitnig_user_local * 1.2;
+                break;
+
+            default:
+                break;
+        }
+
+        raitnig_user += raitnig_user_local
+
+    });
+    return Math.round(raitnig_user);
 }
