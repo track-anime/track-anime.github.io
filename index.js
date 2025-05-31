@@ -925,15 +925,19 @@ document.addEventListener("authorize", function (e) { // (1)
     document.getElementById("raiting_button")
 
 
-    setTimeout(() => showToast({
-        cover: sh_api.UserData.image.x160 ? sh_api.UserData.image.x160 : sh_api.UserData.avatar,
-        title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других факторов.",
-        date: {
-            string: "",
-        },
-        voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
-        sound_mute: true,
-    }, 10, null, 3), 1 * 1000);
+    setTimeout(() => {
+        if (reiting_off) return
+        reiting_off = true
+        showToast({
+            cover: sh_api.UserData.image.x160 ? sh_api.UserData.image.x160 : sh_api.UserData.avatar,
+            title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других факторов.",
+            date: {
+                string: "",
+            },
+            voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
+            sound_mute: true,
+        }, 10, null, 3)
+    }, 1 * 1000);
 
     const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
 
@@ -2592,8 +2596,6 @@ function domReady(fn) {
 /// Функция по созданию рейтинга пользователя
 
 function raitnig_user() {
-    if (reiting_off) return
-    reiting_off = true
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
@@ -2610,7 +2612,7 @@ function raitnig_user() {
         raitnig_user_local += parseFloat(e.anime.score)
         if (e.anime.episodes) {
             raitnig_user_local += e.anime.episodes
-        }else if (e.anime.episodes_aired) {
+        } else if (e.anime.episodes_aired) {
             raitnig_user_local += e.anime.episodes_aired
         } else {
             raitnig_user_local += 12
