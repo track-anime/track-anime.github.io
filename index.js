@@ -9,6 +9,7 @@ var HistoryIsActivy = true
 var TypePage = 0
 document.body.r = 2
 var FavCheckSave = false
+var reiting_off = false
 
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
@@ -2591,6 +2592,8 @@ function domReady(fn) {
 /// Функция по созданию рейтинга пользователя
 
 function raitnig_user() {
+    if (reiting_off) return
+    reiting_off = true
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
