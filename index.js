@@ -933,7 +933,7 @@ document.addEventListener("authorize", function (e) { // (1)
         },
         voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
         sound_mute: true,
-    }, 10, null, 1), 1 * 1000);
+    }, 10, null, 3), 1 * 1000);
 
     const set2 = new Set(sh_api.Favorits.data.map(item => item.anime.id.toString()));
 
