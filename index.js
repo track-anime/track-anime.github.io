@@ -396,12 +396,6 @@ if (typeof base_anime.CheckReleased == "boolean") {
 
 url_get.searchParams.get('token') ? add_token_connect(url_get.searchParams.get('token')) : null
 
-document.getElementById('User_login_QR_code').addEventListener('click', () => {
-    location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&response_type=code&redirect_uri=${window.location.origin}${window.location.pathname}?qrcode=true`
-})
-
-
-
 function add_token_connect(token) {
     document.cookie = `sh_refresh_token=${token.split(";")[0]}; path=/;`
     document.cookie = `sh_access_token=${token.split(";")[1]}; path=/; max-age=${token.split(";")[2]}`
@@ -924,10 +918,16 @@ document.addEventListener("authorize", function (e) { // (1)
     document.getElementById("User_Menu_Button").classList.remove('hide')
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
     document.getElementById("User_Menu_Button").querySelector('span').textContent = `${sh_api.UserData.nickname}: ⭐️${_raitnig_user}`
+    document.getElementById("raiting_button").textContent = `Рейтинг: ⭐️${_raitnig_user}`
+    document.getElementById("raiting_button").addEventListener("click", () => reiting_popup())
+    document.getElementById("modal_reiting_info_title").textContent = `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`
+    document.getElementById("modal_reiting_info_body").textContent = `Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других факторов.`
+    document.getElementById("raiting_button")
+
 
     setTimeout(() => showToast({
         cover: sh_api.UserData.image.x160 ? sh_api.UserData.image.x160 : sh_api.UserData.avatar,
-        title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других фаторов.",
+        title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других факторов.",
         date: {
             string: "",
         },
@@ -1407,12 +1407,10 @@ async function addCalendar() {
 
 async function add_push(e) {
     if (sh_api?.authorize == false) return
-    // showToast(e);
     return
 
     const perm = await window?.Notification?.requestPermission()
 
-    // return showToast(e);
 
     if (perm != "granted" || perm == undefined) {
         showToast(e);
@@ -1677,6 +1675,7 @@ async function httpGet(theUrl) {
             },
             voice: `Ошибка доступа к ${url.hostname}`,
         }, "15", "/contact.htm")
+        document.getElementById("contacts_Button").classList.remove('hide')
         // prompt(`Ошибка: ${error.message}. Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`, ".dygdyg @DygDyg")
     }
     const data = await response.json();
@@ -2638,4 +2637,16 @@ function raitnig_user() {
 
     });
     return Math.round(raitnig_user);
+}
+
+function reiting_popup(){
+    showToast({
+        cover: sh_api.UserData.image.x160 ? sh_api.UserData.image.x160 : sh_api.UserData.avatar,
+        title: "Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других фаторов.",
+        date: {
+            string: "",
+        },
+        voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
+        sound_mute: true,
+    })
 }

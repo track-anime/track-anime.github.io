@@ -62,6 +62,24 @@
 
 
 <body>
+    <div class="modal fade" id="modal_reiting_info" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
+        tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modal_reiting_info_title">title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="modal_reiting_info_body">
+                    <p>Modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <img class="image_preview" id="image-preview-window"></img>
     <div class="modal fade" id="qrcode_scan_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -193,12 +211,12 @@
 
                     </ul>
                     </li>
-                    <!-- <li class="nav-item">
+                    <li class="nav-item">
                         <button id="contacts_Button" onclick="window.location.href = `/contact.htm`" aria-current="page"
-                            class="btn-link nav-link">Контакты</button>
-                    </li> -->
+                            class="btn-link nav-link hide">Контакты</button>
+                    </li>
                     </ul>
-                    
+
                     <form class="d-flex input-group" role="search" id="search_form">
                         <input id="search_input" name="search_input" class="form-control" type="search"
                             placeholder="Поиск" aria-describedby="search anume" aria-label="Поиск">
@@ -216,8 +234,8 @@
                         </button>
                         <ul class="dropdown-menu">
                             </li>
-                            <li><button style="display: none" class="dropdown-item" id="User_login_QR_code">Вход по QR
-                                    CODE</button>
+                            <li><button class="dropdown-item" id="raiting_button" data-bs-toggle="modal"
+                                    href="#modal_reiting_info">Рейтинг</button>
                             </li>
                             <li><button class="dropdown-item" id="User_Fav_sinc_button">Избранное</button>
                             </li>
@@ -415,9 +433,10 @@
                             Kodik Player</button>
                         <button type="button" id="info_AlohaPlayer" class="btn btn-danger w-100 mb-2">Смотреть
                             Alloha Player</button>
-                        <button type="button" id="info_AnilibriaPlayer" class="btn btn-warning w-100 mb-2">Искать на Anilibia</button>
+                        <button type="button" id="info_AnilibriaPlayer" class="btn btn-warning w-100 mb-2">Искать на
+                            Anilibia</button>
                     </div>
-                        <!-- <button type="button" id="info_TorrentPlayer" class="btn btn-success w-100 mb-2">Поискать на
+                    <!-- <button type="button" id="info_TorrentPlayer" class="btn btn-success w-100 mb-2">Поискать на
                             Торренте</button>
                     </div> -->
                     <div class="col-md-9">
