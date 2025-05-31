@@ -919,7 +919,6 @@ document.addEventListener("authorize", function (e) { // (1)
     document.getElementById("User_Menu_Button").querySelector('img').src = sh_api.UserData.avatar
     document.getElementById("User_Menu_Button").querySelector('span').textContent = `${sh_api.UserData.nickname}: ⭐️${_raitnig_user}`
     document.getElementById("raiting_button").textContent = `Рейтинг: ⭐️${_raitnig_user}`
-    document.getElementById("raiting_button").addEventListener("click", () => reiting_popup())
     document.getElementById("modal_reiting_info_title").textContent = `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`
     document.getElementById("modal_reiting_info_body").textContent = `Он высчитывается на основе просмотренных, брошенных, отложенных, пересматриваемых и запланированных аниме, так же учитывается их дата выхода, количество серий и ещё многих других факторов.`
     document.getElementById("raiting_button")
