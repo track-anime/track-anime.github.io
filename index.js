@@ -2644,11 +2644,13 @@ function raitnig_user() {
             case "rewatching":
                 raitnig_user_local = raitnig_user_local * 1.2;
                 break;
-
-            default:
-                break;
-        }
-
+                
+                default:
+                    break;
+                }
+                
+        if(parseFloat(e.anime.score)>0)raitnig_user_local = raitnig_user_local * (parseFloat(e.anime.score)/10);
+        console.log((parseFloat(e.anime.score)/10))
         raitnig_user += raitnig_user_local
 
         // if (e.anime.id == 21) {
