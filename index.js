@@ -2599,7 +2599,7 @@ function raitnig_user() {
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
-        console.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e.anime})
+        console.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e})
 
         var raitnig_user_local = 0
         if (e.anime.score) {
@@ -2623,7 +2623,7 @@ function raitnig_user() {
         }
 
         if (e.anime.kind == "movie") raitnig_user_local += 20
-        if (e.anime.kind == "muvie") raitnig_user_local += 20
+
 
         switch (e.status) {
             case "watching":
@@ -2650,7 +2650,11 @@ function raitnig_user() {
                 }
                 
         if(parseFloat(e.anime.score)>0)raitnig_user_local = raitnig_user_local * (parseFloat(e.anime.score)/10);
-        console.log((parseFloat(e.anime.score)/10))
+
+        // console.log((parseFloat(e.anime.score)/10))
+        if (e.anime.kind == "tv_special") raitnig_user_local *= 0.5
+        if (e.anime.kind == "special") raitnig_user_local *= 0.5
+        
         raitnig_user += raitnig_user_local
 
         // if (e.anime.id == 21) {
