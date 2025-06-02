@@ -98,7 +98,7 @@ const debug = {
         }
     }
 };
-isDebugEnabled = sh_api.url_get.searchParams.get('Debug')?sh_api.url_get.searchParams.get('Debug'):isDebugEnabled
+isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searchParams.get('Debug') : isDebugEnabled
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
@@ -1573,72 +1573,74 @@ async function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
         }*/
-    if (!base_anime?.translationActive || typeof base_anime?.translationActive[0]?.title !== "string" || typeof base_anime?.translationActive == "undefined") {
-        debug.log(!base_anime?.translationActive, typeof base_anime?.translationActive[0]?.title !== "string", typeof base_anime?.translationActive == "undefined")
+    if (!base_anime?.translationActive) {
+        if (!base_anime?.translationActive || typeof base_anime?.translationActive[0]?.title !== "string" || typeof base_anime?.translationActive == "undefined") {
+            debug.log(!base_anime?.translationActive, typeof base_anime?.translationActive[0]?.title !== "string", typeof base_anime?.translationActive == "undefined")
 
-        base_anime.translationActive = [
-            {
-                "id": 609,
-                "title": "AniDUB",
-                "type": "voice"
-            },
-            {
-                "id": 2674,
-                "title": "AniDub Online",
-                "type": "voice"
-            },
-            {
-                "id": 610,
-                "title": "AniLibria.TV",
-                "type": "voice"
-            },
-            {
-                "id": 923,
-                "title": "AnimeVost",
-                "type": "voice"
-            },
-            {
-                "id": 910,
-                "title": "AniStar",
-                "type": "voice"
-            },
-            {
-                "id": 1978,
-                "title": "Dream Cast",
-                "type": "voice"
-            },
-            {
-                "id": 557,
-                "title": "JAM",
-                "type": "voice"
-            },
-            {
-                "id": 3293,
-                "title": "VF-Studio",
-                "type": "voice"
-            },
-            {
-                "id": 704,
-                "title": "Дублированный",
-                "type": "voice"
-            },
-            {
-                "id": 3002,
-                "title": "Дублированный 18+",
-                "type": "voice"
-            },
-            {
-                "id": 2023,
-                "title": "РуАниме / DEEP",
-                "type": "voice"
-            },
-            {
-                "id": 3717,
-                "title": "РуАниме / DEEP 18+",
-                "type": "voice"
-            }
-        ];
-        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+            base_anime.translationActive = [
+                {
+                    "id": 609,
+                    "title": "AniDUB",
+                    "type": "voice"
+                },
+                {
+                    "id": 2674,
+                    "title": "AniDub Online",
+                    "type": "voice"
+                },
+                {
+                    "id": 610,
+                    "title": "AniLibria.TV",
+                    "type": "voice"
+                },
+                {
+                    "id": 923,
+                    "title": "AnimeVost",
+                    "type": "voice"
+                },
+                {
+                    "id": 910,
+                    "title": "AniStar",
+                    "type": "voice"
+                },
+                {
+                    "id": 1978,
+                    "title": "Dream Cast",
+                    "type": "voice"
+                },
+                {
+                    "id": 557,
+                    "title": "JAM",
+                    "type": "voice"
+                },
+                {
+                    "id": 3293,
+                    "title": "VF-Studio",
+                    "type": "voice"
+                },
+                {
+                    "id": 704,
+                    "title": "Дублированный",
+                    "type": "voice"
+                },
+                {
+                    "id": 3002,
+                    "title": "Дублированный 18+",
+                    "type": "voice"
+                },
+                {
+                    "id": 2023,
+                    "title": "РуАниме / DEEP",
+                    "type": "voice"
+                },
+                {
+                    "id": 3717,
+                    "title": "РуАниме / DEEP 18+",
+                    "type": "voice"
+                }
+            ];
+            localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        }
     }
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
