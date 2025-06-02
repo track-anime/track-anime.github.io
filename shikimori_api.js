@@ -39,7 +39,7 @@ sh_api.status_lable_ru = [
 ]
 
 /* document.addEventListener("authorize", function (e) { // (1)
-    console.log("authorize", e)
+    debug.log("authorize", e)
 
 }); */
 
@@ -76,7 +76,7 @@ sh_api.add_token = () => {
     }
     /* 
         if (!sh_api.getCookie("sh_access_token") && sh_api.getCookie("sh_refresh_token") && sh_api.getCookie("sh_refresh_token")!="undefined") {
-            console.log("reload_token")
+            debug.log("reload_token")
             sh_api.refresh_token()
     
             return
@@ -92,7 +92,7 @@ sh_api.add_token = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log("get", data);
+            debug.log("get", data);
             if(typeof data.access_token=="string") document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
             // document.cookie = `sh_access_token_max_age=${(new Date(Date.now() + data.expires_in * 1000)).toUTCString()}; path=/; max-age=${data.expires_in};`
             if(typeof data.refresh_token=="string") document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT"`
@@ -126,23 +126,23 @@ sh_api.ClearCookie = () =>{
     return
     if (sh_api.getCookie("sh_refresh_token")=='undefined'){
         document.cookie = `sh_refresh_token=""; path=/; max-age=-1;`
-        console.log("sh_api clear sh_refresh_token")
+        debug.log("sh_api clear sh_refresh_token")
         tmp_Clean_Cookie = true
     }
     
     if (sh_api.getCookie("sh_access_token")=='undefined'){
         document.cookie = `sh_access_token=""; path=/; max-age=-1;`
-        console.log("sh_api clear sh_access_token")
+        debug.log("sh_api clear sh_access_token")
         tmp_Clean_Cookie = true
     }
 /*     if (sh_api.getCookie("sh_access_token_max_age")=='undefined'){
         document.cookie = `sh_access_token_max_age=""; path=/; max-age=-1;`
-        console.log("sh_api clear sh_access_token_max_age")
+        debug.log("sh_api clear sh_access_token_max_age")
         tmp_Clean_Cookie = true
     } */
     if (sh_api.getCookie("_kawai_session")=='undefined'){
         document.cookie = `_kawai_session=""; path=/; max-age=-1;`
-        console.log("sh_api clear _kawai_session")
+        debug.log("sh_api clear _kawai_session")
         tmp_Clean_Cookie = true
     }
     if(tmp_Clean_Cookie==true) navigator.reload()
@@ -172,7 +172,7 @@ sh_api.refresh_token = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log("rf", data);
+            debug.log("rf", data);
             if(typeof data.access_token=="string")document.cookie = `sh_access_token=${data.access_token}; path=/; max-age=${data.expires_in};`
             if(typeof data.refresh_token=="string")document.cookie = `sh_refresh_token=${data.refresh_token}; path=/; expires=Fri, 31 Dec 9999 23:59:59 GMT"`
             if (data.error == "invalid_grant") window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
@@ -189,7 +189,7 @@ sh_api.get_user = (user, isanother) => {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize" || ot == "await") return ot
     }
-    // console.log(encodeURI(user))
+    // debug.log(encodeURI(user))
     var url = `https://shikimori.one/api/users/${user ? encodeURI(user) : "whoami"}?access_token=${sh_api.getCookie("sh_access_token")}`
     if (isanother) url = `https://shikimori.one/api/users/${encodeURI(user)}`
     fetch(url)
@@ -206,13 +206,13 @@ sh_api.get_user = (user, isanother) => {
         })
         .then(data => {
             if (data == "404") {
-                console.log("404 Пользователь не найден")
+                debug.log("404 Пользователь не найден")
                 document.dispatchEvent(sh_api.search_another);
                 sh_api.get_favorit(sh_api.UserData.id)
                 return
             }
             if (!isanother) sh_api.authorize = true
-            console.log("user_data", data);
+            debug.log("user_data", data);
             isanother ? sh_api.another.UserData = data : sh_api.UserData = data
             sh_api.get_favorit(sh_api.another.UserData.id, isanother)
         })
@@ -251,11 +251,11 @@ sh_api.get_favorit = (sh_user, isanother) => {
         .then(data => {
             if (isanother) {
                 sh_api.another.Favorits.data = data
-                // console.log(sh_api.another.UserData.nickname, sh_api.another.Favorits.data)
+                // debug.log(sh_api.another.UserData.nickname, sh_api.another.Favorits.data)
                 document.dispatchEvent(sh_api.search_another);
             } else {
                 if (!isanother) sh_api.authorize = true
-                // console.log("anime_rates", data);
+                // debug.log("anime_rates", data);
                 if (sh_user) {
                     sh_api.Favorits[sh_user] = data
                 } else {
@@ -275,7 +275,7 @@ sh_api.get_favorit = (sh_user, isanother) => {
 }
 
 sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет аниме в избранном
-    if (!sh_api.authorize) return console.log("Вы не авторизированы")
+    if (!sh_api.authorize) return debug.log("Вы не авторизированы")
     var url = `https://shikimori.one/api/user_rates?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url, {
         method: 'POST',
@@ -293,7 +293,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
     })
         .then(response => response.json())
         .then(data => {
-            console.log("AddUserRates", data)
+            debug.log("AddUserRates", data)
             sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'), true)
         })
         .catch(error => console.error(error));
@@ -304,7 +304,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 
 sh_api.get_anime = (id) => {
-    // console.log(id)
+    // debug.log(id)
     var url = `https://shikimori.one/api/animes/${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     fetch(url)
@@ -329,7 +329,7 @@ sh_api.get_anime = (id) => {
             sh_api.get_anime_ev.anime = data
             document.dispatchEvent(sh_api.get_anime_ev);
             // sh_api.Last_search = data
-            // console.log(sh_api.Last_search)
+            // debug.log(sh_api.Last_search)
         })
         .catch(error => {
 
@@ -362,7 +362,7 @@ sh_api.search = (seartch, censored=true) => {
             sh_api.search_ev.search = data
             document.dispatchEvent(sh_api.search_ev);
             // sh_api.Last_search = data
-            // console.log(sh_api.Last_search)
+            // debug.log(sh_api.Last_search)
         })
         .catch(error => {
 
@@ -387,7 +387,7 @@ sh_api.DelUserRates = (id, sl) => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log("DelUserRates", data)
+            debug.log("DelUserRates", data)
         })
         .catch(error => console.error(error));
 }

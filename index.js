@@ -1,4 +1,4 @@
-var data, dat, targetFrame, endid, endid2, prev_page, SH_UserData, SH_Favorite, cart_data, backgrounds
+var data, dat, targetFrame, endid, endid2, prev_page, SH_UserData, SH_Favorite, cart_data, backgrounds;
 var ld = false, SH_isAvtorize = false;
 var AnimeScanID = {}
 var AnimeInfo = {}
@@ -10,6 +10,7 @@ var TypePage = 0
 document.body.r = 2
 var FavCheckSave = false
 var reiting_off = false
+var isDebugEnabled = false
 
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
@@ -49,6 +50,7 @@ var anime_list_id = []
 var covers_base = []
 
 
+
 const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg-body-tertiary.sticky-top')
 
 
@@ -60,6 +62,52 @@ var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&w
 var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
 get_covers_base()
 
+
+//////// Создаёт функцию debug.log() /////////////////////////////////////////////
+// const debug = {
+//     log(...args) {
+//         if (isDebugEnabled) {
+//             console.group()
+//             console.log('[DEBUG]:', ...args);
+//             console.groupEnd()
+//         }
+//     }
+// };
+
+const debug = {
+    log(...args) {
+        if (isDebugEnabled) {
+            // Захватываем стек вызовов
+            const stack = new Error().stack;
+            // Разбираем стек для получения информации о вызове
+            const callerInfo = stack.split('\n')[2]; // Вторая строка обычно указывает на место вызова debug.log
+            const match = callerInfo.match(/at\s+(.*)\s+\((.*):(\d+):(\d+)\)/) ||
+                callerInfo.match(/at\s+(.*):(\d+):(\d+)/);
+
+            let callerDetails = 'unknown';
+            if (match) {
+                var [, a, file, line, column] = match;
+                callerDetails = `${file}:${line}`;
+            }
+
+            // Выводим с группировкой
+            console.groupCollapsed(`[LOG]:`, ...args);
+            // console.log(callerInfo);
+            console.trace(); // Для полного стека вызовов
+            console.groupEnd();
+        }
+    }
+};
+isDebugEnabled = sh_api.url_get.searchParams.get('Debug')?sh_api.url_get.searchParams.get('Debug'):isDebugEnabled
+
+///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
+
+if (location.hostname == "127.0.0.1") {
+    document.getElementById("fav").href = "favicon_local.png"
+    isDebugEnabled = true
+} else {
+    document.getElementById("fav").href = "favicon.png"
+}
 
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
@@ -97,18 +145,12 @@ function Get_base_anime() {
 Get_base_anime()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
-// console.log("translation", base_anime?.translation[0] == "string", base_anime?.translationActive[0] == "string")
+// debug.log("translation", base_anime?.translation[0] == "string", base_anime?.translationActive[0] == "string")
 
 
 
 
-///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
-if (location.hostname == "127.0.0.1") {
-    document.getElementById("fav").href = "favicon_local.png"
-} else {
-    document.getElementById("fav").href = "favicon.png"
-}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -144,7 +186,7 @@ async function check_ver() {
     if (!response.status) return
     var text = await response.text()
     text = moment.utc(text, "YYYY-MM-DD HH:mm:ss").local().fromNow()
-    console.log(text)
+    debug.log(text)
     // document.querySelector('.ver_info').title = `build: ${text}`
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
 }
@@ -155,9 +197,9 @@ async function get_covers_base() {
         if (!response.ok) {
             throw new Error("!!!!!!!!!!!!!!!", `HTTP error! status: ${response.status}`);
         }
-        // console.log("covers_base",response.text());
+        // debug.log("covers_base",response.text());
         covers_base = await response.json();
-        // console.log("covers_base", covers_base);
+        // debug.log("covers_base", covers_base);
         return covers_base;
     } catch (error) {
         console.error('Ошибка загрузки данных:', error);
@@ -167,10 +209,10 @@ async function get_covers_base() {
 sh_api.get_user()
 // sh_api.get_key()
 let tmp_Clean_Cookie = false
-if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh_api.getCookie("sh_refresh_token") && !sh_api.url_get.searchParams.get('code')) {
+if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh_api.getCookie("sh_refresh_token")) {
     base_anime.authorize = false;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    console.log("clear sh_refresh_token")
+    debug.log("clear sh_refresh_token")
     tmp_Clean_Cookie = true
 }
 
@@ -358,26 +400,26 @@ hide_date_cart()
 
 CheckCalendarType.addEventListener('change', function () {
     base_anime.CalendarType = this.checked
-    console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     if (url_get.searchParams.get("calendar")) addCalendar()
 })
 CheckСensored.addEventListener('change', function () {
     base_anime.censored = this.checked
-    // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    // debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 })
 CheckRepeats_.addEventListener('change', function () {
     base_anime.CheckRepeats = this.checked
-    // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    // debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    console.log("CheckRepeats_", base_anime.CheckRepeats)
+    debug.log("CheckRepeats_", base_anime.CheckRepeats)
 })
 CheckReleased_.addEventListener('change', function () {
     base_anime.CheckReleased = this.checked
-    // console.log("CheckCalendarType", this.checked, base_anime.CalendarType)
+    // debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    console.log("CheckReleased_", base_anime.CheckReleased)
+    debug.log("CheckReleased_", base_anime.CheckReleased)
     location.reload()
 })
 
@@ -420,7 +462,7 @@ function get_qr_code(text, el) {
     });
     qrcode.makeCode(text);
 
-    console.log("QR Code", text)
+    debug.log("QR Code", text)
     // sh_refresh_token
     // url_get.searchParams.set("token", `${UserID}`)
 }
@@ -430,7 +472,7 @@ function hide_date_cart(tr) {
         ChecDataCart.checked = base_anime.hide_date_cart
         tr = base_anime.hide_date_cart
     }
-    // console.log(121, tr)
+    // debug.log(121, tr)
 
     // ChecDataCart.checked = tr
 
@@ -523,7 +565,7 @@ function setIImgPreview() {
                     preview.style.top = `${e.clientY - 10 - preview.offsetHeight}px`;
                 }
 
-                // console.log(e.clientY, preview.offsetWidth, window.screen.availWidth)
+                // debug.log(e.clientY, preview.offsetWidth, window.screen.availWidth)
             });
             e1.addEventListener('mouseleave', function () {
                 preview.style.display = 'none';
@@ -535,18 +577,18 @@ function setIImgPreview() {
 
 function CheckRepeats(id) {
     if (!base_anime.CheckRepeats) return
-    // console.log("tttttt")
+    // debug.log("tttttt")
     if (!anime_list_id.includes(id)) {
         anime_list_id.push(id)
         return false
     } else {
-        // console.log(id)
+        // debug.log(id)
         return true
     }
 }
 
 function setVideoInfo(e) {
-    console.log(111, e)
+    debug.log(111, e)
     load.show(false)
     var html
     var tmp45353 = ""
@@ -557,7 +599,7 @@ function setVideoInfo(e) {
 
     VideoInfo.info.cover.src = `cover.png`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
-    console.log(e.image.original)
+    debug.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
     } else {
@@ -589,14 +631,14 @@ function setVideoInfo(e) {
     tmp45353 = ""
 
     e.studios.forEach(e1 => {
-        console.log(e1)
+        debug.log(e1)
         tmp45353 = tmp45353 != "" ? tmp45353 + ", " : tmp45353
         tmp45353 = tmp45353 + `<a style="cursor: pointer;"class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover"><img class="img-preview"style="height: 20px;" src="${e1.image ? `https://shikimori.one/${e1.image}` : ""}"> ${e1.name}</a>`
     });
 
     VideoInfo.info.studios.innerHTML = `<p class="card-text">Студии: ${tmp45353}</p>`
 
-    // console.log("studios",VideoInfo.e.studios.length)
+    // debug.log("studios",VideoInfo.e.studios.length)
 
     // VideoInfo.info.studios.textContent = e.studios[0]?.filtered_name ? e.studios[0].filtered_name : "?";
     // VideoInfo.info.studios.href = e.studios[0]?.filtered_name ? `${window.location.origin + window.location.pathname}?anime_studios=${e.studios[0].filtered_name ? e.studios[0].filtered_name : "404.html"}` : "404.html";
@@ -611,7 +653,7 @@ function setVideoInfo(e) {
 
     VideoInfo.info.fandubbers.innerHTML = `<p class="card-text">Дабберы: ${tmp45353}</p>`
     VideoInfo.info.year.textContent = e.aired_on ? e.aired_on.split("-")[0] : "?";
-    console.log(e.aired_on, e.year, e.aired_on.split("-")[0])
+    debug.log(e.aired_on, e.year, e.aired_on.split("-")[0])
     VideoInfo.info.year.href = e.aired_on.split("-")[0] ? `${window.location.origin + window.location.pathname}?year=${e.aired_on.split("-")[0] ? e.aired_on.split("-")[0] : "404.html"}` : "404.html";
 
     VideoInfo.info.rating_mpaa.textContent = e.rating ? e.rating : "?";
@@ -654,7 +696,7 @@ function setVideoInfo(e) {
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         DialogVideoInfo.classList.remove("d-none");
         VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`
-        console.log(e.id)
+        debug.log(e.id)
         if (ev.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
 
@@ -671,7 +713,7 @@ function setVideoInfo(e) {
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         DialogVideoInfo.classList.remove("d-none");
         VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`
-        console.log(e.id)
+        debug.log(e.id)
         if (ev.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
 
@@ -696,7 +738,7 @@ function setVideoInfo(e) {
     VideoInfo.info.KodikPlayer.addEventListener('click', (ee) => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        console.log(e.id)
+        debug.log(e.id)
         if (ee.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
             return
@@ -815,7 +857,7 @@ function vk_share() {
     url.searchParams.set("image", `${VideoInfo.info.cover.src}`)
     url.searchParams.set("noparse", true)
     url.searchParams.set("description", "test123")
-    console.log(url)
+    debug.log(url)
     window.open(url, "shared")
     return url
     // document.querySelector("#copy_discord div a").click();
@@ -907,7 +949,7 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
 
 document.addEventListener("authorize", function (e) { // (1)
     var _raitnig_user = raitnig_user()
-    console.log(`Рейтинг пользователя: ${_raitnig_user}`)
+    debug.log(`Рейтинг пользователя: ${_raitnig_user}`)
     // url_get.searchParams.delete('code')
     window.history.pushState({}, '', url_get);
     SetColorCartFav()
@@ -946,7 +988,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.duration, 'minutes').asMilliseconds())
-    console.log("Статус", sh_api.Favorits.data.find(item => item.anime.id.toString() == VideoInfo.e.id)?.status)
+    debug.log("Статус", sh_api.Favorits.data.find(item => item.anime.id.toString() == VideoInfo.e.id)?.status)
     switch (sh_api.Favorits.data.find(item => item.anime.id.toString() == VideoInfo.e.id)?.status) {
         case "watching":
             btn_sh_save.textContent = "смотрю"
@@ -1099,7 +1141,7 @@ function getRandomInt(max) {
 function getCover(id) {
 
     if (covers_base[id] == undefined) {
-        console.log("getCover", id, `https://shikimori.one/animes/${id}`)
+        debug.log("getCover", id, `https://shikimori.one/animes/${id}`)
         sendWebhookMessageNoCover(id)
         return "404_static.png"
     }
@@ -1126,7 +1168,7 @@ async function sendWebhookMessageNoCover(id) {
             throw new Error(`Ошибка при отправке webhook: ${response.statusText}`);
         }
 
-        console.log('Сообщение успешно отправлено через webhook');
+        debug.log('Сообщение успешно отправлено через webhook');
     } catch (error) {
         console.error('Ошибка при отправке webhook:', error);
     }
@@ -1294,7 +1336,7 @@ async function get_settings() {
 // url_get.searchParams.delete("seartch")
 
 async function getHome(iss) {
-    console.log("home")
+    debug.log("home")
     // location.reload()
 
     HistoryIsActivy = true
@@ -1437,7 +1479,7 @@ async function add_push(e) {
 
 function AddFavorite(t) {
     FavCheckSave = true
-    console.log(t)
+    debug.log(t)
 
     var e1 = document.getElementById('btn_sh_save')
 
@@ -1531,8 +1573,8 @@ async function VoiceSettingsMenu() {
     /*     if (!base_anime?.translation || typeof base_anime.translation[0] !== "string") {
             base_anime.translation = [];
         }*/
-    if (!base_anime?.translationActive || typeof base_anime.translationActive[0]?.title !== "string" || typeof base_anime.translationActive == "undefined") {
-        console.log(!base_anime?.translationActive, typeof base_anime.translationActive[0]?.title !== "string", typeof base_anime.translationActive == "undefined")
+    if (!base_anime?.translationActive || typeof base_anime?.translationActive[0]?.title !== "string" || typeof base_anime?.translationActive == "undefined") {
+        debug.log(!base_anime?.translationActive, typeof base_anime?.translationActive[0]?.title !== "string", typeof base_anime?.translationActive == "undefined")
 
         base_anime.translationActive = [
             {
@@ -1601,9 +1643,9 @@ async function VoiceSettingsMenu() {
     VoiceSettings.innerHTML = ""
     const checkboxList = document.getElementById('checkbox-list');
     const buttonContainer = document.getElementById('button-container');
-    console.log(base_anime.translation)
+    debug.log(base_anime.translation)
     tr_list = await httpGet(URLKodikTranslations)
-    console.log(tr_list, tr_list["results"])
+    debug.log(tr_list, tr_list["results"])
     tr_list = tr_list["results"]
     base_anime.translation = tr_list;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
@@ -1658,18 +1700,18 @@ async function VoiceSettingsMenu() {
 async function httpGet(theUrl) {
     try {
         const response = await fetch(theUrl);
-        // console.log('Код выполнения:', response.status); // Например, 200
-        // console.log('Текст статуса:', response.statusText); // Например, "OK"
+        // debug.log('Код выполнения:', response.status); // Например, 200
+        // debug.log('Текст статуса:', response.statusText); // Например, "OK"
 
         if (!response.ok) {
             throw new Error(`Ошибка HTTP: ${response.status} ${response.statusText}`);
         }
         const data = await response.json(); // Парсинг ответа, если ожидается JSON
-        console.log('Данные:', data);
+        debug.log('Данные:', data);
         return data
     } catch (error) {
         const url = new URL(theUrl)
-        console.log(url)
+        debug.log(url)
         console.error('Ошибка:', error.message);
         showToast({
             cover: "rkn.png",
@@ -1702,7 +1744,7 @@ async function getCalendarSh() {
     // var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
     var response = await fetch(`https://dygdyg.duckdns.org/calendar.json`);
     const data = await response.json();
-    // console.log("dasdasdasdasd", data)
+    // debug.log("dasdasdasdasd", data)
     data.forEach(e => {
         // Скрывает анонсы (ещё не вышедшие аниме) anons
         // if(e.anime.status=="anons") return    
@@ -1730,7 +1772,7 @@ async function getCalendarSh() {
         tmp_ned[formatDate(e.next_episode_at).moment.isoWeekday() - 1].appendChild(add_cart(e1))
         // ned_shikimori.appendChild(add_cart(e1))
     });
-    // console.log(data)
+    // debug.log(data)
     // tmp_ned[formatDate().moment.isoWeekday()-1].parentElement.open = true
     tmp_ned.forEach(e => {
         e.parentElement.open = true
@@ -1778,7 +1820,7 @@ function RangeRaiting(r) {
     r.target.title = `Фильтр по минимальному рейтингу: ${r.target.value}`
     document.getElementById('RangeRaitingTitle').textContent = `Рейтинг: ${r.target.value}`
     document.body.querySelectorAll(".cart_").forEach(e => {
-        // console.log(e?.data?.status=="anons")
+        // debug.log(e?.data?.status=="anons")
         (e.r < r.target.value && e?.data?.status != "anons") ? e.classList.add('hide') : e.classList.remove('hide')
 
     })
@@ -1811,11 +1853,11 @@ async function SetColorCartFav() {
 function add_cart(e) {
     const cart = document.createElement('div');
     cart.data = e;
-    // console.log(cart.data.shikimori)
+    // debug.log(cart.data.shikimori)
     cart.classList.add('cart_', 'bg-dark', 'text-white');
     cart.r = e.raiting
     cart.title = e?.status
-    // console.log("test",e)
+    // debug.log("test",e)
     document.body.r > cart.r && e?.status != "anons" ? cart.classList.add('hide') : null;
     // cart.style.borderBottomStyle = "dashed"
     cart.style.borderBottomStyle = "dotted"
@@ -1850,7 +1892,7 @@ function add_cart(e) {
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
         if (!e.cover.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
-        // console.log(e.cover)
+        // debug.log(e.cover)
         e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
         // e.cover = `${getCoverURL}${e.shikimori}`
     }
@@ -1875,7 +1917,7 @@ function add_cart(e) {
     imgTop.addEventListener("mousedown", (event) => {
         var a = new URL(window.location.href)
         a.searchParams.set("shikimori_id", `${e.shikimori}`)
-        // console.log(event.button, a.href)
+        // debug.log(event.button, a.href)
         // return
         if (event.button == 1) {
             var newTab = window.open(a.href, '_blank')
@@ -2000,7 +2042,7 @@ function add_card_ned(e) {
     if (hide_date_cart_num < 15) {
         hide_date_cart_num = hide_date_cart_num + 1
     } else {
-        // console.log(hide_date_cart_num)
+        // debug.log(hide_date_cart_num)
         cart.setAttribute("style", "display: none !important;");
     }
     return cart
@@ -2039,7 +2081,7 @@ function playSound(soundFile, vol) {
     audioElement.preload = 'auto';
     audioElement.volume = vol ? vol : (base_anime.Volume ? base_anime.Volume : 1.0);
     audioElement.play();
-    // console.log(audioElement.volume)
+    // debug.log(audioElement.volume)
 }
 
 
@@ -2047,7 +2089,7 @@ function playSound(soundFile, vol) {
 function showToast(e, t, click, t_start) {
 
     // prompt("",JSON.stringify(e))
-    console.log(e)
+    debug.log(e)
     if (!e.sound_mute) playSound('meloboom.mp3');
     var toast0 = document.createElement('div');
     document.getElementById('ToastsMain').appendChild(toast0)
@@ -2069,7 +2111,7 @@ function showToast(e, t, click, t_start) {
     t_start = t_start ? t_start : 0
     setTimeout(() => {
         var toast1 = new bootstrap.Toast(toast0.querySelector(".liveToast"));
-        // console.log(typeof t)
+        // debug.log(typeof t)
         if (typeof t == "number") setTimeout(() => toast0.remove(), t * 1000);
 
         toast0.addEventListener('hidden.bs.toast', function (e) {
@@ -2095,9 +2137,9 @@ function showToast(e, t, click, t_start) {
     }, t_start * 1000)
 }
 document.addEventListener("sh_get_anime", function (e) {
-    console.log("sh_get_anime", e.anime)
+    debug.log("sh_get_anime", e.anime)
     AnimeInfo = e.anime
-    // console.log(`https://shikimori.one${e.anime.image.original}`)
+    // debug.log(`https://shikimori.one${e.anime.image.original}`)
     const e1 = {
         "title": e.anime.anime_title,
         // "cover": e.anime.image.original,
@@ -2229,7 +2271,7 @@ __${AnimeInfo.description ? AnimeInfo.description.replace(/\[character=\d+\]/g, 
 
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        console.log('Текст успешно скопирован в буфер обмена', text);
+        debug.log('Текст успешно скопирован в буфер обмена', text);
     }).catch(err => {
         console.error('Не удалось скопировать текст: ', err);
     });
@@ -2248,14 +2290,14 @@ function dialog_(e, info) {
         return
     }
     Loading_skip.addEventListener('click', function (event) {
-        console.log("skip..")
+        debug.log("skip..")
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
         DialogVideoInfo.classList.remove("d-none");
         load.show(false)
     })
-    // console.log(e.shikimori, info)
+    // debug.log(e.shikimori, info)
     sh_api.get_anime(e.shikimori)
     load.show(true)
     Loading_skip.classList.add("hide")
@@ -2278,7 +2320,7 @@ function dialog_(e, info) {
     // }
 
     // VideoPlayer.contentWindow.location.href = e.link?e.link:"loading.htm"
-    console.log(e.link)
+    debug.log(e.link)
     info ? DialogVideoInfo.classList.add("DialogVideoInfoScroll") : DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
 
     ta_pip(false)
@@ -2287,7 +2329,7 @@ function dialog_(e, info) {
 document.getElementById("RangeVolume").value = base_anime.Volume ? base_anime.Volume : 1.0
 document.getElementById("RangeVolume").addEventListener("change", (e) => {
     var a_f = ["ok.mp3", "meloboom.mp3"]
-    // console.log(e.target.value, getRandomInt(2))
+    // debug.log(e.target.value, getRandomInt(2))
     base_anime.Volume = e.target.value
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     playSound(a_f[getRandomInt(2)], base_anime.Volume ? base_anime.Volume : 1.0)
@@ -2298,7 +2340,7 @@ document.getElementById("RangeVolume").addEventListener("change", (e) => {
 
 function ta_pip(flag) //picture to picture
 {
-    if (typeof flag != "boolean" && typeof flag != "undefined") return console.log("Ну и что это такое?")
+    if (typeof flag != "boolean" && typeof flag != "undefined") return debug.log("Ну и что это такое?")
     VideoPlayerAnime.pip = typeof flag == "boolean" ? flag : !VideoPlayerAnime.pip
 
     if (VideoPlayerAnime.pip == true) {
@@ -2343,7 +2385,7 @@ document.addEventListener("sh_api_search", function (e) {
     targetFrame.innerHTML = ""
     getChapter("#list_history")
     e.search.forEach(e => {
-        // console.log(e)
+        // debug.log(e)
         // return
         const e1 = {
             "title": e.russian,
@@ -2400,7 +2442,7 @@ async function GetKodi(seartch, revers) {
                 endid2 = dat.results[0].id
             } else {
                 if (typeof (URLList) != "string") {
-                    console.log("конец истории");
+                    debug.log("конец истории");
                     if (!document.querySelector(".cart_end")) {
                         document.getElementById("list_serch").insertAdjacentHTML('beforeend', `<div class="cart_ cart_end">
                             <div class="cart_n">
@@ -2419,7 +2461,7 @@ async function GetKodi(seartch, revers) {
                 endid = endid ? endid : dat.results[0].id
 
             }
-            console.log(dat)
+            debug.log(dat)
         } else {
 
             getHome(true)
@@ -2578,7 +2620,7 @@ var qrcode_scan_modal = new bootstrap.Modal(document.getElementById("qrcode_scan
 
 document.getElementById("qrcode_scan_modal").addEventListener('hidden.bs.modal', function (e) {
     htmlscanner.clear()
-    // console.log(111)
+    // debug.log(111)
 })
 
 function domReady(fn) {
@@ -2599,7 +2641,7 @@ function raitnig_user() {
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
-        console.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, {"e": e})
+        debug.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, { "e": e })
 
         var raitnig_user_local = 0
         if (e.anime.score) {
@@ -2644,22 +2686,22 @@ function raitnig_user() {
             case "rewatching":
                 raitnig_user_local = raitnig_user_local * 1.2;
                 break;
-                
-                default:
-                    break;
-                }
-                
-        if(parseFloat(e.anime.score)>0)raitnig_user_local = raitnig_user_local * (parseFloat(e.anime.score)/10);
 
-        // console.log((parseFloat(e.anime.score)/10))
+            default:
+                break;
+        }
+
+        if (parseFloat(e.anime.score) > 0) raitnig_user_local = raitnig_user_local * (parseFloat(e.anime.score) / 10);
+
+        // debug.log((parseFloat(e.anime.score)/10))
         if (e.anime.kind == "tv_special") raitnig_user_local *= 0.5
         if (e.anime.kind == "special") raitnig_user_local *= 0.5
-        
+
         raitnig_user += raitnig_user_local
 
         // if (e.anime.id == 21) {
-        //     console.log("a", e.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, { "e": e.anime })
-        //     console.log("t", raitnig_user_local)
+        //     debug.log("a", e.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, { "e": e.anime })
+        //     debug.log("t", raitnig_user_local)
         // }
 
     });
