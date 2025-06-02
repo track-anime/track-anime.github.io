@@ -1574,6 +1574,7 @@ async function VoiceSettingsMenu() {
             base_anime.translation = [];
         }*/
     if (!base_anime?.translationActive) {
+        console.log(typeof base_anime?.translationActive, base_anime?.translationActive)
         if (!base_anime?.translationActive || typeof base_anime?.translationActive[0]?.title !== "string" || typeof base_anime?.translationActive == "undefined") {
             debug.log(!base_anime?.translationActive, typeof base_anime?.translationActive[0]?.title !== "string", typeof base_anime?.translationActive == "undefined")
 
