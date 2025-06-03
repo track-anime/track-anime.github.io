@@ -189,7 +189,7 @@ async function check_ver() {
     debug.log(text)
     // document.querySelector('.ver_info').title = `build: ${text}`
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
-    console.warn(`Последний сбой был ${text}, приятного вам дня!`)
+    // console.warn(`Последний сбой был ${text}, приятного вам дня!`)
     console.log(
         // `%cВаше сообщение здесь`,
         `%cПоследний сбой был ${text}, приятного вам дня!`,
