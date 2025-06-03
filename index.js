@@ -193,7 +193,7 @@ async function check_ver() {
     console.log(
         // `%cВаше сообщение здесь`,
         `%cПоследний сбой был ${text}, приятного вам дня!`,
-        "background-color: #666; border: 10px double black; border-radius: 15px; color: #5865f2; -webkit-text-stroke: 2px black; font-size: 64px; font-weight: bold;"
+        "text-align: center; background-color: #666; border: 10px double black; border-radius: 15px; color: #5865f2; -webkit-text-stroke: 2px black; font-size: 64px; font-weight: bold;"
       );
 }
 
