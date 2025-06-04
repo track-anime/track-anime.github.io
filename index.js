@@ -2739,6 +2739,7 @@ async function sh_saveUserData(userData) {
     try {
         const response = await fetch(`https://${MyServerURL}/sh_save_user.php`, {
             method: 'POST',
+            mode: 'cors', // Включаем CORS
             headers: {
                 'Content-Type': 'application/json'
             },
