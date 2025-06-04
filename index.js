@@ -194,7 +194,7 @@ async function check_ver() {
         // `%cВаше сообщение здесь`,
         `%cПоследний сбой был ${text}, приятного вам дня!`,
         "text-align: center; background-color: #666; border: 10px double black; border-radius: 15px; color: #5865f2; -webkit-text-stroke: 2px black; font-size: 64px; font-weight: bold;"
-      );
+    );
 }
 
 async function get_covers_base() {
@@ -992,6 +992,9 @@ document.addEventListener("authorize", function (e) { // (1)
     GetFavoriteList("authorize")
     btn_sh_save?.classList.remove("hide")
 
+    sh_api.UserData.raitnig_user = _raitnig_user
+    sh_saveUserData(_raitnig_user)
+
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.duration, 'minutes').asMilliseconds())
     debug.log("Статус", sh_api.Favorits.data.find(item => item.anime.id.toString() == VideoInfo.e.id)?.status)
@@ -1030,6 +1033,8 @@ document.addEventListener("authorize", function (e) { // (1)
             btn_sh_save.classList.add("btn-outline-light")
             break;
     }
+
+
 });
 
 
@@ -2650,7 +2655,7 @@ function raitnig_user() {
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
     sh_api.Favorits.data.forEach(e => {
-        debug.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, { "e": e })
+        // debug.log(e.anime.id, e.anime.episodes_aired, e.anime.episodes, e.anime.kind, { "e": e })
 
         var raitnig_user_local = 0
         if (e.anime.score) {
@@ -2727,4 +2732,27 @@ function reiting_popup() {
         voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
         sound_mute: true,
     })
+}
+
+// Функция для отправки POST запроса с данными пользователя
+async function sh_saveUserData(userData) {
+    try {
+        const response = await fetch(`https://${MyServerURL}/sh_save_user.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userData) // Отправляем данные из sh_api.UserData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log('Успешно сохранено:', result);
+        return result; // Возвращает сообщение и список всех пользователей
+    } catch (error) {
+        console.error('Ошибка при сохранении данных:', error);
+    }
 }
