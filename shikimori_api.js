@@ -3,6 +3,7 @@ var sh_api = {}
 sh_api.url_get = new URL(window.location.href)
 sh_api.UserData = {}
 sh_api.Favorits = {}
+sh_api.all_users = []
 sh_api.another = { UserData: {}, Favorits: {}, status: "0" }
 sh_api.authorize = false
 sh_api.authorize_ev = new Event("authorize", { bubbles: true })
