@@ -2743,7 +2743,7 @@ async function sh_saveUserData(userData) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userData) 
+            body: JSON.stringify(userData)
         });
 
         if (!response.ok) {
@@ -2751,9 +2751,31 @@ async function sh_saveUserData(userData) {
         }
 
         const result = await response.json();
-        console.log('Успешно сохранено:', result);
-        return result; // Возвращает сообщение и список всех пользователей
+        debug.log("Пользователи ", result.users)
+        sh_api.all_users = result.users;
+        UserDataTableRaieng(sh_api.all_users)
     } catch (error) {
-        console.error('Ошибка при сохранении данных:', error);
     }
+}
+
+function UserDataTableRaieng(users) {
+    // Сортировка по рейтингу по убыванию
+    users.sort((a, b) => b.raitnig_user - a.raitnig_user);
+
+    const tableBody = document.getElementById('userTableBody');
+    tableBody.innerHTML = ''; // Очистка тела таблицы
+    for (let i = 0; i < 1; i++) {
+        users.forEach(user => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td><img src="${user.avatar}" alt="${user.nickname}'s avatar" style="width: 48px; height: 48px;"></td>
+                <td><a href="${user.url}" target="_blank">${user.nickname}</a></td>
+                <td>${user.raitnig_user}</td>
+                <td>${new Date(user.last_online_at).toLocaleString('ru-RU')}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+    }
+
 }

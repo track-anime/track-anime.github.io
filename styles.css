@@ -26,6 +26,15 @@ body {
     position: absolute; */
 }
 
+#modal_reiting_info_userTable_body {
+    max-height: 400px; /* Ограничиваем высоту таблицы */
+    overflow-y: auto; /* Включаем вертикальную прокрутку */
+}
+#userTableBody th,
+#userTableBody td {
+    text-align: center; /* Горизонтальное центрирование */
+    vertical-align: middle; /* Вертикальное центрирование */
+}
 
 #copy_discord {
     width: 100%;
