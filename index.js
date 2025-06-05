@@ -993,7 +993,7 @@ document.addEventListener("authorize", function (e) { // (1)
     btn_sh_save?.classList.remove("hide")
 
     sh_api.UserData.raitnig_user = _raitnig_user
-    sh_saveUserData(sh_api.UserData.raitnig_user)
+    sh_saveUserData(sh_api.UserData)
 
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.duration, 'minutes').asMilliseconds())
