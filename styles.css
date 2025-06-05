@@ -332,9 +332,11 @@ body {
     }
 }
 
-#closeDialogButton {
+#closeDialogButton, #VideoInfoBtn {
     background-color: #2b3035;
     border-color: #2b3035;
+}
+#closeDialogButton {
     position: fixed;
     right: 25px;
     top: 64px;
@@ -342,7 +344,7 @@ body {
     height: 45px;
     z-index: 9999999999;
 }
-#closeDialogButton:hover{
+#closeDialogButton:hover, #VideoInfoBtn:hover{
     background-color: #363d43;
     border-color: #363d43;
 
