@@ -993,7 +993,7 @@ document.addEventListener("authorize", function (e) { // (1)
     btn_sh_save?.classList.remove("hide")
 
     sh_api.UserData.raitnig_user = _raitnig_user
-    sh_saveUserData(_raitnig_user)
+    sh_saveUserData(sh_api.UserData.raitnig_user)
 
     if (!VideoInfo.e) return
     let tt = moment().add(moment.duration(VideoInfo.e.duration, 'minutes').asMilliseconds())
@@ -2743,7 +2743,7 @@ async function sh_saveUserData(userData) {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(userData) // Отправляем данные из sh_api.UserData
+            body: JSON.stringify(userData) 
         });
 
         if (!response.ok) {
