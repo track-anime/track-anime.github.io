@@ -309,6 +309,10 @@ body {
     right: 0;
     position: fixed;
 }
+html{
+    font-size: 14px;
+
+}
 
 .container_ {
     width: 100%;

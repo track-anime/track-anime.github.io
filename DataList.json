@@ -2601,6 +2601,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "306e93a660041de60914eccfbb96df9644f821",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "40551356a27b258ed2ada7e38496f36811ac15",
                                     "suffix": "",
                                     "type": "file"
@@ -6386,6 +6391,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "9d368d0802ac0a7d2a11a14207706040cc97e5",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "a32a38a155f541e6cfb7288330b9d3fa006cdd",
                                     "suffix": "",
                                     "type": "file"
@@ -6585,6 +6595,11 @@
                             "suffix": "",
                             "type": "directory",
                             "children": [
+                                {
+                                    "name": "3baa8c86aedc47d767609a88036685ef26eb36",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
                                 {
                                     "name": "3c092169c6c36cc793a775f4ac256bb6d5e777",
                                     "suffix": "",
@@ -11503,6 +11518,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "dd5bf2e99afb1fde895c9ec573c917f7097306",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "de409147f64e7b2c3ab786f9ab2a2c9fe1c9d9",
                                     "suffix": "",
                                     "type": "file"
@@ -15345,6 +15365,11 @@
                                     "name": "b9d13af370ba0f632488329d5baa9b12b18cc0",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "c572590cc39dbef2150547cb79f3dd0acd3389",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -16511,6 +16536,11 @@
         {
             "name": "scan.exe",
             "suffix": ".exe",
+            "type": "file"
+        },
+        {
+            "name": "screenResolution.html",
+            "suffix": ".html",
             "type": "file"
         },
         {
