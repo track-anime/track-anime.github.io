@@ -1,48 +1,51 @@
 <script type="text/javascript">
-        var gk_isXlsx = false;
-        var gk_xlsxFileLookup = {};
-        var gk_fileData = {};
-        function filledCell(cell) {
-          return cell !== '' && cell != null;
-        }
-        function loadFileData(filename) {
-        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
-            try {
-                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
-                var firstSheetName = workbook.SheetNames[0];
-                var worksheet = workbook.Sheets[firstSheetName];
+  var gk_isXlsx = false;
+  var gk_xlsxFileLookup = {};
+  var gk_fileData = {};
+  function filledCell(cell) {
+    return cell !== '' && cell != null;
+  }
+  function loadFileData(filename) {
+    if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+      try {
+        var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+        var firstSheetName = workbook.SheetNames[0];
+        var worksheet = workbook.Sheets[firstSheetName];
 
-                // Convert sheet to JSON to filter blank rows
-                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
-                // Filter out blank rows (rows where all cells are empty, null, or undefined)
-                var filteredData = jsonData.filter(row => row.some(filledCell));
+        // Convert sheet to JSON to filter blank rows
+        var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+        // Filter out blank rows (rows where all cells are empty, null, or undefined)
+        var filteredData = jsonData.filter(row => row.some(filledCell));
 
-                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
-                var headerRowIndex = filteredData.findIndex((row, index) =>
-                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
-                );
-                // Fallback
-                if (headerRowIndex === -1 || headerRowIndex > 25) {
-                  headerRowIndex = 0;
-                }
+        // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+        var headerRowIndex = filteredData.findIndex((row, index) =>
+          row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+        );
+        // Fallback
+        if (headerRowIndex === -1 || headerRowIndex > 25) {
+          headerRowIndex = 0;
+        }
 
-                // Convert filtered JSON back to CSV
-                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
-                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
-                return csv;
-            } catch (e) {
-                console.error(e);
-                return "";
-            }
-        }
-        return gk_fileData[filename] || "";
-        }
-        </script><!DOCTYPE html>
+        // Convert filtered JSON back to CSV
+        var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+        csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+        return csv;
+      } catch (e) {
+        console.error(e);
+        return "";
+      }
+    }
+    return gk_fileData[filename] || "";
+  }
+</script>
+<!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Разрешение экрана</title>
+  <script src="https://cdn.jsdelivr.net/npm/ua-parser-js/dist/ua-parser.min.js"></script>
   <style>
     body {
       background-color: #1a1a1a;
@@ -50,27 +53,96 @@
       font-family: Arial, sans-serif;
       display: flex;
       justify-content: center;
-      align-items: center;
       height: 100vh;
       margin: 0;
+      flex-direction: column;
     }
-    #resolution {
+
+    body>div {
       font-size: 24px;
       text-align: center;
     }
   </style>
 </head>
+
 <body>
   <div id="resolution"></div>
-  <script>
-    function updateResolution() {
-      const width = window.innerWidth;
-      const height = window.innerHeight;
-      document.getElementById('resolution').textContent = `Разрешение экрана: ${width} x ${height}`;
+  <div id="resolution_width"></div>
+  <div id="resolution_height"></div>
+  <div id="Platform"></div>
+  <div>=====================</div>
+  <div id="UserAgent"></div>
+
+
+</body>
+<script>
+  const uap = new UAParser();
+  console.log(uap.getResult())
+  function getOSDetails() {
+    const userAgent = window.navigator.userAgent;
+    let os = "?";
+    let version = "";
+
+    // Windows
+    if (/Windows/i.test(userAgent)) {
+      os = "Windows";
+      const match = userAgent.match(/Windows NT (\d+\.\d+)/);
+      if (match) {
+        const ver = match[1];
+        if (ver === "10.0") version = "10/11";
+        else if (ver === "6.3") version = "8.1";
+        else if (ver === "6.2") version = "8";
+        else if (ver === "6.1") version = "7";
+      }
+    }
+    // Android
+    else if (/Android/i.test(userAgent)) {
+      os = "Android";
+      const match = userAgent.match(/Android (\d+(\.\d+)?)/);
+      if (match) {
+        version = match[1];
+      }
+    }
+    // iOS
+    else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+      os = "iOS";
+      const match = userAgent.match(/OS (\d+_\d+)/);
+      if (match) {
+        version = match[1].replace("_", ".");
+      }
+    }
+    // Mac OS
+    else if (/Mac OS/i.test(userAgent)) {
+      os = "Mac OS";
+      const match = userAgent.match(/Mac OS X (\d+[._]\d+)/);
+      if (match) {
+        version = match[1].replace("_", ".");
+      }
+    }
+    // Linux
+    else if (/Linux/i.test(userAgent)) {
+      os = "Linux";
     }
 
-    window.addEventListener('resize', updateResolution);
-    window.addEventListener('load', updateResolution);
-  </script>
-</body>
+    return { os, version };
+  }
+
+  const osInfo = getOSDetails();
+
+  console.log(navigator, osInfo);
+  function updateResolution() {
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    document.getElementById('resolution').textContent = `Разрешение экрана: ${width} x ${height}`;
+    document.getElementById('resolution_width').textContent = `width: ${width};`;
+    document.getElementById('resolution_height').textContent = `height: ${height};`;
+    document.getElementById('Platform').textContent = `Операционная система: ${osInfo.os} ${osInfo.version}`;
+
+    document.getElementById('UserAgent').textContent = `UserAgent: ${navigator.userAgent}`;
+  }
+
+  window.addEventListener('resize', updateResolution);
+  window.addEventListener('load', updateResolution);
+</script>
+
 </html>

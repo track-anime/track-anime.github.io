@@ -100,17 +100,19 @@ const debug = {
 };
 isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searchParams.get('Debug') : isDebugEnabled
 
+
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
 // console.log(navigator.wakeLock.request('screen'))
 if (isLocal()) {
     document.getElementById("fav").href = "favicon_local.png"
     isDebugEnabled = true
-    document.getElementById("keepAwake").play()
+    // document.getElementById("keepAwake").play()
 } else {
     document.getElementById("fav").href = "favicon.png"
 }
 
+if(isDebugEnabled) document.getElementById("keepAwake").play()
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
 function Get_base_anime() {
