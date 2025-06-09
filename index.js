@@ -102,9 +102,11 @@ isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searc
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
-if (location.hostname == "127.0.0.1") {
+// console.log(navigator.wakeLock.request('screen'))
+if (isLocal()) {
     document.getElementById("fav").href = "favicon_local.png"
     isDebugEnabled = true
+    document.getElementById("keepAwake").play()
 } else {
     document.getElementById("fav").href = "favicon.png"
 }
@@ -2732,6 +2734,17 @@ function reiting_popup() {
         voice: `Ваш рейтинг пользователя на сайте: ⭐️${_raitnig_user}`,
         sound_mute: true,
     })
+}
+
+//Функция для проверки сайт открыт с хостинга или локально по ip
+function isLocal() {
+    const hostname = window.location.hostname;
+    // Регулярное выражение для IPv4
+    const ipv4Pattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+    // Регулярное выражение для IPv6
+    const ipv6Pattern = /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::(?:[0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}$|^[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,5}[0-9a-fA-F]{1,4}$|^[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,4}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,2}[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,3}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,3}[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,2}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,4}[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:)?[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,5}[0-9a-fA-F]{1,4}::[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}::$/;
+    
+    return ipv4Pattern.test(hostname) || ipv6Pattern.test(hostname);
 }
 
 // Функция для отправки POST запроса с данными пользователя
