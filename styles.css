@@ -320,7 +320,7 @@ body {
 }
 
 
-@media (max-height: 720px) and (orientation: landscape) {
+@media (max-width: 1151px) and (orientation: landscape) {
     html {
         font-size: 0.7rem;
     }
