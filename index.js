@@ -635,7 +635,7 @@ function setVideoInfo(e) {
 
     VideoInfo.info.description.innerHTML = e.description_html ? e.description_html : "?";
 
-    // VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
+    VideoInfo.info.info_status.textContent = e.status ? e.status : "?";
     // VideoInfo.info.info_status.href = e.status ? `${window.location.origin + window.location.pathname}?anime_status=${e.status ? e.status : "404.html"}` : "404.html";
 
     tmp45353 = ""
@@ -1760,7 +1760,7 @@ async function getCalendarSh() {
     // ned_shikimori.classList.add("ned_shikimori")
 
     // var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
-    var response = await fetch(`https://${MyServerURL}/calendar.json`);
+    var response = await fetch(`https://${MyServerURL}/kodik.php?method=calendar`);
     const data = await response.json();
     // debug.log("dasdasdasdasd", data)
     data.forEach(e => {
@@ -1775,17 +1775,18 @@ async function getCalendarSh() {
             "voice": formatDate(e.next_episode_at).moment.format('dddd'),
             "series": e.next_episode ? e.next_episode : "M",
 
-            "link": null,
+            "link": `https://shikimori.one/animes/${e.anime.id}`,
             "kp": null,
             "imdb": null,
             "shikimori": e.anime.id,
-            "status": e.anime.status,
-            "raiting": e.anime.score,
-            "material_data": e.material_data,
+            "status": e.status,
+            "raiting": e.score,
+            "material_data": null,
             "id": e.anime.id,
             "screenshots": [],
             "e": e,
         }
+        debug.log(e.anime.russian, e1)
 
         tmp_ned[formatDate(e.next_episode_at).moment.isoWeekday() - 1].appendChild(add_cart(e1))
         // ned_shikimori.appendChild(add_cart(e1))
