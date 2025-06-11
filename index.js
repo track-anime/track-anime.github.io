@@ -977,6 +977,7 @@ document.addEventListener("authorize", function (e) { // (1)
 
 
     setTimeout(() => {
+        return
         if (reiting_off) return
         reiting_off = true
         showToast({
