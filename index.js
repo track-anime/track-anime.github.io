@@ -57,9 +57,9 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 var URLKodikTranslations = "https://" + MyServerURL + "/kodik.php?method=translations&types=anime-serial"
-var URLList = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"//&countries=Япония"
+var URLList = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"//&countries=Япония"
 var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false"
+var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
 get_covers_base()
 
 
@@ -1424,7 +1424,8 @@ async function addCalendar() {
         URLCalendarAdd = d1.next_page
     }
     data.forEach(e => {
-        if ((e.type == 'anime-serial') && e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай") {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
+        //(e.type == 'anime-serial') &&
+        if ( e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай") {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
             if (id.includes(e.shikimori_id)) return
 
             id.push(e.shikimori_id)
@@ -2545,7 +2546,8 @@ function GetKodiScan(data, revers) {
             endid = endid2
             return
         }
-        if ((e.type == 'anime-serial' || e.type == "anime") && e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
+        //(e.type == 'anime-serial' || e.type == "anime") &&
+        if ( e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
             if (CheckRepeats(e.shikimori_id)) return
             if (VoiceTranslate(e.translation.title)) {
 
