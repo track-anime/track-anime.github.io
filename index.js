@@ -195,7 +195,6 @@ async function check_ver() {
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
     // console.warn(`Последний сбой был ${text}, приятного вам дня!`)
     console.log(
-        // `%cВаше сообщение здесь`,
         `%cПоследний сбой был ${text}, приятного вам дня!`,
         "text-align: center; background-color: #666; border: 10px double black; border-radius: 15px; color: #5865f2; -webkit-text-stroke: 2px black; font-size: 64px; font-weight: bold;"
     );
