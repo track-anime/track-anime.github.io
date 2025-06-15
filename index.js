@@ -347,7 +347,7 @@ URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${
 
 /////////////////////////////////////////////// Управление kodik_player /////////////////////////////////////////////////////////
 function kodikMessageListener(message) {
-    console.log("[kodikn player]", message.data);
+    debug.log("[kodikn player]", message.data);
     
 }
 
