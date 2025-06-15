@@ -12,6 +12,8 @@ var FavCheckSave = false
 var reiting_off = false
 var isDebugEnabled = false
 
+var base_anime_Current = {}
+
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
 let CURSOR_MAX = 22;  // Сколько всего курсоров в папке
@@ -347,9 +349,21 @@ URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${
 
 /////////////////////////////////////////////// Управление kodik_player /////////////////////////////////////////////////////////
 function kodikMessageListener(message) {
-    debug.log("[kodikn player]", message.data);
+    debug.log("[kodik player]", message.data);
+    switch (message.data.key) {
+        case "kodik_player_current_episode":
+            debug.log(typeof message.data.value, url_get.searchParams.get('shikimori_id'));
+            base_anime_Current[url_get.searchParams.get('shikimori_id')] = message.data.value;
+            debug.log(base_anime_Current)
+            localStorage.setItem('BaseAnimeCurrent', JSON.stringify(base_anime_Current));
+            break;
+    
+        default:
+            break;
+    }
     
 }
+base_anime_Current = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
 
 if (window.addEventListener) {
     window.addEventListener('message', kodikMessageListener);
@@ -357,7 +371,7 @@ if (window.addEventListener) {
     window.attachEvent('onmessage', kodikMessageListener);
 }
 
-var kodikIframe = document.getElementById("kodik-player").contentWindow;
+var kodikIframe = document.getElementById("VideoPlayer").contentWindow;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 translation_id = ""
