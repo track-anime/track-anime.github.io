@@ -352,9 +352,9 @@ function kodikMessageListener(message) {
     debug.log("[kodik player]", message.data);
     switch (message.data.key) {
         case "kodik_player_current_episode":
-            debug.log(typeof message.data.value, url_get.searchParams.get('shikimori_id'));
+            // debug.log(typeof message.data.value, url_get.searchParams.get('shikimori_id'));
             base_anime_Current[url_get.searchParams.get('shikimori_id')] = message.data.value;
-            debug.log(base_anime_Current)
+            // debug.log(base_anime_Current)
             localStorage.setItem('BaseAnimeCurrent', JSON.stringify(base_anime_Current));
             break;
     
