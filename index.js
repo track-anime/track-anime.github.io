@@ -112,7 +112,7 @@ if (isLocal()) {
     document.getElementById("fav").href = "favicon.png"
 }
 
-if(isDebugEnabled) document.getElementById("keepAwake").play()
+if (isDebugEnabled) document.getElementById("keepAwake").play()
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
 function Get_base_anime() {
@@ -345,45 +345,19 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////////////////////// Аниме курсор ///////////////////////////////////////////////////
-let isMoving = false;
-let cursorX = 0;
-let cursorY = 0;
-
-// Проверяем, есть ли поддержка сенсорного экрана
-const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-if (!isTouchDevice && true != true) { // Если устройство не тач-скрин, включаем курсор
-
-    // Функция выбора случайного курсора
-    function getRandomCursor() {
-        //Выдаёт случайное изображение курсора //
-        const randomIndex = Math.floor(Math.random() * CURSOR_MAX) + 1; // Генерируем число от 1 до 6
-        return `cursor/cursor${randomIndex}.webp`; // Формируем имя файла
-    }
-
-    document.addEventListener('mousemove', (e) => {
-        cursorX = e.pageX;
-        cursorY = e.pageY;
-        isMoving = true;
-
-        cursor.style.transform = `translate(${e.pageX}px, ${e.pageY}px)`;
-        if (isMoving) cursor.style.display = 'block'; // Показываем курсор при входе в окно
-    });
-
-    document.addEventListener('mouseenter', () => {
-        cursor.style.display = 'block'; // Показываем курсор при входе в окно
-        cursor.style.backgroundImage = `url('${getRandomCursor()}')`;
-        // cursor.style.backgroundImage = `url('cursor/cursor18.webp')`;
-    });
-
-    document.addEventListener('mouseleave', () => {
-        isMoving = false;
-        cursor.style.display = 'none'; // Прячем курсор при выходе из окна
-    });
-
+/////////////////////////////////////////////// Управление kodik_player /////////////////////////////////////////////////////////
+function kodikMessageListener(message) {
+    console.log("[kodikn player]", message.data);
+    
 }
 
+if (window.addEventListener) {
+    window.addEventListener('message', kodikMessageListener);
+} else {
+    window.attachEvent('onmessage', kodikMessageListener);
+}
+
+var kodikIframe = document.getElementById("kodik-player").contentWindow;
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 translation_id = ""
@@ -1426,7 +1400,7 @@ async function addCalendar() {
     }
     data.forEach(e => {
         //(e.type == 'anime-serial') &&
-        if ( e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай") {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
+        if (e.translation.type == "voice" && e.shikimori_id && e.material_data.shikimori_rating > 0 && e.material_data.countries != "Китай") {  //&& (e.material_data.countries != "Китай"||CheckChinaTrash)  && (e.material_data.countries != "Китай"||document.getElementById("CheckChinaTrash"))
             if (id.includes(e.shikimori_id)) return
 
             id.push(e.shikimori_id)
@@ -2548,7 +2522,7 @@ function GetKodiScan(data, revers) {
             return
         }
         //(e.type == 'anime-serial' || e.type == "anime") &&
-        if ( e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
+        if (e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
             if (CheckRepeats(e.shikimori_id)) return
             if (VoiceTranslate(e.translation.title)) {
 
@@ -2748,7 +2722,7 @@ function isLocal() {
     const ipv4Pattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
     // Регулярное выражение для IPv6
     const ipv6Pattern = /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^::(?:[0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}$|^[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,5}[0-9a-fA-F]{1,4}$|^[0-9a-fA-F]{1,4}:[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,4}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,2}[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,3}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,3}[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:){0,2}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,4}[0-9a-fA-F]{1,4}::(?:[0-9a-fA-F]{1,4}:)?[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,5}[0-9a-fA-F]{1,4}::[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){0,6}[0-9a-fA-F]{1,4}::$/;
-    
+
     return ipv4Pattern.test(hostname) || ipv6Pattern.test(hostname);
 }
 
