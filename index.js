@@ -12,7 +12,7 @@ var FavCheckSave = false
 var reiting_off = false
 var isDebugEnabled = false
 
-var base_anime_Current = {}
+var BaseAnimeCurrent = {}
 
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
@@ -351,19 +351,23 @@ URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${
 function kodikMessageListener(message) {
     debug.log("[kodik player]", message.data);
     switch (message.data.key) {
+        case "kodik_player_time_update":
+            navigator.mediaSession.metadata.time = message.data.value;
+            break
         case "kodik_player_current_episode":
-            // debug.log(typeof message.data.value, url_get.searchParams.get('shikimori_id'));
-            base_anime_Current[url_get.searchParams.get('shikimori_id')] = message.data.value;
-            // debug.log(base_anime_Current)
-            localStorage.setItem('BaseAnimeCurrent', JSON.stringify(base_anime_Current));
+            navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
+            debug.log( message.data.value, url_get.searchParams.get('shikimori_id'));
+            BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
+            // debug.log(BaseAnimeCurrent)
+            localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
             break;
-    
+
         default:
             break;
     }
-    
+
 }
-base_anime_Current = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
+BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
 
 if (window.addEventListener) {
     window.addEventListener('message', kodikMessageListener);
@@ -372,6 +376,9 @@ if (window.addEventListener) {
 }
 
 var kodikIframe = document.getElementById("VideoPlayer").contentWindow;
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 translation_id = ""
@@ -735,7 +742,7 @@ function setVideoInfo(e) {
     VideoInfo.info.KodikPlayer.addEventListener('click', (ee) => {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        debug.log(e.id)
+        // debug.log(e)
         if (ee.shiftKey) {
             window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
             return
@@ -744,6 +751,43 @@ function setVideoInfo(e) {
         // VideoPlayer.contentWindow.location.href = e.link;
         VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
         // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
+
+        // Настройка Media Session API
+        if ('mediaSession' in navigator) {
+            //window.pl = player
+            //console.log("mediaSession", player)
+            navigator.mediaSession.metadata = new MediaMetadata({
+                title: VideoInfo.info.title.textContent,
+                artist: ``,
+                album: '',
+                artwork: [{ src: VideoInfo.info.cover.src }]
+            });
+            
+            navigator.mediaSession.metadata.time = 0;
+            navigator.mediaSession.setActionHandler('play', () => {
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "play"} }, '*');
+                console.log('Воспроизведение');
+            });
+
+            navigator.mediaSession.setActionHandler('pause', () => {
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause"} }, '*');
+            });
+            navigator.mediaSession.setActionHandler('stop', () => {
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause"} }, '*');
+            });
+
+            navigator.mediaSession.setActionHandler('previoustrack', () => {
+                console.log('Перемотка назад');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 10} }, '*');
+            });
+
+            navigator.mediaSession.setActionHandler('nexttrack', () => {
+                console.log('Перемотка вперед');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 10} }, '*');
+            });
+        } else {
+            console.log('Media Session API не поддерживается');
+        }
     })
     VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
     html = ""
