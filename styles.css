@@ -26,6 +26,15 @@ body {
     position: absolute; */
 }
 
+#new_anime_list {
+    display: flex;
+    background-color: #0d6efd54;
+    border: #ffff0085;
+    border-width: 1px;
+    border-style: dotted;
+
+}
+
 #modal_reiting_info_userTable_body {
     max-height: 400px;
     /* Ограничиваем высоту таблицы */
@@ -325,7 +334,7 @@ body {
         font-size: 0.7rem;
     }
 
-    #navbarSupportedContent{
+    #navbarSupportedContent {
         font-size: 1rem;
     }
 }
@@ -527,6 +536,11 @@ p {
 }
 
 @media screen and (orientation: portrait) {
+
+    #new_anime_list {
+        flex-direction: column;
+        width: 100%;
+    }
 
     .anime_list {
         flex-direction: column;

@@ -100,6 +100,7 @@ const debug = {
         }
     }
 };
+
 isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searchParams.get('Debug') : isDebugEnabled
 
 
@@ -2581,7 +2582,11 @@ function GetKodiScan(data, revers) {
         }
         //(e.type == 'anime-serial' || e.type == "anime") &&
         if (e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
-            if (CheckRepeats(e.shikimori_id)) return
+            if (CheckRepeats(e.shikimori_id) && (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) 
+                {
+                    return
+                }
+            // console.log(e)
             if (VoiceTranslate(e.translation.title)) {
 
                 if (!e.shikimori_id) return
@@ -2642,7 +2647,11 @@ function GetKodiScan(data, revers) {
                         }
                     }
                     targetFrame.appendChild(cart)
-
+                    if(BaseAnimeCurrent[e.shikimori_id]?.episode < e.last_episode)
+                    {
+                        new_anime_list.appendChild(cart)
+                    }
+                    list_serch.prepend(new_anime_list)
                     /*                     if (!AnimeScanID[e.shikimori_id]) {
                                             AnimeScanID[e.shikimori_id] = new Array()
                                             AnimeScanID[e.shikimori_id].push(e.translation.title)
