@@ -29,9 +29,9 @@ body {
 #new_anime_list {
     display: flex;
     background-color: #0d6efd54;
-    border: #ffff0085;
-    border-width: 1px;
-    border-style: dotted;
+    border: #ff00e985;
+    border-width: 4px;
+    border-style: inset;
 
 }
 
