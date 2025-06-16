@@ -66,15 +66,6 @@ get_covers_base()
 
 
 //////// Создаёт функцию debug.log() /////////////////////////////////////////////
-// const debug = {
-//     log(...args) {
-//         if (isDebugEnabled) {
-//             console.group()
-//             console.log('[DEBUG]:', ...args);
-//             console.groupEnd()
-//         }
-//     }
-// };
 
 const debug = {
     log(...args) {
@@ -357,8 +348,13 @@ function kodikMessageListener(message) {
             break
         case "kodik_player_current_episode":
             navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
-            debug.log( message.data.value, url_get.searchParams.get('shikimori_id'));
-            BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
+            debug.log( message.data.value, VideoInfo.e);
+
+            if(VideoInfo.e.episodes == message.data.value.episode){
+                delete BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')];
+            }else{
+                BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
+            }
             // debug.log(BaseAnimeCurrent)
             localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
             break;
@@ -593,7 +589,7 @@ function CheckRepeats(id) {
 }
 
 function setVideoInfo(e) {
-    debug.log(111, e)
+    // debug.log(111, e)
     load.show(false)
     var html
     var tmp45353 = ""
