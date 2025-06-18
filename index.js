@@ -2848,6 +2848,9 @@ const mouseDownEvent = new MouseEvent('mousedown', {
     view: window // Контекст окна
 });
 
+
+
+
 document.addEventListener('keydown', (e) => {
     if (url_get.searchParams.get('shikimori_id')) {
         switch (e.key) {
@@ -2869,14 +2872,35 @@ document.addEventListener('keydown', (e) => {
                 break;
         }
     } else {
+        let items = document.querySelector('#list_serch').querySelectorAll(':scope > .cart_.bg-dark:not(.hide)');
+        let firstItemTop = items[main_i>-1?main_i:0].getBoundingClientRect().top;
+
+        let itemsInRow = 0;
+        for (const item of items) {
+            const itemTop = item.getBoundingClientRect().top;
+            if (Math.abs(itemTop - firstItemTop) < 10) {
+                itemsInRow++;
+            } else {
+                //break; // Прерываем цикл, как только начинается новая строка
+            }
+        }
+        
         switch (e.key) {
             case 'ArrowDown':
+                e.preventDefault();
+                main_i = (main_i + itemsInRow) % cart_list.length;
+                cart_list[main_i].focus();
+                break;
             case 'ArrowRight':
                 e.preventDefault();
                 main_i = (main_i + 1) % cart_list.length;
                 cart_list[main_i].focus();
                 break;
             case 'ArrowUp':
+                e.preventDefault();
+                main_i = (main_i - itemsInRow + cart_list.length) % cart_list.length;
+                cart_list[main_i].focus();
+                break;
             case 'ArrowLeft':
                 e.preventDefault();
                 main_i = (main_i - 1 + cart_list.length) % cart_list.length;
