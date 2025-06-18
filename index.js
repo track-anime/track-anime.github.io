@@ -11,6 +11,7 @@ document.body.r = 2
 var FavCheckSave = false
 var reiting_off = false
 var isDebugEnabled = false
+var cart_list = []
 
 var BaseAnimeCurrent = {}
 
@@ -348,11 +349,11 @@ function kodikMessageListener(message) {
             break
         case "kodik_player_current_episode":
             navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
-            debug.log( message.data.value, VideoInfo.e);
+            debug.log(message.data.value, VideoInfo.e);
 
-            if(VideoInfo.e.episodes == message.data.value.episode){
+            if (VideoInfo.e.episodes == message.data.value.episode) {
                 delete BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')];
-            }else{
+            } else {
                 BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
             }
             // debug.log(BaseAnimeCurrent)
@@ -759,28 +760,28 @@ function setVideoInfo(e) {
                 album: '',
                 artwork: [{ src: VideoInfo.info.cover.src }]
             });
-            
+
             navigator.mediaSession.metadata.time = 0;
             navigator.mediaSession.setActionHandler('play', () => {
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "play"} }, '*');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "play" } }, '*');
                 console.log('Воспроизведение');
             });
 
             navigator.mediaSession.setActionHandler('pause', () => {
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause"} }, '*');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
             });
             navigator.mediaSession.setActionHandler('stop', () => {
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause"} }, '*');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
             });
 
             navigator.mediaSession.setActionHandler('previoustrack', () => {
                 console.log('Перемотка назад');
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 10} }, '*');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 10 } }, '*');
             });
 
             navigator.mediaSession.setActionHandler('nexttrack', () => {
                 console.log('Перемотка вперед');
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 10} }, '*');
+                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 10 } }, '*');
             });
         } else {
             console.log('Media Session API не поддерживается');
@@ -2578,10 +2579,9 @@ function GetKodiScan(data, revers) {
         }
         //(e.type == 'anime-serial' || e.type == "anime") &&
         if (e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
-            if (CheckRepeats(e.shikimori_id) && (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) 
-                {
-                    return
-                }
+            if (CheckRepeats(e.shikimori_id) && (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) {
+                return
+            }
             // console.log(e)
             if (VoiceTranslate(e.translation.title)) {
 
@@ -2608,6 +2608,7 @@ function GetKodiScan(data, revers) {
                 }
 
                 const cart = add_cart(e1)
+                cart_list.push(cart)
                 // if(i==0) cart.focus();
                 // cart.style.borderBottomStyle = "dashed"
                 cart.style.borderBottomStyle = "dotted"
@@ -2644,8 +2645,7 @@ function GetKodiScan(data, revers) {
                         }
                     }
                     targetFrame.appendChild(cart)
-                    if(BaseAnimeCurrent[e.shikimori_id]?.episode < e.last_episode)
-                    {
+                    if (BaseAnimeCurrent[e.shikimori_id]?.episode < e.last_episode) {
                         new_anime_list.appendChild(cart)
                     }
                     list_serch.prepend(new_anime_list)
@@ -2835,3 +2835,57 @@ function UserDataTableRaieng(users) {
     }
 
 }
+
+
+/////// Управление с пульта tv
+let main_i = -1;
+let button_player_i = -1;
+let button_player_list = document.querySelectorAll(".player_button")
+// Создаем событие mousedown
+const mouseDownEvent = new MouseEvent('mousedown', {
+    bubbles: true, // Событие будет всплывать
+    cancelable: true, // Событие можно отменить
+    view: window // Контекст окна
+});
+
+document.addEventListener('keydown', (e) => {
+    if (url_get.searchParams.get('shikimori_id')) {
+        switch (e.key) {
+            case 'ArrowDown':
+            case 'ArrowRight':
+                e.preventDefault();
+                button_player_i = (button_player_i + 1) % button_player_list.length;
+                button_player_list[button_player_i].focus();
+                break;
+            case 'ArrowUp':
+            case 'ArrowLeft':
+                e.preventDefault();
+                button_player_i = (button_player_i - 1 + button_player_list.length) % button_player_list.length;
+                button_player_list[button_player_i].focus();
+                break;
+            case 'Enter':
+                e.preventDefault();
+                button_player_list[button_player_i].click();
+                break;
+        }
+    } else {
+        switch (e.key) {
+            case 'ArrowDown':
+            case 'ArrowRight':
+                e.preventDefault();
+                main_i = (main_i + 1) % cart_list.length;
+                cart_list[main_i].focus();
+                break;
+            case 'ArrowUp':
+            case 'ArrowLeft':
+                e.preventDefault();
+                main_i = (main_i - 1 + cart_list.length) % cart_list.length;
+                cart_list[main_i].focus();
+                break;
+            case 'Enter':
+                e.preventDefault();
+                cart_list[main_i].querySelector(".cart-img-top").dispatchEvent(mouseDownEvent);
+                break;
+        }
+    }
+});

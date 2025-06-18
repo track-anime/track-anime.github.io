@@ -595,6 +595,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "6afdf0e5e81ed5250ad149937a756cea6b736d",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "701633b558a28153fd6168ce3583bb1217d12f",
                                     "suffix": "",
                                     "type": "file"
@@ -1829,6 +1834,11 @@
                                 },
                                 {
                                     "name": "6b2b2a60ef322fd6ede1322f632945062539f9",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "9fbbd6f5f5648ff5faeb2e2096329c77c3e7a8",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -4839,6 +4849,11 @@
                                 },
                                 {
                                     "name": "395563b0680292ed2acc7a8bd5364b4306da63",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "b7d4c02be32fb29830ab15a859c7576dadd1d7",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -9157,6 +9172,11 @@
                             "type": "directory",
                             "children": [
                                 {
+                                    "name": "0f0a12accd618f6b332f0761cec55e707d033b",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "28d7bf721736f52279f701ee957e067571b7d2",
                                     "suffix": "",
                                     "type": "file"
@@ -10493,6 +10513,11 @@
                                 },
                                 {
                                     "name": "71eef67e65929bb8cb3fed6d4b5cade1aaa4a4",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "7cb09b4dca8d820e57544eaa93a67b6cb783f9",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -14166,6 +14191,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "45029a6cbc40b63e849f69cec10153cb57a092",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "4699aafe79e81dec7210b3609d2ad7c2d4d511",
                                     "suffix": "",
                                     "type": "file"
@@ -15228,6 +15258,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "68a93a5d9cd1616f669d2bda8c53b7e59db5d6",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "7d17abfd0f7937e72ddfa7951258248a73551c",
                                     "suffix": "",
                                     "type": "file"
@@ -15410,6 +15445,11 @@
                                 },
                                 {
                                     "name": "63e39667796e75faa8fda04d9663effd34b8f5",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "688af8be11c7566dcaaec3e8780aa206ceb3f5",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -15933,6 +15973,11 @@
                             "suffix": "",
                             "type": "directory",
                             "children": [
+                                {
+                                    "name": "3a970fd7a7272420072939b3b96752a44be390",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
                                 {
                                     "name": "40b9661ec30fc76b2ae438af9a3d88f80eeb84",
                                     "suffix": "",
@@ -16513,7 +16558,7 @@
                     "type": "file"
                 },
                 {
-                    "name": "TrackAnimeByDygDyg.apk",
+                    "name": "track-anime.apk",
                     "suffix": ".apk",
                     "type": "file"
                 },
@@ -16532,6 +16577,11 @@
         {
             "name": "background.jpg",
             "suffix": ".jpg",
+            "type": "file"
+        },
+        {
+            "name": "banner.png",
+            "suffix": ".png",
             "type": "file"
         },
         {
@@ -17009,6 +17059,11 @@
             "type": "file"
         },
         {
+            "name": "favicon.jpg",
+            "suffix": ".jpg",
+            "type": "file"
+        },
+        {
             "name": "favicon.png",
             "suffix": ".png",
             "type": "file"
@@ -17016,6 +17071,11 @@
         {
             "name": "faviconV2.png",
             "suffix": ".png",
+            "type": "file"
+        },
+        {
+            "name": "favicon_cr.jpg",
+            "suffix": ".jpg",
             "type": "file"
         },
         {
