@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Тест поддержки пульта</title>
+    <style>
+        body {
+            background: #121212;
+            color: #eee;
+            font-family: monospace, monospace;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        #key, #userAgent {
+            font-size: 2rem;
+            margin: 20px;
+            padding: 20px;
+            border: 2px solid #eee;
+            border-radius: 8px;
+            width: 80vw;
+            max-width: 600px;
+            text-align: center;
+            background: #222;
+        }
+        h1 {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Тест поддержки пульта</h1>
+    <div id="key">Нажмите кнопку на пульте...</div>
+    <div id="userAgent"><b>User-Agent:</b> <span id="ua"></span></div>
+
+    <script>
+        const keyDiv = document.getElementById('key');
+        const uaSpan = document.getElementById('ua');
+
+        // Выводим user agent
+        uaSpan.textContent = navigator.userAgent;
+
+        // Обработка нажатий кнопок
+        window.addEventListener('keydown', (e) => {
+            // Показываем код и имя клавиши
+            keyDiv.textContent = `Клавиша: ${e.key} (код: ${e.code}, keyCode: ${e.keyCode})`;
+            e.preventDefault(); // чтобы не прокручивало страницу
+        });
+    </script>
+</body>
+</html>

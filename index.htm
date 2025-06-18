@@ -64,11 +64,13 @@
 
 
 <body>
+    <!-- Это фикс чтобы планшет экран не засыпал -->
     <video id="keepAwake" loop muted style="display: none;">
         <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMQAAAAA=" type="video/mp4">
     </video>
+    <!-- =============== -->
     <div class="modal fade" id="modal_reiting_info" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="-1">
+        tabindex="0">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -99,7 +101,7 @@
     </div>
 
     <img class="image_preview" id="image-preview-window"></img>
-    <div class="modal fade" id="qrcode_scan_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="qrcode_scan_modal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header" id="qrcode_scan_main">
@@ -110,21 +112,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="qrcode_modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" id="qrcode_main">
-                    <p1 id="qrcode_label">Отсканируй на телефоне, чтобы войти</p1>
-                    <div>
-
-                        <!-- <img src="favicon.png"></img> -->
-                    </div>
-                    <a id="qrcode_link"
-                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">link</a>
                 </div>
             </div>
         </div>
@@ -595,14 +582,14 @@
 
     <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 
-    <div id="VoiceSettings" class="modal fade" tabindex="-1">
+    <div id="VoiceSettings" class="modal fade" tabindex="0">
         <div class="modal-dialog modal-sm modal-dialog-centered ">
             <div id="VoiceSettings_content" class="modal-content">
             </div>
         </div>
     </div>
 
-    <div id="VideoPlayerAnime" class="modal fade" tabindex="-1">
+    <div id="VideoPlayerAnime" class="modal fade" tabindex="0">
         <div class="modal-dialog modal-xl modal-dialog-centered ">
             <div class="modal-content">
                 <button type="button" class="btn btn-secondary" title="PiP" id="pipDialogButton">

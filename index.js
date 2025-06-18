@@ -1904,6 +1904,7 @@ function add_cart(e) {
     cart.data = e;
     // debug.log(cart.data.shikimori)
     cart.classList.add('cart_', 'bg-dark', 'text-white');
+    cart.setAttribute('tabindex', '0');
     cart.r = e.raiting
     cart.title = e?.status
     // debug.log("test",e)
@@ -2434,7 +2435,6 @@ document.addEventListener("sh_api_search", function (e) {
     targetFrame.innerHTML = ""
     getChapter("#list_history")
     e.search.forEach(e => {
-        // debug.log(e)
         // return
         const e1 = {
             "title": e.russian,
@@ -2568,8 +2568,8 @@ if (url_get.searchParams.get('calendar')) {  // Открываем календ�
 function GetKodiScan(data, revers) {
 
     var t1 = false
-    data.forEach(e => {
-
+    data.forEach((e, i) => {
+        // console.log(i)
         if (revers && endid == e.id || t1) {
 
             t1 = true
@@ -2608,6 +2608,7 @@ function GetKodiScan(data, revers) {
                 }
 
                 const cart = add_cart(e1)
+                // if(i==0) cart.focus();
                 // cart.style.borderBottomStyle = "dashed"
                 cart.style.borderBottomStyle = "dotted"
 

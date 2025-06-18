@@ -657,7 +657,7 @@ p {
     }
 
 
-    .cart_:hover {
+    .cart_:hover, .cart_:active, .cart_:focus {
         transform: rotateY(0) !important;
 
         .cart-img-top,
@@ -696,6 +696,7 @@ p {
         }
 
     }
+
 
     .cart_n {
         height: 9rem !important;
@@ -1034,7 +1035,7 @@ span.sr-only {
     scale: 1;
     /* scale: 0;
     transition: scale 0.5s ease; */
-    user-select: none;
+    /* user-select: none; */
     /* opacity: 0%;
     transition: opacity 2s ease; */
     animation: fadeIn 1.5s forwards;
@@ -1089,7 +1090,7 @@ span.sr-only {
     backdrop-filter: blur(5px) brightness(0.5);
 }
 
-.cart_:hover {
+.cart_:hover, .cart_:active, .cart_:focus {
     .cart-title {
         visibility: hidden;
     }
