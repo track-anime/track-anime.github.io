@@ -2873,7 +2873,7 @@ document.addEventListener('keydown', (e) => {
         }
     } else {
         let items = document.querySelector('#list_serch').querySelectorAll(':scope > .cart_.bg-dark:not(.hide)');
-        let firstItemTop = items[main_i>-1?main_i:0].getBoundingClientRect().top;
+        let firstItemTop = items[main_i > -1 ? main_i : 0].getBoundingClientRect().top;
 
         let itemsInRow = 0;
         for (const item of items) {
@@ -2884,7 +2884,7 @@ document.addEventListener('keydown', (e) => {
                 //break; // Прерываем цикл, как только начинается новая строка
             }
         }
-        
+
         switch (e.key) {
             case 'ArrowDown':
                 e.preventDefault();
@@ -2913,3 +2913,26 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
+
+
+async function DownloadAPK(link) {
+    // Проверяем, доступен ли интерфейс AndroidApp
+
+    if (window.AndroidApp) {
+        const response = await fetch('app/output-metadata.json');
+        if (!response.status) return
+        const json = await response.json();
+        if (json.elements[0].versionCode.toString() != navigator.userAgent.split("|").pop()) {
+
+            BrowserOpen(link)
+        }
+    }
+}
+
+async function BrowserOpen(link) {
+    if (window.AndroidApp) {
+        window.AndroidApp.downloadApk(link);
+    }
+}
+
+DownloadAPK("https://track-anime.github.io/app/TrackAnimeByDygDyg.apk")
