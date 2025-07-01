@@ -56,7 +56,8 @@ sh_api.getCookie_time = (name) => {
 
 sh_api.get_key = () => {
     // window.open(`https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`, "_self");
-    location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}&response_type=code`
+    let qrcode = sh_api.url_get.searchParams.get('qrcode')?"?qrcode=true":""
+    location.href = `https://shikimori.one/oauth/authorize?client_id=aBohwwIpPXeCgSlo1xorfHKPaRBsdpW0_MMF8S-7SWA&redirect_uri=${window.location.origin}${window.location.pathname}${qrcode}&response_type=code`
     return
     code = sh_api.url_get.searchParams.get('code')
     if (!code && !sh_api.getCookie("sh_refresh_token")) {
