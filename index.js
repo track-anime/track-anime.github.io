@@ -66,7 +66,7 @@ get_covers_base()
 
 setTimeout(() => {
     error_timeoud_hide = true  // Через 5 минут отключаем уведомление о блокировки сайта 
-}, 5*60*1000);
+}, 5 * 60 * 1000);
 
 //////// Создаёт функцию debug.log() /////////////////////////////////////////////
 
@@ -125,8 +125,8 @@ function Get_base_anime() {
     base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру (по умолчанию выключено)
     base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов (по умолчанию выключено)
     base_anime.CheckReleased = typeof base_anime.CheckReleased == "boolean" ? base_anime.CheckReleased : false // Задаёт вывод только релизнутых аниме (по умолчанию выключено)
-    base_anime.Fonts = base_anime.Fonts ? base_anime.Fonts : "Roboto Condensed"                                // Загружаем шрифт по умолчанию
-    
+    base_anime.Fonts = base_anime.Fonts ? base_anime.Fonts : "Pangolin"                                // Загружаем шрифт по умолчанию
+
     base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
     if (typeof base_anime.CalendarType == "boolean") {
@@ -159,11 +159,11 @@ Get_base_anime()
 
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
-    if (document.getElementById("list_calendar").classList.contains('hide')&url_get.searchParams.get("calendar")) {
+    if (document.getElementById("list_calendar").classList.contains('hide') & url_get.searchParams.get("calendar")) {
         url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
     };
-    if (document.getElementById("list_fav").classList.contains('hide')&&url_get.searchParams.get("sh_user_fav")) {
+    if (document.getElementById("list_fav").classList.contains('hide') && url_get.searchParams.get("sh_user_fav")) {
         url_get.searchParams.delete('sh_user_fav')
         window.history.pushState({}, '', url_get);
     };
@@ -1767,7 +1767,7 @@ async function httpGet(theUrl) {
         const url = new URL(theUrl)
         debug.log(url)
         console.error('Ошибка:', error.message);
-        if (error_timeoud_hide==true) return
+        if (error_timeoud_hide == true) return
         showToast({
             cover: "rkn.png",
             title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов.`,
@@ -2923,7 +2923,7 @@ document.addEventListener('keydown', (e) => {
 function FontsCustom(newFilePath) {
     // Находим существующий CSS файл (например, по id или классу)
     const oldLink = document.querySelector('#fonts_custom');
-    if(oldLink?.name == newFilePath) return
+    if (oldLink?.name == newFilePath) return
     if (oldLink) {
         oldLink.remove(); // Удаляем старый CSS
     }
