@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Propaniac';
+    src: url('Propaniac.ttf') format('truetype'),
+    url('Propaniac.woff2') format('woff2'),
+        url('Propaniac.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html {
+    /* Устанавливаем шрифт по умолчанию */
+    --font-family: 'Propaniac', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}

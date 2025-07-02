@@ -1,0 +1,14 @@
+@font-face {
+    font-family: 'Tolkien';
+    src: url('TolkienCyr.ttf') format('truetype'),
+    url('tolkiencyr-webfont.woff2') format('woff2'),
+         url('tolkiencyr-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html {
+    /* Устанавливаем шрифт по умолчанию */
+    --font-family: 'Tolkien', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}

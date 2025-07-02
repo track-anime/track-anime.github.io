@@ -72,22 +72,24 @@
 
 <body>
     <!-- Настройки -->
-    <div class="modal fade" id="SettingsModal" tabindex="-1" aria-labelledby="SettingsModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PersonalizedModal" tabindex="-1" aria-labelledby="PersonalizedModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="SettingsModalLabel">Выберите шрифт</h5>
+                    <h5 class="modal-title" id="PersonalizedModalLabel">Пероснализация</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                 </div>
                 <div class="modal-body">
+                    <h5 class="modal-title" id="PersonalizedModalLabel">Выбери шрифт</h5>
                     <select class="form-select" id="fontSelect" onchange="FontsCustom(this.value)">
-                        <option selected disabled>Выберите шрифт...</option>
+                        <option selected disabled>Выбери шрифт...</option>
                         <option value="Roboto Condensed">Roboto Condensed</option>
                         <option value="Pangolin">Pangolin</option>
                         <option value="Fira Sans">Fira Sans</option>
                         <option value="Tektur">Tektur</option>
                         <option value="Inter Tight">Inter Tight</option>
-                        <!-- <option value="WDXL Lubrifont TC">WDXL Lubrifont TC</option> -->
+                        <option value="Tolkien">Tolkien</option>
+                        <option value="Propaniac">Propaniac</option>
                         <!-- <option value="Courier New">Courier New</option>
                         <option value="Verdana">Verdana</option>
                         <option value="Georgia">Georgia</option> -->
@@ -230,7 +232,7 @@
                                 Только вышедшие
                             </label>
                         </li>
-                        <li class="form-check form-switch nav-item mx-2">
+                        <li class="form-check form-switch nav-item mx-2 hide">
                             <input class="form-check-input" type="checkbox" value="" id="CheckChinaTrash" disabled>
 
                             <label class="form-check-label" for="flexCheckDefault">
@@ -241,10 +243,10 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li class="nav-item">
-                            <button id="ClearButtonMenu" aria-current="page" class="dropdown-item">Сброс
-                                настроек</button>
+                            <button id="ClearButtonMenu" aria-current="page" class="dropdown-item">Сброс настроек</button>
                             <button id="VoiceButtonMenu" aria-current="page" class="dropdown-item">Озвучки</button>
-                            <button id="SettingsButtonMenu" aria-current="page" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</button>
+                            <hr class="dropdown-divider">
+                            <button id="SettingsButtonMenu" aria-current="page" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#PersonalizedModal">Пероснализация</button>
                         </li>
                         <!-- <li>
                             <hr class="dropdown-divider">
