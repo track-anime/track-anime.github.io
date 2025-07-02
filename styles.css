@@ -1,6 +1,40 @@
-/* *{
-    outline: 1px solid rgb(0, 128, 0) !important;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+
+html {
+    /* Устанавливаем шрифт по умолчанию */
+    /* --font-family: 'Roboto Condensed', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+    --font-family:   'Roboto Condensed',  ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    /* --font-family:           'Pangolin',  ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
+
+}
+
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: fixed;
+    font-family: var(--font-family);
+    font-style: normal;
+    font-weight: 500;
+}
+    
+
+
+.btn,
+input, 
+.nav-link {
+    font-family: var(--font-family);
+    font-weight: 500;
+}
+
+
+
+
 html {
     color-scheme: light dark;
 }
@@ -314,19 +348,6 @@ body {
 }
 
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    position: fixed;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-style: normal;
-    font-weight: 400;
-}
 
 
 @media (max-width: 1151px) and (orientation: landscape) {
@@ -657,7 +678,9 @@ p {
     }
 
 
-    .cart_:hover, .cart_:active, .cart_:focus {
+    .cart_:hover,
+    .cart_:active,
+    .cart_:focus {
         transform: rotateY(0) !important;
 
         .cart-img-top,
@@ -1088,9 +1111,13 @@ span.sr-only {
     inset: 0;
     transform: rotateY(180deg);
     backdrop-filter: blur(5px) brightness(0.5);
+    font-style: revert;
+    font-weight: normal;
 }
 
-.cart_:hover, .cart_:active, .cart_:focus {
+.cart_:hover,
+.cart_:active,
+.cart_:focus {
     .cart-title {
         visibility: hidden;
     }

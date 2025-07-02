@@ -17,9 +17,6 @@ var BaseAnimeCurrent = {}
 
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
-let CURSOR_MAX = 22;  // Сколько всего курсоров в папке
-
-
 var url_get = new URL(window.location.href)
 
 const MyServerURL = url_get.searchParams.get('MyServerURL') ? url_get.searchParams.get('MyServerURL') : 'server.dygdyg.ru' //'dygdyg.duckdns.org'
@@ -123,7 +120,8 @@ function Get_base_anime() {
     base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру (по умолчанию выключено)
     base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов (по умолчанию выключено)
     base_anime.CheckReleased = typeof base_anime.CheckReleased == "boolean" ? base_anime.CheckReleased : false // Задаёт вывод только релизнутых аниме (по умолчанию выключено)
-
+    base_anime.Fonts = base_anime.Fonts ? base_anime.Fonts : ""                                                // Загружаем шрифт по умолчанию
+    
     base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
     if (typeof base_anime.CalendarType == "boolean") {
@@ -139,8 +137,9 @@ function Get_base_anime() {
         CheckReleased_.checked = base_anime.CheckReleased
 
     }
-
+    FontsCustom(base_anime.Fonts)
 }
+
 Get_base_anime()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,12 +154,12 @@ Get_base_anime()
 
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
-    if (document.getElementById("list_fav").classList.contains('hide')) {
-        url_get.searchParams.delete('sh_user_fav')
+    if (document.getElementById("list_calendar").classList.contains('hide')&url_get.searchParams.get("calendar")) {
+        url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
     };
-    if (document.getElementById("list_calendar").classList.contains('hide')) {
-        url_get.searchParams.delete('calendar')
+    if (document.getElementById("list_fav").classList.contains('hide')&&url_get.searchParams.get("sh_user_fav")) {
+        url_get.searchParams.delete('sh_user_fav')
         window.history.pushState({}, '', url_get);
     };
     setIImgPreview()
@@ -693,7 +692,8 @@ function setVideoInfo(e) {
     VideoInfo.info.AlohaPlayer.textContent = e.imdb ? "Смотреть Alloha Player" : "Alloha!! Мне повезёт!!"
     VideoInfo.info.AlohaPlayer.title = "Зажать shift для поиска по названию"
     VideoInfo.info.AlohaPlayer.addEventListener('click', (ev) => {
-
+        alert("Плеер больше недоступен")
+        return
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         DialogVideoInfo.classList.remove("d-none");
@@ -2914,6 +2914,28 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+function FontsCustom(newFilePath) {
+    // Находим существующий CSS файл (например, по id или классу)
+    const oldLink = document.querySelector('#fonts_custom');
+    if(oldLink?.name == newFilePath) return
+    if (oldLink) {
+        oldLink.remove(); // Удаляем старый CSS
+    }
+    if (!newFilePath) return
+    // Добавляем новый CSS
+    const newLink = document.createElement('link');
+    newLink.rel = 'stylesheet';
+    newLink.type = 'text/css';
+    newLink.id = 'fonts_custom';
+    newLink.href = `fonts/${newFilePath}.css`;
+    newLink.name = newFilePath;
+    document.head.appendChild(newLink);
+    base_anime.Fonts = newFilePath;
+
+    localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+}
+
+//<link href="/fonts/Pangolin.css" rel="stylesheet" />
 
 async function DownloadAPK(link) {
     // Проверяем, доступен ли интерфейс AndroidApp

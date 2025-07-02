@@ -9,6 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/scripts/bootstrap.min.css" rel="stylesheet" />
 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet"> -->
+
     <!-- <script src="/scripts/jquery.min.js"></script> -->
 
 
@@ -53,6 +59,7 @@
 </head>
 
 <link rel="stylesheet" type="text/css" href="/styles.css" media="screen" />
+<!-- <link href="/fonts/Pangolin.css" rel="stylesheet" /> -->
 
 <div class="hide" id="load">
 
@@ -64,6 +71,30 @@
 
 
 <body>
+    <!-- Настройки -->
+    <div class="modal fade" id="SettingsModal" tabindex="-1" aria-labelledby="SettingsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="SettingsModalLabel">Выберите шрифт</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    <select class="form-select" id="fontSelect" onchange="FontsCustom(this.value)">
+                        <option selected disabled>Выберите шрифт...</option>
+                        <option value="Roboto_Condensed">Roboto Condensed</option>
+                        <option value="Pangolin">Pangolin</option>
+                        <!-- <option value="Courier New">Courier New</option>
+                        <option value="Verdana">Verdana</option>
+                        <option value="Georgia">Georgia</option> -->
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Это фикс чтобы планшет экран не засыпал -->
     <video id="keepAwake" loop muted style="display: none;">
         <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMQAAAAA=" type="video/mp4">
@@ -209,6 +240,7 @@
                             <button id="ClearButtonMenu" aria-current="page" class="dropdown-item">Сброс
                                 настроек</button>
                             <button id="VoiceButtonMenu" aria-current="page" class="dropdown-item">Озвучки</button>
+                            <button id="SettingsButtonMenu" aria-current="page" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#SettingsModal">Настройки</button>
                         </li>
                         <!-- <li>
                             <hr class="dropdown-divider">
@@ -436,11 +468,14 @@
                             <p class="card-text mb-0 mt-0" id="info_imdb_votes">16350 голосов</p>
                         </div>
                         <hr>
-                        <button type="button" id="info_KodikPlayer" class="player_button btn btn-primary w-100 mb-2">Смотреть
+                        <button type="button" id="info_KodikPlayer"
+                            class="player_button btn btn-primary w-100 mb-2">Смотреть
                             Kodik Player</button>
-                        <button type="button" id="info_AlohaPlayer" class="hide player_button btn btn-danger w-100 mb-2">Смотреть
+                        <button type="button" id="info_AlohaPlayer"
+                            class="hide player_button btn btn-danger w-100 mb-2">Смотреть
                             Alloha Player</button>
-                        <button type="button" id="info_AnilibriaPlayer" class="hide player_button btn btn-warning w-100 mb-2">Искать на
+                        <button type="button" id="info_AnilibriaPlayer"
+                            class="hide player_button btn btn-warning w-100 mb-2">Искать на
                             Anilibia</button>
                     </div>
                     <!-- <button type="button" id="info_TorrentPlayer" class="btn btn-success w-100 mb-2">Поискать на
