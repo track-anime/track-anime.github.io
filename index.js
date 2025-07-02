@@ -120,7 +120,7 @@ function Get_base_anime() {
     base_anime.censored = typeof base_anime.censored == "boolean" ? base_anime.censored : false             // Задаёт цензуру (по умолчанию выключено)
     base_anime.CheckRepeats = typeof base_anime.CheckRepeats == "boolean" ? base_anime.CheckRepeats : false // Задаёт скип повторов (по умолчанию выключено)
     base_anime.CheckReleased = typeof base_anime.CheckReleased == "boolean" ? base_anime.CheckReleased : false // Задаёт вывод только релизнутых аниме (по умолчанию выключено)
-    base_anime.Fonts = base_anime.Fonts ? base_anime.Fonts : ""                                                // Загружаем шрифт по умолчанию
+    base_anime.Fonts = base_anime.Fonts ? base_anime.Fonts : "Roboto Condensed"                                // Загружаем шрифт по умолчанию
     
     base_anime.authorize = base_anime.authorize ? base_anime.authorize : false
 
