@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TrackAnimeByDygDyg</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background-color: #555555;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #777777;
+        }
+        .download-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1e90ff;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+        .download-button:hover {
+            background-color: #4682b4;
+        }
+        img.qr-code {
+            margin-top: 20px;
+            max-width: 50%;
+            max-height: 50%;
+            border-radius: 10px;
+        }
+        img.android-logo {
+            height: 40px;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        h1 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:history.back()" class="back-button">Назад</a>
+    <h1>Версия приложения: 2.0</h1>
+    <a href="TrackAnimeByDygDyg.apk" class="download-button">Скачать TrackAnimeByDygDyg.apk <img src="android_logo.png" alt="Android Logo" class="android-logo"></a>
+    <img src="TrackAnimeByDygDyg.apk.qr-code.png" alt="QR Code" class="qr-code">
+</body>
+</html>

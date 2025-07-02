@@ -11,6 +11,7 @@ document.body.r = 2
 var FavCheckSave = false
 var reiting_off = false
 var isDebugEnabled = false
+var error_timeoud_hide = false
 var cart_list = []
 
 var BaseAnimeCurrent = {}
@@ -62,6 +63,10 @@ var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&w
 var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
 get_covers_base()
 
+
+setTimeout(() => {
+    error_timeoud_hide = true  // Через 5 минут отключаем уведомление о блокировки сайта 
+}, 5*60*1000);
 
 //////// Создаёт функцию debug.log() /////////////////////////////////////////////
 
@@ -1762,6 +1767,7 @@ async function httpGet(theUrl) {
         const url = new URL(theUrl)
         debug.log(url)
         console.error('Ошибка:', error.message);
+        if (error_timeoud_hide==true) return
         showToast({
             cover: "rkn.png",
             title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов.`,
