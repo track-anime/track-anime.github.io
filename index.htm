@@ -72,7 +72,8 @@
 
 <body>
     <!-- Пероснализация -->
-    <div class="modal fade" id="PersonalizedModal" tabindex="-1" aria-labelledby="PersonalizedModalLabel" aria-hidden="true">
+    <div class="modal fade" id="PersonalizedModal" tabindex="-1" aria-labelledby="PersonalizedModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -243,10 +244,12 @@
                             <hr class="dropdown-divider">
                         </li>
                         <li class="nav-item">
-                            <button id="ClearButtonMenu" aria-current="page" class="dropdown-item">Сброс настроек</button>
+                            <button id="ClearButtonMenu" aria-current="page" class="dropdown-item">Сброс
+                                настроек</button>
                             <button id="VoiceButtonMenu" aria-current="page" class="dropdown-item">Озвучки</button>
                             <hr class="dropdown-divider">
-                            <button id="SettingsButtonMenu" aria-current="page" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#PersonalizedModal">Пероснализация</button>
+                            <button id="SettingsButtonMenu" aria-current="page" class="dropdown-item"
+                                data-bs-toggle="modal" data-bs-target="#PersonalizedModal">Пероснализация</button>
                         </li>
                         <!-- <li>
                             <hr class="dropdown-divider">
@@ -259,7 +262,8 @@
                             class="btn-link nav-link hide">Контакты</button>
                     </li>
                     <li class="nav-item">
-                        <button id="contacts_Button" onclick="window.location.href = `/app/`" aria-current="page" class="btn-link nav-link">
+                        <button id="contacts_Button" onclick="window.location.href = `/app/`" aria-current="page"
+                            class="btn-link nav-link">
                             Скачать на Android
                             <!-- <img src="app/android_logo.png" alt="Android Logo" class="android-logo" style="max-height: 21px;"></button> -->
                     </li>
@@ -686,5 +690,14 @@
 </body>
 
 
+
+    <!-- неровный бордер -->
+    <svg id="dr_border">
+        <filter id="rough-edge">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    <!-- ====== -->
 
 </html>

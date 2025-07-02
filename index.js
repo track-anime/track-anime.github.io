@@ -2088,10 +2088,10 @@ function add_card_ned(e) {
     // ${e.cart_data_old.n == "сб" || e.cart_data_old.n == "вс" ? "#ff00002e" : "#1900ff2e"}
     cart.innerHTML = `
     <div class="cart_n">
-        <div align="center" style=" font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 5px 0px 0px 5px;">
+        <div align="center" class="hand-drawn-border" style=" font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 5px 0px 0px 5px;">
             <div align="center" style=";height: 25%;background-color: ${e.cart_data_old.nn > 0 ? `hwb(${190 / 7 * e.cart_data_old.nn + 190}deg 0% 0% / 18.04%);` : "hwb(0deg 0% 0% / 18.04%)"}">${e.cart_data_old.n}</div>
         ${e.cart_data_old.dat}<br class="br">◄</div>
-        <div align="center" style="font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 0px 5px 5px 0px;">
+        <div align="center" class="hand-drawn-border" style="font-size: 3em;wight=50%;width: 50%;height: 100%;background-color:#5151518f;border-color: #dee2e6;border-style: solid;border-width: 0.3rem;border-radius: 0px 5px 5px 0px;">
             <div align="center" style=";height: 25%;background-color: ${e.cart_data_new.nn > 0 ? `hwb(${190 / 7 * e.cart_data_new.nn + 190}deg 0% 0% / 18.04%);` : "hwb(0deg 0% 0% / 18.04%)"}">${e.cart_data_new.n}</div>
         ${e.cart_data_new.dat}<br class="br">►</div>
     </div>
