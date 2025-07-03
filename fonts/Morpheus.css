@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'morpheus';
-    src: url('morpheus.ttf') format('truetype'),
-    url('morpheus.woff2') format('woff2'),
-         url('morpheus.woff') format('woff');
+    font-family: 'Morpheus';
+    src: url('Morpheus.ttf') format('truetype'),
+    url('Morpheus.woff2') format('woff2'),
+         url('Morpheus.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 
@@ -10,5 +10,5 @@
 
 html {
     /* Устанавливаем шрифт по умолчанию */
-    --font-family: 'morpheus', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family: 'Morpheus', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
