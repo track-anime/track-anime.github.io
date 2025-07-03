@@ -9,3 +9,6 @@ html {
 .hand-drawn-border {
     filter: url(#rough-edge);
 }
+/* .hand-drawn-border_hover:hover {
+    filter: url(#rough-edge-2) blur(0.5px);
+} */

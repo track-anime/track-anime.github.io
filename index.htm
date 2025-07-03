@@ -284,7 +284,7 @@
                             <img class="mx-2 rounded" alt="Image" width="24" height="24" src="pedro.gif"></img>
                             <span>UserName</span>
                         </button>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu hand-drawn-border">
                             </li>
                             <li><button class="dropdown-item" id="raiting_button" data-bs-toggle="modal"
                                     href="#modal_reiting_info">Рейтинг</button>
@@ -696,6 +696,12 @@
         <filter id="rough-edge">
             <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" result="noise" />
             <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+    </svg>
+    <svg id="dr_border">
+        <filter id="rough-edge-2">
+            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
         </filter>
     </svg>
     <!-- ====== -->

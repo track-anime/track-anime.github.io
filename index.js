@@ -702,13 +702,13 @@ function setVideoInfo(e) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         DialogVideoInfo.classList.remove("d-none");
-        VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`
+        VideoPlayer.contentWindow.location.href = `/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`
         debug.log(e.id)
         if (ev.shiftKey) {
-            window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
+            window.open(`/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
 
             return
-            // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
+            // VideoPlayer.contentWindow.location.href = `/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
         } else {
 
@@ -725,7 +725,7 @@ function setVideoInfo(e) {
             window.open(`https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
 
             return
-            // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
+            // VideoPlayer.contentWindow.location.href = `/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
         } else {
 
@@ -747,13 +747,13 @@ function setVideoInfo(e) {
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         // debug.log(e)
         if (ee.shiftKey) {
-            window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
+            window.open(`/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
             return
         }
 
         // VideoPlayer.contentWindow.location.href = e.link;
         VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
-        // VideoPlayer.contentWindow.location.href = `https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
+        // VideoPlayer.contentWindow.location.href = `/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
 
         // Настройка Media Session API
         if ('mediaSession' in navigator) {
@@ -1911,6 +1911,7 @@ function add_cart(e) {
     cart.data = e;
     // debug.log(cart.data.shikimori)
     cart.classList.add('cart_', 'bg-dark', 'text-white');
+    cart.classList.add("hand-drawn-border_hover")
     cart.setAttribute('tabindex', '0');
     cart.r = e.raiting
     cart.title = e?.status
@@ -2083,6 +2084,7 @@ function add_card_ned(e) {
 
     const cart = document.createElement('div');
     cart.classList.add("cart_")
+    
     // cart.classList.add("bg-dark")
     cart.classList.add("cart_n_bg")
     // ${e.cart_data_old.n == "сб" || e.cart_data_old.n == "вс" ? "#ff00002e" : "#1900ff2e"}
@@ -2342,7 +2344,7 @@ function dialog_(e, info) {
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
         DialogVideoInfo.classList.remove("d-none");
-        // window.open(`https://dygdyg.github.io/DygDygWEB/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
+        // window.open(`/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
         // };
         return
     }
