@@ -704,15 +704,15 @@ function setVideoInfo(e) {
 
     function add_kodik_pleer(ee) {
         if (ee.shiftKey) {
-            window.open(`/kodik.htm?shikimori_id=${e.id}&MyServerURL=${MyServerURL}`, '_blank').focus();
+            window.open(`/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`, '_blank').focus();
         } else {
-            VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}&MyServerURL=${MyServerURL}`;
+            VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`;
             let DialogVideoInfo = document.getElementById('DialogVideoInfo');
             DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         }
     }
 
-    VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}&MyServerURL=${MyServerURL}`;
+    VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}}`;
     html = ""
     html2 = ""
     e.screenshots?.forEach(el => {
