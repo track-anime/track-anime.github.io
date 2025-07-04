@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+</head>
+
+<body>
+  <iframe id="kodik" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *"></iframe>
+</body>
+<style>
+  body {
+    background-color: rgb(32, 32, 32);
+    margin: 0 0 0 0;
+  }
+
+  #kodik {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    border: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+  }
+</style>
+
+
+<script>
+
+  var url_get = new URL(window.location.href)
+  const MyServerURL = url_get.searchParams.get('MyServerURL') ? url_get.searchParams.get('MyServerURL') : 'server.dygdyg.ru' //'dygdyg.duckdns.org'
+  var kodik = document.createElement("iframe");
+  var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
+  var data_anime
+
+  start()
+
+  async function start() {
+    await anim_data()
+    await start_kodik()
+    await mediaplayer()
+  }
+
+  /////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////////
+  async function anim_data() {
+    console.log(url_get.searchParams.get("shikimori_id"))
+    const response = await fetch(`https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${url_get.searchParams.get("shikimori_id")}`);
+    data = await response.json(response);
+    data_anime = data.results[0]
+    console.log("anime", data_anime)
+  }
+
+  /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
+  async function start_kodik() {
+    document.getElementById("kodik").src = `https://kodik.cc/find-player?shikimoriID=${url_get.searchParams.get("shikimori_id")}`
+    
+
+    if (window.addEventListener) {
+      window.addEventListener('message', kodikMessageListener);
+    } else {
+      window.attachEvent('onmessage', kodikMessageListener);
+    }
+
+    var kodikIframe = document.getElementById("kodik").contentWindow;
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+
+  /////////////////////////////////////////////// Управление kodik_player /////////////////////////////////////////////////////////
+  function kodikMessageListener(message) {
+    console.log("[kodik player]", message.data);
+    switch (message.data.key) {
+      case "kodik_player_time_update":
+        navigator.mediaSession.metadata.time = message.data.value;
+        break
+      case "kodik_player_current_episode":
+        navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
+        // console.log(message.data.value, VideoInfo.e);
+        // delete BaseAnimeCurrent[null];
+        if (data_anime.material_data.episodes_aired == message.data.value.episode) {
+          delete BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')];
+        } else {
+          BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
+          BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')]["material_data"] = data_anime.material_data
+        }
+        // console.log(BaseAnimeCurrent)
+        localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+        break;
+
+      default:
+        break;
+    }
+
+  }
+
+
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  ///////////////////////////////////////////////  Настройка Media Session API   /////////////////////////////////////////////// 
+  async function mediaplayer() {
+
+
+    if ('mediaSession' in navigator) {
+
+      navigator.mediaSession.metadata = new MediaMetadata({
+        title: data_anime.material_data.title,
+        artist: ``,
+        album: '',
+        artwork: [{ src: data_anime.material_data.poster_url }]
+      });
+
+      navigator.mediaSession.metadata.time = 0;
+      navigator.mediaSession.setActionHandler('play', () => {
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "play" } }, '*');
+        console.log('Воспроизведение');
+      });
+
+      navigator.mediaSession.setActionHandler('pause', () => {
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
+      });
+      navigator.mediaSession.setActionHandler('stop', () => {
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
+      });
+
+      navigator.mediaSession.setActionHandler('previoustrack', () => {
+        console.log('Перемотка назад');
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 10 } }, '*');
+      });
+
+      navigator.mediaSession.setActionHandler('nexttrack', () => {
+        console.log('Перемотка вперед');
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 10 } }, '*');
+      });
+    } else {
+      console.log('Media Session API не поддерживается');
+    }
+  }
+
+</script>
+
+</html>

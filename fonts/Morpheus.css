@@ -1,8 +1,8 @@
 @font-face {
     font-family: 'Morpheus';
     src: url('Morpheus.ttf') format('truetype'),
-    url('Morpheus.woff2') format('woff2'),
-         url('Morpheus.woff') format('woff');
+        url('Morpheus.woff2') format('woff2'),
+        url('Morpheus.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 

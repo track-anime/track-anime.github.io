@@ -14,7 +14,7 @@ var isDebugEnabled = false
 var error_timeoud_hide = false
 var cart_list = []
 
-var BaseAnimeCurrent = {}
+var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
 
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
@@ -344,44 +344,7 @@ URLList = url_get.searchParams.get('anime_studios') ? `${URLList}&anime_studios=
 URLList = url_get.searchParams.get('anime_status') ? `${URLList}&anime_status=${encodeURIComponent(url_get.searchParams.get('anime_status'))}` : URLList
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-/////////////////////////////////////////////// Управление kodik_player /////////////////////////////////////////////////////////
-function kodikMessageListener(message) {
-    debug.log("[kodik player]", message.data);
-    switch (message.data.key) {
-        case "kodik_player_time_update":
-            navigator.mediaSession.metadata.time = message.data.value;
-            break
-        case "kodik_player_current_episode":
-            navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
-            debug.log(message.data.value, VideoInfo.e);
 
-            if (VideoInfo.e.episodes == message.data.value.episode) {
-                delete BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')];
-            } else {
-                BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
-            }
-            // debug.log(BaseAnimeCurrent)
-            localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
-            break;
-
-        default:
-            break;
-    }
-
-}
-BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
-
-if (window.addEventListener) {
-    window.addEventListener('message', kodikMessageListener);
-} else {
-    window.attachEvent('onmessage', kodikMessageListener);
-}
-
-var kodikIframe = document.getElementById("VideoPlayer").contentWindow;
-
-
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 translation_id = ""
 
@@ -708,7 +671,6 @@ function setVideoInfo(e) {
             window.open(`/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
 
             return
-            // VideoPlayer.contentWindow.location.href = `/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
         } else {
 
@@ -725,7 +687,6 @@ function setVideoInfo(e) {
             window.open(`https://dygdyg.github.io/DygDygWEB/anilibria.htm?query=${e.russian.replace(/ /g, '+')}`, '_blank').focus();
 
             return
-            // VideoPlayer.contentWindow.location.href = `/svetacdn.htm?menu_default=menu_button&shikimori=${e.id}&query=${e.english[0].replace(/ /g, '+')}`
 
         } else {
 
@@ -734,65 +695,24 @@ function setVideoInfo(e) {
 
 
 
-    // VideoInfo.info.TorrentPlayer.title = e.russian
-    // VideoInfo.info.TorrentPlayer.removeEventListener('click', TorrentURL, false)
-    // VideoInfo.info.TorrentPlayer.addEventListener('click', TorrentURL, false)
+    // костыль пересоздаёт кнопку, чтобы очистить событие клика
+    const newPlayer = VideoInfo.info.KodikPlayer.cloneNode(true);
+    VideoInfo.info.KodikPlayer.parentNode.replaceChild(newPlayer, VideoInfo.info.KodikPlayer);
+    VideoInfo.info.KodikPlayer = newPlayer;
+    // ------------------------------------------
+    VideoInfo.info.KodikPlayer.addEventListener('click', add_kodik_pleer)
 
-    // VideoInfo.info.TorrentPlayer.en = true;
-
-
-
-    VideoInfo.info.KodikPlayer.addEventListener('click', (ee) => {
-        let DialogVideoInfo = document.getElementById('DialogVideoInfo');
-        DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        // debug.log(e)
+    function add_kodik_pleer(ee) {
         if (ee.shiftKey) {
-            window.open(`/svetacdn.htm?loadserv=kodik&shikimoriID=${e.id}`, '_blank').focus();
-            return
-        }
-
-        // VideoPlayer.contentWindow.location.href = e.link;
-        VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
-        // VideoPlayer.contentWindow.location.href = `/svetacdn.htm?loadserv=kinobox&imdb=${e.imdb}`
-
-        // Настройка Media Session API
-        if ('mediaSession' in navigator) {
-            //window.pl = player
-            //console.log("mediaSession", player)
-            navigator.mediaSession.metadata = new MediaMetadata({
-                title: VideoInfo.info.title.textContent,
-                artist: ``,
-                album: '',
-                artwork: [{ src: VideoInfo.info.cover.src }]
-            });
-
-            navigator.mediaSession.metadata.time = 0;
-            navigator.mediaSession.setActionHandler('play', () => {
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "play" } }, '*');
-                console.log('Воспроизведение');
-            });
-
-            navigator.mediaSession.setActionHandler('pause', () => {
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
-            });
-            navigator.mediaSession.setActionHandler('stop', () => {
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
-            });
-
-            navigator.mediaSession.setActionHandler('previoustrack', () => {
-                console.log('Перемотка назад');
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 10 } }, '*');
-            });
-
-            navigator.mediaSession.setActionHandler('nexttrack', () => {
-                console.log('Перемотка вперед');
-                kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 10 } }, '*');
-            });
+            window.open(`/kodik.htm?shikimori_id=${e.id}&MyServerURL=${MyServerURL}`, '_blank').focus();
         } else {
-            console.log('Media Session API не поддерживается');
+            VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}&MyServerURL=${MyServerURL}`;
+            let DialogVideoInfo = document.getElementById('DialogVideoInfo');
+            DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         }
-    })
-    VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.id}`;
+    }
+
+    VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}&MyServerURL=${MyServerURL}`;
     html = ""
     html2 = ""
     e.screenshots?.forEach(el => {
@@ -2084,7 +2004,7 @@ function add_card_ned(e) {
 
     const cart = document.createElement('div');
     cart.classList.add("cart_")
-    
+
     // cart.classList.add("bg-dark")
     cart.classList.add("cart_n_bg")
     // ${e.cart_data_old.n == "сб" || e.cart_data_old.n == "вс" ? "#ff00002e" : "#1900ff2e"}
@@ -2653,6 +2573,7 @@ function GetKodiScan(data, revers) {
                         }
                     }
                     targetFrame.appendChild(cart)
+                    debug.log(BaseAnimeCurrent[e.shikimori_id]?.episode)
                     if (BaseAnimeCurrent[e.shikimori_id]?.episode < e.last_episode) {
                         new_anime_list.appendChild(cart)
                     }
