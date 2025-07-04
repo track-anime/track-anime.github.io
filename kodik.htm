@@ -88,6 +88,7 @@
         } else {
           BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
           BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')]["material_data"] = data_anime.material_data
+          BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')]["lasttime"] = new Date().getTime() / 1000
         }
         // console.log(BaseAnimeCurrent)
         localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
