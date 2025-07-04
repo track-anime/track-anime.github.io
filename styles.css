@@ -72,6 +72,14 @@ body {
     z-index: -1;
 } */
 
+canvas#starryCanvas {
+    position: fixed;
+}
+
+.card {
+    background-color: transparent;
+}
+
 #dr_border {
     position: absolute;
     width: 0;
@@ -460,6 +468,7 @@ dialog::backdrop {
 }
 
 #DialogVideoInfo {
+    background-color: #212529;
     position: absolute;
     width: 200%;
     height: calc(100% - 56px);
@@ -499,7 +508,7 @@ iframe#VideoPlayer {
     padding: 0;
     overflow: hidden;
     padding: 15px 0px 0px 15px;
-    background-color: #212529;
+    /* background-color: #212529; */
     aspect-ratio: 16 / 9;
     top: 0%;
     transition: top 1s ease;

@@ -63,6 +63,25 @@ var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&w
 var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
 get_covers_base()
 
+// Инициализация звёздного неба с пользовательскими параметрами
+const starrySky = new StarrySky('starryCanvas', {
+    rotationSpeed: 0.00005, // Очень медленное вращение
+    maxOrbitRadius: window.innerWidth, // Радиус на ширину экрана
+    starDensity: 0.0007, // Меньшая плотность звёзд
+    fadeSpeed: 0.3, // Быстрее появление/исчезновение
+    visibleAngleStart: Math.PI / 100, // ~1.8°
+    visibleAngleEnd: 3 * Math.PI / 2, // 270°, почти до горизонта
+    flickerSpeed: 0.005, // Скорость мерцания
+    flickerIntensity: 0.4, // Интенсивность мерцания
+    gradientColors: ['#1a1a1a', '#2a2a4a'], // Градиент: тёмный у горизонта, светлее кверху
+    cloudConfig: {
+        cloudCount: 10, // Количество облаков
+        cloudSpeed: 0.2, // Скорость движения облаков
+        cloudOpacity: 0.03, // Прозрачность облаков
+        cloudBlur: 40 // Размытие облаков
+    }
+});
+starrySky.stop()
 
 setTimeout(() => {
     error_timeoud_hide = true  // Через 5 минут отключаем уведомление о блокировки сайта 
@@ -1241,6 +1260,7 @@ closeDialogButton.addEventListener('click', () => {
 });
 
 function closeDialogButtonEvent() {
+    starrySky.stop()
     // VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     DialogVideoInfo.classList.add("d-none")
@@ -2305,6 +2325,7 @@ function dialog_(e, info) {
     // VideoPlayer.contentWindow.location.href = e.link?e.link:"loading.htm"
     debug.log(e.link)
     info ? DialogVideoInfo.classList.add("DialogVideoInfoScroll") : DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
+    info ? starrySky.start() : starrySky.stop()
 
     ta_pip(false)
 }
@@ -2842,6 +2863,20 @@ document.addEventListener('keydown', (e) => {
                 e.preventDefault();
                 cart_list[main_i].querySelector(".cart-img-top").dispatchEvent(mouseDownEvent);
                 break;
+        }
+    }
+});
+
+document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') {
+        starrySky.stop()
+    } else if (document.visibilityState === 'visible') {
+        if (document.getElementById("DialogVideoInfo").classList.contains('d-none')) {
+            // starrySky.stop()
+        }
+        else {
+            // console.log("s")
+            starrySky.start()
         }
     }
 });

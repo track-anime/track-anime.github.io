@@ -48,6 +48,7 @@
     <script defer src="/scripts/moment-with-locales.js"></script>
     <script defer src="/scripts/counterToStringLabel.js"></script>
     <script type="text/javascript" src="/scripts/qrcode.min.js"></script>
+    <script src="/scripts/StarrySky.js"></script>
     <script type="text/javascript" src="https://vk.com/js/api/share.js?168" charset="windows-1251"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
     <script src="/scripts/html5-qrcode.min.js"></script>
@@ -395,10 +396,11 @@
     </div>
 
     <div id="DialogVideoInfo" class="d-none">
+        <canvas id="starryCanvas"></canvas>
         <button type="button" class="btn btn-secondary" id="closeDialogButton">X</button>
         <div id="VideoInfo">
             <!-- ////////////////////////////////////////////////////// -->
-
+            
             <div class="card mb-3 border-0">
                 <div class="row g-0">
                     <button id="screenshotButton" class="hide">Take Screenshot</button>
