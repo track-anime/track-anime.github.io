@@ -712,7 +712,7 @@ function setVideoInfo(e) {
         }
     }
 
-    VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}}`;
+    VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`;
     html = ""
     html2 = ""
     e.screenshots?.forEach(el => {
@@ -2573,7 +2573,6 @@ function GetKodiScan(data, revers) {
                         }
                     }
                     targetFrame.appendChild(cart)
-                    debug.log(BaseAnimeCurrent[e.shikimori_id]?.episode)
                     if (BaseAnimeCurrent[e.shikimori_id]?.episode < e.last_episode) {
                         new_anime_list.appendChild(cart)
                     }
