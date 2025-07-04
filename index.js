@@ -908,6 +908,7 @@ document.getElementById('search_input').addEventListener('input', function (e) {
 document.getElementById("VideoInfoBtn").addEventListener('click', () => {
     let DialogVideoInfo = document.getElementById('DialogVideoInfo')
     DialogVideoInfo.classList.contains('DialogVideoInfoScroll') ? DialogVideoInfo.classList.remove("DialogVideoInfoScroll") : DialogVideoInfo.classList.add("DialogVideoInfoScroll")
+    DialogVideoInfo.classList.contains('DialogVideoInfoScroll') ? starrySky.start() : starrySky.stop()
 
 })
 document.addEventListener("search_another", function (e) {

@@ -170,7 +170,7 @@ class StarrySky {
 
     animate() {
         this.drawBackground();
-        this.ctx.filter = `blur(${this.config.cloudConfig.cloudBlur}px)`;
+        // this.ctx.filter = `blur(${this.config.cloudConfig.cloudBlur}px)`;
         this.clouds.forEach(cloud => this.updateCloud(cloud));
         this.ctx.filter = 'none';
         this.stars.forEach(star => this.updateStar(star));
