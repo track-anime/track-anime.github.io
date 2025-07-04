@@ -159,12 +159,16 @@ Get_base_anime()
 
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
-    if (document.getElementById("list_calendar").classList.contains('hide') & url_get.searchParams.get("calendar")) {
+    if (document.getElementById("list_calendar").classList.contains('hide') && url_get.searchParams.get("calendar")) {
         url_get.searchParams.delete('calendar')
         window.history.pushState({}, '', url_get);
     };
     if (document.getElementById("list_fav").classList.contains('hide') && url_get.searchParams.get("sh_user_fav")) {
         url_get.searchParams.delete('sh_user_fav')
+        window.history.pushState({}, '', url_get);
+    };
+    if (document.getElementById("DialogVideoInfo").classList.contains('d-none') && url_get.searchParams.get("shikimori_id")) {
+        url_get.searchParams.delete('shikimori_id')
         window.history.pushState({}, '', url_get);
     };
     setIImgPreview()
