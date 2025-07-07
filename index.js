@@ -114,6 +114,7 @@ const debug = {
 };
 
 isDebugEnabled = sh_api.url_get.searchParams.get('debug') ? sh_api.url_get.searchParams.get('debug') : isDebugEnabled
+isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searchParams.get('Debug') : isDebugEnabled
 
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
