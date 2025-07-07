@@ -113,7 +113,7 @@ const debug = {
     }
 };
 
-isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searchParams.get('Debug') : isDebugEnabled
+isDebugEnabled = sh_api.url_get.searchParams.get('debug') ? sh_api.url_get.searchParams.get('debug') : isDebugEnabled
 
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
@@ -947,6 +947,9 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
     save_server_base()
 })
 
+
+
+/////////////////////////////  После входа в учёту. Авторизация ///////////////////////////////
 document.addEventListener("authorize", async function (e) { // (1)
     await load_server_base()
 
