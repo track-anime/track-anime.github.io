@@ -243,6 +243,7 @@ let tmp_Clean_Cookie = false
 if (!sh_api.getCookie("sh_refresh_token") && base_anime.authorize == true && !sh_api.getCookie("sh_refresh_token")) {
     base_anime.authorize = false;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     debug.log("clear sh_refresh_token")
     tmp_Clean_Cookie = true
 }
@@ -394,23 +395,27 @@ CheckCalendarType.addEventListener('change', function () {
     base_anime.CalendarType = this.checked
     debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     if (url_get.searchParams.get("calendar")) addCalendar()
 })
 CheckСensored.addEventListener('change', function () {
     base_anime.censored = this.checked
     // debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
 })
 CheckRepeats_.addEventListener('change', function () {
     base_anime.CheckRepeats = this.checked
     // debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     debug.log("CheckRepeats_", base_anime.CheckRepeats)
 })
 CheckReleased_.addEventListener('change', function () {
     base_anime.CheckReleased = this.checked
     // debug.log("CheckCalendarType", this.checked, base_anime.CalendarType)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     debug.log("CheckReleased_", base_anime.CheckReleased)
     location.reload()
 })
@@ -481,6 +486,7 @@ function hide_date_cart(tr) {
     }
     base_anime.hide_date_cart = tr
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
 }
 
 // function TorrentURL() {
@@ -933,15 +939,17 @@ document.addEventListener("search_another", function (e) {
 document.addEventListener("sh_api_logout", function (e) { // (1)
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
 })
 
 document.addEventListener("authorize", async function (e) { // (1)
 
     var response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${sh_api.UserData.id}`);
     var user_data = await response.json()
-    debug.log("user_data_server", user_data)
     if (!user_data.message) {
-
+        debug.log("user_data_server", user_data)
+        base_anime = user_data.base_anime
+        BaseAnimeCurrent = user_data.BaseAnimeCurrent
     }
 
     var _raitnig_user = raitnig_user()
@@ -951,6 +959,7 @@ document.addEventListener("authorize", async function (e) { // (1)
     SetColorCartFav()
     base_anime.authorize = sh_api.authorize;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
 
     document.getElementById("list_login_Button").classList.add('hide')
 
@@ -1543,6 +1552,7 @@ function ClearFavorite() {
     if (!confirm("Очистить локальную базу данных?")) return
     delete base_anime.fav
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     location.reload()
 }
 
@@ -1551,6 +1561,7 @@ function ClearBase() {
     if (confirm("Очистить базу данных?")) {
         base_anime = {}
         localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        save_server_base()
         location.reload()
     }
 }
@@ -1645,6 +1656,7 @@ async function VoiceSettingsMenu() {
                 }
             ];
             localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+            save_server_base()
         }
     }
     VoiceSettings.innerHTML = ""
@@ -1656,6 +1668,7 @@ async function VoiceSettingsMenu() {
     tr_list = tr_list["results"]
     base_anime.translation = tr_list;
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     base_anime.translation.sort().forEach((voice, index) => {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
@@ -1696,6 +1709,7 @@ async function VoiceSettingsMenu() {
             }
         });
         if (base_anime.translationActive.length > 0) localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        save_server_base()
         // VoiceSettings.innerHTML = ""
         VoiceSettings.modal.hide()
         location.reload();
@@ -2345,6 +2359,7 @@ document.getElementById("RangeVolume").addEventListener("change", (e) => {
     // debug.log(e.target.value, getRandomInt(2))
     base_anime.Volume = e.target.value
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
     playSound(a_f[getRandomInt(2)], base_anime.Volume ? base_anime.Volume : 1.0)
 })
 
@@ -2631,7 +2646,7 @@ function GetKodiScan(data, revers) {
     });
 }
 localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-
+save_server_base()
 
 ///////////////////////////////////////////
 var htmlscanner
@@ -2927,6 +2942,7 @@ function FontsCustom(newFilePath) {
     base_anime.Fonts = newFilePath;
 
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    save_server_base()
 }
 
 //<link href="/fonts/Pangolin.css" rel="stylesheet" />
