@@ -173,7 +173,7 @@ Get_base_anime()
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
+var last_server_update = new Date().getTime() / 1000
 ///////////////////////////////////////// Кастыль на изменение гет параметров /////////////////////////////
 setInterval(() => {
     if (document.getElementById("list_calendar").classList.contains('hide') && url_get.searchParams.get("calendar")) {
@@ -190,6 +190,13 @@ setInterval(() => {
     };
     setIImgPreview()
     Get_base_anime()
+    BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
+    if(last_server_update<BaseAnimeCurrent.lasttime)
+    {
+        save_server_base() //Сохранение настроек на сервере
+        last_server_update = BaseAnimeCurrent.lasttime
+        debug.log("timeUpdate", BaseAnimeCurrent.lasttime)
+    }
 }, 1000);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -345,6 +352,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
     setInterval(() => {
+        
         url_get.searchParams.delete("code")
         window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
@@ -940,15 +948,7 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
 })
 
 document.addEventListener("authorize", async function (e) { // (1)
-
-    var response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${sh_api.UserData.id}`);
-    var user_data = await response.json()
-    if (!user_data.message) {
-        debug.log("user_data_server", user_data)
-        base_anime = user_data.base_anime
-        BaseAnimeCurrent = user_data.BaseAnimeCurrent
-        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-    }
+    await load_server_base()
 
     var _raitnig_user = raitnig_user()
     debug.log(`Рейтинг пользователя: ${_raitnig_user}`)
@@ -2809,8 +2809,22 @@ function UserDataTableRaieng(users) {
 
 }
 
+async function load_server_base() {
+    if (sh_api.authorize == false) return
+    var response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${sh_api.UserData.id}`);
+    var user_data = await response.json()
+    if (!user_data.message) {
+        debug.log("user_data_server", user_data)
+        debug.log("Test_data", user_data)
+        base_anime = user_data.base_anime
+        BaseAnimeCurrent = user_data.BaseAnimeCurrent
+        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+    }
+    return user_data
+}
+
 async function save_server_base() {
-    if(sh_api.authorize==false) return
+    if (sh_api.authorize == false) return
     const response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${encodeURIComponent(sh_api.UserData.id)}`, {
         method: 'POST',
         headers: {
