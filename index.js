@@ -947,6 +947,7 @@ document.addEventListener("authorize", async function (e) { // (1)
         debug.log("user_data_server", user_data)
         base_anime = user_data.base_anime
         BaseAnimeCurrent = user_data.BaseAnimeCurrent
+        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
     }
 
     var _raitnig_user = raitnig_user()
