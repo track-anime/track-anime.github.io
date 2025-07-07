@@ -935,7 +935,15 @@ document.addEventListener("sh_api_logout", function (e) { // (1)
     localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
 })
 
-document.addEventListener("authorize", function (e) { // (1)
+document.addEventListener("authorize", async function (e) { // (1)
+
+    var response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${sh_api.UserData.id}`);
+    var user_data = await response.json()
+    debug.log("user_data_server", user_data)
+    if (!user_data.message) {
+
+    }
+
     var _raitnig_user = raitnig_user()
     debug.log(`Рейтинг пользователя: ${_raitnig_user}`)
     // url_get.searchParams.delete('code')
@@ -2787,6 +2795,24 @@ function UserDataTableRaieng(users) {
         });
 
     }
+
+}
+
+async function save_server_base() {
+    if(sh_api.authorize==false) return
+    const response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${encodeURIComponent(sh_api.UserData.id)}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            base_anime,
+            BaseAnimeCurrent
+        })
+    });
+
+    console.log("Ответ от сервера:", response);
+    return response
 
 }
 
