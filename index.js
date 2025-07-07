@@ -107,7 +107,6 @@ const debug = {
 
             // Выводим с группировкой
             console.groupCollapsed(`[LOG]:`, ...args);
-            // console.log(callerInfo);
             console.trace(); // Для полного стека вызовов
             console.groupEnd();
         }
@@ -119,7 +118,6 @@ isDebugEnabled = sh_api.url_get.searchParams.get('Debug') ? sh_api.url_get.searc
 
 ///////////////////////////////////////////// Меняет иконку на локальном сайте ////////////////////////////
 
-// console.log(navigator.wakeLock.request('screen'))
 if (isLocal()) {
     document.getElementById("fav").href = "favicon_local.png"
     isDebugEnabled = true
@@ -215,7 +213,6 @@ async function check_ver() {
     debug.log(text)
     // document.querySelector('.ver_info').title = `build: ${text}`
     document.querySelector('.ver_info').title = `Последний сбой был ${text}, приятного вам дня!`
-    // console.warn(`Последний сбой был ${text}, приятного вам дня!`)
     console.log(
         `%cПоследний сбой был ${text}, приятного вам дня!`,
         "text-align: center; background-color: #666; border: 10px double black; border-radius: 15px; color: #5865f2; -webkit-text-stroke: 2px black; font-size: 64px; font-weight: bold;"
@@ -1589,7 +1586,7 @@ async function VoiceSettingsMenu() {
             base_anime.translation = [];
         }*/
     if (!base_anime?.translationActive) {
-        console.log(typeof base_anime?.translationActive, base_anime?.translationActive)
+        debug.log(typeof base_anime?.translationActive, base_anime?.translationActive)
         if (!base_anime?.translationActive || typeof base_anime?.translationActive[0]?.title !== "string" || typeof base_anime?.translationActive == "undefined") {
             // debug.log(!base_anime?.translationActive, typeof base_anime?.translationActive[0]?.title !== "string", typeof base_anime?.translationActive == "undefined")
 
@@ -2547,7 +2544,6 @@ function GetKodiScan(data, revers) {
 
     var t1 = false
     data.forEach((e, i) => {
-        // console.log(i)
         if (revers && endid == e.id || t1) {
 
             t1 = true
@@ -2559,7 +2555,6 @@ function GetKodiScan(data, revers) {
             if (CheckRepeats(e.shikimori_id) && (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) {
                 return
             }
-            // console.log(e)
             if (VoiceTranslate(e.translation.title)) {
 
                 if (!e.shikimori_id) return
@@ -2826,7 +2821,7 @@ async function save_server_base() {
         })
     });
 
-    console.log("Ответ от сервера:", response);
+    debug.log("Ответ от сервера:", response);
     return response
 
 }
@@ -2847,6 +2842,7 @@ const mouseDownEvent = new MouseEvent('mousedown', {
 
 
 document.addEventListener('keydown', (e) => {
+    return
     if (url_get.searchParams.get('shikimori_id')) {
         switch (e.key) {
             case 'ArrowDown':
@@ -2917,7 +2913,6 @@ document.addEventListener('visibilitychange', function () {
             // starrySky.stop()
         }
         else {
-            // console.log("s")
             starrySky.start()
         }
     }
