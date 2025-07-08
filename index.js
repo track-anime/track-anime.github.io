@@ -2938,6 +2938,7 @@ async function load_server_base() {
         base_anime = user_data.base_anime
         BaseAnimeCurrent = user_data.BaseAnimeCurrent
         localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        localStorage.setItem('BaseAnime', JSON.stringify(BaseAnimeCurrent));
 
     }
     return user_data
