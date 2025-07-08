@@ -2558,7 +2558,7 @@ function GetKodiScan(data, revers) {
         //(e.type == 'anime-serial' || e.type == "anime") &&
         if (e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
             if (_CheckRepeats(e.shikimori_id) ){//&& (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) {
-                debug.log("Hides Repeats")
+                // debug.log("Hides Repeats")
                 return
             }
             if (VoiceTranslate(e.translation.title)) {
