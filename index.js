@@ -2736,7 +2736,7 @@ async function GetResume() {
                 "imdb": "",
                 "shikimori": key,
                 "status": BaseAnimeCurrent[key]?.material_data?.status,
-                "raiting": "?",
+                "raiting": undefined,
                 "material_data": [],
                 "id": key,
                 "screenshots": [],
