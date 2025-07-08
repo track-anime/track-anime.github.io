@@ -601,6 +601,9 @@ p {
 }
 
 @media screen and (orientation: portrait) {
+    .cart-del {
+        
+    }
 
     #new_anime_list {
         flex-direction: column;
