@@ -2720,8 +2720,8 @@ async function GetResume() {
     for (let key in BaseAnimeCurrent) {
 
         if (key != "lasttime") {
-            // console.log(BaseAnimeCurrent[key]["lasttime"])
-            BaseAnimeCurrent[key]["lasttime"] = BaseAnimeCurrent[key]["lasttime"] == undefined ? BaseAnimeCurrent[key]["lasttime"] : new Date().getTime() / 1000
+            debug.log(BaseAnimeCurrent[key])
+            // BaseAnimeCurrent[key]["lasttime"] = BaseAnimeCurrent[key]["lasttime"] == undefined ? BaseAnimeCurrent[key]["lasttime"] : new Date().getTime() / 1000
             // BaseAnimeCurrent[key][""]
             const e1 = {
                 "title": BaseAnimeCurrent[key]?.material_data?.anime_title ? (BaseAnimeCurrent[key]?.material_data?.anime_title) : "?",
@@ -2749,7 +2749,7 @@ async function GetResume() {
             list_resume.appendChild(add_cart(e1))
         }
     }
-    localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+    // localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
     load.show(false)
 
 }
