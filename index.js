@@ -2026,13 +2026,15 @@ function add_cart(e) {
     </div>
   </div>
     `
+    const r_title = e.r_title?e.r_title:"Рейтинг шикимори:"
     !e.raiting ? cartRaiting.classList.add("hide") : null
     cartRaiting.r = e.raiting
-    cartRaiting.title = `Рейтинг шикимори: ${e.raiting}`
+
+    cartRaiting.title = `${r_title} ${e.raiting}`
     cartRaiting.label = cartRaiting.querySelector(".sr-only")
     cartRaiting.progress = cartRaiting.querySelector(".progress-bar")
     cartRaiting.progress.style.height = `${e.raiting * 10}%`
-    cartRaiting.label.textContent = `Рейтинг шикимори: ${e.raiting}`
+    cartRaiting.label.textContent = `${r_title} ${e.raiting}`
 
     imgTop.appendChild(cartRaiting);
 
@@ -2736,12 +2738,13 @@ async function GetResume() {
                 "imdb": "",
                 "shikimori": key,
                 "status": BaseAnimeCurrent[key]?.material_data?.status,
-                "raiting": BaseAnimeCurrent[key]?.material_data?.score,
+                "raiting": BaseAnimeCurrent[key]?.episode,
                 "material_data": [],
                 "id": key,
                 "screenshots": [],
                 "e": BaseAnimeCurrent[key],
-                "del": key
+                "del": key,
+                "r_title": "Прогресс:"
             }
             list_resume.appendChild(add_cart(e1))
         }
@@ -2772,7 +2775,9 @@ async function GetResume() {
     }
 });*/
 
-
+function convertToScale(a, b) {
+    return Math.ceil((a / b) * 10);
+}
 /////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////
 async function anim_data(id) {
     console.log(url_get.searchParams.get("shikimori_id"))
