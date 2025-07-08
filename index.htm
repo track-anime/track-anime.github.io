@@ -177,6 +177,11 @@
                             <button id="list_calendar_Button" aria-current="page"
                                 class="btn-link nav-link">Календарь</button>
                         </li>
+                        <li class="nav-item">
+                            <button id="resume_Button"  aria-current="page" onclick="GetResume()"
+                                class="btn-link nav-link hide">
+                                История
+                        </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
@@ -263,12 +268,14 @@
                         <button id="contacts_Button" onclick="window.location.href = `/contact.htm`" aria-current="page"
                             class="btn-link nav-link hide">Контакты</button>
                     </li>
+
                     <li class="nav-item">
-                        <button id="contacts_Button" onclick="window.location.href = `/app/`" aria-current="page"
+                        <button id="app_Button" onclick="window.location.href = `/app/`" aria-current="page"
                             class="btn-link nav-link">
                             Скачать на Android
                             <!-- <img src="app/android_logo.png" alt="Android Logo" class="android-logo" style="max-height: 21px;"></button> -->
                     </li>
+
                     </ul>
 
                     <form class="d-flex input-group" role="search" id="search_form">
@@ -389,6 +396,7 @@
         </div>
 
         <div class="anime_list hide" id="list_history"></div>
+        <div class="anime_list hide" id="list_resume"></div>
 
         <div class="anime_list hide" id="list_serch">
             <div id="new_anime_list"></div>

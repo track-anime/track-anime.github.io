@@ -34,6 +34,7 @@ const load = document.getElementById("load");
 const list_fav = document.getElementById("list_fav");
 const list_serch = document.getElementById("list_serch");
 const list_history = document.getElementById("list_history");
+const list_resume = document.getElementById("list_resume");
 const styleDateCart = document.createElement("style")
 const ChecDataCart = document.getElementById("ChecDataCart")
 const CheckCalendarType = document.getElementById("CheckCalendarType")
@@ -192,8 +193,7 @@ setInterval(() => {
     setIImgPreview()
     Get_base_anime()
     BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
-    if(last_server_update<BaseAnimeCurrent.lasttime)
-    {
+    if (last_server_update < BaseAnimeCurrent.lasttime) {
         save_server_base() //Сохранение настроек на сервере
         last_server_update = BaseAnimeCurrent.lasttime
         debug.log("timeUpdate", BaseAnimeCurrent.lasttime)
@@ -353,7 +353,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     //////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
     setInterval(() => {
-        
+
         url_get.searchParams.delete("code")
         window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
@@ -1912,13 +1912,13 @@ function add_cart(e) {
     cart.appendChild(target);
     // if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
 
-    if (e.cover.includes("missing_original.jpg")) {
+    if (e.cover?.includes("missing_original.jpg")) {
 
         e.cover = `${getCoverURL}${e.shikimori}`
 
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
-        if (!e.cover.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
+        if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
         // debug.log(e.cover)
         e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
         // e.cover = `${getCoverURL}${e.shikimori}`
@@ -2557,7 +2557,7 @@ function GetKodiScan(data, revers) {
         }
         //(e.type == 'anime-serial' || e.type == "anime") &&
         if (e.translation.type == "voice" && e.shikimori_id) {  //&& e.material_data.countries != "Китай" //&& e.material_data.shikimori_rating > 0
-            if (_CheckRepeats(e.shikimori_id) ){//&& (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) {
+            if (_CheckRepeats(e.shikimori_id)) {//&& (BaseAnimeCurrent[e.shikimori_id]?.episode <= e.last_episode)) {
                 // debug.log("Hides Repeats")
                 return
             }
@@ -2672,8 +2672,47 @@ function domReady(fn) {
 }
 
 
-/// Функция по созданию рейтинга пользователя
+/////////////////////////////////////////////////////// История просмотренных аниме ////////////////////////////////////////////////////////////////////////
+const resume_Button = document.getElementById("resume_Button")
+if (isDebugEnabled) resume_Button.classList.remove("hide")
 
+function GetResume() {
+    load.show(true)
+    document.querySelectorAll(".anime_list").forEach(e => {
+        e.classList.add("hide")
+    });
+    list_resume.innerHTML = ""
+    list_resume.classList.remove("hide")
+    for (let key in BaseAnimeCurrent) {
+        if (key != "lasttime") {
+            const e1 = {
+                "title": BaseAnimeCurrent[key]?.material_data?.anime_title,
+                // "cover": e.image.original,
+                "cover": BaseAnimeCurrent[key]?.material_data?.anime_poster_url,
+                "date": formatDate(BaseAnimeCurrent[key]?.material_data?.aired_on),
+                // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+                "voice": BaseAnimeCurrent[key]?.material_data?.status,
+                "series": BaseAnimeCurrent[key]?.material_data?.episodes ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
+                "link": BaseAnimeCurrent[key]?.material_data?.link,
+                "kp": "",
+                "imdb": "",
+                "shikimori": key,
+                "status": BaseAnimeCurrent[key]?.material_data?.status,
+                "raiting": BaseAnimeCurrent[key]?.material_data?.score,
+                "material_data": [],
+                "id": key,
+                "screenshots": [],
+                "e": [],
+            }
+            list_resume.appendChild(add_cart(e1))
+        }
+    }
+    load.show(false)
+
+}
+
+
+///////////////////////////////////////////// Функция по созданию рейтинга пользователя  //////////////////////////////////////////////////////////////////
 function raitnig_user() {
     var raitnig_user = 0
     const currentYear = new Date().getFullYear()
