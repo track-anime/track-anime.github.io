@@ -58,7 +58,7 @@
   /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
   async function start_kodik() {
     document.getElementById("kodik").src = `https://kodik.cc/find-player?shikimoriID=${url_get.searchParams.get("shikimori_id")}`
-    
+
 
     if (window.addEventListener) {
       window.addEventListener('message', kodikMessageListener);
@@ -81,11 +81,12 @@
         break
       case "kodik_player_current_episode":
         navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
-        // console.log(message.data.value, VideoInfo.e);
+        // console.log("dat1",data_anime.material_data);
         // delete BaseAnimeCurrent[null];
-        if (data_anime.material_data.episodes_aired == message.data.value.episode) {
+        if (data_anime.material_data.episodes_total == message.data.value.episode) {
           delete BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')];
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
+          // console.log("delete base",data_anime.material_data, message.data.value.episode)
         } else {
           BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')] = message.data.value;
           BaseAnimeCurrent[url_get.searchParams.get('shikimori_id')]["material_data"] = data_anime.material_data
