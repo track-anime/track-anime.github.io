@@ -2728,8 +2728,6 @@ async function GetResume() {
                 // "cover": e.image.original,
                 "cover": BaseAnimeCurrent[key]?.material_data?.anime_poster_url,
                 "date": formatDate(new Date(BaseAnimeCurrent[key]?.lasttime * 1000)),
-                // "date": formatDate(BaseAnimeCurrent[key]?.material_data?.aired_on),
-                // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
                 "voice": BaseAnimeCurrent[key].translation.title,
                 "series": `${BaseAnimeCurrent[key]?.episode}/${BaseAnimeCurrent[key]?.material_data?.episodes_total ? (BaseAnimeCurrent[key]?.material_data?.episodes_total) : "?"}`,
                 //  ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
@@ -2738,13 +2736,12 @@ async function GetResume() {
                 "imdb": "",
                 "shikimori": key,
                 "status": BaseAnimeCurrent[key]?.material_data?.status,
-                "raiting": BaseAnimeCurrent[key]?.episode,
+                "raiting": "",
                 "material_data": [],
                 "id": key,
                 "screenshots": [],
                 "e": BaseAnimeCurrent[key],
-                "del": key,
-                "r_title": "Прогресс:"
+                "del": key
             }
             list_resume.appendChild(add_cart(e1))
         }
