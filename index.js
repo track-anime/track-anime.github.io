@@ -2722,7 +2722,7 @@ async function GetResume() {
         if (key != "lasttime") {
             debug.log(BaseAnimeCurrent[key])
             // BaseAnimeCurrent[key]["lasttime"] = BaseAnimeCurrent[key]["lasttime"] == undefined ? BaseAnimeCurrent[key]["lasttime"] : new Date().getTime() / 1000
-            // BaseAnimeCurrent[key][""]
+            BaseAnimeCurrent[key].material_data = BaseAnimeCurrent[key].material_data ? BaseAnimeCurrent[key].material_data : await anim_data(key)
             const e1 = {
                 "title": BaseAnimeCurrent[key]?.material_data?.anime_title ? (BaseAnimeCurrent[key]?.material_data?.anime_title) : "?",
                 // "cover": e.image.original,
@@ -2744,9 +2744,7 @@ async function GetResume() {
                 "del": key,
                 "r_title": "Прогресс:"
             }
-            const cart = add_cart(e1)
-            // cart.classList.remove('hide')
-            list_resume.appendChild(cart)
+            list_resume.appendChild(add_cart(e1))
         }
     }
     // localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
@@ -2784,7 +2782,7 @@ async function anim_data(id) {
     const response = await fetch(`https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${id}`);
     data = await response.json(response);
     data_anime = data.results[0]
-    return data_anime
+    return data_anime.material_data
     console.log("anime", data_anime)
 }
 /////
