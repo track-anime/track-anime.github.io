@@ -2679,10 +2679,7 @@ function domReady(fn) {
 /////////////////////////////////////////////////////// История просмотренных аниме ////////////////////////////////////////////////////////////////////////
 const resume_Button = document.getElementById("resume_Button")
 if (isDebugEnabled) resume_Button.classList.remove("hide")
-
-
-
-
+if(url_get.searchParams.get('resume')) GetResume()
 async function GetResume() {
     load.show(true)
     HistoryIsActivy = false
