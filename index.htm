@@ -178,9 +178,8 @@
                                 class="btn-link nav-link">Календарь</button>
                         </li>
                         <li class="nav-item">
-                            <button id="resume_Button"  aria-current="page" onclick="GetResume()"
-                                class="btn-link nav-link hide">
-                                История
+                            <button id="resume_Button" aria-current="page" onclick="GetResume()"
+                                class="btn-link nav-link">История</button>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
@@ -408,7 +407,7 @@
         <button type="button" class="btn btn-secondary" id="closeDialogButton">X</button>
         <div id="VideoInfo">
             <!-- ////////////////////////////////////////////////////// -->
-            
+
             <div class="card mb-3 border-0">
                 <div class="row g-0">
                     <button id="screenshotButton" class="hide">Take Screenshot</button>
@@ -702,19 +701,19 @@
 
 
 
-    <!-- неровный бордер -->
-    <svg id="dr_border">
-        <filter id="rough-edge">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
-    <svg id="dr_border">
-        <filter id="rough-edge-2">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
-        </filter>
-    </svg>
-    <!-- ====== -->
+<!-- неровный бордер -->
+<svg id="dr_border">
+    <filter id="rough-edge">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+</svg>
+<svg id="dr_border">
+    <filter id="rough-edge-2">
+        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" result="noise" />
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
+    </filter>
+</svg>
+<!-- ====== -->
 
 </html>

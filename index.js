@@ -2680,26 +2680,39 @@ function domReady(fn) {
 const resume_Button = document.getElementById("resume_Button")
 if (isDebugEnabled) resume_Button.classList.remove("hide")
 
-function GetResume() {
+
+
+
+async function GetResume() {
     load.show(true)
+    HistoryIsActivy = false
     url_get.searchParams.set('resume', true)
     window.history.pushState({}, '', url_get);
     document.querySelectorAll(".anime_list").forEach(e => {
         e.classList.add("hide")
     });
+    document.querySelector(".navbar-nav").querySelectorAll("button").forEach(e => {
+
+        e.classList.remove("active")
+    })
+    resume_Button.classList.add("active")
     list_resume.innerHTML = ""
     list_resume.classList.remove("hide")
     for (let key in BaseAnimeCurrent) {
+
         if (key != "lasttime") {
+            // console.log(BaseAnimeCurrent[key]["lasttime"])
+            BaseAnimeCurrent[key]["lasttime"] = BaseAnimeCurrent[key]["lasttime"] == undefined ? BaseAnimeCurrent[key]["lasttime"] : new Date().getTime() / 1000
+            // BaseAnimeCurrent[key][""]
             const e1 = {
-                "title": BaseAnimeCurrent[key]?.material_data?.anime_title?(BaseAnimeCurrent[key]?.material_data?.anime_title):"?",
+                "title": BaseAnimeCurrent[key]?.material_data?.anime_title ? (BaseAnimeCurrent[key]?.material_data?.anime_title) : "?",
                 // "cover": e.image.original,
                 "cover": BaseAnimeCurrent[key]?.material_data?.anime_poster_url,
-                "date": formatDate(new Date(BaseAnimeCurrent[key]?.lasttime*1000)),
+                "date": formatDate(new Date(BaseAnimeCurrent[key]?.lasttime * 1000)),
                 // "date": formatDate(BaseAnimeCurrent[key]?.material_data?.aired_on),
                 // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
                 "voice": BaseAnimeCurrent[key]?.material_data?.status,
-                "series": `${BaseAnimeCurrent[key]?.episode}/${BaseAnimeCurrent[key]?.material_data?.episodes_total?(BaseAnimeCurrent[key]?.material_data?.episodes_total):"?"}`,
+                "series": `${BaseAnimeCurrent[key]?.episode}/${BaseAnimeCurrent[key]?.material_data?.episodes_total ? (BaseAnimeCurrent[key]?.material_data?.episodes_total) : "?"}`,
                 //  ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
                 "link": BaseAnimeCurrent[key]?.material_data?.link,
                 "kp": "",
@@ -2715,11 +2728,43 @@ function GetResume() {
             list_resume.appendChild(add_cart(e1))
         }
     }
-
+    localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
     load.show(false)
 
 }
+/*resume_Button.addEventListener('mousedown', async (e) => {
+    GetResume()
+    return
+    switch (e.button) {
+        case 0:
+            window.getCalendar()
+            DialogVideoInfo.classList.add("d-none")
+            break;
+        case 1:
+            nTab = window.open(window.location.href, "_blank");
+            nTab.onload = function () {
+                nTab.getCalendar()
+            };
+            break;
+        case 2:
+            break;
 
+        default:
+            break;
+    }
+});*/
+
+
+/////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////
+async function anim_data(id) {
+    console.log(url_get.searchParams.get("shikimori_id"))
+    const response = await fetch(`https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${id}`);
+    data = await response.json(response);
+    data_anime = data.results[0]
+    return data_anime
+    console.log("anime", data_anime)
+}
+/////
 
 ///////////////////////////////////////////// Функция по созданию рейтинга пользователя  //////////////////////////////////////////////////////////////////
 function raitnig_user() {
