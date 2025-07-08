@@ -14,7 +14,8 @@ var isDebugEnabled = false
 var error_timeoud_hide = false
 var cart_list = []
 
-var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
+var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) ? JSON.parse(localStorage.getItem('BaseAnimeCurrent')) : {};
+localStorage.setItem('BaseAnime', JSON.stringify(BaseAnimeCurrent));
 
 // var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
 
@@ -2934,7 +2935,6 @@ async function load_server_base() {
     var user_data = await response.json()
     if (!user_data.message) {
         debug.log("user_data_server", user_data)
-        debug.log("Test_data", user_data)
         base_anime = user_data.base_anime
         BaseAnimeCurrent = user_data.BaseAnimeCurrent
         localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
