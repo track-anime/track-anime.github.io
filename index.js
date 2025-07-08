@@ -186,6 +186,10 @@ setInterval(() => {
         url_get.searchParams.delete('sh_user_fav')
         window.history.pushState({}, '', url_get);
     };
+    if (document.getElementById("list_resume").classList.contains('hide') && url_get.searchParams.get("resume")) {
+        url_get.searchParams.delete('resume')
+        window.history.pushState({}, '', url_get);
+    };
     if (document.getElementById("DialogVideoInfo").classList.contains('d-none') && url_get.searchParams.get("shikimori_id")) {
         url_get.searchParams.delete('shikimori_id')
         window.history.pushState({}, '', url_get);
@@ -2678,6 +2682,8 @@ if (isDebugEnabled) resume_Button.classList.remove("hide")
 
 function GetResume() {
     load.show(true)
+    url_get.searchParams.set('resume', true)
+    window.history.pushState({}, '', url_get);
     document.querySelectorAll(".anime_list").forEach(e => {
         e.classList.add("hide")
     });
@@ -2686,13 +2692,15 @@ function GetResume() {
     for (let key in BaseAnimeCurrent) {
         if (key != "lasttime") {
             const e1 = {
-                "title": BaseAnimeCurrent[key]?.material_data?.anime_title,
+                "title": BaseAnimeCurrent[key]?.material_data?.anime_title?(BaseAnimeCurrent[key]?.material_data?.anime_title):"?",
                 // "cover": e.image.original,
                 "cover": BaseAnimeCurrent[key]?.material_data?.anime_poster_url,
-                "date": formatDate(BaseAnimeCurrent[key]?.material_data?.aired_on),
+                "date": formatDate(new Date(BaseAnimeCurrent[key]?.lasttime*1000)),
+                // "date": formatDate(BaseAnimeCurrent[key]?.material_data?.aired_on),
                 // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
                 "voice": BaseAnimeCurrent[key]?.material_data?.status,
-                "series": BaseAnimeCurrent[key]?.material_data?.episodes ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
+                "series": `${BaseAnimeCurrent[key]?.episode}/${BaseAnimeCurrent[key]?.material_data?.episodes_total?(BaseAnimeCurrent[key]?.material_data?.episodes_total):"?"}`,
+                //  ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
                 "link": BaseAnimeCurrent[key]?.material_data?.link,
                 "kp": "",
                 "imdb": "",
@@ -2707,6 +2715,7 @@ function GetResume() {
             list_resume.appendChild(add_cart(e1))
         }
     }
+
     load.show(false)
 
 }
