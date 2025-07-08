@@ -2045,6 +2045,26 @@ function add_cart(e) {
     cartSeries.style.color = e.status == "released" ? "#a9ffb4" : "#ffffff"
     imgTop.appendChild(cartSeries);
 
+    if(e.del)
+    {
+        const del = document.createElement('div');
+        del.classList.add('cart-del');
+        del.textContent = "X"
+        del.title = "Удалить из истории"
+        cartBG.appendChild(del);
+        del.addEventListener('mousedown', async (e1) => {
+            e1.stopPropagation(); // Останавливает всплытие события к родительским элементам
+            if(confirm(`Удалить "${e.title}" из истории?`))
+            {
+                delete BaseAnimeCurrent[e.id];
+                localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+                save_server_base()
+                GetResume()
+            }
+            
+        })
+    }
+
     var id = e.shikimori ? e.shikimori : e.id
     if (sh_api.authorize == true) {
         cart.style.borderTopColor = sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] ? sh_api.status_color[sh_api?.Favorits?.data?.find(item => item.anime.id.toString() === id.toString())?.status]?.[0] : "none"
@@ -2708,7 +2728,7 @@ async function GetResume() {
                 "date": formatDate(new Date(BaseAnimeCurrent[key]?.lasttime * 1000)),
                 // "date": formatDate(BaseAnimeCurrent[key]?.material_data?.aired_on),
                 // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
-                "voice": BaseAnimeCurrent[key]?.material_data?.status,
+                "voice": BaseAnimeCurrent[key].translation.title,
                 "series": `${BaseAnimeCurrent[key]?.episode}/${BaseAnimeCurrent[key]?.material_data?.episodes_total ? (BaseAnimeCurrent[key]?.material_data?.episodes_total) : "?"}`,
                 //  ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
                 "link": BaseAnimeCurrent[key]?.material_data?.link,
@@ -2720,7 +2740,8 @@ async function GetResume() {
                 "material_data": [],
                 "id": key,
                 "screenshots": [],
-                "e": [],
+                "e": BaseAnimeCurrent[key],
+                "del": key
             }
             list_resume.appendChild(add_cart(e1))
         }
