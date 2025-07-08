@@ -2736,14 +2736,17 @@ async function GetResume() {
                 "imdb": "",
                 "shikimori": key,
                 "status": BaseAnimeCurrent[key]?.material_data?.status,
-                "raiting": "",
+                "raiting": BaseAnimeCurrent[key]?.episode,
                 "material_data": [],
                 "id": key,
                 "screenshots": [],
                 "e": BaseAnimeCurrent[key],
-                "del": key
+                "del": key,
+                "r_title": "Прогресс:"
             }
-            list_resume.appendChild(add_cart(e1))
+            const cart = add_cart(e1)
+            // cart.classList.remove('hide')
+            list_resume.appendChild(cart)
         }
     }
     // localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
