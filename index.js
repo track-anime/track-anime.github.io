@@ -2027,7 +2027,7 @@ function add_cart(e) {
     </div>
   </div>
     `
-    const r_title = e.r_title?e.r_title:"Рейтинг шикимори:"
+    const r_title = e.r_title ? e.r_title : "Рейтинг шикимори:"
     !e.raiting ? cartRaiting.classList.add("hide") : null
     cartRaiting.r = e.raiting
 
@@ -2048,8 +2048,7 @@ function add_cart(e) {
     cartSeries.style.color = e.status == "released" ? "#a9ffb4" : "#ffffff"
     imgTop.appendChild(cartSeries);
 
-    if(e.del)
-    {
+    if (e.del) {
         const del = document.createElement('div');
         del.classList.add('cart-del');
         del.textContent = "X"
@@ -2057,14 +2056,13 @@ function add_cart(e) {
         cartBG.appendChild(del);
         del.addEventListener('mousedown', async (e1) => {
             e1.stopPropagation(); // Останавливает всплытие события к родительским элементам
-            if(confirm(`Удалить "${e.title}" из истории?`))
-            {
+            if (confirm(`Удалить "${e.title}" из истории?`)) {
                 delete BaseAnimeCurrent[e.id];
                 localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
                 save_server_base()
                 GetResume()
             }
-            
+
         })
     }
 
@@ -2702,22 +2700,27 @@ function domReady(fn) {
 /////////////////////////////////////////////////////// История просмотренных аниме ////////////////////////////////////////////////////////////////////////
 const resume_Button = document.getElementById("resume_Button")
 // if (isDebugEnabled) resume_Button.classList.remove("hide")
-if(url_get.searchParams.get('resume')) GetResume()
-async function GetResume() {
-    load.show(true)
-    HistoryIsActivy = false
-    url_get.searchParams.set('resume', true)
-    window.history.pushState({}, '', url_get);
-    document.querySelectorAll(".anime_list").forEach(e => {
-        e.classList.add("hide")
-    });
-    document.querySelector(".navbar-nav").querySelectorAll("button").forEach(e => {
+if (url_get.searchParams.get('resume')) GetResume()
 
-        e.classList.remove("active")
-    })
-    resume_Button.classList.add("active")
+async function GetResume(d) {
+    if (d != "ubd") {
+        load.show(true)
+        HistoryIsActivy = false
+        url_get.searchParams.set('resume', true)
+        window.history.pushState({}, '', url_get);
+
+        document.querySelectorAll(".anime_list").forEach(e => {
+            e.classList.add("hide")
+        });
+        document.querySelector(".navbar-nav").querySelectorAll("button").forEach(e => {
+
+            e.classList.remove("active")
+        })
+        resume_Button.classList.add("active")
+        list_resume.classList.remove("hide")
+    }
     list_resume.innerHTML = ""
-    list_resume.classList.remove("hide")
+    
     for (let key in BaseAnimeCurrent) {
 
         if (key != "lasttime") {
@@ -2941,6 +2944,7 @@ async function load_server_base() {
         localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
 
     }
+    GetResume("ubd")
     return user_data
 }
 
