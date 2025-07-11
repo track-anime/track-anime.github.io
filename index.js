@@ -17,8 +17,6 @@ var cart_list = []
 var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) ? JSON.parse(localStorage.getItem('BaseAnimeCurrent')) : {};
 localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
 
-// var MyServerURL = 'https://dygdyg.duckdns.org'    //Адрес сервера
-
 var url_get = new URL(window.location.href)
 
 const MyServerURL = url_get.searchParams.get('MyServerURL') ? url_get.searchParams.get('MyServerURL') : 'server.dygdyg.ru' //'dygdyg.duckdns.org'
@@ -1918,14 +1916,18 @@ function add_cart(e) {
     // if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
 
     if (e.cover?.includes("missing_original.jpg")) {
-
+        
         e.cover = `${getCoverURL}${e.shikimori}`
+        
 
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
+        console.log(1212, e.material_data.poster_url)
         if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
+
         // debug.log(e.cover)
-        e.cover = `${getCoverURL}${e.shikimori}&url=${e.cover}`
+        e.cover = `${getCoverURL}${e.shikimori}&url=${e.material_data.poster_url}`
+        // e.cover = e.material_data.poster_url
         // e.cover = `${getCoverURL}${e.shikimori}`
     }
     // e.cover = `${getCoverURL}${e.shikimori}`
