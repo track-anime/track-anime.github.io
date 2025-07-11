@@ -594,6 +594,14 @@ function _CheckRepeats(id) {
     }
 }
 
+
+VideoInfo.info.cover.addEventListener('click', (ev) => {
+    if (!ev.shiftKey)  return
+        
+    VideoInfo.info.cover.src = ``;
+    VideoInfo.info.cover.src = VideoInfo.info.cover.src_force
+})
+
 function setVideoInfo(e) {
     // debug.log(111, e)
     load.show(false)
@@ -606,13 +614,14 @@ function setVideoInfo(e) {
 
     VideoInfo.info.cover.src = `cover.png`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
+    
     debug.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
     } else {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}&url=${VideoInfo.info.cover.src}`
     }
-
+    VideoInfo.info.cover.src_force = `${VideoInfo.info.cover.src}&force=true`
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
     VideoInfo.info.title.querySelector("a").textContent = e.russian ? `${e.russian}` : "?";
@@ -1922,7 +1931,7 @@ function add_cart(e) {
 
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
-        console.log(1212, e.material_data.poster_url)
+        
         if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
 
         // debug.log(e.cover)
@@ -1949,9 +1958,16 @@ function add_cart(e) {
     cart.appendChild(imgTop);
 
     imgTop.addEventListener("mousedown", (event) => {
+        if (event.shiftKey) {
+            imgTop.src = ""
+            imgTop.src = `${imgTop.img_pre}&force=true`
+            // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
+            imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
+            return
+        }
         var a = new URL(window.location.href)
         a.searchParams.set("shikimori_id", `${e.shikimori}`)
-        // debug.log(event.button, a.href)
+        
         // return
         if (event.button == 1) {
             var newTab = window.open(a.href, '_blank')
@@ -2784,12 +2800,11 @@ function convertToScale(a, b) {
 }
 /////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////
 async function anim_data(id) {
-    console.log(url_get.searchParams.get("shikimori_id"))
+    debug.log(url_get.searchParams.get("shikimori_id"))
     const response = await fetch(`https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${id}`);
     data = await response.json(response);
     data_anime = data.results[0]
     return data_anime.material_data
-    console.log("anime", data_anime)
 }
 /////
 
