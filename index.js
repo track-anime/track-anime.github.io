@@ -1961,6 +1961,7 @@ function add_cart(e) {
         if (event.shiftKey) {
             imgTop.src = ""
             imgTop.src = `${imgTop.img_pre}&force=true`
+            console.log(imgTop.src)
             // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
             imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
             return
