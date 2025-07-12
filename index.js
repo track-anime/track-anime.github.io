@@ -1935,7 +1935,7 @@ function add_cart(e) {
         if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
 
         // debug.log(e.cover)
-        e.cover = `${getCoverURL}${e.shikimori}&url=${e.material_data.poster_url}`
+        e.cover = `${getCoverURL}${e.shikimori}&url=${e?.material_data?.poster_url}`
         // e.cover = e.material_data.poster_url
         // e.cover = `${getCoverURL}${e.shikimori}`
     }
@@ -2787,27 +2787,7 @@ async function GetResume(d) {
     load.show(false)
 
 }
-/*resume_Button.addEventListener('mousedown', async (e) => {
-    GetResume()
-    return
-    switch (e.button) {
-        case 0:
-            window.getCalendar()
-            DialogVideoInfo.classList.add("d-none")
-            break;
-        case 1:
-            nTab = window.open(window.location.href, "_blank");
-            nTab.onload = function () {
-                nTab.getCalendar()
-            };
-            break;
-        case 2:
-            break;
 
-        default:
-            break;
-    }
-});*/
 
 function convertToScale(a, b) {
     return Math.ceil((a / b) * 10);
