@@ -596,8 +596,8 @@ function _CheckRepeats(id) {
 
 
 VideoInfo.info.cover.addEventListener('click', (ev) => {
-    if (!ev.shiftKey)  return
-        
+    if (!ev.shiftKey) return
+
     VideoInfo.info.cover.src = ``;
     VideoInfo.info.cover.src = VideoInfo.info.cover.src_force
 })
@@ -614,7 +614,7 @@ function setVideoInfo(e) {
 
     VideoInfo.info.cover.src = `cover.png`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
-    
+
     debug.log(e.image.original)
     if (VideoInfo.info.cover.src.includes("missing_original.jpg")) {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}`
@@ -1925,13 +1925,13 @@ function add_cart(e) {
     // if (e.cover.includes("missing_original.jpg")) e.cover = `${getCoverURL}${e.shikimori}`
 
     if (e.cover?.includes("missing_original.jpg")) {
-        
+
         e.cover = `${getCoverURL}${e.shikimori}`
-        
+
 
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
-        
+
         if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
 
         // debug.log(e.cover)
@@ -1968,7 +1968,7 @@ function add_cart(e) {
         }
         var a = new URL(window.location.href)
         a.searchParams.set("shikimori_id", `${e.shikimori}`)
-        
+
         // return
         if (event.button == 1) {
             var newTab = window.open(a.href, '_blank')
@@ -2739,38 +2739,51 @@ async function GetResume(d) {
         list_resume.classList.remove("hide")
     }
     list_resume.innerHTML = ""
-    
-    for (let key in BaseAnimeCurrent) {
 
-        if (key != "lasttime") {
-            debug.log(BaseAnimeCurrent[key])
-            // BaseAnimeCurrent[key]["lasttime"] = BaseAnimeCurrent[key]["lasttime"] == undefined ? BaseAnimeCurrent[key]["lasttime"] : new Date().getTime() / 1000
-            BaseAnimeCurrent[key].material_data = BaseAnimeCurrent[key].material_data ? BaseAnimeCurrent[key].material_data : await anim_data(key)
-            const e1 = {
-                "title": BaseAnimeCurrent[key]?.material_data?.anime_title ? (BaseAnimeCurrent[key]?.material_data?.anime_title) : "?",
-                // "cover": e.image.original,
-                "cover": BaseAnimeCurrent[key]?.material_data?.anime_poster_url,
-                "date": formatDate(new Date(BaseAnimeCurrent[key]?.lasttime * 1000)),
-                "voice": BaseAnimeCurrent[key].translation.title,
-                "series": `${BaseAnimeCurrent[key]?.episode}/${BaseAnimeCurrent[key]?.material_data?.episodes_total ? (BaseAnimeCurrent[key]?.material_data?.episodes_total) : "?"}`,
-                //  ? BaseAnimeCurrent[key]?.material_data?.episodes : "M",
-                "link": BaseAnimeCurrent[key]?.material_data?.link,
-                "kp": "",
-                "imdb": "",
-                "shikimori": key,
-                "status": BaseAnimeCurrent[key]?.material_data?.status,
-                "raiting": undefined,
-                "material_data": [],
-                "id": key,
-                "screenshots": [],
-                "e": BaseAnimeCurrent[key],
-                "del": key,
-                "r_title": "Прогресс:"
-            }
-            list_resume.appendChild(add_cart(e1))
+    // Получаем и сортируем ключи по lasttime (пропуская "lasttime" сам по себе)
+    let sortedKeys = Object.keys(BaseAnimeCurrent)
+        .filter(key => key !== "lasttime")
+        .sort((a, b) => {
+            const aTime = BaseAnimeCurrent[a]?.lasttime ?? 0;
+            const bTime = BaseAnimeCurrent[b]?.lasttime ?? 0;
+            return bTime - aTime; // по убыванию
+        });
+
+    for (let key of sortedKeys) {
+        const item = BaseAnimeCurrent[key];
+
+        // Обновляем material_data, если его нет
+        if (!item.material_data) {
+            item.material_data = await anim_data(key);
+            // сохраняем обратно в объект
+            BaseAnimeCurrent[key] = item;
         }
+
+        const e1 = {
+            "title": item?.material_data?.anime_title ?? "?",
+            "cover": item?.material_data?.anime_poster_url,
+            "date": formatDate(new Date(item?.lasttime * 1000)),
+            "voice": item.translation?.title,
+            "series": `${item?.episode}/${item?.material_data?.episodes_total ?? "?"}`,
+            "link": item?.material_data?.link,
+            "kp": "",
+            "imdb": "",
+            "shikimori": key,
+            "status": item?.material_data?.status,
+            "raiting": undefined,
+            "material_data": [],
+            "id": key,
+            "screenshots": [],
+            "e": item,
+            "del": key,
+            "r_title": "Прогресс:"
+        };
+
+        list_resume.appendChild(add_cart(e1));
     }
-    // localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+
+
+    localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
     load.show(false)
 
 }
