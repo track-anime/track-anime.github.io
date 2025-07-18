@@ -1282,6 +1282,7 @@ document.getElementById("User_Logaut_button").addEventListener('click', async ()
 // });
 
 VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
+    
     closeDialogButtonEvent()
     return
 })
@@ -1292,6 +1293,7 @@ closeDialogButton.addEventListener('click', () => {
 });
 
 function closeDialogButtonEvent() {
+    GetResume("ubd")
     starrySky.stop()
     // VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
