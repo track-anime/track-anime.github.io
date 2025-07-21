@@ -750,6 +750,7 @@ function setVideoInfo(e) {
     VideoInfo.info.KodikPlayer.addEventListener('click', add_kodik_pleer)
 
     function add_kodik_pleer(ee) {
+
         if (ee.shiftKey) {
             window.open(`/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`, '_blank').focus();
         } else {
@@ -1294,6 +1295,7 @@ closeDialogButton.addEventListener('click', () => {
 
 function closeDialogButtonEvent() {
     GetResume("ubd")
+    VideoPlayerAnime.data = undefined
     starrySky.stop()
     // VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
@@ -1979,6 +1981,7 @@ function add_cart(e) {
         if (event.button == 2) return
 
         e.shift = event.shiftKey
+        VideoPlayerAnime.data = cart.data
         dialog_(e, !event.shiftKey)
         cart.classList.remove("new_cart")
     })
@@ -2357,7 +2360,8 @@ function dialog_(e, info) {
         // if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+        // VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+        VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.shikimori}`;
         DialogVideoInfo.classList.remove("d-none");
         // window.open(`/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
         // };
@@ -2367,7 +2371,8 @@ function dialog_(e, info) {
         debug.log("skip..")
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
-        VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+        // VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
+        VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.shikimori}`;
         DialogVideoInfo.classList.remove("d-none");
         load.show(false)
     })
