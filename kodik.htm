@@ -6,9 +6,15 @@
 </head>
 
 <body>
-  <div id="scroll_butons">
-    <div class="scroll_button" id="-90">-90</div>
-    <div class="scroll_button" id="+90">+90</div>
+  <div id="control_butons">
+    <div id="resume_butons">
+      <div class="_button" id="resume_buton">Продолжить</div>
+    </div>
+    <div id="scroll_butons">
+      <div class="_button" id="-90">-90</div>
+      <div class="_button" id="+90">+90</div>
+    </div>
+
   </div>
   <iframe id="kodik" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *"></iframe>
 </body>
@@ -29,17 +35,22 @@
     aspect-ratio: 16/9;
   }
 
-  #scroll_butons {
+  #control_butons {
     position: fixed;
     left: 0;
     right: 0;
     z-index: 1000;
     pointer-events: none;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
-  .scroll_button {
+  #scroll_butons {
+    display: flex;
+  }
+
+  ._button {
     color: aliceblue;
     background-color: #363d43;
     /* border-top-left-radius: 3px; */
@@ -52,7 +63,7 @@
     pointer-events: auto;
   }
 
-  .scroll_button:hover {
+  ._button:hover {
     background-color: #2b3035;
   }
 </style>
@@ -67,6 +78,7 @@
   var data_anime
   var kodikIframe
   var shikimori_id = url_get.searchParams.get('shikimori_id') ? url_get.searchParams.get('shikimori_id') : 50346
+  var start_load = false
 
   // Screen.lockOrientation("landscape")
 
@@ -96,7 +108,7 @@
 
   /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
   async function start_kodik() {
-    var get_sav_url_data = ""
+    var get_sav_url_data = "&season=1&episode=1"
     if (BaseAnimeCurrent[shikimori_id]) {
       get_sav_url_data = `&season=${BaseAnimeCurrent[shikimori_id].season}&episode=${BaseAnimeCurrent[shikimori_id].episode}`
     }
@@ -113,11 +125,46 @@
 
     kodikIframe = document.getElementById("kodik").contentWindow;
 
-    console.log(kodikIframe.document.getElementById("player-iframe"))
     kodikIframe.window.addEventListener('keydown', (e) => {
-      console.log(e.code, this)
+      // console.log(e.code, this)
     }
     );
+    document.getElementById("kodik").addEventListener('load', () => {
+      if (start_load == false) {
+        console.log(1111, "load")
+        if (BaseAnimeCurrent[shikimori_id]) kodik_player_api(
+          {
+            method: "change_episode",
+            season: BaseAnimeCurrent[shikimori_id].season,
+            episode: BaseAnimeCurrent[shikimori_id].episode + 1
+          }
+        )
+        start_load = true
+      }
+    })
+
+    document.getElementById("resume_buton").addEventListener('click', function (event) {
+
+      if (BaseAnimeCurrent[shikimori_id]) {
+        kodik_player_api(
+          {
+            method: "change_episode",
+            season: BaseAnimeCurrent[shikimori_id].season,
+            episode: BaseAnimeCurrent[shikimori_id].episode
+          }
+        )
+        // kodik_player_api(
+        //   {
+        //     method: "change_episode",
+        //     season: BaseAnimeCurrent[shikimori_id].season,
+        //     episode: BaseAnimeCurrent[shikimori_id].episode + 1
+        //   }
+        // )
+      }
+      kodik_player_api({
+        method: "play"
+      })
+    })
 
   }
 
