@@ -8,11 +8,11 @@
 <body>
   <div id="control_butons">
     <div id="resume_butons">
-      <div class="_button" id="resume_buton">Продолжить</div>
+      <div class="_button" id="resume_buton" title="Воспроизведёт следующую серию после последней просмотренной">Продолжить +1</div>
     </div>
-    <div id="scroll_butons">
-      <div class="_button" id="-90">-90</div>
-      <div class="_button" id="+90">+90</div>
+    <div id="scroll_butons" class="hidden">
+      <div class="_button" id="-90" title="Перемотает назад на примерную динну опенинга"><<90с</div>
+      <div class="_button" id="+90" title="Перемотает вперёд на примерную динну опенинга">90с>></div>
     </div>
 
   </div>
@@ -22,6 +22,10 @@
   body {
     background-color: rgb(32, 32, 32);
     margin: 0 0 0 0;
+  }
+
+  .hidden {
+    display: none !important;
   }
 
   #kodik {
@@ -136,7 +140,7 @@
           {
             method: "change_episode",
             season: BaseAnimeCurrent[shikimori_id].season,
-            episode: BaseAnimeCurrent[shikimori_id].episode + 1
+            episode: BaseAnimeCurrent[shikimori_id].episode
           }
         )
         start_load = true
@@ -153,17 +157,20 @@
             episode: BaseAnimeCurrent[shikimori_id].episode
           }
         )
-        // kodik_player_api(
-        //   {
-        //     method: "change_episode",
-        //     season: BaseAnimeCurrent[shikimori_id].season,
-        //     episode: BaseAnimeCurrent[shikimori_id].episode + 1
-        //   }
-        // )
+        kodik_player_api(
+          {
+            method: "change_episode",
+            season: BaseAnimeCurrent[shikimori_id].season,
+            episode: BaseAnimeCurrent[shikimori_id].episode + 1
+          }
+        )
       }
-      kodik_player_api({
-        method: "play"
-      })
+      setTimeout(() => {
+        kodik_player_api({
+          method: "play"
+        })
+      }, 1000);
+
     })
 
   }
@@ -194,6 +201,13 @@
   function kodikMessageListener(message) {
     console.log("[kodik player]", message.data);
     switch (message.data.key) {
+      case "kodik_player_play":
+        document.getElementById("resume_buton").classList.add("hidden")
+        document.getElementById("scroll_butons").classList.remove("hidden")
+        break
+      case "kodik_player_pause":
+        // document.getElementById("resume_buton").classList.remove("hidden")
+        break
       case "kodik_player_time_update":
         navigator.mediaSession.metadata.time = message.data.value;
         break
