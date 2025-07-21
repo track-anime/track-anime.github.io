@@ -6,6 +6,10 @@
 </head>
 
 <body>
+  <div id="scroll_butons">
+    <div class="scroll_button" id="-90">-90</div>
+    <div class="scroll_button" id="+90">+90</div>
+  </div>
   <iframe id="kodik" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *"></iframe>
 </body>
 <style>
@@ -24,6 +28,33 @@
     overflow: hidden;
     aspect-ratio: 16/9;
   }
+
+  #scroll_butons {
+    position: fixed;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scroll_button {
+    color: aliceblue;
+    background-color: #363d43;
+    /* border-top-left-radius: 3px; */
+    /* border-top-right-radius: 3px; */
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    padding: 1ch;
+    cursor: pointer;
+    font: 700 12px / 30px Arial;
+    pointer-events: auto;
+  }
+
+  .scroll_button:hover {
+    background-color: #2b3035;
+  }
 </style>
 
 
@@ -35,6 +66,8 @@
   var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
   var data_anime
   var kodikIframe
+
+  // Screen.lockOrientation("landscape")
 
   start()
 
@@ -67,9 +100,33 @@
     }
 
     kodikIframe = document.getElementById("kodik").contentWindow;
+
+    console.log(kodikIframe.document.getElementById("player-iframe"))
+    kodikIframe.window.addEventListener('keydown', (e) => {
+      console.log(e.code, this)
+    }
+    );
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+  ////////////////////////////////////////////// Перемотка 90 секунд ///////////////////////////////////////////////////////////
+
+  document.getElementById("+90").addEventListener('click', function (event) {
+    scroll_video(90)
+  }
+  )
+  document.getElementById("-90").addEventListener('click', function (event) {
+    scroll_video(-90)
+  }
+  )
+
+  function scroll_video(p) {
+    kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + p } }, '*');
+  }
+
+
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
   /////////////////////////////////////////////// Управление kodik_player ///////////////////////////////////////////////////////
