@@ -8,12 +8,26 @@
 <body>
   <div id="control_butons">
     <div id="resume_butons">
-      <div class="_button" id="resume_buton" title="Воспроизведёт следующую серию после последней просмотренной">Продолжить +1</div>
+      <div class="_button" id="resume_buton" title="Воспроизведёт следующую серию после последней просмотренной">
+        Продолжить +1</div>
     </div>
     <div id="scroll_butons" class="hidden">
-      <div class="_button" id="-90" title="Перемотает назад на примерную динну опенинга"><<90с</div>
-      <div class="_button" id="+90" title="Перемотает вперёд на примерную динну опенинга">90с>></div>
+      <div class="_button" id="-90" title="Перемотает назад на примерную динну опенинга">
+        -90с </div>
+      <div class="_button" id="+90" title="Перемотает вперёд на примерную динну опенинга">90с</div>
     </div>
+    <div id="panel_info_control">
+      <h2>Управление</h2>
+      <div class="controls-grid">
+          <span class="key">←</span><span class="desc">Перемотка назад на 10 сек</span>
+          <span class="key">→</span><span class="desc">Перемотка вперёд на 10 сек</span>
+          <span class="key">↑</span><span class="desc">Увеличить громкость</span>
+          <span class="key">↓</span><span class="desc">Уменьшить громкость</span>
+          <span class="key">A</span><span class="desc">Перемотка назад на 90 сек</span>
+          <span class="key">D</span><span class="desc">Перемотка вперёд на 90 сек</span>
+          <span class="key">Space</span><span class="desc">Плей-пауза</span>
+      </div>
+  </div>
 
   </div>
   <iframe id="kodik" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *"></iframe>
@@ -70,6 +84,43 @@
   ._button:hover {
     background-color: #363d43;
   }
+
+  #panel_info_control {
+    color: aliceblue;
+    background-color: #2b3035;
+    border-radius: 3px;
+    padding: 1ch;
+    cursor: pointer;
+    font: 700 12px / 30px Arial;
+    /* pointer-events: auto; */
+    margin: 3px;
+}
+
+#panel_info_control h2 {
+    color: #00b7ff; /* Голубой для заголовка */
+    font-size: 1.2em;
+    margin: 0 0 0 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.controls-grid {
+    display: grid;
+    grid-template-columns: 50px 1fr; /* Фиксированная ширина для клавиш, остальное для описания */
+    /* gap: 10px; Отступ между строками и столбцами */
+    align-items: center;
+}
+
+.controls-grid .key {
+    color: #ffcc00; /* Жёлтый для клавиш */
+    text-align: center;
+    font-weight: 700;
+}
+
+.controls-grid .desc {
+    color: aliceblue;
+    font-weight: 400; /* Чуть легче шрифт для описания */
+}
 </style>
 
 
@@ -96,7 +147,6 @@
 
   /////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////
   async function anim_data() {
-    console.log(shikimori_id)
     var url_serch = `https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${shikimori_id}`
     if (BaseAnimeCurrent[shikimori_id]) {
       url_serch = `${url_serch}&translation_id=${BaseAnimeCurrent[shikimori_id].translation.id}`
@@ -105,7 +155,6 @@
     const response = await fetch(url_serch);
     data = await response.json(response);
     data_anime = data.results[0]
-    console.log("anime", data_anime)
   }
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -129,13 +178,61 @@
 
     kodikIframe = document.getElementById("kodik").contentWindow;
 
-    kodikIframe.window.addEventListener('keydown', (e) => {
-      // console.log(e.code, this)
+    document.addEventListener('keydown', (e) => {
+      // console.log(1111, e.code, this)
+      switch (e.code) {
+        case "ArrowLeft":
+          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time - 10 })
+          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time - 10
+          break;
+
+        case "ArrowRight":
+          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time + 10 })
+          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time + 10
+          break;
+
+        case "ArrowUp":
+          // kodik_player_api({ method: "volume", volume: +0.7 })
+          kodik_player_api({ method: "volume", volume: navigator.mediaSession.metadata.volume + 0.1 })
+          navigator.mediaSession.metadata.volume = navigator.mediaSession.metadata.volume + 0.1
+          break;
+
+        case "ArrowDown":
+          // kodik_player_api({ method: "volume", volume: -0.7 })
+          kodik_player_api({ method: "volume", volume: navigator.mediaSession.metadata.volume - 0.1 })
+          navigator.mediaSession.metadata.volume = navigator.mediaSession.metadata.volume - 0.1
+          break;
+
+        case "KeyA":
+          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time - 90 })
+          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time - 90
+          break;
+
+        case "KeyD":
+          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time + 90 })
+          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time + 90
+
+          break;
+
+        case "Space":
+          navigator.mediaSession.metadata.isPlay?kodik_player_api({ method: "pause"}):kodik_player_api({ method: "play"})
+          break;
+        case "1":
+
+          break;
+
+        default:
+          break;
+      }
     }
     );
+
+    setInterval(() => {
+      window.focus();   ////////////////////////////// Костыль чтоб забирать фокус у плеера по кд
+    }, 1000);
+    
     document.getElementById("kodik").addEventListener('load', () => {
       if (start_load == false) {
-        console.log(1111, "load")
         if (BaseAnimeCurrent[shikimori_id]) kodik_player_api(
           {
             method: "change_episode",
@@ -200,33 +297,39 @@
 
   /////////////////////////////////////////////// Управление kodik_player ///////////////////////////////////////////////////////
   function kodikMessageListener(message) {
-    console.log("[kodik player]", message.data);
+    // if (message.data.title == "mousemove") return
+    // console.log(1111, message.data)
     switch (message.data.key) {
+      case 'kodik_player_volume_change':
+        navigator.mediaSession.metadata.volume = message.data.value.volume
+        break
       case "kodik_player_play":
+        navigator.mediaSession.metadata.isPlay = true
         document.getElementById("resume_buton").classList.add("hidden")
+        document.getElementById("panel_info_control").classList.add("hidden")
         document.getElementById("scroll_butons").classList.remove("hidden")
+        kodik_player_api({ method: "volume", volume: navigator.mediaSession.metadata.volume })
         break
       case "kodik_player_pause":
+        navigator.mediaSession.metadata.isPlay = false
         // document.getElementById("resume_buton").classList.remove("hidden")
         break
       case "kodik_player_time_update":
         navigator.mediaSession.metadata.time = message.data.value;
+
         break
       case "kodik_player_current_episode":
         navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
-        // console.log("dat1",data_anime.material_data);
         // delete BaseAnimeCurrent[null];
         if (data_anime.material_data.episodes_total == message.data.value.episode) {
           delete BaseAnimeCurrent[shikimori_id];
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
-          // console.log("delete base",data_anime.material_data, message.data.value.episode)
         } else {
           BaseAnimeCurrent[shikimori_id] = message.data.value;
           BaseAnimeCurrent[shikimori_id]["material_data"] = data_anime.material_data
           BaseAnimeCurrent[shikimori_id]["lasttime"] = new Date().getTime() / 1000
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
         }
-        console.log("base", BaseAnimeCurrent)
         localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
         break;
 
@@ -261,13 +364,16 @@
       });
 
       navigator.mediaSession.metadata.time = 0;
+      navigator.mediaSession.metadata.volume - 1;
+      navigator.mediaSession.metadata.isPlay = false;
       navigator.mediaSession.setActionHandler('play', () => {
-        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "play" } }, '*');
+        navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause"}) : kodik_player_api({ method: "play"})
         console.log('Воспроизведение');
       });
 
       navigator.mediaSession.setActionHandler('pause', () => {
-        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
+        // kodik_player_api({ method: "pause" });
+        navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause"}) : kodik_player_api({ method: "play"})
       });
       navigator.mediaSession.setActionHandler('stop', () => {
         kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
