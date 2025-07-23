@@ -307,7 +307,7 @@
         navigator.mediaSession.metadata.isPlay = true
         document.getElementById("resume_buton").classList.add("hidden")
         document.getElementById("panel_info_control").classList.add("hidden")
-        document.getElementById("scroll_butons").classList.remove("hidden")
+        //document.getElementById("scroll_butons").classList.remove("hidden")
         kodik_player_api({ method: "volume", volume: navigator.mediaSession.metadata.volume })
         break
       case "kodik_player_pause":
