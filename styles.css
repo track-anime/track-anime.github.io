@@ -908,6 +908,7 @@ screen and (max-width: 992px) {
     }
 
     #info_cover {
+        max-width: auto;
         width: 90% !important;
     }
 
@@ -924,6 +925,7 @@ screen and (max-width: 992px) {
 }
 
 #info_cover {
+    max-width: 350px;
     width: 60%;
 }
 
