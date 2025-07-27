@@ -1283,7 +1283,7 @@ document.getElementById("User_Logaut_button").addEventListener('click', async ()
 // });
 
 VideoPlayerAnime.addEventListener('hidden.bs.modal', e => {
-    
+
     closeDialogButtonEvent()
     return
 })
@@ -1962,6 +1962,10 @@ function add_cart(e) {
     cart.appendChild(imgTop);
 
     imgTop.addEventListener("mousedown", (event) => {
+        setTimeout(() => {
+            cart.blur()
+        }, 100);
+
         if (event.shiftKey) {
             imgTop.src = ""
             imgTop.src = `${imgTop.img_pre}&force=true`
