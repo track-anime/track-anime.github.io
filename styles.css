@@ -1,6 +1,6 @@
 html {
     /* Устанавливаем шрифт по умолчанию */
-    --font-family:   ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-family: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 
@@ -17,11 +17,59 @@ body {
     font-style: normal;
     font-weight: 500;
 }
-    
+
+.context-menu {
+    position: absolute;
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 8px 0;
+    z-index: 1000;
+    display: none;
+}
+
+.context-menu-item {
+    position: relative;
+    padding: 8px 16px;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.context-menu-item:hover {
+    background-color: #3a3a3a;
+}
+
+.context-menu-item.has-submenu::after {
+    content: '▶';
+    margin-left: 8px;
+    font-size: 12px;
+}
+
+.submenu {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    background-color: #2d2d2d;
+    border: 1px solid #444;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    padding: 8px 0;
+    display: none;
+    min-width: 150px;
+}
+
+.context-menu-item:hover>.submenu {
+    display: block;
+}
 
 
 .btn,
-input, 
+input,
 .nav-link {
     font-family: var(--font-family);
     font-weight: 500;
@@ -77,14 +125,20 @@ canvas#starryCanvas {
 }
 
 .container_ {
-    -webkit-touch-callout: none; /* iOS Safari */
-      -webkit-user-select: none; /* Safari */
-       -khtml-user-select: none; /* Konqueror HTML */
-         -moz-user-select: none; /* Old versions of Firefox */
-          -ms-user-select: none; /* Internet Explorer/Edge */
-              user-select: none; /* Non-prefixed version, currently
+    -webkit-touch-callout: none;
+    /* iOS Safari */
+    -webkit-user-select: none;
+    /* Safari */
+    -khtml-user-select: none;
+    /* Konqueror HTML */
+    -moz-user-select: none;
+    /* Old versions of Firefox */
+    -ms-user-select: none;
+    /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
                                     supported by Chrome, Edge, Opera and Firefox */
-  }
+}
 
 .card {
     background-color: transparent;
@@ -95,6 +149,7 @@ canvas#starryCanvas {
     width: 0;
     height: 0;
 }
+
 #new_anime_list {
     display: flex;
     background-color: #0d6efd54;
@@ -504,6 +559,7 @@ iframe#VideoPlayer {
     left: 50%;
 
 }
+
 .cart-del {
     position: fixed;
     right: 0;
@@ -518,8 +574,9 @@ iframe#VideoPlayer {
     border-bottom: solid;
     border-left: solid;
 }
+
 .cart-del:hover {
-    color:#aaaaaa
+    color: #aaaaaa
 }
 
 #search_form {
@@ -908,7 +965,7 @@ screen and (max-width: 992px) {
     }
 
     #info_cover {
-        max-width: auto;
+        max-width: none !important;
         width: 90% !important;
     }
 
@@ -1276,7 +1333,8 @@ span.sr-only {
     color: rgb(214, 101, 101);
 }
 
-.\%D0\%A0\%D1\%83\%D0\%90\%D0\%BD\%D0\%B8\%D0\%BC\%D0\%B5\%20\%2F\%20DEEP, .AniStar\%20\%26\%20DEEP {
+.\%D0\%A0\%D1\%83\%D0\%90\%D0\%BD\%D0\%B8\%D0\%BC\%D0\%B5\%20\%2F\%20DEEP,
+.AniStar\%20\%26\%20DEEP {
     color: rgb(198, 116, 61);
 }
 

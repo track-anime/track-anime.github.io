@@ -40,6 +40,7 @@ const CheckCalendarType = document.getElementById("CheckCalendarType")
 const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
+const contextMenu = document.getElementById('contextMenu');
 
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
@@ -62,6 +63,11 @@ var URLList = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_
 var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
 get_covers_base()
+
+document.addEventListener('click', () => {
+
+    contextMenu.style.display = 'none';
+});
 
 // Инициализация звёздного неба с пользовательскими параметрами
 const starrySky = new StarrySky('starryCanvas', {
@@ -1982,13 +1988,48 @@ function add_cart(e) {
             var newTab = window.open(a.href, '_blank')
             return
         }
-        if (event.button == 2) return
+        if (event.button == 2) {
+            createMenuItems([
+                { text: 'Открыть', action: () => {
+                    e.shift = event.shiftKey
+                    VideoPlayerAnime.data = cart.data
+                    dialog_(e, !event.shiftKey)
+                    cart.classList.remove("new_cart")
+                } },
+                { text: 'Открыть в новой вкладке', action: () => window.open(a.href, '_blank') },
+                // { text: 'Копировать ссылку', action: () => alert('Ссылка скопирована') },
+                {text: 'Обновить обложку', action: () => {
+                    imgTop.src = ""
+                    imgTop.src = `${imgTop.img_pre}&force=true`
+                    console.log(imgTop.src)
+                    // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
+                    imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
+                }},
+                {
+                    text: sh_api.authorize?'Добавить в избранное':null,
+                    submenu: [
+                        { text: 'смотрю', class: "yellow", action: () => {sh_api.AddUserRates(Number(e.shikimori), 0)}},
+                        { text: 'просмотренно', class: "btn-success", action: () => {sh_api.AddUserRates(Number(e.shikimori), 1)}},
+                        { text: 'брошено', class: "btn-danger", action: () => {sh_api.AddUserRates(Number(e.shikimori), 2)}},
+                        { text: 'отложено', class: "btn-warning", action: () => {sh_api.AddUserRates(Number(e.shikimori), 3)}},
+                        { text: 'запланировано', class: "pink", action: () => {sh_api.AddUserRates(Number(e.shikimori), 4)}},
+                        { text: 'пересматриваю', class: "btn-info", action: () => {sh_api.AddUserRates(Number(e.shikimori), 5)}},
+                    ]
+                }
+            ]);
+            return
+        }
+
 
         e.shift = event.shiftKey
         VideoPlayerAnime.data = cart.data
         dialog_(e, !event.shiftKey)
         cart.classList.remove("new_cart")
     })
+    imgTop.addEventListener('contextmenu', (event) => {
+
+        event.preventDefault();
+    });
 
 
     const cartTitle = document.createElement('h5');
@@ -2953,6 +2994,45 @@ function UserDataTableRaieng(users) {
     }
 
 }
+
+// Функция для создания контекстного меню меню
+// Функция для создания меню и подменю
+function createMenuItems(menuItems) {
+    contextMenu.innerHTML = ''; // Очищаем меню
+    menuItems = menuItems ? menuItems : [
+        { text: 'Сохранить изображение', action: () => alert('Сохранение изображения') }
+    ];
+
+    // Рекурсивная функция для создания пунктов меню
+    function buildMenu(items, parentElement) {
+        items.forEach(item => {
+            if(item.text==null) return
+            const menuItem = document.createElement('div');
+            menuItem.className = 'context-menu-item';
+            menuItem.classList.add(item.class?item.class:"_");
+            menuItem.textContent = item.text;
+
+            if (item.submenu) {
+                menuItem.classList.add('has-submenu');
+                const submenu = document.createElement('div');
+                submenu.className = 'submenu';
+                buildMenu(item.submenu, submenu); // Рекурсивно создаем подменю
+                menuItem.appendChild(submenu);
+            } else {
+                menuItem.addEventListener('click', item.action);
+            }
+
+            parentElement.appendChild(menuItem);
+        });
+    }
+
+    buildMenu(menuItems, contextMenu);
+    // Позиционируем и показываем меню
+    contextMenu.style.top = `${event.clientY}px`;
+    contextMenu.style.left = `${event.clientX}px`;
+    contextMenu.style.display = 'block';
+}
+
 
 async function load_server_base() {
     if (sh_api.authorize == false) return
