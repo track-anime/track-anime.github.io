@@ -617,7 +617,7 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
 
-
+    VideoInfo.info.anime_related_list = document.getElementById("anime_related_list")
     VideoInfo.info.cover.src = `cover.png`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
 
@@ -808,6 +808,19 @@ function setVideoInfo(e) {
 
     var btn_sh_save = document.getElementById('btn_sh_save')
     btn_sh_save.ids = e.id ? e.id : null;
+
+    VideoInfo.info.anime_related_list.innerHTML = ""
+    
+    sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
+    .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
+    .forEach(e321 => {
+        VideoInfo.info?.anime_related_list?.insertAdjacentHTML(
+            'afterBegin',
+            `<a href="index.htm?shikimori_id=${e321.anime.id}" class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="color: #ff5555; text-decoration-color: rgba(255, 85, 85, 0.25);">[${e321.anime.kind}] ${e321.anime.russian} (${e321.relation_russian})</a>`
+        );
+    });
+    VideoInfo.info.anime_related_list.insertAdjacentHTML('afterBegin', "<div>Связанные аниме:</div>")
+
 
     if (sh_api.authorize) {
         sh_api.get_favorit(url_get.searchParams.get('sh_user_fav'))
