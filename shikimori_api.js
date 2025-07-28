@@ -308,6 +308,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 
 sh_api.get_anime = (id) => {
     // debug.log(id)
+    sh_api.get_anime_related(id)
     var url = `https://shikimori.one/api/animes/${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     
@@ -339,7 +340,7 @@ sh_api.get_anime = (id) => {
 
             console.error('Возникла проблема с операцией выборки get_anime:', error);
         });
-        sh_api.get_anime_related(id)
+        
 }
 sh_api.get_anime_related = (id) => {
     // debug.log(id)
