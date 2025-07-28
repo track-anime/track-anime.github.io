@@ -120,6 +120,11 @@ body {
     z-index: -1;
 } */
 
+.screen_filter{
+    filter: brightness(20%);
+    mask-image: radial-gradient(circle, white 50%, transparent 100%);
+}
+
 canvas#starryCanvas {
     position: fixed;
 }
@@ -905,6 +910,7 @@ p {
 @media screen and (orientation: portrait),
 screen and (max-width: 992px) {
 
+
     #pipDialogButton {
         display: none;
     }
@@ -975,19 +981,23 @@ screen and (max-width: 992px) {
 
     #carouselExampleAutoplaying,
     #carouselExampleAutoplaying2 {
-        margin: 4px !important;
-        width: 100% !important;
+        /* margin: 4px !important; */
+        /* width: 50% !important; */
+        /* height: 100%; */
+        /* width: auto !important; */
+        display: none;
     }
 
+}
+
+#carouselExampleAutoplaying {
+    width: 50%;
+    position: absolute;
 }
 
 #info_cover {
     max-width: 350px;
     width: 60%;
-}
-
-#carouselExampleAutoplaying {
-    width: 50%;
 }
 
 .vi_label {

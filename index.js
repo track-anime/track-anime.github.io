@@ -68,7 +68,7 @@ document.addEventListener('click', () => {
 
     contextMenu.style.display = 'none';
 });
-
+/*
 // Инициализация звёздного неба с пользовательскими параметрами
 const starrySky = new StarrySky('starryCanvas', {
     rotationSpeed: 0.00005, // Очень медленное вращение
@@ -88,7 +88,7 @@ const starrySky = new StarrySky('starryCanvas', {
     }
 });
 starrySky.stop()
-
+*/
 setTimeout(() => {
     error_timeoud_hide = true  // Через 5 минут отключаем уведомление о блокировки сайта 
 }, 5 * 60 * 1000);
@@ -333,7 +333,7 @@ VideoInfo.info = {
     "studios": VideoInfo.querySelector("#info_studios"),
     "fandubbers": VideoInfo.querySelector("#info_fandubbers"),
     "updated_at": VideoInfo.querySelector("#info_updated_at"),
-    "screenshots": VideoInfo.querySelector("#info_screenshots"),
+    "screenshots": DialogVideoInfo.querySelector("#info_screenshots"),
     "videos": VideoInfo.querySelector("#info_videos"),
     "info_status": VideoInfo.querySelector("#info_status"),
     "year": VideoInfo.querySelector("#info_year"),
@@ -771,7 +771,7 @@ function setVideoInfo(e) {
     html2 = ""
     e.screenshots?.forEach(el => {
         html = html + `
-        <div class="carousel-item w-100">
+        <div class="carousel-item w-100" data-bs-interval="15000">
         <img src="https://shikimori.one${el.original}"
             class="d-block w-100"  
             alt="...">
@@ -939,7 +939,7 @@ document.getElementById('search_input').addEventListener('input', function (e) {
 document.getElementById("VideoInfoBtn").addEventListener('click', () => {
     let DialogVideoInfo = document.getElementById('DialogVideoInfo')
     DialogVideoInfo.classList.contains('DialogVideoInfoScroll') ? DialogVideoInfo.classList.remove("DialogVideoInfoScroll") : DialogVideoInfo.classList.add("DialogVideoInfoScroll")
-    DialogVideoInfo.classList.contains('DialogVideoInfoScroll') ? starrySky.start() : starrySky.stop()
+    // DialogVideoInfo.classList.contains('DialogVideoInfoScroll') ? starrySky.start() : starrySky.stop()
 
 })
 document.addEventListener("search_another", function (e) {
@@ -1302,7 +1302,7 @@ closeDialogButton.addEventListener('click', () => {
 function closeDialogButtonEvent() {
     GetResume("ubd")
     VideoPlayerAnime.data = undefined
-    starrySky.stop()
+    // starrySky.stop()
     // VideoPlayerAnime.modal.hide();
     DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
     DialogVideoInfo.classList.add("d-none")
@@ -2446,7 +2446,7 @@ function dialog_(e, info) {
     // VideoPlayer.contentWindow.location.href = e.link?e.link:"loading.htm"
     debug.log(e.link)
     info ? DialogVideoInfo.classList.add("DialogVideoInfoScroll") : DialogVideoInfo.classList.remove("DialogVideoInfoScroll")
-    info ? starrySky.start() : starrySky.stop()
+    // info ? starrySky.start() : starrySky.stop()
 
     ta_pip(false)
 }
@@ -3149,13 +3149,13 @@ document.addEventListener('keydown', (e) => {
 
 document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') {
-        starrySky.stop()
+        // starrySky.stop()
     } else if (document.visibilityState === 'visible') {
         if (document.getElementById("DialogVideoInfo").classList.contains('d-none')) {
             // starrySky.stop()
         }
         else {
-            starrySky.start()
+            // starrySky.start()
         }
     }
 });

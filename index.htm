@@ -48,7 +48,7 @@
     <script defer src="/scripts/moment-with-locales.js"></script>
     <script defer src="/scripts/counterToStringLabel.js"></script>
     <script type="text/javascript" src="/scripts/qrcode.min.js"></script>
-    <script src="/scripts/StarrySky.js"></script>
+    <!-- <script src="/scripts/StarrySky.js"></script> -->
     <script type="text/javascript" src="https://vk.com/js/api/share.js?168" charset="windows-1251"></script>
     <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
     <script src="/scripts/html5-qrcode.min.js"></script>
@@ -406,8 +406,30 @@
 
     <div id="DialogVideoInfo" class="d-none">
         <canvas id="starryCanvas"></canvas>
+        <div id="carouselExampleAutoplaying" class="carousel slide screen_filter" data-bs-ride="carousel" data-bs-touch="false">
+            <div id="info_screenshots" class="carousel-inner rounded w-100">
+                <div class="carousel-item active w-100" data-bs-interval="30000">
+                    <img src="https://i.ytimg.com/vi/uRsEum05X1s/maxresdefault.jpg" class="d-block w-100" alt="...">
+                </div>
+                <div class="carousel-item w-100" data-bs-interval="30000">
+                    <img src="https://i.etsystatic.com/13034759/r/il/e630cf/1095944403/il_1588xN.1095944403_21s3.jpg"
+                        class="d-block w-100" alt="...">
+                </div>
+            </div>
+            <!-- <button class="carousel-control-prev" type="button"
+                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Предыдущий</span>
+            </button>
+            <button class="carousel-control-next" type="button"
+                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Следующий</span>
+            </button> -->
+        </div>
         <button type="button" class="btn btn-secondary" id="closeDialogButton">X</button>
         <div id="VideoInfo">
+
             <!-- ////////////////////////////////////////////////////// -->
 
             <div class="card mb-3 border-0">
@@ -577,29 +599,7 @@
                             </div>
 
                             <div class="d-md-flex flex-column flex-md-row w-100">
-                                <div id="carouselExampleAutoplaying" class="carousel slide m-4" data-bs-ride="carousel">
 
-                                    <div id="info_screenshots" class="carousel-inner rounded w-100">
-                                        <div class="carousel-item active w-100">
-                                            <img src="https://i.ytimg.com/vi/uRsEum05X1s/maxresdefault.jpg"
-                                                class="d-block w-100" alt="...">
-                                        </div>
-                                        <div class="carousel-item w-100">
-                                            <img src="https://i.etsystatic.com/13034759/r/il/e630cf/1095944403/il_1588xN.1095944403_21s3.jpg"
-                                                class="d-block w-100" alt="...">
-                                        </div>
-                                    </div>
-                                    <button class="carousel-control-prev" type="button"
-                                        data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Предыдущий</span>
-                                    </button>
-                                    <button class="carousel-control-next" type="button"
-                                        data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                        <span class="visually-hidden">Следующий</span>
-                                    </button>
-                                </div>
                             </div>
                         </div>
                     </div>
