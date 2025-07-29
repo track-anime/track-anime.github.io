@@ -381,12 +381,12 @@
 
       navigator.mediaSession.setActionHandler('previoustrack', () => {
         console.log('Перемотка назад');
-        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 88 } }, '*');
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 85 } }, '*');
       });
 
       navigator.mediaSession.setActionHandler('nexttrack', () => {
         console.log('Перемотка вперед');
-        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 88 } }, '*');
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 85 } }, '*');
       });
     } else {
       console.log('Media Session API не поддерживается');
