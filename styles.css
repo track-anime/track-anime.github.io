@@ -45,9 +45,11 @@ body {
 }
 
 .context-menu-item.has-submenu::after {
-    content: '▶';
+    content: '►';
     margin-left: 8px;
     font-size: 12px;
+    font-family: auto;
+    
 }
 
 .submenu {
@@ -126,10 +128,23 @@ body {
     flex-wrap: nowrap;
     overflow-x: auto;
     /* padding-top: var(--bs-card-spacer-x); */
-    padding-right: var(--bs-card-spacer-y);
-    padding-bottom: var(--bs-card-spacer-y);
-    padding-left: var(--bs-card-spacer-x);
+    /* padding-right: var(--bs-card-spacer-y); */
+    /* padding-bottom: 2rem; */
+    /* padding-left: var(--bs-card-spacer-x); */
     scroll-behavior: smooth;
+}
+
+.anime_related_spoiler{
+    background-color: #c6c6c6;
+    color: #424242;
+    width: 100%;
+    text-align: center;
+    border-radius: 7px;
+    margin: 15px 0px 15px 0px;
+    padding: 5px 0px 5px 0px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    user-select: none;
 }
 
 #anime_related_title {
@@ -739,6 +754,9 @@ p {
     /* .cart-del {
 
     } */
+    #anime_related_list {
+        flex-direction: column;
+    }
 
     #new_anime_list {
         flex-direction: column;
@@ -973,9 +991,7 @@ p {
 @media screen and (orientation: portrait),
 screen and (max-width: 992px) {
 
-    #anime_related_list {
-        flex-direction: column;
-    }
+
 
     .related_cart {
         flex-shrink: 0;
