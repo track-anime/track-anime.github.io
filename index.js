@@ -624,6 +624,9 @@ VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
 VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
     if (event.target.open) {
         VideoInfo.info.anime_franchise_iframe.src= `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`
+    }else{
+        VideoInfo.info.anime_franchise_iframe.src= `loading.htm`
+
     }})
 
 function setVideoInfo(e) {
@@ -827,6 +830,7 @@ function setVideoInfo(e) {
 
     var btn_sh_save = document.getElementById('btn_sh_save')
     btn_sh_save.ids = e.id ? e.id : null;
+    VideoInfo.info.anime_franchise.open = false;
 
     VideoInfo.info.anime_related_list.innerHTML = ""
 
