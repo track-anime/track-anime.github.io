@@ -628,7 +628,7 @@ VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
         window.focus()
     }else{
         VideoInfo.info.anime_franchise_iframe.src= `loading.htm`
-        window.focus()
+        // window.focus()
     }})
 
 function setVideoInfo(e) {
@@ -836,7 +836,49 @@ function setVideoInfo(e) {
 
     VideoInfo.info.anime_related_list.innerHTML = ""
 
-    // VideoInfo.info.anime_related_list.insertAdjacentHTML('beforeEnd', "<div>Связанные аниме:</div>")
+    sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
+    .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
+    .forEach(e321 => {
+        const e1 = {
+            "title": e321.anime.russian,
+            "cover": `https://shikimori.one${e321.anime.image.original}`,
+            // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
+            "date": formatDate(e321.anime.aired_on),
+            // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+            "voice": e321.relation_russian,
+            "series": e321.anime.episodes ? e321.anime.episodes : "M",
+            "link": `https://kodik.cc/find-player?shikimoriID=${e321.anime.id}`,
+            "kp": null,
+            "imdb": null,
+            "shikimori": e321.anime.id.toString(),
+            "status": e321.anime.status,
+            "raiting": e321.anime.score,
+            "material_data": {
+                poster_url: `https://shikimori.one${e321.anime.image.original}`,
+                anime_kind: `${e321.anime.kind}`,
+                anime_title: `${e321.anime.russian}`,
+                episodes_aired: `${e321.anime.episodes_aired}`,
+                episodes_total: `${e321.anime.episodes}`,
+                description: ``,
+                anime_status: `${e321.anime.status}`,
+                anime_studios: ``,
+                year: `${e321.anime.aired_on}`,
+                rating_mpaa: ``,
+                shikimori_rating: `${e321.anime.score}`,
+
+
+            },
+            "id": e321.anime.id,
+            "screenshots": [],
+            "e": e321,
+        }
+        const cart = add_cart(e1)
+        cart.classList.add("related_cart")
+        VideoInfo.info?.anime_related_list?.appendChild(cart)
+    });
+    VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length>0?VideoInfo.info?.anime_related.classList.remove("hide"):VideoInfo.info?.anime_related.classList.add("hide")
+
+    /*
     sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
         .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
         .forEach(e321 => {
@@ -878,7 +920,7 @@ function setVideoInfo(e) {
             VideoInfo.info?.anime_related_list?.appendChild(cart)
         });
         VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length>0?VideoInfo.info?.anime_related.classList.remove("hide"):VideoInfo.info?.anime_related.classList.add("hide")
-
+        */
 
 
     if (sh_api.authorize) {

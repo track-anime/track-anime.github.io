@@ -12,6 +12,7 @@ sh_api.logout_ev = new Event("sh_api_logout", { bubbles: true })
 sh_api.search_ev = new CustomEvent("sh_api_search", { bubbles: true })
 sh_api.get_anime_ev = new CustomEvent("sh_get_anime", { bubbles: true })
 sh_api.get_anime_ev_related = new CustomEvent("sh_get_anime_related", { bubbles: true })
+sh_api.get_anime_ev_franchise = new CustomEvent("sh_get_anime_franchise", { bubbles: true })
 
 sh_api.code = sh_api.url_get.searchParams.get('code')
 sh_api.status_lable = [
@@ -309,6 +310,7 @@ sh_api.AddUserRates = (id, sl) => {  ///Добавляет - изменяет а
 sh_api.get_anime = (id) => {
     // debug.log(id)
     sh_api.get_anime_related(id)
+    sh_api.get_anime_franchise(id)
     var url = `https://shikimori.one/api/animes/${id}`
     if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
     
@@ -373,6 +375,40 @@ sh_api.get_anime_related = (id) => {
         .catch(error => {
 
             console.error('Возникла проблема с операцией выборки get_anime_related:', error);
+        });
+}
+sh_api.get_anime_franchise = (id) => {
+    // debug.log(id)
+    var url = `https://shikimori.one/api/animes/${id}/franchise`
+    if(sh_api.authorize==true) url=`${url}?access_token=${sh_api.getCookie("sh_access_token")}`
+    fetch(url)
+        .then(response => {
+            sh_api.another.status = response.status
+            if (response.ok) {
+                return response.json();
+            } else {
+
+                if (response.status == "404") return response.status
+
+                throw new Error('Ответ сети был не в порядке. get_anime_franchise');
+            }
+        })
+        .then(data => {
+            console.log(111, data)
+            if (data == "404") {
+                sh_api.get_anime_ev.franchise = data
+                document.dispatchEvent(sh_api.get_anime_ev_franchise);
+                return
+            }
+
+            sh_api.get_anime_ev.franchise = data
+            document.dispatchEvent(sh_api.get_anime_ev_franchise);
+            // sh_api.Last_search = data
+            // debug.log(sh_api.Last_search)
+        })
+        .catch(error => {
+
+            console.error('Возникла проблема с операцией выборки get_anime_franchise:', error);
         });
 }
 
