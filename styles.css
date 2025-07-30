@@ -129,6 +129,7 @@ body {
     padding-right: var(--bs-card-spacer-y);
     padding-bottom: var(--bs-card-spacer-y);
     padding-left: var(--bs-card-spacer-x);
+    scroll-behavior: smooth;
 }
 
 #anime_related_title {

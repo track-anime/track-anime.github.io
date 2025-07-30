@@ -351,10 +351,10 @@ VideoInfo.info = {
     "KodikPlayer": VideoInfo.querySelector("#info_KodikPlayer"),
     "duration": VideoInfo.querySelector("#info_duration"),
     "TorrentURL": null,
+    "anime_related_list": document.getElementById("anime_related_list"),
 
 
 }
-
 // list_serch.children[4].scrollIntoView({behavior: "smooth"}) чтоб перейти к нужному объекту на странице
 
 
@@ -608,6 +608,15 @@ VideoInfo.info.cover.addEventListener('click', (ev) => {
     VideoInfo.info.cover.src = VideoInfo.info.cover.src_force
 })
 
+
+///////////////////////// Плавная прокрутка для связанных аниме в карточке list ////////////////////////
+VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
+    if(!window.matchMedia("(orientation: landscape)").matches)return
+    event.preventDefault();
+    const scrollContainer = event.currentTarget;
+    scrollContainer.scrollLeft += event.deltaY * 2;
+});
+
 function setVideoInfo(e) {
     // debug.log(111, e)
     load.show(false)
@@ -617,7 +626,7 @@ function setVideoInfo(e) {
     VideoInfo.e = e
     const tv = e.kind ? ` [${e.kind.toUpperCase()}]` : ""
 
-    VideoInfo.info.anime_related_list = document.getElementById("anime_related_list")
+
     VideoInfo.info.cover.src = `cover.png`;
     VideoInfo.info.cover.src = `https://shikimori.one${e.image.original}`;
 
@@ -810,55 +819,49 @@ function setVideoInfo(e) {
     btn_sh_save.ids = e.id ? e.id : null;
 
     VideoInfo.info.anime_related_list.innerHTML = ""
+
     // VideoInfo.info.anime_related_list.insertAdjacentHTML('beforeEnd', "<div>Связанные аниме:</div>")
     sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
-    .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
-    .forEach(e321 => {
-        console.log(111, e321)
-        // return
-        const e1 = {
-            "title": e321.anime.russian,
-            "cover": `https://shikimori.one${e321.anime.image.original}`,
-            // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
-            "date": formatDate(e321.anime.aired_on),
-            // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
-            "voice": e321.relation_russian,
-            "series": e321.anime.episodes ? e321.anime.episodes : "M",
-            "link": `https://kodik.cc/find-player?shikimoriID=${e321.anime.id}`,
-            "kp": null,
-            "imdb": null,
-            "shikimori": e321.anime.id.toString(),
-            "status": e321.anime.status,
-            "raiting": e321.anime.score,
-            "material_data": {
-                poster_url: `https://shikimori.one${e321.anime.image.original}`,
-                anime_kind: `${e321.anime.kind}`,
-                anime_title: `${e321.anime.russian}`,
-                episodes_aired: `${e321.anime.episodes_aired}`,
-                episodes_total: `${e321.anime.episodes}`,
-                description: ``,
-                anime_status: `${e321.anime.status}`,
-                anime_studios: ``,
-                year: `${e321.anime.aired_on}`,
-                rating_mpaa: ``,
-                shikimori_rating: `${e321.anime.score}`,
+        .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
+        .forEach(e321 => {
+            const e1 = {
+                "title": e321.anime.russian,
+                "cover": `https://shikimori.one${e321.anime.image.original}`,
+                // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
+                "date": formatDate(e321.anime.aired_on),
+                // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+                "voice": e321.relation_russian,
+                "series": e321.anime.episodes ? e321.anime.episodes : "M",
+                "link": `https://kodik.cc/find-player?shikimoriID=${e321.anime.id}`,
+                "kp": null,
+                "imdb": null,
+                "shikimori": e321.anime.id.toString(),
+                "status": e321.anime.status,
+                "raiting": e321.anime.score,
+                "material_data": {
+                    poster_url: `https://shikimori.one${e321.anime.image.original}`,
+                    anime_kind: `${e321.anime.kind}`,
+                    anime_title: `${e321.anime.russian}`,
+                    episodes_aired: `${e321.anime.episodes_aired}`,
+                    episodes_total: `${e321.anime.episodes}`,
+                    description: ``,
+                    anime_status: `${e321.anime.status}`,
+                    anime_studios: ``,
+                    year: `${e321.anime.aired_on}`,
+                    rating_mpaa: ``,
+                    shikimori_rating: `${e321.anime.score}`,
 
 
-            },
-            "id": e321.anime.id,
-            "screenshots": [],
-            "e": e321,
-        }
-        const cart = add_cart(e1)
-        cart.classList.add("related_cart")
-        VideoInfo.info?.anime_related_list?.appendChild(cart)
+                },
+                "id": e321.anime.id,
+                "screenshots": [],
+                "e": e321,
+            }
+            const cart = add_cart(e1)
+            cart.classList.add("related_cart")
+            VideoInfo.info?.anime_related_list?.appendChild(cart)
+        });
 
-        // VideoInfo.info?.anime_related_list?.insertAdjacentHTML(
-        //     'beforeEnd',
-        //     `<a href="index.htm?shikimori_id=${e321.anime.id}" class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" style="color: #ff5555; text-decoration-color: rgba(255, 85, 85, 0.25);">[${e321.anime.kind}] ${e321.anime.russian} (${e321.relation_russian})</a>`
-        // );
-    });
-    
 
 
     if (sh_api.authorize) {
@@ -1193,7 +1196,7 @@ function GetFavoriteList(type) {
         }
 
         const cart = add_cart(e1)
-        
+
         status.num[e.status] = status.num[e.status] ? status.num[e.status] + 1 : 1
         // sh_f.status.name[e.status] = sh_f.status.name[e.status] ? sh_f.status.name[e.status] : document.querySelector(`#fav_${e.status} .ned_name`).textContent
         document.querySelector(`#fav_${e.status} .ned`).appendChild(cart)
@@ -2043,30 +2046,34 @@ function add_cart(e) {
         }
         if (event.button == 2) {
             createMenuItems([
-                { text: 'Открыть', action: () => {
-                    e.shift = event.shiftKey
-                    VideoPlayerAnime.data = cart.data
-                    dialog_(e, !event.shiftKey)
-                    cart.classList.remove("new_cart")
-                } },
+                {
+                    text: 'Открыть', action: () => {
+                        e.shift = event.shiftKey
+                        VideoPlayerAnime.data = cart.data
+                        dialog_(e, !event.shiftKey)
+                        cart.classList.remove("new_cart")
+                    }
+                },
                 { text: 'Открыть в новой вкладке', action: () => window.open(a.href, '_blank') },
                 // { text: 'Копировать ссылку', action: () => alert('Ссылка скопирована') },
-                {text: 'Обновить обложку', action: () => {
-                    imgTop.src = ""
-                    imgTop.src = `${imgTop.img_pre}&force=true`
-                    console.log(imgTop.src)
-                    // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
-                    imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
-                }},
                 {
-                    text: sh_api.authorize?'Добавить в избранное':null,
+                    text: 'Обновить обложку', action: () => {
+                        imgTop.src = ""
+                        imgTop.src = `${imgTop.img_pre}&force=true`
+                        console.log(imgTop.src)
+                        // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
+                        imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
+                    }
+                },
+                {
+                    text: sh_api.authorize ? 'Добавить в избранное' : null,
                     submenu: [
-                        { text: 'смотрю', class: "yellow", action: () => {sh_api.AddUserRates(Number(e.shikimori), 0)}},
-                        { text: 'просмотренно', class: "btn-success", action: () => {sh_api.AddUserRates(Number(e.shikimori), 1)}},
-                        { text: 'брошено', class: "btn-danger", action: () => {sh_api.AddUserRates(Number(e.shikimori), 2)}},
-                        { text: 'отложено', class: "btn-warning", action: () => {sh_api.AddUserRates(Number(e.shikimori), 3)}},
-                        { text: 'запланировано', class: "pink", action: () => {sh_api.AddUserRates(Number(e.shikimori), 4)}},
-                        { text: 'пересматриваю', class: "btn-info", action: () => {sh_api.AddUserRates(Number(e.shikimori), 5)}},
+                        { text: 'смотрю', class: "yellow", action: () => { sh_api.AddUserRates(Number(e.shikimori), 0) } },
+                        { text: 'просмотренно', class: "btn-success", action: () => { sh_api.AddUserRates(Number(e.shikimori), 1) } },
+                        { text: 'брошено', class: "btn-danger", action: () => { sh_api.AddUserRates(Number(e.shikimori), 2) } },
+                        { text: 'отложено', class: "btn-warning", action: () => { sh_api.AddUserRates(Number(e.shikimori), 3) } },
+                        { text: 'запланировано', class: "pink", action: () => { sh_api.AddUserRates(Number(e.shikimori), 4) } },
+                        { text: 'пересматриваю', class: "btn-info", action: () => { sh_api.AddUserRates(Number(e.shikimori), 5) } },
                     ]
                 }
             ]);
@@ -3059,10 +3066,10 @@ function createMenuItems(menuItems) {
     // Рекурсивная функция для создания пунктов меню
     function buildMenu(items, parentElement) {
         items.forEach(item => {
-            if(item.text==null) return
+            if (item.text == null) return
             const menuItem = document.createElement('div');
             menuItem.className = 'context-menu-item';
-            menuItem.classList.add(item.class?item.class:"_");
+            menuItem.classList.add(item.class ? item.class : "_");
             menuItem.textContent = item.text;
 
             if (item.submenu) {
