@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Граф аниме (Shikimori API)</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/standalone/umd/vis-network.min.js"></script>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #mynetwork {
+            position: absolute;
+            border: 1px solid #444;
+            background-color: #2a2a2a;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        #loading {
+            font-size: 18px;
+            margin: 20px;
+        }
+
+        #error {
+            font-size: 18px;
+            color: #ff5555;
+            margin: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading">Загрузка данных...</div>
+    <div id="error" style="display: none;"></div>
+    <div id="mynetwork" style="display: none;"></div>
+
+    <script>
+        var url_get = new URL(window.location.href)
+        const MyServerURL = url_get.searchParams.get('MyServerURL') ? url_get.searchParams.get('MyServerURL') : 'server.dygdyg.ru'
+        const color_link = {
+            prequel: '#FFEB3B00',
+            sequel: '#ff4444',
+            side_story: '#ea4c89',
+            parent_story: '#ea4c89',
+            other: '#000000',
+            summary: '#673AB7',
+        }
+
+        // Функция для получения данных из API
+        async function fetchFranchiseData() {
+            try {
+                const response = await fetch(`https://shikimori.one/api/animes/${url_get.searchParams.get('shikimori_id') ? url_get.searchParams.get('shikimori_id') : '29803'}/franchise`);
+                if (!response.ok) {
+                    throw new Error(`Ошибка HTTP: ${response.status}`);
+                }
+                const data = await response.json();
+                return data;
+            } catch (error) {
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').textContent = `Ошибка загрузки данных: ${error.message}`;
+                document.getElementById('error').style.display = 'block';
+                throw error;
+            }
+        }
+
+        // Функция для обработки данных и создания графа
+        async function createGraph() {
+            const franchiseData = await fetchFranchiseData();
+
+            // Формирование узлов с обложками
+            const nodes = franchiseData.nodes.map(node => ({
+                id: node.id,
+                label: `[${node.kind}]\n${node.name}\n${node.year || 'Неизвестный год'}`,
+                url: node.url,
+                image: `//${MyServerURL}/cover2.php?id=${node.id}&url=${node.image_url}`,
+                // image: node.image_url,
+                shape: 'image',
+                size: 50,
+                // Добавляем weight для увеличения "массы" узлов, чтобы они отталкивались сильнее
+                weight: 30 // Устанавливаем вес узлов
+            }));
+
+            // Формирование всех рёбер с цветами и стилем в зависимости от типа связи
+            const edges = franchiseData.links
+                .filter(link => link.relation !== 'prequel')
+                .filter(link => link.relation !== 'other')
+                // .filter(link => link.relation !== 'parent_story')
+                .map(link => ({
+                    id: link.id,
+                    from: link.source_id,
+                    to: link.target_id,
+                    // label: link.relation,
+                    arrows: 'to',
+                    color: {
+                        color: color_link[link.relation] ? color_link[link.relation] : '#888888',
+                        highlight: link.relation === 'prequel' ? '#00ff00' : link.relation === 'sequel' ? '#ff6666' : '#aaaaaa'
+                    },
+                    dashes: link.relation != 'prequel' && link.relation != 'sequel'
+                }));
+
+            // Создание узлов и рёбер для vis.js
+            const nodesDataSet = new vis.DataSet(nodes);
+            const edgesDataSet = new vis.DataSet(edges);
+
+            // Контейнер для графа
+            const container = document.getElementById('mynetwork');
+
+            // Данные графа
+            const data = {
+                nodes: nodesDataSet,
+                edges: edgesDataSet
+            };
+
+            // Настройки графа
+            const options = {
+                nodes: {
+                    shape: 'image',
+                    font: {
+                        color: '#ffffff',
+                        size: 14,
+                        face: 'arial',
+                        align: 'center',
+                        strokeWidth: 2,
+                        strokeColor: '#000000'
+                    },
+                    borderWidth: 2,
+                    color: {
+                        border: '#555',
+                        highlight: {
+                            border: '#777'
+                        }
+                    },
+                    shapeProperties: {
+                        useBorderWithImage: true
+                    }
+                },
+                edges: {
+                    arrows: {
+                        to: { enabled: true, scaleFactor: 1 }
+                    },
+                    font: {
+                        color: '#ffffff',
+                        size: 15,
+                        face: 'arial',
+                        strokeWidth: 0
+                    }
+                },
+                physics: {
+                    enabled: true,
+                    barnesHut: {
+                        gravitationalConstant: -3000, // Увеличено отталкивание узлов
+                        centralGravity: 0.2, // Уменьшена центральная гравитация для более равномерного распределения
+                        springLength: 600, // Увеличена длина рёбер для большего расстояния между узлами
+                        avoidOverlap: 1 // Включено избегание наложения
+                    },
+                    repulsion: {
+                        nodeDistance: 200 // Установлено минимальное расстояние между узлами
+                    }
+                }
+            };
+
+            // Инициализация графа
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('mynetwork').style.display = '';
+            const network = new vis.Network(container, data, options);
+
+            // Обработка клика по узлу
+            network.on("click", function (params) {
+                // console.log(params.event.srcEvent.shiftKey)
+                if (params.nodes.length > 0) {
+                    const nodeId = params.nodes[0];
+                    const node = nodes.find(n => n.id === nodeId);
+                    if (node && node.url) {
+                        window.open(`index.htm?shikimori_id=${node.id}`, '_blank')
+                        return
+                        if (params.event.srcEvent.shiftKey) {
+                        }
+                        window.location.href = `index.htm?shikimori_id=${node.id}`;
+                    }
+                }
+            });
+        }
+
+        // Запуск создания графа
+        createGraph().catch(error => console.error(error));
+    </script>
+</body>
+
+</html>

@@ -121,6 +121,9 @@ body {
     filter: url(#rough-edge);
     z-index: -1;
 } */
+#anime_franchise_iframe {
+    height: 800px;
+}
 
 #anime_related_list {
     display: flex;
@@ -134,7 +137,8 @@ body {
     scroll-behavior: smooth;
 }
 
-.anime_related_spoiler{
+.anime_related_spoiler,
+.anime_franchise_spoiler{
     background-color: #c6c6c6;
     color: #424242;
     width: 100%;

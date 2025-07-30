@@ -352,6 +352,10 @@ VideoInfo.info = {
     "duration": VideoInfo.querySelector("#info_duration"),
     "TorrentURL": null,
     "anime_related_list": document.getElementById("anime_related_list"),
+    "anime_related": document.getElementById("anime_related"),
+    "anime_franchise_iframe": document.getElementById("anime_franchise_iframe"),
+    "anime_franchise": document.getElementById("anime_franchise"),
+
 
 
 }
@@ -617,6 +621,11 @@ VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
     scrollContainer.scrollLeft += event.deltaY * 2;
 });
 
+VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
+    if (event.target.open) {
+        VideoInfo.info.anime_franchise_iframe.src= `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`
+    }})
+
 function setVideoInfo(e) {
     // debug.log(111, e)
     load.show(false)
@@ -636,6 +645,7 @@ function setVideoInfo(e) {
     } else {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}&url=${VideoInfo.info.cover.src}`
     }
+    
     VideoInfo.info.cover.src_force = `${VideoInfo.info.cover.src}&force=true`
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
@@ -861,6 +871,7 @@ function setVideoInfo(e) {
             cart.classList.add("related_cart")
             VideoInfo.info?.anime_related_list?.appendChild(cart)
         });
+        VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length>0?VideoInfo.info?.anime_related.classList.remove("hide"):VideoInfo.info?.anime_related.classList.add("hide")
 
 
 
