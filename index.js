@@ -879,7 +879,7 @@ function setVideoInfo(e) {
         VideoInfo.info?.anime_related_list?.appendChild(cart)
     });
     VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length>0?VideoInfo.info?.anime_related.classList.remove("hide"):VideoInfo.info?.anime_related.classList.add("hide")
-
+    sh_api.get_anime_ev.franchise.nodes.length>0?VideoInfo.info?.anime_franchise.classList.remove("hide"):VideoInfo.info?.anime_franchise.classList.add("hide")
     /*
     sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
         .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
