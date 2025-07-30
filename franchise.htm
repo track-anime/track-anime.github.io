@@ -13,7 +13,7 @@
         }
 
         body {
-            background: radial-gradient(at 40% 80%,rgb(22, 22, 22), rgb(60, 60, 90),rgb(22, 22, 22));
+            background: radial-gradient(at 40% 80%, rgb(22, 22, 22), rgb(60, 60, 90), rgb(22, 22, 22));
             color: #ffffff;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -25,6 +25,7 @@
         }
 
         #starfield {
+            background: radial-gradient(at 40% 80%, rgb(22, 22, 22), rgb(60, 60, 90), rgb(22, 22, 22));
             position: fixed;
             top: 0;
             left: 0;
@@ -32,7 +33,6 @@
             bottom: 0;
             pointer-events: none;
             z-index: 0;
-            background: transparent;
         }
 
         #mynetwork {
@@ -67,10 +67,19 @@
             z-index: 2;
             position: relative;
         }
+
+        #fullscreen {
+            z-index: 10;
+            right: 0;
+            font-size: large;
+            position: fixed;
+            margin: 10px;
+        }
     </style>
 </head>
 
 <body>
+    <input type="button" id="fullscreen" onclick="document.body.requestFullscreen()" value="[ ]" title="Развернуть во весь экран"></input>
     <canvas id="starfield"></canvas>
 
     <div id="loading">Загрузка данных...</div>
