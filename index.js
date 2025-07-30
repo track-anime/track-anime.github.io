@@ -354,6 +354,7 @@ VideoInfo.info = {
     "anime_related_list": document.getElementById("anime_related_list"),
     "anime_related": document.getElementById("anime_related"),
     "anime_franchise_iframe": document.getElementById("anime_franchise_iframe"),
+    "anime_franchise_link": document.getElementById("anime_franchise_link"),
     "anime_franchise": document.getElementById("anime_franchise"),
 
 
@@ -624,6 +625,8 @@ VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
 VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
     if (event.target.open) {
         VideoInfo.info.anime_franchise_iframe.src= `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`
+        VideoInfo.info.anime_franchise_link.onclick = () => { window.open(`franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`, '_blank')}
+        VideoInfo.info.anime_franchise_link.style.cursor = "pointer"
         VideoInfo.info.anime_franchise_iframe.scrollIntoView({behavior: "smooth"});
         window.focus()
     }else{
@@ -835,7 +838,6 @@ function setVideoInfo(e) {
     VideoInfo.info.anime_franchise.open = false;
 
     VideoInfo.info.anime_related_list.innerHTML = ""
-
     sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
     .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
     .forEach(e321 => {
