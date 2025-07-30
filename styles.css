@@ -123,6 +123,7 @@ body {
 } */
 #anime_franchise_iframe {
     height: 800px;
+    border-radius: 9px;
 }
 
 #anime_related_list {

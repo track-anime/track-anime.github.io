@@ -7,8 +7,12 @@
     <title>Граф аниме (Shikimori API)</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/standalone/umd/vis-network.min.js"></script>
     <style>
+        html {
+            background-color: transparent;
+        }
+
         body {
-            background-color: #1a1a1a;
+            background-color: #2b3035;
             color: #ffffff;
             font-family: Arial, sans-serif;
             margin: 0;
@@ -18,9 +22,9 @@
         }
 
         #mynetwork {
-            position: absolute;
-            border: 1px solid #444;
-            background-color: #2a2a2a;
+            position: fixed;
+            /* border: 1px solid #444; */
+            background-color: transparent;
             top: 0;
             bottom: 0;
             left: 0;
