@@ -20,14 +20,13 @@ if (isset($_GET['shikimori_id']) && !empty($_GET['shikimori_id'])) {
         if (isset($data['russian']) && !empty($data['russian'])) {
 
             // Заменяем существующий метатег description на новый
+            $content = preg_replace('/<title>[^<]*<\/title>/i', '<title>TA: ['.$data['kind']."] ".$data['russian'].'"</title>', $content);
             $content = preg_replace('/<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i', '<meta name="description" content="['.$data['kind']."] ".$data['russian'].'">', $content);
             $content = preg_replace('/<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i', '<meta property="og:description" content="['.$data['kind']."] ".$data['russian'].'">', $content);
             $content = preg_replace('/<meta\s+property="twitter:description"\s+content="[^"]*"\s*\/?>/i', '<meta property="twitter:description" content="['.$data['kind']."] ".$data['russian'].'">', $content);
             $content = preg_replace('/<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i', '<meta property="og:image" content="https://server.dygdyg.ru/cover2.php?id='.$shikimori_id.'">', $content);
             $content = preg_replace('/<meta\s+property="twitter:image"\s+content="[^"]*"\s*\/?>/i', '<meta property="twitter:image" content="https://server.dygdyg.ru/cover2.php?id='.$shikimori_id.'">', $content);
         }
-        // Добавляем JavaScript для вывода $response в консоль браузера
-        $debug_script = '<script>console.log(111,"' . $data['russian'] . '");</script>';
     }
     
     
