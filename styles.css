@@ -49,7 +49,7 @@ body {
     margin-left: 8px;
     font-size: 12px;
     font-family: auto;
-    
+
 }
 
 .submenu {
@@ -139,7 +139,7 @@ body {
 }
 
 .anime_related_spoiler,
-.anime_franchise_spoiler{
+.anime_franchise_spoiler {
     background-color: #c6c6c6;
     color: #424242;
     width: 100%;
@@ -238,14 +238,65 @@ canvas#starryCanvas {
     height: 0;
 }
 
+:root {
+    --color_R: hsl(0, 100%, 50%);
+    /* Красный */
+    --color_G: hsl(120, 100%, 50%);
+    /* Зелёный */
+    --color_B: hsl(240, 100%, 50%);
+    /* Синий */
+}
+
+
 #new_anime_list {
     display: flex;
     background-color: #0d6efd54;
-    border: #ff00e985;
+    /* border: #ff00e985; */
     border-width: 4px;
     border-style: inset;
     flex-wrap: wrap;
     justify-content: center;
+    border-image: linear-gradient(45deg,
+            var(--color_R),
+            var(--color_G),
+            var(--color_B),
+            var(--color_R)) 1;
+    animation: rotateColors 20s linear infinite;
+}
+
+
+@keyframes rotateColors {
+    0% {
+        border-image: linear-gradient(45deg,
+                var(--color_R),
+                var(--color_G),
+                var(--color_B),
+                var(--color_R)) 1;
+    }
+
+    33.33% {
+        border-image: linear-gradient(45deg,
+                var(--color_G),
+                var(--color_B),
+                var(--color_R),
+                var(--color_G)) 1;
+    }
+
+    66.66% {
+        border-image: linear-gradient(45deg,
+                var(--color_B),
+                var(--color_R),
+                var(--color_G),
+                var(--color_B)) 1;
+    }
+
+    100% {
+        border-image: linear-gradient(45deg,
+                var(--color_R),
+                var(--color_G),
+                var(--color_B),
+                var(--color_R)) 1;
+    }
 }
 
 #modal_reiting_info_userTable_body {
@@ -756,6 +807,7 @@ p {
 }
 
 @media screen and (orientation: portrait) {
+
     /* .cart-del {
 
     } */
