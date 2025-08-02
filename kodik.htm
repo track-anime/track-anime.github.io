@@ -20,14 +20,14 @@
       <h2>Управление</h2>
       <div class="controls-grid">
         <span class="key">Space</span><span class="desc">Плей-пауза</span>
-          <span class="key">←</span><span class="desc">Перемотка назад на 10 сек</span>
-          <span class="key">→</span><span class="desc">Перемотка вперёд на 10 сек</span>
-          <span class="key">↑</span><span class="desc">Увеличить громкость</span>
-          <span class="key">↓</span><span class="desc">Уменьшить громкость</span>
-          <span class="key">A</span><span class="desc">Перемотка назад на 90 сек</span>
-          <span class="key">D</span><span class="desc">Перемотка вперёд на 90 сек</span>
+        <span class="key">←</span><span class="desc">Перемотка назад на 10 сек</span>
+        <span class="key">→</span><span class="desc">Перемотка вперёд на 10 сек</span>
+        <span class="key">↑</span><span class="desc">Увеличить громкость</span>
+        <span class="key">↓</span><span class="desc">Уменьшить громкость</span>
+        <span class="key">A</span><span class="desc">Перемотка назад на 90 сек</span>
+        <span class="key">D</span><span class="desc">Перемотка вперёд на 90 сек</span>
       </div>
-  </div>
+    </div>
 
   </div>
   <iframe id="kodik" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *"></iframe>
@@ -94,33 +94,37 @@
     font: 700 12px / 30px Arial;
     /* pointer-events: auto; */
     margin: 3px;
-}
+  }
 
-#panel_info_control h2 {
-    color: #00b7ff; /* Голубой для заголовка */
+  #panel_info_control h2 {
+    color: #00b7ff;
+    /* Голубой для заголовка */
     font-size: 1.2em;
     margin: 0 0 0 0;
     text-align: center;
     text-transform: uppercase;
-}
+  }
 
-.controls-grid {
+  .controls-grid {
     display: grid;
-    grid-template-columns: 50px 1fr; /* Фиксированная ширина для клавиш, остальное для описания */
+    grid-template-columns: 50px 1fr;
+    /* Фиксированная ширина для клавиш, остальное для описания */
     /* gap: 10px; Отступ между строками и столбцами */
     align-items: center;
-}
+  }
 
-.controls-grid .key {
-    color: #ffcc00; /* Жёлтый для клавиш */
+  .controls-grid .key {
+    color: #ffcc00;
+    /* Жёлтый для клавиш */
     text-align: center;
     font-weight: 700;
-}
+  }
 
-.controls-grid .desc {
+  .controls-grid .desc {
     color: aliceblue;
-    font-weight: 400; /* Чуть легче шрифт для описания */
-}
+    font-weight: 400;
+    /* Чуть легче шрифт для описания */
+  }
 </style>
 
 
@@ -216,7 +220,7 @@
           break;
 
         case "Space":
-          navigator.mediaSession.metadata.isPlay?kodik_player_api({ method: "pause"}):kodik_player_api({ method: "play"})
+          navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause" }) : kodik_player_api({ method: "play" })
           break;
         case "1":
 
@@ -231,7 +235,7 @@
     setInterval(() => {
       window.focus();   ////////////////////////////// Костыль чтоб забирать фокус у плеера по кд
     }, 1000);
-    
+
     document.getElementById("kodik").addEventListener('load', () => {
       if (start_load == false) {
         if (BaseAnimeCurrent[shikimori_id]) kodik_player_api(
@@ -320,6 +324,7 @@
 
         break
       case "kodik_player_current_episode":
+        navigator.mediaSession.metadata.time = 0;
         navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
         // delete BaseAnimeCurrent[null];
         if (data_anime.material_data.episodes_total == message.data.value.episode) {
@@ -368,13 +373,13 @@
       navigator.mediaSession.metadata.volume - 1;
       navigator.mediaSession.metadata.isPlay = false;
       navigator.mediaSession.setActionHandler('play', () => {
-        navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause"}) : kodik_player_api({ method: "play"})
+        navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause" }) : kodik_player_api({ method: "play" })
         console.log('Воспроизведение');
       });
 
       navigator.mediaSession.setActionHandler('pause', () => {
         // kodik_player_api({ method: "pause" });
-        navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause"}) : kodik_player_api({ method: "play"})
+        navigator.mediaSession.metadata.isPlay ? kodik_player_api({ method: "pause" }) : kodik_player_api({ method: "play" })
       });
       navigator.mediaSession.setActionHandler('stop', () => {
         kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "pause" } }, '*');
