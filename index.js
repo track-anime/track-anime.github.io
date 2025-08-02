@@ -989,7 +989,7 @@ function setVideoInfo(e) {
 function vk_share() {
 
     var url = new URL("https://vk.com/share.php")
-    url.searchParams.set("url", `https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}`)
+    url.searchParams.set("url", `${location.origin}/?shikimori_id=${AnimeInfo.id}`)
     url.searchParams.set("title", `Серии: ${VideoInfo.info.series.textContent} | [${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian}`)
     url.searchParams.set("image", `${VideoInfo.info.cover.src}`)
     url.searchParams.set("noparse", true)
@@ -1310,7 +1310,7 @@ async function sendWebhookMessageNoCover(id) {
             },
             body: JSON.stringify({
                 username: sh_api.authorize ? sh_api.UserData.nickname : "нонейм",
-                avatar_url: sh_api.authorize ? sh_api.UserData.image.x32 : "https://track-anime.github.io/favicon.png",
+                avatar_url: sh_api.authorize ? sh_api.UserData.image.x32 : `${location.origin}/favicon.png`,
 
                 content: `ID: ${id} \n https://shikimori.one/animes/${id}`,
             }),
@@ -2437,7 +2437,7 @@ function copy_discord() {
     var genres = ""
 
     AnimeInfo.genres.forEach(e => {
-        genres = `${genres} [${e.russian}](<https://track-anime.github.io/?anime_genres=${e.russian}>)`
+        genres = `${genres} [${e.russian}](<${location.origin}/?anime_genres=${e.russian}>)`
     });
 
     copyToClipboard(`
@@ -2447,14 +2447,14 @@ function copy_discord() {
 
 > 🎬 **Серии:** ${VideoInfo.info.series.textContent}  
 > ⏰ **Длительность:** ${VideoInfo.info.duration.textContent}
-> 🎨 **Студия:** [${VideoInfo.info.studios.textContent}](<https://track-anime.github.io/?anime_studios=${encodeURIComponent(VideoInfo.info.studios.textContent)}>) 
+> 🎨 **Студия:** [${VideoInfo.info.studios.textContent}](<${location.origin}/?anime_studios=${encodeURIComponent(VideoInfo.info.studios.textContent)}>) 
 > 📅 **Год выхода:** ${VideoInfo.info.year.textContent}
 > 🏷️ **Жанры:** ${genres} 
 > 📌 **Статус:** ${VideoInfo.info.info_status.textContent}  
-> 🎯 **Возрастной рейтинг:** [${VideoInfo.info.rating_mpaa.textContent}](<https://track-anime.github.io/?rating_mpaa=${encodeURIComponent(VideoInfo.info.rating_mpaa.textContent)}>)
+> 🎯 **Возрастной рейтинг:** [${VideoInfo.info.rating_mpaa.textContent}](<${location.origin}/?rating_mpaa=${encodeURIComponent(VideoInfo.info.rating_mpaa.textContent)}>)
 > 🌟 **Рейтинг shikimori:** ${VideoInfo.info.shikimori_rating.textContent}
 
-[Открыть на Track Anime By ДугДуг](<https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}>)
+[Открыть на Track Anime By ДугДуг](<${location.origin}/?shikimori_id=${AnimeInfo.id}>)
 [Открыть на shikimori](<https://shikimori.one/animes/${AnimeInfo.id}>)
 
 [Обложка](${VideoInfo.info.cover.src})
@@ -2499,7 +2499,7 @@ function copy_telegram() {
     | 🎯 **Возрастной рейтинг:** __${VideoInfo.info.rating_mpaa.textContent}__
     | 🌟 **Рейтинг shikimori:** __${VideoInfo.info.shikimori_rating.textContent}__
 
-🔗 [Track Anime By ДугДуг]: https://track-anime.github.io/?shikimori_id=${AnimeInfo.id}
+🔗 [Track Anime By ДугДуг]: ${location.origin}/?shikimori_id=${AnimeInfo.id}
 🌐 [shikimori]: https://shikimori.one/animes/${AnimeInfo.id}
 
 __${AnimeInfo.description ? AnimeInfo.description.replace(/\[character=\d+\]/g, '__ **').replace(/\[\/character\]/g, '** __') : '*'}__
@@ -3329,4 +3329,4 @@ async function BrowserOpen(link) {
     }
 }
 
-DownloadAPK("https://track-anime.github.io/app/TrackAnimeByDygDyg.apk")
+DownloadAPK(`${location.origin}/app/TrackAnimeByDygDyg.apk`)
