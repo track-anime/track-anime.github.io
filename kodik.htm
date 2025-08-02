@@ -128,6 +128,7 @@
 
   var url_get = new URL(window.location.href)
   const MyServerURL = url_get.searchParams.get('MyServerURL') ? url_get.searchParams.get('MyServerURL') : 'server.dygdyg.ru' //'dygdyg.duckdns.org'
+  const time_op = 85
   var kodik = document.createElement("iframe");
   var BaseAnimeCurrent = JSON.parse(localStorage.getItem('BaseAnimeCurrent')) || {};
   var data_anime
@@ -204,13 +205,13 @@
           break;
 
         case "KeyA":
-          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time - 90 })
-          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time - 90
+          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time - time_op })
+          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time - time_op
           break;
 
         case "KeyD":
-          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time + 90 })
-          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time + 90
+          kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time + time_op })
+          navigator.mediaSession.metadata.time = navigator.mediaSession.metadata.time + time_op
 
           break;
 
@@ -381,12 +382,12 @@
 
       navigator.mediaSession.setActionHandler('previoustrack', () => {
         console.log('Перемотка назад');
-        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - 85 } }, '*');
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time - time_op } }, '*');
       });
 
       navigator.mediaSession.setActionHandler('nexttrack', () => {
         console.log('Перемотка вперед');
-        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + 85 } }, '*');
+        kodikIframe.postMessage({ key: "kodik_player_api", value: { method: "seek", seconds: navigator.mediaSession.metadata.time + time_op } }, '*');
       });
     } else {
       console.log('Media Session API не поддерживается');
