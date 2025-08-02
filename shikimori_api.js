@@ -236,7 +236,7 @@ sh_api.get_fav_color = (id) => {  //Возвращает по id цвет изб
     return [id_status ? sh_api.status_color[id_status][0] : "#ffffff", id_status ? sh_api.status_color[id_status][1] : "не добавлено"]
 }
 
-sh_api.get_favorit = (sh_user, isanother) => {
+sh_api.get_favorit = async (sh_user, isanother) => {
     if (!sh_api.getCookie("sh_access_token") && !isanother) {
         const ot = sh_api.refresh_token()
         if (ot == "No_Authorize") return ot
