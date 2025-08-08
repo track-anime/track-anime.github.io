@@ -2930,6 +2930,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "9208a1179f2d5524a280a251adbd2b3e0ad150",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "9f29eae506d4fb2a27e8bc439dd36bd83a2ee3",
                                     "suffix": "",
                                     "type": "file"
@@ -11569,6 +11574,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "b99c7c3bc86420634d21bf62829a2b2caa71e4",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "c7c6da49cc6afb7632a63b312385ad880da754",
                                     "suffix": "",
                                     "type": "file"
@@ -12991,6 +13001,11 @@
                                 },
                                 {
                                     "name": "f415587013062a6c8a7b3028472057c158bf3b",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "febd5f4a2cd2bc93d0d647d3696105e4051045",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -17290,6 +17305,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "3fdd894bd302521a09cfb17820f29b730ac55b",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "447a952b83dbdfce3d4e1246de0f1ca4401b25",
                                     "suffix": "",
                                     "type": "file"
@@ -20168,6 +20188,11 @@
                     "type": "file"
                 },
                 {
+                    "name": "Anime Tracker Portable.exe",
+                    "suffix": ".exe",
+                    "type": "file"
+                },
+                {
                     "name": "index.htm",
                     "suffix": ".htm",
                     "type": "file"
@@ -20195,6 +20220,11 @@
                 {
                     "name": "TrackAnimeByDygDyg.apk.qr-code.svg",
                     "suffix": ".svg",
+                    "type": "file"
+                },
+                {
+                    "name": "windows_logo.png",
+                    "suffix": ".png",
                     "type": "file"
                 }
             ]
