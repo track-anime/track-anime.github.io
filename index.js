@@ -46,7 +46,7 @@ function start_window_label() {
         title:"Track Anime By DygDyg",
         state:"На сайте",
         details: "Выбирает что посмотреть...",
-        // timestamps: {start: Math.floor(Date.now() / 1000)}
+        timestamps: {start: Math.floor(Date.now() / 999999)}
     }
 }
 start_window_label()
