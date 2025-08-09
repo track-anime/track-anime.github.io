@@ -2536,7 +2536,6 @@ function copyToClipboard(text) {
 
 function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
-    console.log(1111, e, info)
 
     if (e.shift) {
         // if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {

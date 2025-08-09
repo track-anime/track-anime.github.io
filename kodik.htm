@@ -194,7 +194,6 @@
     kodikIframe = document.getElementById("kodik").contentWindow;
 
     document.addEventListener('keydown', (e) => {
-      // console.log(1111, e.code, this)
       switch (e.code) {
         case "ArrowLeft":
           kodik_player_api({ method: "seek", seconds: navigator.mediaSession.metadata.time - 10 })
@@ -313,7 +312,6 @@
   /////////////////////////////////////////////// Управление kodik_player ///////////////////////////////////////////////////////
   function kodikMessageListener(message) {
     // if (message.data.title == "mousemove") return
-    // console.log(1111, message.data)
     switch (message.data.key) {
       case 'kodik_player_volume_change':
         navigator.mediaSession.metadata.volume = message.data.value.volume
