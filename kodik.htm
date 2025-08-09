@@ -140,6 +140,8 @@
   var shikimori_id = url_get.searchParams.get('shikimori_id') ? url_get.searchParams.get('shikimori_id') : 50346
   var start_load = false
 
+
+
   // Screen.lockOrientation("landscape")
 
   start()
@@ -166,6 +168,14 @@
 
   /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
   async function start_kodik() {
+    window.label = {
+        title:"Track Anime By DygDyg",
+        state: `Cерии: ${data_anime.material_data.episodes_aired}/${data_anime.material_data.episodes?data_anime.material_data.episodes:"?"}`,
+        details: data_anime.title,
+        timestamps: {start: Math.floor(Date.now() / 1000)+999999}
+    }
+
+
     var get_sav_url_data = "&season=1&episode=1"
     if (BaseAnimeCurrent[shikimori_id]) {
       get_sav_url_data = `&season=${BaseAnimeCurrent[shikimori_id].season}&episode=${BaseAnimeCurrent[shikimori_id].episode}`
@@ -318,12 +328,24 @@
       case "kodik_player_pause":
         navigator.mediaSession.metadata.isPlay = false
         // document.getElementById("resume_buton").classList.remove("hidden")
+        window.parent.label = {
+          title: "Track Anime By DygDyg",
+          state: `${navigator.mediaSession.metadata.artist} | ▐▐`,
+          details: window.parent.label.details,
+          timestamps: { start: Math.floor(Date.now() / 1000)+999999 }
+        }
         break
       case "kodik_player_time_update":
         navigator.mediaSession.metadata.time = message.data.value;
-
+        window.parent.label = {
+          title: "Track Anime By DygDyg",
+          state: `${navigator.mediaSession.metadata.artist} | ►`,
+          details: window.parent.label.details,
+          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
+        }
         break
       case "kodik_player_current_episode":
+
         navigator.mediaSession.metadata.time = 0;
         navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
         // delete BaseAnimeCurrent[null];
@@ -337,6 +359,13 @@
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
         }
         localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+        console.log(message)
+        window.parent.label = {
+          title: "Track Anime By DygDyg",
+          state: `Серия: ${message.data.value.episode}`,
+          details: window.parent.label.details,
+          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
+        }
         break;
 
       default:

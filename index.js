@@ -41,13 +41,15 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
 const contextMenu = document.getElementById('contextMenu');
-
-window.label = {
-    title:"Track Anime By DygDyg",
-    state:"На сайте",
-    details: "Выбирает что посмотреть...",
-    timestamps: {start: Math.floor(Date.now() / 1000)}
+function start_window_label() {
+    window.label = {
+        title:"Track Anime By DygDyg",
+        state:"На сайте",
+        details: "Выбирает что посмотреть...",
+        // timestamps: {start: Math.floor(Date.now() / 1000)}
+    }
 }
+start_window_label()
 
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
@@ -1427,6 +1429,7 @@ closeDialogButton.addEventListener('click', () => {
 });
 
 function closeDialogButtonEvent() {
+    start_window_label()
     GetResume("ubd")
     VideoPlayerAnime.data = undefined
     VideoInfo.info.anime_franchise.open = false;
@@ -2533,6 +2536,8 @@ function copyToClipboard(text) {
 
 function dialog_(e, info) {
     VideoPlayerAnime.pip = VideoPlayerAnime.pip ? VideoPlayerAnime.pip : false
+    console.log(1111, e, info)
+
     if (e.shift) {
         // if (confirm(`Открыть "${e.title}" в отдельном окне?`)) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
@@ -2581,6 +2586,13 @@ function dialog_(e, info) {
     // info ? starrySky.start() : starrySky.stop()
 
     ta_pip(false)
+    /////////////////  Добавляем данные для приложения дискорда //////////////////////////////
+    window.label = {
+        title:"Track Anime By DygDyg",
+        state: `Cерии: ${e.e.episodes_aired}/${e.e.episodes?e.e.episodes:"?"} | ►▐`,
+        details: e.title,
+        timestamps: {start: Math.floor(Date.now() / 1000) + 999999}
+    }
 }
 
 document.getElementById("RangeVolume").value = base_anime.Volume ? base_anime.Volume : 1.0

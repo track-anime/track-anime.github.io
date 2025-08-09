@@ -526,6 +526,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "e676f19b8c547e904a5da3686f641100c98312",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "e96dc1fa658945b25f4840d357060b08644cf3",
                                     "suffix": "",
                                     "type": "file"
@@ -1856,6 +1861,11 @@
                                 },
                                 {
                                     "name": "bc93afeb472405f08a80d354a6a571ec12656a",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "de6a60b55052cf376984858dbe74c7639c3ac9",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -5230,6 +5240,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "2f46141e5642c3edf8513e5d52900aa50e8356",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "3ca4a731b4bc4bf8ba11dd45096d1343a199b2",
                                     "suffix": "",
                                     "type": "file"
@@ -6110,6 +6125,11 @@
                                 },
                                 {
                                     "name": "f428b8ec4caefcf5375b28094cf39cac3dcd4c",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "ff4d6e6e7cd6d3abe353b15b0dccb27645265b",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -16535,6 +16555,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "7395d447e6560ecb6d66cfd0c56fa9b1433001",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "86b90b2b7be5e7b7932a03a396832d743a12ee",
                                     "suffix": "",
                                     "type": "file"
@@ -21003,6 +21028,11 @@
         {
             "name": "pedro.gif",
             "suffix": ".gif",
+            "type": "file"
+        },
+        {
+            "name": "privacy_policy.html",
+            "suffix": ".html",
             "type": "file"
         },
         {

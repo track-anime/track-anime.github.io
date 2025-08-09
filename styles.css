@@ -675,7 +675,7 @@ dialog::backdrop {
     background-color: #212529;
     position: absolute;
     width: 200%;
-    height: calc(100% - 56px);
+    height: calc(100% - 50px);
     left: -100%;
     transition: left 1s ease, height 1s ease;
     bottom: 0;
