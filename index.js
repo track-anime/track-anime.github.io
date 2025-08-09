@@ -42,6 +42,13 @@ const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
 const contextMenu = document.getElementById('contextMenu');
 
+window.label = {
+    title:"Track Anime By DygDyg",
+    state:"На сайте",
+    details: "Выбирает что посмотреть...",
+    timestamps: {start: Math.floor(Date.now() / 1000)}
+}
+
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
