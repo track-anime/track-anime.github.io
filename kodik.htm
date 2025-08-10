@@ -168,9 +168,10 @@
 
   /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
   async function start_kodik() {
+    console.log(1111, data_anime.material_data, `Cерии: ${data_anime.material_data.episodes_aired || "?"}/${data_anime.material_data.episodes || data_anime.material_data.episodes_total || "?"}`)
     window.label = {
         title:"Track Anime By DygDyg",
-        state: `Cерии: ${data_anime.material_data.episodes_aired}/${data_anime.material_data.episodes?data_anime.material_data.episodes:"?"}`,
+        state: `Cерии: ${data_anime.material_data.episodes_aired || "?"}/${data_anime.material_data.episodes || data_anime.material_data.episodes_total || "?"}`,
         details: data_anime.title,
         timestamps: {start: Math.floor(Date.now() / 1000)+999999}
     }
