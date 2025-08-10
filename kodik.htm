@@ -322,12 +322,6 @@
         document.getElementById("panel_info_control").classList.add("hidden")
         //document.getElementById("scroll_butons").classList.remove("hidden")
         kodik_player_api({ method: "volume", volume: navigator.mediaSession.metadata.volume })
-        window.parent.label = {
-          title: "Track Anime By DygDyg",
-          state: `${navigator.mediaSession.metadata.artist} | ►`,
-          details: window.parent.label.details,
-          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
-        }
         break
       case "kodik_player_pause":
         navigator.mediaSession.metadata.isPlay = false
@@ -341,16 +335,16 @@
         break
       case "kodik_player_time_update":
         navigator.mediaSession.metadata.time = message.data.value;
-        // console.log(1111, "u",message)
-        break
-      case "kodik_player_seek":
-        console.log(1111, "s", message)
         window.parent.label = {
           title: "Track Anime By DygDyg",
           state: `${navigator.mediaSession.metadata.artist} | ►`,
           details: window.parent.label.details,
           timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
         }
+        break
+      case "kodik_player_seek":
+        
+
         break
       case "kodik_player_current_episode":
 
