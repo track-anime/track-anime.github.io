@@ -2586,7 +2586,6 @@ function dialog_(e, info) {
 
     ta_pip(false)
     /////////////////  Добавляем данные для приложения дискорда //////////////////////////////
-    // console.log(1111, `Cерии: ${e.e.episodes_aired || e.e.material_data?.episodes_aired || "?"}/${e.e.episodes||e.e.material_data?.episodes||e.e.episodes_total||e.e.material_data?.episodes_total||"?"} | ►▐`, window.label, e)
     window.label = {
         title:"Track Anime By DygDyg",
         state: `Cерии: ${e.e.episodes_aired || e.e.material_data?.episodes_aired || "?"}/${e.e.episodes||e.e.material_data?.episodes||e.e.episodes_total||e.e.material_data?.episodes_total||"?"} | ►▐`,
