@@ -335,6 +335,10 @@
         break
       case "kodik_player_time_update":
         navigator.mediaSession.metadata.time = message.data.value;
+        // console.log(1111, "u",message)
+        break
+      case "kodik_player_seek":
+        // console.log(1111, "s", message)
         window.parent.label = {
           title: "Track Anime By DygDyg",
           state: `${navigator.mediaSession.metadata.artist} | ►`,
