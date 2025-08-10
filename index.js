@@ -2588,7 +2588,7 @@ function dialog_(e, info) {
     /////////////////  Добавляем данные для приложения дискорда //////////////////////////////
     window.label = {
         title:"Track Anime By DygDyg",
-        state: `Cерии: ${e.e.episodes_aired}/${e.e.episodes?e.e.episodes:"?"} | ►▐`,
+        state: `Cерии: ${e.e.episodes_aired || "?"}/${e.e.episodes||e.e.episodes_total||"?"} | ►▐`,
         details: e.title,
         timestamps: {start: Math.floor(Date.now() / 1000) + 999999}
     }
