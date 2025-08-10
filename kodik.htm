@@ -330,8 +330,8 @@
           title: "Track Anime By DygDyg",
           state: `${navigator.mediaSession.metadata.artist} | ▐▐`,
           details: window.parent.label.details,
-          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
-          // timestamps: { start: Math.floor(Date.now() / 1000)+999999 }
+          // timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
+          timestamps: { start: Math.floor(Date.now() / 1000)+999999 }
         }
         break
       case "kodik_player_time_update":
