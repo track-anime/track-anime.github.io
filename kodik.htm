@@ -331,7 +331,8 @@
           state: `${navigator.mediaSession.metadata.artist} | ▐▐`,
           details: window.parent.label.details,
           // timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
-          timestamps: { start: Math.floor(Date.now() / 1000)+999999 }
+          timestamps: { start: Math.floor(Date.now() / 1000)+999999 },
+          time: Date.now()
         }
         break
       case "kodik_player_time_update":
@@ -340,7 +341,8 @@
           title: "Track Anime By DygDyg",
           state: `${navigator.mediaSession.metadata.artist} | ►`,
           details: window.parent.label.details,
-          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
+          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time },
+          time: Date.now()
         }
         break
       case "kodik_player_seek":
@@ -367,7 +369,8 @@
           title: "Track Anime By DygDyg",
           state: `Серия: ${message.data.value.episode}`,
           details: window.parent.label.details,
-          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
+          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time },
+          time: Date.now()
         }
         break;
 

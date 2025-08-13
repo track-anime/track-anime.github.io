@@ -46,7 +46,8 @@ function start_window_label() {
         title:"Track Anime By DygDyg",
         state:"На сайте",
         details: "Выбирает что посмотреть...",
-        timestamps: {start: Math.floor(Date.now() / 999999)}
+        timestamps: {start: Math.floor(Date.now() / 999999)},
+        time: Date.now()
     }
 }
 start_window_label()
@@ -2590,7 +2591,8 @@ function dialog_(e, info) {
         title:"Track Anime By DygDyg",
         state: `Cерии: ${e.e.episodes_aired || e.e.material_data?.episodes_aired || "?"}/${e.e.episodes||e.e.material_data?.episodes||e.e.episodes_total||e.e.material_data?.episodes_total||"?"} | ►▐`,
         details: e.title,
-        timestamps: {start: Math.floor(Date.now() / 1000) + 999999}
+        timestamps: {start: Math.floor(Date.now() / 1000) + 999999},
+        time: Date.now()
     }
 }
 
