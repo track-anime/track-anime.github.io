@@ -3355,7 +3355,7 @@ DownloadAPK(`${location.origin}/app/TrackAnimeByDygDyg.apk`)
 
 
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// Discord RPC /////////////////////////////////////////////////////////////
 
 
 
@@ -3367,14 +3367,12 @@ let ws;
 let time = 0;
 
 
-// console.log(1111, window.paren)
-
 // Функция для подключения к WebSocket
 function connectWebSocket() {
     ws = new WebSocket(wsUrl);
     window.ws = ws
     ws.onopen = function () {
-        console.log('WebSocket подключен');
+        debug.log('WebSocket подключен');
         // Отправляем тестовые данные активности
 
     };
@@ -3385,16 +3383,16 @@ function connectWebSocket() {
         {
             console.warn("Сервер устарел, требуется минимум версия", min_ver)
         }
-        console.log('Получен ответ от сервера:', event.data);
+        debug.log('Получен ответ от сервера:', JSON.parse(event.data));
     };
 
     ws.onclose = function () {
-        console.log('WebSocket отключен, пытаюсь переподключиться...');
+        debug.log('WebSocket отключен, пытаюсь переподключиться...');
         setTimeout(connectWebSocket, 15000); // Переподключение через 15 секунд
     };
 
     ws.onerror = function (error) {
-        console.error('Ошибка WebSocket:', error);
+        // console.error('Ошибка WebSocket:', error);
     };
 
 
@@ -3403,7 +3401,7 @@ function connectWebSocket() {
         if (document.hidden) return
         if (ws.readyState != 1) return
         if (window.label.time == time) return
-        // console.log(111,time)
+        // debug.log(111,time)
         if (window.label) {
             info = {}
             if ((new URL(window.location.href)).searchParams.get("shikimori_id")) {
@@ -3437,7 +3435,7 @@ function connectWebSocket() {
         }
     }, timer_int * 1000);
 }
-
+///////////////////////////////////////////////////// Сравнение версий /////////////////////////////
 function compareVersions(version1, version2) {
     const v1 = version1.split('.').map(Number);
     const v2 = version2.split('.').map(Number);
@@ -3459,3 +3457,6 @@ function compareVersions(version1, version2) {
 window.addEventListener('load', () => {
     connectWebSocket();
 });
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
