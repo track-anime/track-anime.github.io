@@ -242,6 +242,7 @@
     );
 
     setInterval(() => {
+      if(navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return
       window.focus();   ////////////////////////////// Костыль чтоб забирать фокус у плеера по кд
     }, 1000);
 
