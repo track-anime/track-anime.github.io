@@ -394,7 +394,6 @@ sh_api.get_anime_franchise = (id) => {
             }
         })
         .then(data => {
-            console.log(111, data)
             if (data == "404") {
                 sh_api.get_anime_ev.franchise = data
                 document.dispatchEvent(sh_api.get_anime_ev_franchise);

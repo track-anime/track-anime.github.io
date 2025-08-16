@@ -645,7 +645,6 @@ VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
     }})
 
 function setVideoInfo(e) {
-    // debug.log(111, e)
     load.show(false)
     var html
     var tmp45353 = ""
@@ -2898,7 +2897,6 @@ var qrcode_scan_modal = new bootstrap.Modal(document.getElementById("qrcode_scan
 
 document.getElementById("qrcode_scan_modal").addEventListener('hidden.bs.modal', function (e) {
     htmlscanner.clear()
-    // debug.log(111)
 })
 
 function domReady(fn) {
@@ -3365,6 +3363,7 @@ const clientId = '1403578059851960533';
 const timer_int = 5;
 let ws;
 let time = 0;
+let 
 
 
 // Функция для подключения к WebSocket
@@ -3401,7 +3400,6 @@ function connectWebSocket() {
         if (document.hidden) return
         if (ws.readyState != 1) return
         if (window.label.time == time) return
-        // debug.log(111,time)
         if (window.label) {
             info = {}
             if ((new URL(window.location.href)).searchParams.get("shikimori_id")) {

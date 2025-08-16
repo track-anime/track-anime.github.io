@@ -1,7 +1,7 @@
 <?php
 // Читаем содержимое файла index.htm
 $content = file_get_contents('index.htm');
-$debug_script = "<div>111</div>";
+$debug_script = "<div></div>";
 // Проверяем наличие GET параметра shikimori_id
 if (isset($_GET['shikimori_id']) && !empty($_GET['shikimori_id'])) {
     // Получаем shikimori_id из GET параметра
