@@ -3368,6 +3368,7 @@ let time = 0;
 
 // Функция для подключения к WebSocket
 function connectWebSocket() {
+    if(navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return 
     ws = new WebSocket(wsUrl);
     window.ws = ws
     ws.onopen = function () {
@@ -3400,6 +3401,7 @@ function connectWebSocket() {
         if (document.hidden) return
         if (ws.readyState != 1) return
         if (window.label.time == time) return
+        if (navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return 
         if (window.label) {
             info = {}
             if ((new URL(window.location.href)).searchParams.get("shikimori_id")) {
