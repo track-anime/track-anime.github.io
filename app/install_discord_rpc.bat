@@ -15,12 +15,13 @@ set "LINE========================================="
 :: ========================================
 ::  Конфигурация установки
 :: ========================================
-set "source_file=discord-rpc-server.exe"
+set "script_dir=%~dp0"
+set "source_file=%script_dir%discord-rpc-server.exe"
+set "uninstall_file=%script_dir%uninstall_discord_rpc.bat"
 set "download_url=https://track-anime.dygdyg.ru/app/discord-rpc-server.exe"
 set "uninstall_url=https://track-anime.dygdyg.ru/app/uninstall_discord_rpc.bat"
 set "appdata_dir=%APPDATA%\DiscordRPC"
 set "destination_file=%appdata_dir%\discord-rpc-server.exe"
-set "uninstall_file=uninstall_discord_rpc.bat"
 set "vbs_launcher=%appdata_dir%\start_hidden.vbs"
 set "service_name=DiscordRPCService"
 set "protocol_name=rtc"
@@ -45,26 +46,28 @@ if not exist "%appdata_dir%" mkdir "%appdata_dir%"
 echo [%date% %time%] Начало установки >nul
 
 :: ========================================
-::  0. Скачивание файлов
+::  0. Скачивание необходимых файлов
 :: ========================================
-echo [0] Скачивание файлов...
+echo [0] Скачивание необходимых файлов...
 echo [%date% %time%] Скачивание файлов >>nul
 
 :: Скачиваем основной файл
+echo    - Скачивание discord-rpc-server.exe...
 curl -L -o "%source_file%" "%download_url%" --progress-bar
 if exist "%source_file%" (
-    call :log_success "Файл discord-rpc-server.exe успешно скачан"
+    call :log_success "Основной файл успешно скачан"
 ) else (
-    call :log_error "Ошибка скачивания файла discord-rpc-server.exe"
+    call :log_error "Ошибка скачивания основного файла"
     exit /b 1
 )
 
 :: Скачиваем файл удаления
+echo    - Скачивание uninstall_discord_rpc.bat...
 curl -L -o "%uninstall_file%" "%uninstall_url%" --progress-bar
 if exist "%uninstall_file%" (
-    call :log_success "Файл uninstall_discord_rpc.bat успешно скачан"
+    call :log_success "Файл удаления успешно скачан"
 ) else (
-    call :log_warning "Не удалось скачать файл uninstall_discord_rpc.bat"
+    call :log_warning "Не удалось скачать файл удаления"
 )
 
 :: ========================================
@@ -152,10 +155,10 @@ if %ERRORLEVEL%==0 (
 echo [%date% %time%] Запуск программы >>nul
 start "" wscript.exe //B "%vbs_launcher%"
 
-:: Удаление скачанных временных файлов
+:: Удаление временного файла (если нужно)
 if exist "%source_file%" (
     del "%source_file%" >nul 2>&1
-    call :log_info "Временный файл discord-rpc-server.exe удален"
+    call :log_info "Временный файл удален"
 )
 
 echo.
@@ -163,6 +166,7 @@ echo %LINE%
 call :color_print " Установка завершена успешно! " %COLOR_SUCCESS%
 echo %LINE%
 echo.
+echo Файл для удаления: uninstall_discord_rpc.bat
 echo.
 pause
 exit /b 0
