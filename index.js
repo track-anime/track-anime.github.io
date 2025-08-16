@@ -3363,7 +3363,7 @@ const clientId = '1403578059851960533';
 const timer_int = 5;
 let ws;
 let time = 0;
-let 
+// let 
 
 
 // Функция для подключения к WebSocket
