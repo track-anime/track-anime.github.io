@@ -715,6 +715,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "c96868697207adee523d2c73e58fe87355ead0",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "cd6e3d5a627103437a6a2da7689df3706a37d6",
                                     "suffix": "",
                                     "type": "file"
@@ -2723,6 +2728,11 @@
                             "children": [
                                 {
                                     "name": "26af0c7ef40ec11afeec496d83a9d3e37db7dd",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "27cbfef5fec3c25e54c5bfa7de849de02741ab",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -6161,6 +6171,11 @@
                                     "name": "ca8b15e1b2bad3efbf21f2cc1af341d85f4d4b",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "d407593e9afa3b33f6ad06a87c247ca22ef553",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -8073,6 +8088,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "e998428abf9615117dba88a09335039bf838d0",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "f86226dc9dea2439307d5175d0f13ab3ff343f",
                                     "suffix": "",
                                     "type": "file"
@@ -8491,6 +8511,11 @@
                                 },
                                 {
                                     "name": "98dd2e1e0a3fb7000665146cf6598a11860e89",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "9e439ce332f341b7c719f9eb712a04294fb71c",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -14699,6 +14724,11 @@
                                 },
                                 {
                                     "name": "8c6b739fb71e940e82755390a326a09987b244",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "96615266f1db58e17102cbd60086df534c8bb6",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -21028,6 +21058,11 @@
                     "type": "file"
                 },
                 {
+                    "name": "install_discord_rpc.bat",
+                    "suffix": ".bat",
+                    "type": "file"
+                },
+                {
                     "name": "output-metadata.json",
                     "suffix": ".json",
                     "type": "file"
@@ -21050,6 +21085,11 @@
                 {
                     "name": "TrackAnimeByDygDyg.apk.qr-code.svg",
                     "suffix": ".svg",
+                    "type": "file"
+                },
+                {
+                    "name": "uninstall_discord_rpc.bat",
+                    "suffix": ".bat",
                     "type": "file"
                 },
                 {
