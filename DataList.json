@@ -1393,6 +1393,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "1329cf31457c795f1a3f2e65be7a382ac509e5",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "36b4dcef2d27bab52458b1d8d9bfc99508dd4f",
                                     "suffix": "",
                                     "type": "file"
@@ -1675,6 +1680,11 @@
                                 },
                                 {
                                     "name": "f288ce059ebcf23bf127b01fc111dbf635cd6f",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "f89a74a8a5b9b0221aeef28af96e99b024376b",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -4783,6 +4793,11 @@
                                 },
                                 {
                                     "name": "a3d562f76d4e0f42e121dc3050ac1ec9b2be88",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "a6c5fcee8a31a908d409394010412e5060710e",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -8090,6 +8105,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "53925e09199e19ee3ab455b2a91b394f43e54e",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "5af260610c316af4330da9338faabf3a62f501",
                                     "suffix": "",
                                     "type": "file"
@@ -9991,6 +10011,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "a1071ffab7309b853202d3238963878eb1b6bb",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "aa4b6cc2d659704b41ee8ac2b9867cfe4e8fd5",
                                     "suffix": "",
                                     "type": "file"
@@ -10263,6 +10288,11 @@
                                 },
                                 {
                                     "name": "b640b659febe5734c694d5be230f40b31e0290",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "bcb0e34167f98789d7223ca6c0ef22a01d4c21",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -14771,6 +14801,11 @@
                                 },
                                 {
                                     "name": "a4886530eabe257c057bebdee3e0b66fdc2dad",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "a52b455fbafd88c10c3b98528f1128f34ef918",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -20979,6 +21014,11 @@
                 },
                 {
                     "name": "Anime Tracker Setup.exe",
+                    "suffix": ".exe",
+                    "type": "file"
+                },
+                {
+                    "name": "discord-rpc-server.exe",
                     "suffix": ".exe",
                     "type": "file"
                 },
