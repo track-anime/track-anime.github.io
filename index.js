@@ -3430,7 +3430,7 @@ function connectWebSocket() {
             } else {
                 activityData.startTimestamp = Number(new Date()) + 10000;
             }
-            if(readyState != 1) connectWebSocket()
+            if(ws.readyState != 1) connectWebSocket()
             ws.send(JSON.stringify(activityData));
             time = window.label.time
         }
