@@ -3399,12 +3399,12 @@ function connectWebSocket() {
 
     setInterval(() => {
         if (document.hidden) return
-        // if (ws.readyState != 1) return
+        if (ws.readyState != 1) return
         if (window.label.time == time) return
-        if(ws.readyState != 1) {
-            connectWebSocket() 
-            return
-        }
+        // if(ws.readyState != 1) {
+        //     connectWebSocket() 
+        //     return
+        // }
         if (navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return 
         if (window.label) {
             info = {}
