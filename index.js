@@ -3368,7 +3368,7 @@ let time = 0;
 
 // Функция для подключения к WebSocket
 function connectWebSocket() {
-    if(navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return 
+    if(navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')||navigator.userAgent.toLowerCase().includes('Electron')) return 
     ws = new WebSocket(wsUrl);
     window.ws = ws
     ws.onopen = function () {
