@@ -169,10 +169,10 @@
   /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
   async function start_kodik() {
     window.label = {
-        title:"Track Anime By DygDyg",
-        state: `Cерии: ${data_anime.material_data.episodes_aired || "?"}/${data_anime.material_data.episodes || data_anime.material_data.episodes_total || "?"}`,
-        details: data_anime.title,
-        timestamps: {start: Math.floor(Date.now() / 1000)+999999}
+      title: "Track Anime By DygDyg",
+      state: `Cерии: ${data_anime.material_data.episodes_aired || "?"}/${data_anime.material_data.episodes || data_anime.material_data.episodes_total || "?"}`,
+      details: data_anime.title,
+      timestamps: { start: Math.floor(Date.now() / 1000) + 999999 }
     }
 
 
@@ -240,9 +240,12 @@
       }
     }
     );
-
+    const parentWindow = window.parent;
     setInterval(() => {
-      if(navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return // Последний фикс-хуикс для дерил, остальные по подписке
+      if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('android')) return // Последний фикс-хуикс для дерил, остальные по подписке
+      if (parentWindow?.document.activeElement === parentWindow?.document?.getElementById("search_input")) return 
+      if (parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('DialogVideoInfoScroll')!==false || parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('d-none')!==false) return 
+
       window.focus();   ////////////////////////////// Костыль чтоб забирать фокус у плеера по кд
     }, 1000);
 
@@ -332,7 +335,7 @@
           state: `${navigator.mediaSession.metadata.artist} | ▐▐`,
           details: window.parent.label.details,
           // timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time }
-          timestamps: { start: Math.floor(Date.now() / 1000)+999999 },
+          timestamps: { start: Math.floor(Date.now() / 1000) + 999999 },
           time: Date.now()
         }
         break
@@ -342,12 +345,12 @@
           title: "Track Anime By DygDyg",
           state: `${navigator.mediaSession.metadata.artist} | ►`,
           details: window.parent.label.details,
-          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time },
+          timestamps: { start: Math.floor(Date.now() / 1000) - navigator.mediaSession.metadata.time },
           time: Date.now()
         }
         break
       case "kodik_player_seek":
-        
+
 
         break
       case "kodik_player_current_episode":
@@ -370,7 +373,7 @@
           title: "Track Anime By DygDyg",
           state: `Серия: ${message.data.value.episode}`,
           details: window.parent.label.details,
-          timestamps: { start: Math.floor(Date.now() / 1000)-navigator.mediaSession.metadata.time },
+          timestamps: { start: Math.floor(Date.now() / 1000) - navigator.mediaSession.metadata.time },
           time: Date.now()
         }
         break;
