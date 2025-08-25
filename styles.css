@@ -580,7 +580,8 @@ canvas#starryCanvas {
 
 
 
-@media (max-width: 1151px) and (orientation: landscape) {
+@media (min-width: 989px) and (max-width: 1270px)  {
+/* @media (max-width: 1270px) and (orientation: landscape) { */
     html {
         font-size: 0.7rem;
     }
