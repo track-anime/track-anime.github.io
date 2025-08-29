@@ -807,9 +807,9 @@ function setVideoInfo(e) {
     html2 = ""
     e.screenshots?.forEach(el => {
         html = html + `
-        <div class="carousel-item w-100" data-bs-interval="15000">
+        <div class="carousel-item w-100 h-100 df_im" data-bs-interval="15000">
         <img src="https://shikimori.one${el.original}"
-            class="d-block w-100"  
+            class="d-block minw-100 minh-100"  
             alt="...">
     </div>
     ` });

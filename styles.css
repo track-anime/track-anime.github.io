@@ -1132,10 +1132,24 @@ screen and (max-width: 992px) {
         /* width: 50% !important; */
         /* height: 100%; */
         /* width: auto !important; */
-        display: none;
+        /* display: none; */
     }
 
 }
+.minh-100
+{
+    min-height: 100% ;
+}
+.minw-100
+{
+    min-width: 100%;
+}
+.df_im
+{
+    /* display: flex !important; */
+    margin: 0 auto;
+}
+
 
 #carouselExampleAutoplaying {
     width: 50%;
