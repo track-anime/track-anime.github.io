@@ -1126,14 +1126,14 @@ screen and (max-width: 992px) {
         width: 100%;
     }
 
-    #carouselExampleAutoplaying,
-    #carouselExampleAutoplaying2 {
+    /* #carouselExampleAutoplaying, */
+    /* #carouselExampleAutoplaying2 { */
         /* margin: 4px !important; */
         /* width: 50% !important; */
         /* height: 100%; */
         /* width: auto !important; */
         /* display: none; */
-    }
+    /* } */
 
 }
 .minh-100

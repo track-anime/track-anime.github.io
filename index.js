@@ -43,10 +43,10 @@ const CheckReleased_ = document.getElementById("CheckReleased")
 const contextMenu = document.getElementById('contextMenu');
 function start_window_label() {
     window.label = {
-        title:"Track Anime By DygDyg",
-        state:"На сайте",
+        title: "Track Anime By DygDyg",
+        state: "На сайте",
         details: "Выбирает что посмотреть...",
-        timestamps: {start: Math.floor(Date.now() / 999999)},
+        timestamps: { start: Math.floor(Date.now() / 999999) },
         time: Date.now()
     }
 }
@@ -626,7 +626,7 @@ VideoInfo.info.cover.addEventListener('click', (ev) => {
 
 ///////////////////////// Плавная прокрутка для связанных аниме в карточке list ////////////////////////
 VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
-    if(!window.matchMedia("(orientation: landscape)").matches)return
+    if (!window.matchMedia("(orientation: landscape)").matches) return
     event.preventDefault();
     const scrollContainer = event.currentTarget;
     scrollContainer.scrollLeft += event.deltaY * 2;
@@ -634,15 +634,16 @@ VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
 
 VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
     if (event.target.open) {
-        VideoInfo.info.anime_franchise_iframe.src= `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`
-        VideoInfo.info.anime_franchise_link.onclick = () => { window.open(`franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`, '_blank')}
+        VideoInfo.info.anime_franchise_iframe.src = `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`
+        VideoInfo.info.anime_franchise_link.onclick = () => { window.open(`franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`, '_blank') }
         VideoInfo.info.anime_franchise_link.style.cursor = "pointer"
-        VideoInfo.info.anime_franchise_iframe.scrollIntoView({behavior: "smooth"});
+        VideoInfo.info.anime_franchise_iframe.scrollIntoView({ behavior: "smooth" });
         // window.focus()
-    }else{
-        VideoInfo.info.anime_franchise_iframe.src= `loading.htm`
+    } else {
+        VideoInfo.info.anime_franchise_iframe.src = `loading.htm`
         // window.focus()
-    }})
+    }
+})
 
 function setVideoInfo(e) {
     load.show(false)
@@ -662,7 +663,7 @@ function setVideoInfo(e) {
     } else {
         VideoInfo.info.cover.src = `${getCoverURL}${e.id}&url=${VideoInfo.info.cover.src}`
     }
-    
+
     VideoInfo.info.cover.src_force = `${VideoInfo.info.cover.src}&force=true`
     // VideoInfo.info.cover.src = `${getCoverURL}${e.id}`;
     VideoInfo.info.title.childNodes[0].nodeValue = e.russian ? `${tv}` : "?";
@@ -848,50 +849,50 @@ function setVideoInfo(e) {
 
     VideoInfo.info.anime_related_list.innerHTML = ""
     sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
-    .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
-    .forEach(e321 => {
-        const e1 = {
-            "title": e321.anime.russian,
-            "cover": `https://shikimori.one${e321.anime.image.original}`,
-            // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
-            "date": formatDate(e321.anime.aired_on),
-            // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
-            "voice": e321.relation_russian,
-            "series": e321.anime.episodes ? e321.anime.episodes : "M",
-            "link": `https://kodik.cc/find-player?shikimoriID=${e321.anime.id}`,
-            "kp": null,
-            "imdb": null,
-            "shikimori": e321.anime.id.toString(),
-            "status": e321.anime.status,
-            "raiting": e321.anime.score,
-            "material_data": {
-                poster_url: `https://shikimori.one${e321.anime.image.original}`,
-                anime_kind: `${e321.anime.kind}`,
-                anime_title: `${e321.anime.russian}`,
-                episodes_aired: `${e321.anime.episodes_aired}`,
-                episodes_total: `${e321.anime.episodes}`,
-                description: ``,
-                anime_status: `${e321.anime.status}`,
-                anime_studios: ``,
-                year: `${e321.anime.aired_on}`,
-                rating_mpaa: ``,
-                shikimori_rating: `${e321.anime.score}`,
+        .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
+        .forEach(e321 => {
+            const e1 = {
+                "title": e321.anime.russian,
+                "cover": `https://shikimori.one${e321.anime.image.original}`,
+                // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
+                "date": formatDate(e321.anime.aired_on),
+                // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
+                "voice": e321.relation_russian,
+                "series": e321.anime.episodes ? e321.anime.episodes : "M",
+                "link": `https://kodik.cc/find-player?shikimoriID=${e321.anime.id}`,
+                "kp": null,
+                "imdb": null,
+                "shikimori": e321.anime.id.toString(),
+                "status": e321.anime.status,
+                "raiting": e321.anime.score,
+                "material_data": {
+                    poster_url: `https://shikimori.one${e321.anime.image.original}`,
+                    anime_kind: `${e321.anime.kind}`,
+                    anime_title: `${e321.anime.russian}`,
+                    episodes_aired: `${e321.anime.episodes_aired}`,
+                    episodes_total: `${e321.anime.episodes}`,
+                    description: ``,
+                    anime_status: `${e321.anime.status}`,
+                    anime_studios: ``,
+                    year: `${e321.anime.aired_on}`,
+                    rating_mpaa: ``,
+                    shikimori_rating: `${e321.anime.score}`,
 
 
-            },
-            "id": e321.anime.id,
-            "screenshots": [],
-            "e": e321,
-        }
-        const cart = add_cart(e1)
-        cart.classList.add("related_cart")
-        VideoInfo.info?.anime_related_list?.appendChild(cart)
-    });
-    VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length>0?VideoInfo.info?.anime_related.classList.remove("hide"):VideoInfo.info?.anime_related.classList.add("hide")
+                },
+                "id": e321.anime.id,
+                "screenshots": [],
+                "e": e321,
+            }
+            const cart = add_cart(e1)
+            cart.classList.add("related_cart")
+            VideoInfo.info?.anime_related_list?.appendChild(cart)
+        });
+    VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length > 0 ? VideoInfo.info?.anime_related.classList.remove("hide") : VideoInfo.info?.anime_related.classList.add("hide")
     // sh_api.get_anime_ev.franchise.nodes.length>0?VideoInfo.info?.anime_franchise.classList.remove("hide"):VideoInfo.info?.anime_franchise.classList.add("hide")
-    
-    
-    
+
+
+
     /*
     sh_api?.get_anime_ev?.related?.filter(e321 => e321.anime != null) // Фильтруем, чтобы исключить null
         .sort((a, b) => new Date(a.anime.aired_on) - new Date(b.anime.aired_on)) // Сортировка по дате
@@ -1429,6 +1430,7 @@ closeDialogButton.addEventListener('click', () => {
 });
 
 function closeDialogButtonEvent() {
+    upd_new_anime_list()
     start_window_label()
     GetResume("ubd")
     VideoPlayerAnime.data = undefined
@@ -2130,6 +2132,7 @@ function add_cart(e) {
                     }
                 },
                 { text: 'Открыть в новой вкладке', action: () => window.open(a.href, '_blank') },
+                { text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori)} },
                 // { text: 'Копировать ссылку', action: () => alert('Ссылка скопирована') },
                 {
                     text: 'Обновить обложку', action: () => {
@@ -2587,10 +2590,10 @@ function dialog_(e, info) {
     ta_pip(false)
     /////////////////  Добавляем данные для приложения дискорда //////////////////////////////
     window.label = {
-        title:"Track Anime By DygDyg",
-        state: `Cерии: ${e.e.episodes_aired || e.e.material_data?.episodes_aired || "?"}/${e.e.episodes||e.e.material_data?.episodes||e.e.episodes_total||e.e.material_data?.episodes_total||"?"} | ►▐`,
+        title: "Track Anime By DygDyg",
+        state: `Cерии: ${e.e.episodes_aired || e.e.material_data?.episodes_aired || "?"}/${e.e.episodes || e.e.material_data?.episodes || e.e.episodes_total || e.e.material_data?.episodes_total || "?"} | ►▐`,
         details: e.title,
-        timestamps: {start: Math.floor(Date.now() / 1000) + 999999},
+        timestamps: { start: Math.floor(Date.now() / 1000) + 999999 },
         time: Date.now()
     }
 }
@@ -3290,6 +3293,17 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
+//////////////////////////////  удаляет аниме из истории просмотренного /////////////////////////////////////////////////
+function del_history_anime(title, id) {
+    if (confirm(`Удалить "${title}" из истории?`)) {
+        delete BaseAnimeCurrent[id];
+        localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+        save_server_base()
+        // GetResume()
+        upd_new_anime_list()
+    }
+}
+
 document.addEventListener('visibilitychange', function () {
     if (document.visibilityState === 'hidden') {
         // starrySky.stop()
@@ -3365,10 +3379,25 @@ let ws;
 let time = 0;
 // let 
 
+function upd_new_anime_list() {
+    new_anime_list.querySelectorAll('.cart_').forEach(ee => {
+        console.log(1111, BaseAnimeCurrent[ee.data.shikimori]?.episode, ee.data.e.last_episode, BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode, ee.data)
+
+        if (BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode) {
+            console.log(1112, ee.data.shikimori, ee.data)
+            list_serch.prepend(ee)
+        }
+        list_serch.prepend(new_anime_list)
+        
+    });
+
+
+}
+
 
 // Функция для подключения к WebSocket
 function connectWebSocket() {
-    if(navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')||navigator.userAgent.toLowerCase().includes('Electron')) return 
+    if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('android') || navigator.userAgent.toLowerCase().includes('Electron')) return
     ws = new WebSocket(wsUrl);
     window.ws = ws
     ws.onopen = function () {
@@ -3378,9 +3407,8 @@ function connectWebSocket() {
     };
 
     ws.onmessage = function (event) {
-		const min_ver = "1.0.1"
-        if(compareVersions(JSON.parse(event.data).vers_server, min_ver)==-1)
-        {
+        const min_ver = "1.0.1"
+        if (compareVersions(JSON.parse(event.data).vers_server, min_ver) == -1) {
             console.warn("Сервер устарел, требуется минимум версия", min_ver)
         }
         debug.log('Получен ответ от сервера:', JSON.parse(event.data));
@@ -3405,7 +3433,7 @@ function connectWebSocket() {
         //     connectWebSocket() 
         //     return
         // }
-        if (navigator.userAgent.toLowerCase().includes('iphone')||navigator.userAgent.toLowerCase().includes('android')) return 
+        if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('android')) return
         if (window.label) {
             info = {}
             if ((new URL(window.location.href)).searchParams.get("shikimori_id")) {
@@ -3434,7 +3462,7 @@ function connectWebSocket() {
             } else {
                 activityData.startTimestamp = Number(new Date()) + 10000;
             }
-            
+
             ws.send(JSON.stringify(activityData));
             time = window.label.time
         }
