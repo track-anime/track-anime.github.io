@@ -2132,7 +2132,8 @@ function add_cart(e) {
                     }
                 },
                 { text: 'Открыть в новой вкладке', action: () => window.open(a.href, '_blank') },
-                { text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori)} },
+                // { text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori)} },
+                ...(BaseAnimeCurrent[e.shikimori] ? [{ text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori)} }] : []),
                 // { text: 'Копировать ссылку', action: () => alert('Ссылка скопирована') },
                 {
                     text: 'Обновить обложку', action: () => {
@@ -3381,10 +3382,8 @@ let time = 0;
 
 function upd_new_anime_list() {
     new_anime_list.querySelectorAll('.cart_').forEach(ee => {
-        console.log(1111, BaseAnimeCurrent[ee.data.shikimori]?.episode, ee.data.e.last_episode, BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode, ee.data)
 
         if (BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode) {
-            console.log(1112, ee.data.shikimori, ee.data)
             list_serch.prepend(ee)
         }
         list_serch.prepend(new_anime_list)
