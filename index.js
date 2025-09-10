@@ -3383,7 +3383,7 @@ let time = 0;
 function upd_new_anime_list() {
     new_anime_list.querySelectorAll('.cart_').forEach(ee => {
 
-        if (BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode) {
+        if (!BaseAnimeCurrent[ee.data.shikimori]||BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode) {
             list_serch.prepend(ee)
         }
         list_serch.prepend(new_anime_list)
