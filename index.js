@@ -1429,6 +1429,9 @@ closeDialogButton.addEventListener('click', () => {
     return
 });
 
+/**
+ * Закрытие модального окна с аниме
+ */
 function closeDialogButtonEvent() {
     upd_new_anime_list()
     start_window_label()
@@ -2132,8 +2135,7 @@ function add_cart(e) {
                     }
                 },
                 { text: 'Открыть в новой вкладке', action: () => window.open(a.href, '_blank') },
-                // { text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori)} },
-                ...(BaseAnimeCurrent[e.shikimori] ? [{ text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori)} }] : []),
+                ...(BaseAnimeCurrent[e.shikimori] ? [{ text: 'удалить из истории', action: () => { del_history_anime(e.title, e.shikimori) } }] : []),
                 // { text: 'Копировать ссылку', action: () => alert('Ссылка скопирована') },
                 {
                     text: 'Обновить обложку', action: () => {
@@ -2268,7 +2270,7 @@ function add_cart(e) {
                 delete BaseAnimeCurrent[e.id];
                 localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
                 save_server_base()
-                GetResume()
+                GetResume("upd")
             }
 
         })
@@ -2919,9 +2921,12 @@ function domReady(fn) {
 const resume_Button = document.getElementById("resume_Button")
 // if (isDebugEnabled) resume_Button.classList.remove("hide")
 if (url_get.searchParams.get('resume')) GetResume()
-
-async function GetResume(d) {
-    if (d != "ubd") {
+/**
+ * Вкладка история просмотренных анимеб
+ * передать "upd" чтобы просто обновить не открывая историю
+ */
+async function GetResume(upd) {
+    if (!upd) {
         load.show(true)
         HistoryIsActivy = false
         url_get.searchParams.set('resume', true)
@@ -2937,6 +2942,7 @@ async function GetResume(d) {
         resume_Button.classList.add("active")
         list_resume.classList.remove("hide")
     }
+
     list_resume.innerHTML = ""
 
     // Получаем и сортируем ключи по lasttime (пропуская "lasttime" сам по себе)
@@ -3194,6 +3200,7 @@ async function load_server_base() {
 
     }
     GetResume("ubd")
+    upd_new_anime_list()
     return user_data
 }
 
@@ -3293,14 +3300,15 @@ document.addEventListener('keydown', (e) => {
         }
     }
 });
-
-//////////////////////////////  удаляет аниме из истории просмотренного /////////////////////////////////////////////////
+/**
+//////////////////////////////  удаляет аниме из истории просмотренного /////////////////
+*/
 function del_history_anime(title, id) {
     if (confirm(`Удалить "${title}" из истории?`)) {
         delete BaseAnimeCurrent[id];
         localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
         save_server_base()
-        // GetResume()
+        GetResume("upd")
         upd_new_anime_list()
     }
 }
@@ -3341,7 +3349,9 @@ function FontsCustom(newFilePath) {
 }
 
 //<link href="/fonts/Pangolin.css" rel="stylesheet" />
-
+/**
+        Скачивание обновлений для android приложения
+*/
 async function DownloadAPK(link) {
     // Проверяем, доступен ли интерфейс AndroidApp
 
@@ -3367,9 +3377,9 @@ DownloadAPK(`${location.origin}/app/TrackAnimeByDygDyg.apk`)
 
 
 
-
+/**
 ////////////////////////////////////////////////// Discord RPC /////////////////////////////////////////////////////////////
-
+*/
 
 
 // Настройки WebSocket
@@ -3379,22 +3389,29 @@ const timer_int = 5;
 let ws;
 let time = 0;
 // let 
-
+/**
+        Обновить список аниме на главной странице
+*/
 function upd_new_anime_list() {
     new_anime_list.querySelectorAll('.cart_').forEach(ee => {
 
-        if (!BaseAnimeCurrent[ee.data.shikimori]||BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode) {
+        if (!BaseAnimeCurrent[ee.data.shikimori] || BaseAnimeCurrent[ee.data.shikimori]?.episode >= ee.data.e.last_episode) {
             list_serch.prepend(ee)
         }
-        list_serch.prepend(new_anime_list)
-        
     });
-
+    list_serch.querySelectorAll(".cart_.bg-dark").forEach(ee => {
+        
+        if (BaseAnimeCurrent[ee.data.shikimori]?.episode < ee.data.e.last_episode) {
+            new_anime_list.prepend(ee)
+        }
+    });
+    list_serch.prepend(new_anime_list)
 
 }
 
-
-// Функция для подключения к WebSocket
+/**
+        Функция для подключения к WebSocket
+*/
 function connectWebSocket() {
     if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('android') || navigator.userAgent.toLowerCase().includes('Electron')) return
     ws = new WebSocket(wsUrl);
@@ -3467,7 +3484,9 @@ function connectWebSocket() {
         }
     }, timer_int * 1000);
 }
-///////////////////////////////////////////////////// Сравнение версий /////////////////////////////
+/**
+/////////////////////// Сравнение версий /////////////////////////////
+ */
 function compareVersions(version1, version2) {
     const v1 = version1.split('.').map(Number);
     const v2 = version2.split('.').map(Number);
@@ -3484,8 +3503,9 @@ function compareVersions(version1, version2) {
 
     return 0;
 }
-
+/**
 // Запускаем подключение при загрузке страницы
+*/
 window.addEventListener('load', () => {
     connectWebSocket();
 });
