@@ -2945,7 +2945,7 @@ async function GetResume(upd) {
 
     list_resume.innerHTML = ""
 
-    // Получаем и сортируем ключи по lasttime (пропуская "lasttime" сам по себе)
+    // ANCHOR Получаем и сортируем ключи по lasttime (пропуская "lasttime" сам по себе)
     let sortedKeys = Object.keys(BaseAnimeCurrent)
         .filter(key => key !== "lasttime")
         .sort((a, b) => {
