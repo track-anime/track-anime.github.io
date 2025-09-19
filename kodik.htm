@@ -440,6 +440,9 @@
           BaseAnimeCurrent[shikimori_id] =  BaseAnimeCurrent[shikimori_id]|| {}
           BaseAnimeCurrent[shikimori_id]["episode"] = message.data.value;
           // BaseAnimeCurrent[shikimori_id] = message.data.value;
+          BaseAnimeCurrent[shikimori_id].episode = message.data.value.episode
+          BaseAnimeCurrent[shikimori_id].season = message.data.value.season
+          BaseAnimeCurrent[shikimori_id].translation = message.data.value.translation
           console.log(message.data.value)
           BaseAnimeCurrent[shikimori_id]["material_data"] = data_anime.material_data
           BaseAnimeCurrent[shikimori_id]["lasttime"] = new Date().getTime() / 1000
