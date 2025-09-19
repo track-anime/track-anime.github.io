@@ -8,12 +8,8 @@
 <body>
   <div id="control_butons">
     <div id="resume_butons">
-      <div class="resume_btn">
-        <div class="_button" id="resume_buton_t" title="Продолжает воспроизведение с последнего момента">
-          Продолжить</div>
-        <div class="_button" id="resume_buton" title="Воспроизведёт следующую серию после последней просмотренной">
-          Продолжить +1</div>
-      </div>
+      <div class="_button" id="resume_buton" title="Воспроизведёт следующую серию после последней просмотренной">
+        Продолжить +1</div>
     </div>
     <div id="scroll_butons" class="hidden">
       <div class="_button" id="-90" title="Перемотает назад на примерную динну опенинга">
@@ -37,12 +33,6 @@
   <iframe id="kodik" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *"></iframe>
 </body>
 <style>
-  .resume_btn {
-    display: flex;
-    flex-wrap: nowrap;
-    flex-direction: row;
-  }
-
   body {
     background-color: rgb(32, 32, 32);
     margin: 0 0 0 0;
@@ -79,7 +69,6 @@
   }
 
   ._button {
-    margin: 1px 1px 1px 1px;
     color: aliceblue;
     background-color: #2b3035;
     /* border-top-left-radius: 3px; */
@@ -254,8 +243,8 @@
     const parentWindow = window.parent;
     setInterval(() => {
       if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('android')) return // Последний фикс-хуикс для дерил, остальные по подписке
-      if (parentWindow?.document.activeElement === parentWindow?.document?.getElementById("search_input")) return
-      if (parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('DialogVideoInfoScroll') !== false || parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('d-none') !== false) return
+      if (parentWindow?.document.activeElement === parentWindow?.document?.getElementById("search_input")) return 
+      if (parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('DialogVideoInfoScroll')!==false || parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('d-none')!==false) return 
 
       window.focus();   ////////////////////////////// Костыль чтоб забирать фокус у плеера по кд
     }, 1000);
@@ -299,48 +288,7 @@
       }, 1500);
 
     })
-    document.getElementById("resume_buton_t").textContent = `Продолжить ${formatTime(BaseAnimeCurrent[shikimori_id]?.time_serie || 0)}`
-    document.getElementById("resume_buton_t").addEventListener('click', async function (event) {
 
-      if (BaseAnimeCurrent[shikimori_id]) {
-        kodik_player_api(
-          {
-            method: "change_episode",
-            season: BaseAnimeCurrent[shikimori_id].season,
-            episode: BaseAnimeCurrent[shikimori_id].episode
-          }
-        )
-
-      }
-
-      document.getElementById("resume_buton_t").classList.add("hidden")
-      await sleep(500); // задержка 1 секунда
-      kodik_player_api({
-        method: "play"
-      });
-      resume_video_bool = true
-
-    })
-
-  }
-
-
-  function formatTime(seconds) {
-    const h = Math.floor(seconds / 3600);
-    const m = Math.floor((seconds % 3600) / 60);
-    const s = Math.floor(seconds % 60);
-
-    if (h > 0) {
-      // Если есть часы → показываем hh:mm:ss
-      return `${h}:${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
-    } else {
-      // Если часов нет → показываем m:ss
-      return `${m}:${s.toString().padStart(2, "0")}`;
-    }
-  }
-
-  function sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// 
@@ -368,13 +316,10 @@
   /////////////////////////////////////////////// Управление kodik_player ///////////////////////////////////////////////////////
   function kodikMessageListener(message) {
     // if (message.data.title == "mousemove") return
-    // console.log(111222, message.data.key)
     switch (message.data.key) {
-
       case 'kodik_player_volume_change':
         navigator.mediaSession.metadata.volume = message.data.value.volume
         break
-
       case "kodik_player_play":
         navigator.mediaSession.metadata.isPlay = true
         document.getElementById("resume_buton").classList.add("hidden")
@@ -382,10 +327,7 @@
         //document.getElementById("scroll_butons").classList.remove("hidden")
         kodik_player_api({ method: "volume", volume: navigator.mediaSession.metadata.volume })
         break
-
       case "kodik_player_pause":
-        BaseAnimeCurrent[shikimori_id]["time_serie"] = navigator.mediaSession.metadata.time;
-        localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
         navigator.mediaSession.metadata.isPlay = false
         // document.getElementById("resume_buton").classList.remove("hidden")
         window.parent.label = {
@@ -396,14 +338,9 @@
           timestamps: { start: Math.floor(Date.now() / 1000) + 999999 },
           time: Date.now()
         }
-        window?.parent?.save_server_base()
         break
-
       case "kodik_player_time_update":
-
         navigator.mediaSession.metadata.time = message.data.value;
-
-        // BaseAnimeCurrent
         window.parent.label = {
           title: "Track Anime By DygDyg",
           state: `${navigator.mediaSession.metadata.artist} | ►`,
@@ -412,21 +349,9 @@
           time: Date.now()
         }
         break
-
       case "kodik_player_seek":
 
 
-        break
-
-      case "kodik_player_video_started":
-
-        kodik_player_api(
-          {
-
-            method: "seek",
-            seconds: BaseAnimeCurrent[shikimori_id]?.time_serie || 0
-          }
-        )
         break
       case "kodik_player_current_episode":
 
@@ -437,18 +362,11 @@
           delete BaseAnimeCurrent[shikimori_id];
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
         } else {
-          // BaseAnimeCurrent[shikimori_id] =  BaseAnimeCurrent[shikimori_id]|| {}
-          BaseAnimeCurrent[shikimori_id]["episode"] = message.data.value;
-          // BaseAnimeCurrent[shikimori_id] = message.data.value;
-          BaseAnimeCurrent[shikimori_id]["episode"] = message.data.value.episode
-          BaseAnimeCurrent[shikimori_id]["season"] = message.data.value.season
-          BaseAnimeCurrent[shikimori_id]["translation"] = message.data.value.translation
-          console.log(message.data.value)
+          BaseAnimeCurrent[shikimori_id] = message.data.value;
           BaseAnimeCurrent[shikimori_id]["material_data"] = data_anime.material_data
           BaseAnimeCurrent[shikimori_id]["lasttime"] = new Date().getTime() / 1000
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
         }
-
         localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
         console.log(message)
         window.parent.label = {
@@ -461,7 +379,6 @@
         break;
 
       default:
-
         break;
     }
 
