@@ -12,6 +12,7 @@
         const targetDomain = "track-anime.dygdyg.ru";
         if (currentDomain !== targetDomain) {
             const newUrl = window.location.protocol + "//" + targetDomain + window.location.pathname + window.location.search + window.location.hash;
+            debugger;
             window.location.replace(newUrl);
         }
     }
