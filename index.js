@@ -1,3 +1,26 @@
+/*
+* Перенаправляет с гита на новый сайт
+*/
+(function () {
+    const redirectDomains = [
+        "track-anime.dygdyg.ru",
+    ];
+
+    const currentDomain = window.location.hostname;
+
+    if (redirectDomains.includes(currentDomain)) {
+        const targetDomain = "track-anime.dygdyg.ru";
+        if (currentDomain !== targetDomain) {
+            const newUrl = window.location.protocol + "//" + targetDomain + window.location.pathname + window.location.search + window.location.hash;
+            window.location.replace(newUrl);
+        }
+    }
+})();
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 var data, dat, targetFrame, endid, endid2, prev_page, SH_UserData, SH_Favorite, cart_data, backgrounds;
 var ld = false, SH_isAvtorize = false;
 var AnimeScanID = {}
@@ -41,6 +64,7 @@ const CheckСensored = document.getElementById("CheckСensored")
 const CheckRepeats_ = document.getElementById("CheckRepeats")
 const CheckReleased_ = document.getElementById("CheckReleased")
 const contextMenu = document.getElementById('contextMenu');
+
 function start_window_label() {
     window.label = {
         title: "Track Anime By DygDyg",
@@ -78,6 +102,8 @@ document.addEventListener('click', () => {
 
     contextMenu.style.display = 'none';
 });
+
+
 /*
 // Инициализация звёздного неба с пользовательскими параметрами
 const starrySky = new StarrySky('starryCanvas', {
@@ -3400,7 +3426,7 @@ function upd_new_anime_list() {
         }
     });
     list_serch.querySelectorAll(".cart_.bg-dark").forEach(ee => {
-        
+
         if (BaseAnimeCurrent[ee.data.shikimori]?.episode < ee.data.e.last_episode) {
             new_anime_list.prepend(ee)
         }
