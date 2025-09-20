@@ -3,7 +3,7 @@
 */
 (function () {
     const redirectDomains = [
-        "track-anime.dygdyg.ru",
+        "track-anime.github.io",
     ];
 
     const currentDomain = window.location.hostname;
