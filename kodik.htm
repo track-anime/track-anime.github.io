@@ -157,6 +157,8 @@
     var url_serch = `https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${shikimori_id}`
     if (BaseAnimeCurrent[shikimori_id]) {
       url_serch = `${url_serch}&translation_id=${BaseAnimeCurrent[shikimori_id].translation.id}`
+    }else{
+      BaseAnimeCurrent = {}
     }
 
     const response = await fetch(url_serch);
@@ -179,6 +181,8 @@
     var get_sav_url_data = "&season=1&episode=1"
     if (BaseAnimeCurrent[shikimori_id]) {
       get_sav_url_data = `&season=${BaseAnimeCurrent[shikimori_id].season}&episode=${BaseAnimeCurrent[shikimori_id].episode}`
+    }else{
+      BaseAnimeCurrent = {}
     }
     // var url = url_get.searchParams.get('url') ? url_get.searchParams.get('url') :"https://kodik.cc/find-player"
     var url = data_anime.link ? data_anime.link : "https://kodik.cc/find-player"
