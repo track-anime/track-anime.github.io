@@ -9,11 +9,6 @@
             "type": "directory",
             "children": [
                 {
-                    "name": "AUTO_MERGE",
-                    "suffix": "",
-                    "type": "file"
-                },
-                {
                     "name": "COMMIT_EDITMSG",
                     "suffix": "",
                     "type": "file"
@@ -3455,6 +3450,11 @@
                                 },
                                 {
                                     "name": "1ff1f75c2e3db8b6de34fbd03f82c5a992ea37",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "40e8862d2049e21429296e3b4a0ecd92a88a13",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -12635,6 +12635,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "3e24d5222e9cb752b226bf0dae4063aa587ce9",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "4051de7a390769b13a8c0f7353ddf79add7078",
                                     "suffix": "",
                                     "type": "file"
@@ -20787,6 +20792,11 @@
                                     "type": "file"
                                 },
                                 {
+                                    "name": "d04a9cb904510113f923e8ad0b97e07b0283f5",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
                                     "name": "e2c3a4ca77581a4b92c7dede5ceae7d45b2478",
                                     "suffix": "",
                                     "type": "file"
@@ -21121,6 +21131,11 @@
                                 },
                                 {
                                     "name": "d228f583a3501c7bd39196abff14d50bbec019",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "e6467c146409a62532a0a21f4b0e799d184858",
                                     "suffix": "",
                                     "type": "file"
                                 },
