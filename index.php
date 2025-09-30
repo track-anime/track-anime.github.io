@@ -21,6 +21,7 @@ if (isset($_GET['shikimori_id']) && !empty($_GET['shikimori_id'])) {
         if (isset($data['russian']) && !empty($data['russian'])) {
             $title = "TA: [{$data['kind']}] {$data['russian']}";
             $desc  = "[{$data['kind']}] {$data['russian']}";
+            $descr  = "[{$data['description']}]";
             $img   = "https://server.dygdyg.ru/cover2.php?id={$shikimori_id}";
 
             // Title
@@ -49,7 +50,7 @@ if (isset($_GET['shikimori_id']) && !empty($_GET['shikimori_id'])) {
                 "<meta property=\"twitter:description\" content=\"{$desc}\">", $content);
 
             $content = preg_replace('/<meta\s+property="twitter:image:alt"\s+content="[^"]*"\s*\/?>/i', 
-                "<meta property=\"twitter:image:alt\" content=\"{$desc}\">", $content);
+                "<meta property=\"twitter:image:alt\" content=\"{$descr}\">", $content);
 
             // Images
             $content = preg_replace('/<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i', 
