@@ -21,7 +21,7 @@ if (isset($_GET['shikimori_id']) && !empty($_GET['shikimori_id'])) {
         if (isset($data['russian']) && !empty($data['russian'])) {
             $title = "TA: [{$data['kind']}] {$data['russian']}";
             $desc  = "[{$data['kind']}] {$data['russian']}";
-            $descr  = "{$data['description']}";
+            $descr = preg_replace('/\[\/?character(?:=\d+)?\]/u', '', $data['description']);
             $img   = "https://server.dygdyg.ru/cover2.php?id={$shikimori_id}";
 
             // Title
