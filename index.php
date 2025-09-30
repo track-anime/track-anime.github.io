@@ -48,6 +48,9 @@ if (isset($_GET['shikimori_id']) && !empty($_GET['shikimori_id'])) {
             $content = preg_replace('/<meta\s+property="twitter:description"\s+content="[^"]*"\s*\/?>/i', 
                 "<meta property=\"twitter:description\" content=\"{$desc}\">", $content);
 
+            $content = preg_replace('/<meta\s+property="twitter:image:alt"\s+content="[^"]*"\s*\/?>/i', 
+                "<meta property=\"twitter:description\" content=\"{$desc}\">", $content);
+
             // Images
             $content = preg_replace('/<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i', 
                 "<meta property=\"og:image\" content=\"{$img}\">", $content);
