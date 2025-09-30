@@ -3192,7 +3192,14 @@ function createMenuItems(menuItems) {
 
 async function load_server_base() {
     if (sh_api.authorize == false) return
-    var response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${sh_api.UserData.id}`);
+    var response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
+        method: "GET", // можно POST, PUT и т.п.
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + sh_api.getCookie("sh_access_token")
+        }
+    }
+    );
     var user_data = await response.json()
     if (!user_data.message) {
         debug.log("user_data_server", user_data)
@@ -3209,10 +3216,11 @@ async function load_server_base() {
 
 async function save_server_base() {
     if (sh_api.authorize == false) return
-    const response = await fetch(`https://${MyServerURL}/ta_user_base.php?id=${encodeURIComponent(sh_api.UserData.id)}`, {
+    const response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${sh_api.getCookie("sh_access_token")}`
         },
         body: JSON.stringify({
             base_anime,
