@@ -3191,47 +3191,75 @@ function createMenuItems(menuItems) {
 
 
 async function load_server_base() {
-    if (sh_api.authorize == false) return
-    var response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
-        method: "GET", // можно POST, PUT и т.п.
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + sh_api.getCookie("sh_access_token")
-        }
-    }
-    );
-    var user_data = await response.json()
-    if (!user_data.message) {
-        debug.log("user_data_server", user_data)
-        base_anime = user_data.base_anime
-        BaseAnimeCurrent = user_data.BaseAnimeCurrent
-        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
-        localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+    if (sh_api.authorize == false) return;
 
+    try {
+        let response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + sh_api.getCookie("sh_access_token")
+            }
+        });
+
+        // Проверка статуса ответа
+        if (!response.ok) {
+            console.error("Ошибка запроса:", response.status, response.statusText);
+            return; // просто выходим из функции
+        }
+
+        let user_data = await response.json();
+
+        if (!user_data.message) {
+            debug.log("user_data_server", user_data);
+            base_anime = user_data.base_anime;
+            BaseAnimeCurrent = user_data.BaseAnimeCurrent;
+            localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+            localStorage.setItem('BaseAnimeCurrent', JSON.stringify(BaseAnimeCurrent));
+        }
+
+        GetResume("ubd");
+        upd_new_anime_list();
+
+        return user_data;
+    } catch (err) {
+        console.error("Ошибка при запросе:", err);
+        return; // или return null
     }
-    GetResume("ubd")
-    upd_new_anime_list()
-    return user_data
 }
+
 
 async function save_server_base() {
-    if (sh_api.authorize == false) return
-    const response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${sh_api.getCookie("sh_access_token")}`
-        },
-        body: JSON.stringify({
-            base_anime,
-            BaseAnimeCurrent
-        })
-    });
+    if (sh_api.authorize == false) return;
 
-    debug.log("Ответ от сервера:", response);
-    return response
+    try {
+        const response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${sh_api.getCookie("sh_access_token")}`
+            },
+            body: JSON.stringify({
+                base_anime,
+                BaseAnimeCurrent
+            })
+        });
 
+        if (!response.ok) {
+            console.error("Ошибка сохранения:", response.status, response.statusText);
+            return null; // выходим из функции
+        }
+
+        const data = await response.json().catch(() => null);
+        debug.log("Ответ от сервера:", data);
+
+        return data;
+    } catch (err) {
+        console.error("Ошибка при запросе:", err);
+        return null;
+    }
 }
+
 
 
 /////// Управление с пульта tv
