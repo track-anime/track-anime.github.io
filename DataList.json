@@ -188,6 +188,66 @@
                     "type": "directory",
                     "children": [
                         {
+                            "name": "6a",
+                            "suffix": "",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "20230856618bac5afcaaa0ba0323aed6f74d24",
+                                    "suffix": "",
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "a9",
+                            "suffix": "",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "ee719d5970809a3c167939a40997d1b9cb2b62",
+                                    "suffix": "",
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "d1",
+                            "suffix": "",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "c674c01ba707a0229c7396800d902cb0ea4ef6",
+                                    "suffix": "",
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "f7",
+                            "suffix": "",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "14d41cb85b11c24b7547976818f99d06b5c57f",
+                                    "suffix": "",
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "fa",
+                            "suffix": "",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "name": "f779e8700e14aac7d3dd6cb94e99b4dd3d33a4",
+                                    "suffix": "",
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        {
                             "name": "info",
                             "suffix": "",
                             "type": "directory",
@@ -247,7 +307,13 @@
                             "name": "heads",
                             "suffix": "",
                             "type": "directory",
-                            "children": []
+                            "children": [
+                                {
+                                    "name": "main",
+                                    "suffix": "",
+                                    "type": "file"
+                                }
+                            ]
                         },
                         {
                             "name": "remotes",
@@ -258,7 +324,13 @@
                                     "name": "origin",
                                     "suffix": "",
                                     "type": "directory",
-                                    "children": []
+                                    "children": [
+                                        {
+                                            "name": "main",
+                                            "suffix": "",
+                                            "type": "file"
+                                        }
+                                    ]
                                 }
                             ]
                         },

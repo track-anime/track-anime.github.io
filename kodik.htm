@@ -158,7 +158,7 @@
     if (BaseAnimeCurrent[shikimori_id]) {
       url_serch = `${url_serch}&translation_id=${BaseAnimeCurrent[shikimori_id].translation.id}`
     }else{
-      BaseAnimeCurrent = {}
+      //BaseAnimeCurrent = {}
     }
 
     const response = await fetch(url_serch);
@@ -182,7 +182,7 @@
     if (BaseAnimeCurrent[shikimori_id]) {
       get_sav_url_data = `&season=${BaseAnimeCurrent[shikimori_id].season}&episode=${BaseAnimeCurrent[shikimori_id].episode}`
     }else{
-      BaseAnimeCurrent = {}
+      //BaseAnimeCurrent = {}
     }
     // var url = url_get.searchParams.get('url') ? url_get.searchParams.get('url') :"https://kodik.cc/find-player"
     var url = data_anime.link ? data_anime.link : "https://kodik.cc/find-player"
@@ -362,6 +362,7 @@
         navigator.mediaSession.metadata.time = 0;
         navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
         // delete BaseAnimeCurrent[null];
+        BaseAnimeCurrent = BaseAnimeCurrent || {}
         if (data_anime.material_data.episodes_total == message.data.value.episode) {
           delete BaseAnimeCurrent[shikimori_id];
           BaseAnimeCurrent["lasttime"] = new Date().getTime() / 1000
