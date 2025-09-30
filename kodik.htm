@@ -140,6 +140,10 @@
   var shikimori_id = url_get.searchParams.get('shikimori_id') ? url_get.searchParams.get('shikimori_id') : 50346
   var start_load = false
 
+  if (Array.isArray(BaseAnimeCurrent)) {
+    BaseAnimeCurrent = {}; // чтобы точно был объект, а не []
+  }
+
 
 
   // Screen.lockOrientation("landscape")
@@ -157,7 +161,7 @@
     var url_serch = `https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${shikimori_id}`
     if (BaseAnimeCurrent[shikimori_id]) {
       url_serch = `${url_serch}&translation_id=${BaseAnimeCurrent[shikimori_id].translation.id}`
-    }else{
+    } else {
       //BaseAnimeCurrent = {}
     }
 
@@ -170,6 +174,7 @@
 
   /////////////////////////////////////////////// Запуск плеера в iframe /////////////////////////////////////////////////////////
   async function start_kodik() {
+
     window.label = {
       title: "Track Anime By DygDyg",
       state: `Cерии: ${data_anime.material_data.episodes_aired || "?"}/${data_anime.material_data.episodes || data_anime.material_data.episodes_total || "?"}`,
@@ -181,7 +186,7 @@
     var get_sav_url_data = "&season=1&episode=1"
     if (BaseAnimeCurrent[shikimori_id]) {
       get_sav_url_data = `&season=${BaseAnimeCurrent[shikimori_id].season}&episode=${BaseAnimeCurrent[shikimori_id].episode}`
-    }else{
+    } else {
       //BaseAnimeCurrent = {}
     }
     // var url = url_get.searchParams.get('url') ? url_get.searchParams.get('url') :"https://kodik.cc/find-player"
@@ -247,8 +252,8 @@
     const parentWindow = window.parent;
     setInterval(() => {
       if (navigator.userAgent.toLowerCase().includes('iphone') || navigator.userAgent.toLowerCase().includes('android')) return // Последний фикс-хуикс для дерил, остальные по подписке
-      if (parentWindow?.document.activeElement === parentWindow?.document?.getElementById("search_input")) return 
-      if (parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('DialogVideoInfoScroll')!==false || parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('d-none')!==false) return 
+      if (parentWindow?.document.activeElement === parentWindow?.document?.getElementById("search_input")) return
+      if (parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('DialogVideoInfoScroll') !== false || parentWindow?.document?.getElementById("DialogVideoInfo")?.classList.contains('d-none') !== false) return
 
       window.focus();   ////////////////////////////// Костыль чтоб забирать фокус у плеера по кд
     }, 1000);
@@ -358,7 +363,9 @@
 
         break
       case "kodik_player_current_episode":
-
+        if (Array.isArray(BaseAnimeCurrent)) {
+          BaseAnimeCurrent = {};
+        }
         navigator.mediaSession.metadata.time = 0;
         navigator.mediaSession.metadata.artist = `Серия: ${message.data.value.episode}`
         // delete BaseAnimeCurrent[null];
