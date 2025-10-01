@@ -2373,6 +2373,7 @@ function showToast(e, t, click, t_start) {
 document.addEventListener("sh_get_anime", function (e) {
     debug.log("sh_get_anime", e.anime)
     AnimeInfo = e.anime
+    VideoInfo.info?.anime_related.classList.add("hide")
     VideoInfo.info.anime_related_list.innerHTML = ""
     // debug.log(`https://shikimori.one${e.anime.image.original}`)
     const e1 = {
