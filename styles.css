@@ -93,7 +93,7 @@ body {
     /* display: flex; */
     flex-wrap: wrap;
     justify-content: center;
-    background-image: url(background.jpg);
+    background-image: url(background.webp);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;

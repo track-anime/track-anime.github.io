@@ -73,7 +73,7 @@ var URLKodikTranslations = "https://" + MyServerURL + "/kodik.php?method=transla
 var URLList = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"//&countries=Япония"
 var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
 var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
-get_covers_base()
+// get_covers_base()
 
 document.addEventListener('click', () => {
 
@@ -1304,7 +1304,6 @@ function getRandomInt(max) {
     return Math.floor(Math.random() * max);
 }
 function getCover(id) {
-
     if (covers_base[id] == undefined) {
         debug.log("getCover", id, `https://shikimori.one/animes/${id}`)
         sendWebhookMessageNoCover(id)
