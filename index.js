@@ -1929,14 +1929,14 @@ async function getCalendarSh() {
     // var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
     var response = await fetch(`https://${MyServerURL}/kodik.php?method=calendar`);
     const data = await response.json();
-    // debug.log("dasdasdasdasd", data)
     data.forEach(e => {
+        // debug.log("dasdasdasdasd", e?.anime?.image?.original)
         // Скрывает анонсы (ещё не вышедшие аниме) anons
         // if(e.anime.status=="anons") return    
 
         const e1 = {
             "title": `${e.anime.russian}`,
-            "cover": `https://shikimori.one${e.anime.image.original}`,
+            "cover": `${e.anime.image.original}`,
             // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
             "date": formatDate(e.next_episode_at),
             "voice": formatDate(e.next_episode_at).moment.format('dddd'),
@@ -2081,12 +2081,15 @@ function add_cart(e) {
         // e.cover = `https://shikimori.one/system/animes/original/${e.shikimori}.jpg`
     } else {
 
+        e_cover = e?.cover
+        debug.log(111, e_cover)
         if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
 
-        // debug.log(e.cover)
-        e.cover = `${getCoverURL}${e.shikimori}&url=${e?.material_data?.poster_url}`
+        // debug.log(e?.cover)
+        e.cover = `${getCoverURL}${e.shikimori}`
+        if(e_cover)e.cover = `${getCoverURL}${e.shikimori}`+`&url=${e_cover}`
+        if(e?.material_data?.poster_url)e.cover = `${getCoverURL}${e.shikimori}`+`&url=${e?.material_data?.poster_url}`
         // e.cover = e.material_data.poster_url
-        // e.cover = `${getCoverURL}${e.shikimori}`
     }
     // e.cover = `${getCoverURL}${e.shikimori}`
 
