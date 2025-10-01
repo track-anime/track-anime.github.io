@@ -1722,7 +1722,8 @@ function ClearFavorite() {
 function ClearBase() {
     if (confirm("Очистить базу данных?")) {
         base_anime = {}
-        localStorage.setItem('BaseAnime', JSON.stringify(base_anime));
+        localStorage.setItem('BaseAnime', "{}");
+        localStorage.setItem('BaseAnimeCurrent', "{}");
         save_server_base()
         location.reload()
     }
