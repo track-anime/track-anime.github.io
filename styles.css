@@ -168,6 +168,16 @@ body {
     width: calc(17rem/1.25);
 }
 
+img.img_cover {
+    background-size: inherit;
+    position: absolute;
+    aspect-ratio: 9 / 14;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+
 /* Другая история */
 .\%D0\%94\%D1\%80\%D1\%83\%D0\%B3\%D0\%B0\%D1\%8F\%20\%D0\%B8\%D1\%81\%D1\%82\%D0\%BE\%D1\%80\%D0\%B8\%D1\%8F {
     color: #ea4c89;
@@ -580,8 +590,9 @@ canvas#starryCanvas {
 
 
 
-@media (min-width: 989px) and (max-width: 1270px)  {
-/* @media (max-width: 1270px) and (orientation: landscape) { */
+@media (min-width: 989px) and (max-width: 1270px) {
+
+    /* @media (max-width: 1270px) and (orientation: landscape) { */
     html {
         font-size: 0.7rem;
     }
@@ -809,6 +820,13 @@ p {
 }
 
 @media screen and (orientation: portrait) {
+    img.img_cover {
+        position: absolute;
+        aspect-ratio: 9 / 14;
+        height: 100%;
+        width: auto;
+        overflow: hidden;
+    }
 
     /* .cart-del {
 
@@ -845,7 +863,8 @@ p {
         position: relative;
         right: 0px;
         bottom: 0px;
-        background: #212529 !important;
+        /* background: #212529 !important; */
+        background: transparent !important;
         text-align: left !important;
     }
 
@@ -859,7 +878,8 @@ p {
         position: relative;
         padding: 6px 0px 0px 0px !important;
         /* left: 180px; */
-        background: #212529 !important;
+        /* background: #212529 !important; */
+        background: transparent !important;
         text-align: left !important;
         /* display: inline-block; */
     }
@@ -885,7 +905,8 @@ p {
         font-size: 0.7em !important;
         position: relative !important;
         right: 0px;
-        background: #212529 !important;
+        /* background: #212529 !important; */
+        background: transparent !important;
         text-align: left !important;
     }
 
@@ -896,7 +917,8 @@ p {
         margin: 0;
         width: calc(90% - 180px);
         position: relative;
-        background: #212529 !important;
+        /* background: #212529 !important; */
+        background: transparent !important;
         /* overflow: hidden; */
         text-align: left !important;
     }
@@ -910,7 +932,8 @@ p {
         /* font-size: 15px; */
         font-size: 0.7em !important;
         position: relative !important;
-        background: #212529 !important;
+        /* background: #212529 !important; */
+        background: transparent !important;
         bottom: 0px !important;
         border-radius: 0 !important;
         flex-grow: 1;
@@ -1128,24 +1151,24 @@ screen and (max-width: 992px) {
 
     /* #carouselExampleAutoplaying, */
     /* #carouselExampleAutoplaying2 { */
-        /* margin: 4px !important; */
-        /* width: 50% !important; */
-        /* height: 100%; */
-        /* width: auto !important; */
-        /* display: none; */
+    /* margin: 4px !important; */
+    /* width: 50% !important; */
+    /* height: 100%; */
+    /* width: auto !important; */
+    /* display: none; */
     /* } */
 
 }
-.minh-100
-{
-    min-height: 100% ;
+
+.minh-100 {
+    min-height: 100%;
 }
-.minw-100
-{
+
+.minw-100 {
     min-width: 100%;
 }
-.df_im
-{
+
+.df_im {
     /* display: flex !important; */
     margin: 0 auto;
 }

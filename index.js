@@ -2081,28 +2081,35 @@ function add_cart(e) {
     } else {
 
         e_cover = e?.cover
-        debug.log(111, e_cover)
+        // debug.log(111, e_cover)
         if (!e.cover?.startsWith('http')) e.cover = "https://shikimori.one" + e.cover
 
         // debug.log(e?.cover)
         e.cover = `${getCoverURL}${e.shikimori}`
-        if(e_cover)e.cover = `${getCoverURL}${e.shikimori}`+`&url=${e_cover}`
-        if(e?.material_data?.poster_url)e.cover = `${getCoverURL}${e.shikimori}`+`&url=${e?.material_data?.poster_url}`
+        if (e_cover) e.cover = `${getCoverURL}${e.shikimori}` + `&url=${e_cover}`
+        if (e?.material_data?.poster_url) e.cover = `${getCoverURL}${e.shikimori}` + `&url=${e?.material_data?.poster_url}`
         // e.cover = e.material_data.poster_url
     }
     // e.cover = `${getCoverURL}${e.shikimori}`
 
 
     const imgTop = document.createElement('div');
-    imgTop.style.backgroundImage = `url(${e.cover}),  url(404.webp)`;
+    imgTop.img = document.createElement('img');
+    imgTop.appendChild(imgTop.img);
+    // imgTop.style.backgroundImage = `url(${e.cover}),  url(404.webp)`;
+    imgTop.img.style.backgroundImage = `url(404.webp)`;
+    imgTop.img.classList.add("img_cover")
+    imgTop.img.src = e.cover;
+    imgTop.img.img_pre = e.cover;
+    imgTop.img.loading = "lazy"; // ленивая загрузка
+    imgTop.img.decoding = "async"; // быстрее отображает
 
-    imgTop.src = e.cover;
+
     imgTop.classList.add('cart-img-top');
     // imgTop.classList.add('img-preview');
     imgTop.classList.add('ipa-shift');
     imgTop.classList.add('paralax-bg');
     imgTop.setAttribute("img-preview-height", "720px")
-    imgTop.img_pre = e.cover
     imgTop.alt = 'cover';
 
 
@@ -2115,10 +2122,10 @@ function add_cart(e) {
 
         if (event.shiftKey) {
             imgTop.src = ""
-            imgTop.src = `${imgTop.img_pre}&force=true`
-            console.log(imgTop.src)
+            imgTop.src = `${imgTop.img.img_pre}&force=true`
+            // console.log(imgTop.src)
             // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
-            imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
+            // imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
             return
         }
         var a = new URL(window.location.href)
@@ -2144,11 +2151,11 @@ function add_cart(e) {
                 // { text: 'Копировать ссылку', action: () => alert('Ссылка скопирована') },
                 {
                     text: 'Обновить обложку', action: () => {
-                        imgTop.src = ""
-                        imgTop.src = `${imgTop.img_pre}&force=true`
+                        imgTop.img.src = ""
+                        imgTop.img.src = `${imgTop.img.img_pre}&force=true`
                         console.log(imgTop.src)
                         // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
-                        imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
+                        // imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
                     }
                 },
                 {
