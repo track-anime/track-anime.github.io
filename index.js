@@ -2095,7 +2095,7 @@ function add_cart(e) {
 
 
     const imgTop = document.createElement('div');
-    imgTop.style.backgroundImage = `url(${e.cover}),  url(404.jpg)`;
+    imgTop.style.backgroundImage = `url(${e.cover}),  url(404.webp)`;
 
     imgTop.src = e.cover;
     imgTop.classList.add('cart-img-top');
@@ -2818,7 +2818,7 @@ function GetKodiScan(data, revers) {
                 if (!e.shikimori_id) return
                 const e1 = {
                     "title": e?.material_data?.anime_title ? e?.material_data?.anime_title : "404",
-                    "cover": e?.material_data?.poster_url ? e?.material_data?.poster_url : "404.jpg",
+                    "cover": e?.material_data?.poster_url ? e?.material_data?.poster_url : "404.webp",
                     // "cover": `https://shikimori.one${base_anime.base[e.shikimori_id].image.original}`,
                     "date": formatDate(e.updated_at),
                     // "date": formatDate(base_anime.base[e.shikimori_id].next_episode_at),
