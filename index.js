@@ -2373,7 +2373,6 @@ function showToast(e, t, click, t_start) {
 document.addEventListener("sh_get_anime", function (e) {
     debug.log("sh_get_anime", e.anime)
     AnimeInfo = e.anime
-    VideoInfo.info?.anime_related.classList.add("hide")
     VideoInfo.info.anime_related_list.innerHTML = ""
     // debug.log(`https://shikimori.one${e.anime.image.original}`)
     const e1 = {
@@ -2457,7 +2456,7 @@ document.addEventListener("sh_get_anime_related", function (e) {
             cart.classList.add("related_cart")
             VideoInfo.info?.anime_related_list?.appendChild(cart)
         });
-    VideoInfo.info?.anime_related_list.querySelectorAll(".related_cart").length > 0 ? VideoInfo.info?.anime_related.classList.remove("hide") : VideoInfo.info?.anime_related.classList.add("hide")
+    VideoInfo.info?.anime_related_list.querySelectorAll("#anime_related_list > div > div.cart-img-top.ipa-shift.paralax-bg").length > 0 ? VideoInfo.info?.anime_related.classList.remove("hide") : VideoInfo.info?.anime_related.classList.add("hide")
 
 })
 
