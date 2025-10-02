@@ -2082,8 +2082,8 @@ function add_cart(e) {
         }, 100);
 
         if (event.shiftKey) {
-            imgTop.src = ""
-            imgTop.src = `${imgTop.img.img_pre}&force=true`
+            imgTop.img.src = ""
+            imgTop.img.src = `${imgTop.img.img_pre}&force=true`
             // console.log(imgTop.src)
             // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
             // imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
