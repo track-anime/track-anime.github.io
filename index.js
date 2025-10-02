@@ -2762,7 +2762,6 @@ async function GetKodi(seartch, revers) {
             getHome(true)
             HistoryIsActivy = false
             ignoreVoice = true
-            console.log(111, decodeURIComponent(seartch))
             document.getElementById('search_input').value = decodeURIComponent(seartch)
             targetFrame = document.getElementById('list_history')
             getChapter("#list_history")
