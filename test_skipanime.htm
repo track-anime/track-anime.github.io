@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AniSkip Demo (Shikimori → AniList → AniSkip)</title>
+  <style>
+    body { font-family: sans-serif; margin: 24px; line-height: 1.45; }
+    .row { margin-bottom: 12px; }
+    label { font-weight: 600; display: block; margin-bottom: 4px; }
+    input { width: 100%; padding: 8px; font-family: monospace; }
+    button { padding: 10px 14px; margin-top: 8px; cursor: pointer; }
+    pre { background: #0f172a; color: #e2e8f0; padding: 12px; border-radius: 8px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <h1>AniSkip Demo</h1>
+
+  <div class="row">
+    <label>Shikimori ID</label>
+    <input id="shikimoriId" value="44511" />
+    <small>44511 = Chainsaw Man (Shikimori ID)</small>
+  </div>
+  <div class="row">
+    <label>Номер серии</label>
+    <input id="episode" value="1" />
+  </div>
+
+  <button onclick="getSkips()">Получить тайминги</button>
+
+  <h2>Инфо</h2>
+  <pre id="info">// Тут появятся данные Shikimori → MAL → AniList → AniSkip</pre>
+
+  <h2>Тайминги OP/ED</h2>
+  <pre id="out">// Результат</pre>
+
+  <script>
+    const ANISKIP_ENDPOINT = "https://api.anime-skip.com/graphql";
+    const CLIENT_ID = "ZGfO0sMF3eCwLYf8yMSCJjlynwNGRXWE"; // тестовый client id
+
+    // 1. Получаем из Shikimori
+    async function getFromShikimori(shikimoriId) {
+      const url = `https://shikimori.one/api/animes/${shikimoriId}`;
+      const resp = await fetch(url);
+      if (!resp.ok) throw new Error("Shikimori error: " + resp.status);
+      return await resp.json();
+    }
+
+    // 2. MAL → AniList
+    async function getAniListIdFromMAL(malId) {
+      const query = `query ($idMal: Int) {
+        Media(idMal: $idMal, type: ANIME) {
+          id
+          title { romaji english native }
+        }
+      }`;
+      const resp = await fetch("https://graphql.anilist.co", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ query, variables: { idMal: Number(malId) } })
+      });
+      const data = await resp.json();
+      if (data.errors) throw new Error(JSON.stringify(data.errors));
+      return data.data.Media;
+    }
+
+    // 3. AniSkip: найти шоу по AniList ID
+    async function findShowByAniList(anilistId) {
+      const query = `query($id: String!) {
+        findShowsByExternalId(service: ANILIST, serviceId: $id) {
+          id
+          name
+        }
+      }`;
+      const resp = await fetch(ANISKIP_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Client-ID": CLIENT_ID
+        },
+        body: JSON.stringify({ query, variables: { id: String(anilistId) } })
+      });
+      const data = await resp.json();
+      if (data.errors) throw new Error(JSON.stringify(data.errors));
+      const shows = data.data.findShowsByExternalId;
+      return shows && shows.length ? shows[0] : null;
+    }
+
+    // 4. AniSkip: тайминги по episodeId
+    async function findTimestamps(episodeId) {
+      const query = `query($eid: ID!) {
+        findTimestampsByEpisodeId(episodeId: $eid) {
+          type { name }
+          at
+        }
+      }`;
+      const resp = await fetch(ANISKIP_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Client-ID": CLIENT_ID
+        },
+        body: JSON.stringify({ query, variables: { eid: String(episodeId) } })
+      });
+      const data = await resp.json();
+      if (data.errors) throw new Error(JSON.stringify(data.errors));
+      return data.data.findTimestampsByEpisodeId;
+    }
+
+    // 5. AniSkip: найти эпизод(ы) и проверить тайминги
+    async function findEpisodeWithTimestamps(showId, number) {
+      const query = `query($sid: ID!) {
+        findEpisodesByShowId(showId: $sid) {
+          id
+          number
+        }
+      }`;
+      const resp = await fetch(ANISKIP_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Client-ID": CLIENT_ID
+        },
+        body: JSON.stringify({ query, variables: { sid: String(showId) } })
+      });
+      const data = await resp.json();
+      if (data.errors) throw new Error(JSON.stringify(data.errors));
+      const episodes = data.data.findEpisodesByShowId;
+
+      const candidates = episodes.filter(e => e.number === String(number));
+      if (!candidates.length) return null;
+
+      for (let ep of candidates) {
+        const ts = await findTimestamps(ep.id);
+        if (ts && ts.length) {
+          return { episode: ep, timestamps: ts };
+        }
+      }
+      return { episode: candidates[0], timestamps: [] };
+    }
+
+    // Главная функция
+    async function getSkips() {
+      const shikimoriId = document.getElementById("shikimoriId").value.trim();
+      const episode = Number(document.getElementById("episode").value.trim());
+      const out = document.getElementById("out");
+      const info = document.getElementById("info");
+
+      out.textContent = "// Запрос...";
+      info.textContent = "// Запрос...";
+
+      try {
+        // 1. Shikimori → MAL
+        const shiki = await getFromShikimori(shikimoriId);
+        const malId = shiki.myanimelist_id;
+
+        // 2. MAL → AniList
+        const media = await getAniListIdFromMAL(malId);
+
+        // 3. AniSkip: Show
+        const show = await findShowByAniList(media.id);
+        if (!show) {
+          out.textContent = "В AniSkip не найдено шоу с таким AniList ID.";
+          return;
+        }
+
+        // 4. AniSkip: Episode + Timestamps
+        const result = await findEpisodeWithTimestamps(show.id, episode);
+        if (!result) {
+          out.textContent = "В AniSkip не найден эпизод с таким номером.";
+          return;
+        }
+
+        // выводим инфо
+        info.textContent =
+          `Shikimori ID: ${shikimoriId}\n` +
+          `Shikimori Название: ${shiki.russian || shiki.name}\n` +
+          `MAL ID: ${malId}\n` +
+          `AniList ID: ${media.id}\n` +
+          `AniList Название: ${media.title.romaji || media.title.english || media.title.native}\n` +
+          `AniSkip Show ID: ${show.id}\n` +
+          `AniSkip Episode ID: ${result.episode.id}`;
+
+        // выводим тайминги
+        out.textContent = result.timestamps && result.timestamps.length
+          ? JSON.stringify(result.timestamps, null, 2)
+          : "Для этого эпизода в AniSkip нет таймингов.";
+      } catch (e) {
+        out.textContent = "Ошибка: " + e;
+      }
+    }
+  </script>
+</body>
+</html>

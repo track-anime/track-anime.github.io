@@ -1006,7 +1006,8 @@ document.getElementById('search_form').addEventListener('submit', function (e) {
     e.preventDefault()
     const formdata = new FormData(this)
     formdata.forEach((val, key) => {
-        GetKodi(encodeURI(val))
+        // GetKodi(encodeURI(val))
+        GetKodi(val)
     });
     // GetKodi(encodeURI(e.target.value))
 })
@@ -1020,7 +1021,8 @@ document.getElementById('search_input').addEventListener('input', function (e) {
         }
         DialogVideoInfo.classList.add("d-none")
 
-        GetKodi(encodeURI(e.target.value))
+        // GetKodi(encodeURI(e.target.value))
+        GetKodi(e.target.value)
     }, 500);
 
 })
@@ -2760,6 +2762,7 @@ async function GetKodi(seartch, revers) {
             getHome(true)
             HistoryIsActivy = false
             ignoreVoice = true
+            console.log(111, decodeURIComponent(seartch))
             document.getElementById('search_input').value = decodeURIComponent(seartch)
             targetFrame = document.getElementById('list_history')
             getChapter("#list_history")

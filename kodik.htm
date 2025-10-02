@@ -325,11 +325,17 @@
   /////////////////////////////////////////////// Управление kodik_player ///////////////////////////////////////////////////////
   function kodikMessageListener(message) {
     // if (message.data.title == "mousemove") return
+    if (message.data.title!="mousemove") {
+
+      // console.log(111, message.data)
+    }
     switch (message.data.key) {
+
       case 'kodik_player_volume_change':
         navigator.mediaSession.metadata.volume = message.data.value.volume
         break
       case "kodik_player_play":
+
         navigator.mediaSession.metadata.isPlay = true
         document.getElementById("resume_buton").classList.add("hidden")
         document.getElementById("panel_info_control").classList.add("hidden")
