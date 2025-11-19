@@ -2462,7 +2462,7 @@ document.addEventListener("sh_get_anime_related", function (e) {
 
 })
 
-
+// [${VideoInfo.info.updated_at.textContent}]
 
 function copy_discord() {
     var screen = ""
@@ -2479,7 +2479,8 @@ function copy_discord() {
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
 #  [${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} 
-[${VideoInfo.info.updated_at.textContent}]
+
+Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime()/1000)}:R>
 
 > 🎬 **Серии:** ${VideoInfo.info.series.textContent}  
 > ⏰ **Длительность:** ${VideoInfo.info.duration.textContent}
