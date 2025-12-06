@@ -146,7 +146,6 @@ if (isLocal()) {
     document.getElementById("fav").href = "favicon.png"
 }
 
-if (isDebugEnabled) document.getElementById("keepAwake").play()
 
 ///////////////////////////////////// Загружаются настройки из локалстораджа ///////////////////////////////
 function Get_base_anime() {

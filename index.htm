@@ -45,7 +45,8 @@
     <meta property="twitter:description"
         content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
     <meta property="twitter:image" content="/favicon.png">
-    <meta property="twitter:image:alt" content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
+    <meta property="twitter:image:alt"
+        content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
 
 
     <link type="text/css" href="fonts/RobotoCondensed.css" rel="stylesheet">
@@ -79,7 +80,9 @@
 
 
 <body>
+
     <div id="contextMenu" class="context-menu">
+
     </div>
     <!-- Пероснализация -->
     <div class="modal fade" id="PersonalizedModal" tabindex="-1" aria-labelledby="PersonalizedModalLabel"
@@ -113,11 +116,7 @@
             </div>
         </div>
     </div>
-    <!-- Это фикс чтобы планшет экран не засыпал -->
-    <video id="keepAwake" loop muted style="display: none;">
-        <source src="data:video/mp4;base64,AAAAIGZ0eXBpc29tAAACAGlzb21pc28yYXZjMQAAAAA=" type="video/mp4">
-    </video>
-    <!-- =============== -->
+
     <div class="modal fade" id="modal_reiting_info" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
         tabindex="0">
         <div class="modal-dialog">
@@ -315,6 +314,20 @@
             </div>
         </nav>
     </div>
+    <!-- Новый год -->
+    <link rel="stylesheet" href="ng/style.css">
+    <div id="lights"></div>
+    <script src="ng/jquery.min.js"></script>
+    <script src="ng/ny-bulbs.js"></script>
+    <script>
+    $( document ).ready(function() {
+        $('#lights').lightsOn({
+            initCycle: 800,
+            lampWidth: 50
+        });
+    });
+</script>
+    <!-- Новый год -->
 
     <div class="container_ ">
         <div class="anime_list hide ned_" id="list_calendar">
@@ -443,7 +456,7 @@
             <div class="card mb-3 border-0">
                 <div class="row g-0">
                     <button id="screenshotButton" class="hide">Take Screenshot</button>
-                    <div style="font-size: 1.4em" id="info_title">
+                    <div class="mt-5" style="font-size: 1.4em" id="info_title">
                         <a style="margin-left: 7px; text-decoration: none;" class="link-danger" target="_blank"
                             href="./">Бурятский мультик</a>
                     </div>
@@ -620,8 +633,11 @@
                             padding-left: var(--bs-card-spacer-x);
                             ">
                                 <summary class="anime_franchise_spoiler">Франшиза</summary>
-                                <a id="anime_franchise_link" class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">В отдельном окне</a>
-                                <iframe class="w-100" id="anime_franchise_iframe" frameborder="0" src="loading.htm" allowfullscreen ></iframe>
+                                <a id="anime_franchise_link"
+                                    class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">В
+                                    отдельном окне</a>
+                                <iframe class="w-100" id="anime_franchise_iframe" frameborder="0" src="loading.htm"
+                                    allowfullscreen></iframe>
                             </details>
                             <!-- <div class="col col-12 link-danger" id="anime_related_title">Связанные аниме:</div> -->
 
