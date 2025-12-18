@@ -1857,14 +1857,14 @@ async function httpGet(theUrl) {
         debug.log(url)
         console.error('Ошибка:', error.message);
         if (error_timeoud_hide == true) return
-        showToast({
-            cover: "rkn.png",
-            title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов.`,
-            date: {
-                string: "",
-            },
-            voice: `Ошибка доступа к ${url.hostname}`,
-        }, "15", "/contact.htm")
+        // showToast({
+        //     cover: "rkn.png",
+        //     title: `Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram. Кликни для контактов.`,
+        //     date: {
+        //         string: "",
+        //     },
+        //     voice: `Ошибка доступа к ${url.hostname}`,
+        // }, "15", "/contact.htm")
         document.getElementById("contacts_Button").classList.remove('hide')
         // prompt(`Ошибка: ${error.message}. Скорей всего сайт заблокирован в Вашем регионе, для подробностей пишите мне в discord или telegram`, ".dygdyg @DygDyg")
     }
