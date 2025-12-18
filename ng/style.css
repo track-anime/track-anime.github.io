@@ -1,5 +1,6 @@
----------- Bulbs styles ------------------ */ 
-iframe#VideoPlayer {
+/* ---------- Bulbs styles ------------------ */ 
+
+#VideoPlayer {
     z-index: 1;
 }
 
