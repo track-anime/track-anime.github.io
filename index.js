@@ -3129,7 +3129,7 @@ function isLocal() {
 // Функция для отправки POST запроса с данными пользователя
 async function sh_saveUserData(userData) {
     try {
-        const response = await fetch(`https://${MyServerURL}/sh_save_user.php`, {
+        const response = await fetch(`/sh_save_user.php`, {
             method: 'POST',
             mode: 'cors', // Включаем CORS
             headers: {
@@ -3215,7 +3215,7 @@ async function load_server_base() {
     if (sh_api.authorize == false) return;
 
     try {
-        let response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
+        let response = await fetch(`/ta_user_base.php`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -3254,7 +3254,7 @@ async function save_server_base() {
     if (sh_api.authorize == false) return;
 
     try {
-        const response = await fetch(`https://${MyServerURL}/ta_user_base.php`, {
+        const response = await fetch(`/ta_user_base.php`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
