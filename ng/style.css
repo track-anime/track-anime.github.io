@@ -1,13 +1,19 @@
----------- Bulbs styles ------------------ */
+---------- Bulbs styles ------------------ */ 
+iframe#VideoPlayer {
+    z-index: 1;
+}
+
 #lights {
     position: absolute;
     width: 100%;
 }
+
 #lights .lamp-holder {
     overflow: hidden;
     height: 60px;
     position: relative;
 }
+
 #lights .lamp {
     position: absolute;
     background-image: url('/ng/bulbs.png');
@@ -20,10 +26,12 @@
     transform: scale(0.5);
     z-index: 1;
 }
+
 #lights .circle-holder {
-    top:50px;
+    top: 50px;
     position: relative;
 }
+
 #lights .circle {
     position: absolute;
     opacity: 0;
@@ -35,193 +43,274 @@
     top: -20px;
     left: 0;
 }
+
 #lights .circle.animation0 {
-    opacity:0;
+    opacity: 0;
     top: -45px;
     left: 0;
     animation: animation0 ease-in .4s;
 }
+
 #lights .circle.animation1 {
-    opacity:0;
+    opacity: 0;
     top: 0;
     left: -40px;
     animation: animation1 linear .5s;
 }
+
 #lights .circle.animation2 {
-    opacity:0;
+    opacity: 0;
     top: -35px;
     left: 32px;
     animation: animation2 ease-in-out .6s;
 }
+
 #lights .circle.animation3 {
-    opacity:0;
+    opacity: 0;
     top: -35px;
     left: -28px;
     animation: animation3 ease .4s;
 }
+
 #lights .circle.animation4 {
-    opacity:0;
+    opacity: 0;
     top: 0;
     left: 32px;
     animation: animation4 ease-out .5s;
 }
+
 @keyframes animation0 {
     0% {
-        top: -20px; left: 0; opacity: 0;
+        top: -20px;
+        left: 0;
+        opacity: 0;
     }
+
     2% {
         opacity: .8;
     }
+
     50% {
-        width: 10px; height: 10px;
+        width: 10px;
+        height: 10px;
     }
+
     90% {
         opacity: .8;
     }
+
     100% {
-        top: -45px; left: 0; opacity: 0;
+        top: -45px;
+        left: 0;
+        opacity: 0;
     }
 }
+
 @keyframes animation1 {
     0% {
-        top: -20px; left: 0; opacity: 0;
+        top: -20px;
+        left: 0;
+        opacity: 0;
     }
+
     2% {
-        opacity: 1; width: 7px; height: 7px;
+        opacity: 1;
+        width: 7px;
+        height: 7px;
     }
+
     90% {
-        opacity: 1; width: 3px; height: 3px;
+        opacity: 1;
+        width: 3px;
+        height: 3px;
     }
+
     100% {
-        top: 0; left: -40px; opacity: 0;
+        top: 0;
+        left: -40px;
+        opacity: 0;
     }
 }
+
 @keyframes animation2 {
     0% {
-        top: -20px; left: 0; opacity: 0;
+        top: -20px;
+        left: 0;
+        opacity: 0;
     }
+
     2% {
         opacity: .7;
     }
+
     60% {
-        width: 9px; height: 9px;
+        width: 9px;
+        height: 9px;
     }
+
     90% {
         opacity: .9;
     }
+
     100% {
-        top: -35px; left: 32px; opacity: 0;
+        top: -35px;
+        left: 32px;
+        opacity: 0;
     }
 }
+
 @keyframes animation3 {
     0% {
-        top: -20px; left: 0; opacity: 0;
+        top: -20px;
+        left: 0;
+        opacity: 0;
     }
+
     2% {
         opacity: 1;
     }
+
     90% {
         opacity: 1;
     }
+
     100% {
-        top: -35px; left: -28px; opacity: 0;
+        top: -35px;
+        left: -28px;
+        opacity: 0;
     }
 }
+
 @keyframes animation4 {
     0% {
-        top: -20px; left: 0; opacity: 0;
+        top: -20px;
+        left: 0;
+        opacity: 0;
     }
+
     2% {
         opacity: .5;
     }
+
     30% {
-        width: 5px; height: 5px;
+        width: 5px;
+        height: 5px;
     }
+
     90% {
         opacity: .5;
     }
+
     100% {
-        top: 0; left: 32px; opacity: 0;
+        top: 0;
+        left: 32px;
+        opacity: 0;
     }
 }
+
 #lights .lamp.blue {
     background-position: -40px 0;
 }
+
 #lights .lamp.green {
     background-position: -40px -60px;
 }
+
 #lights .lamp.red {
     background-position: -40px -120px;
 }
+
 #lights .lamp.white {
     background-position: -40px -180px;
 }
+
 #lights .lamp.lilac {
     background-position: -40px -240px;
 }
+
 #lights .lamp.yellow_ {
     background-position: -40px -300px;
 }
+
 #lights .lamp.blue.lighton {
     background-position: 0 0;
 }
+
 #lights .lamp.green.lighton {
     background-position: 0 -60px;
 }
+
 #lights .lamp.red.lighton {
     background-position: 0 -120px;
 }
+
 #lights .lamp.white.lighton {
     background-position: 0 -180px;
 }
+
 #lights .lamp.lilac.lighton {
     background-position: 0 -240px;
 }
+
 #lights .lamp.yellow_.lighton {
     background-position: 0 -300px;
 }
+
 #lights .lamp.blue.broken {
     background-position: -80px 0;
 }
+
 #lights .lamp.green.broken {
     background-position: -80px -60px;
 }
+
 #lights .lamp.red.broken {
     background-position: -80px -120px;
 }
+
 #lights .lamp.white.broken {
     background-position: -80px -180px;
 }
+
 #lights .lamp.lilac.broken {
     background-position: -80px -240px;
 }
+
 #lights .lamp.yellow_.broken {
     background-position: -80px -300px;
 }
+
 #lights .circle.blue {
     background: #2dbbf8;
 }
+
 #lights .circle.green {
     background: #3cfa24;
 }
+
 #lights .circle.red {
     background: #ff0d0d;
 }
+
 #lights .circle.white {
     background: #d1d1d1;
 }
+
 #lights .circle.lilac {
     background: #ff12f1;
 }
+
 #lights .circle.yellow_ {
     background: #ffeb1e;
 }
+
 #lights .lamp.blue.broken,
 #lights .lamp.green.broken,
 #lights .lamp.red.broken,
 #lights .lamp.white.broken {
     background-position-x: -80px;
 }
+
 #lights .swing {
     transform-origin: top center;
     animation-name: swing;
@@ -229,34 +318,42 @@
     animation-fill-mode: both;
     animation-iteration-count: infinite;
 }
+
 @keyframes swing {
     20% {
         transform: rotate3d(0, 0, 1, 15deg);
     }
+
     40% {
         transform: rotate3d(0, 0, 1, -10deg);
     }
+
     60% {
         transform: rotate3d(0, 0, 1, 5deg);
     }
+
     80% {
         transform: rotate3d(0, 0, 1, -5deg);
     }
+
     to {
         transform: rotate3d(0, 0, 1, 0deg);
     }
 }
+
 /* ---------------- Mobile styles ------------------ */
 @media (max-width: 900px) {
     .wrapper.col .masonry {
         column-count: 3;
     }
 }
+
 @media (max-width: 700px) {
     .wrapper.col .masonry {
         column-count: 2;
     }
 }
+
 @media (max-width: 450px) {
     .wrapper.col .masonry {
         column-count: 1;
