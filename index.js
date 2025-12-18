@@ -2475,9 +2475,9 @@ function copy_discord() {
     });
     L_time = ""
 
-    if(typeof AnimeInfo.next_episode_at=="string")L_time =  `Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime()/1000)}:R>`
     if(typeof AnimeInfo.aired_on=="string")L_time =  `Вышло <t:${Math.floor(new Date(AnimeInfo.aired_on).getTime()/1000)}:R>`
     if(typeof AnimeInfo.released_on=="string")L_time =  `Вышло <t:${Math.floor(new Date(AnimeInfo.released_on).getTime()/1000)}:R>`
+    if(typeof AnimeInfo.next_episode_at=="string")L_time =  `Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime()/1000)}:R>`
     console.log("Скопирована инфа для этого аниме: ", AnimeInfo)
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
