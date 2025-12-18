@@ -56,7 +56,7 @@ start_window_label()
 
 // const getCoverURL = "http://107.173.19.4/cover.php?id="
 // const getCoverURL = "//track-anime.dygdyg.ru/cover.php?id="
-const getCoverURL = "https://" + MyServerURL + "/cover2.php?id="
+const getCoverURL = "/cover2.php?id="
 // const getCoverURL = "https://shikimori.one/system/animes/original/"
 var base_anime = {}
 var anime_list_id = []
@@ -69,10 +69,10 @@ const nav_panel_buttons = document.querySelector('nav.navbar.navbar-expand-lg.bg
 
 
 
-var URLKodikTranslations = "https://" + MyServerURL + "/kodik.php?method=translations&types=anime-serial"
-var URLList = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"//&countries=Япония"
-var URLCalendar = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
-var URLListStart = "https://" + MyServerURL + "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
+var URLKodikTranslations = "/kodik.php?method=translations&types=anime-serial"
+var URLList = "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"//&countries=Япония"
+var URLCalendar = "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&anime_status=ongoing"//&anime_kind=tv"//&countries=Япония"
+var URLListStart = "/kodik.php?method=list&limit=100&with_material_data=true&camrip=false&types=anime,anime-serial"
 // get_covers_base()
 
 document.addEventListener('click', () => {
@@ -1886,7 +1886,7 @@ async function getCalendarSh() {
     // ned_shikimori.classList.add("ned_shikimori")
 
     // var response = await fetch(`https://shikimori.one/api/calendar?censored=${base_anime.censored ? base_anime.censored : false}${sh_api.getCookie("sh_access_token") ? "&access_token="+sh_api.getCookie("sh_access_token"):""}`);  //sh_access_token
-    var response = await fetch(`https://${MyServerURL}/kodik.php?method=calendar`);
+    var response = await fetch(`/kodik.php?method=calendar`);
     const data = await response.json();
     data.forEach(e => {
         // debug.log("dasdasdasdasd", e?.anime?.image?.original)
@@ -3024,7 +3024,7 @@ function convertToScale(a, b) {
 /////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////
 async function anim_data(id) {
     debug.log(url_get.searchParams.get("shikimori_id"))
-    const response = await fetch(`https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${id}`);
+    const response = await fetch(`/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${id}`);
     data = await response.json(response);
     data_anime = data.results[0]
     return data_anime.material_data
