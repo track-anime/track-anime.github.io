@@ -376,10 +376,10 @@ VideoInfo.info = {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-
+    return // Отключил автопроверку
     //////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
     setInterval(() => {
-
+        
         url_get.searchParams.delete("code")
         window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
@@ -1310,9 +1310,9 @@ function getBackground() {
                     });
                 }
             });
-            setInterval(() => {
-                document.body.style.backgroundImage = `url(bg/${background[getRandomInt(background.length)]}) `
-            }, 10 * 60 * 1000);
+            // setInterval(() => {
+            //     document.body.style.backgroundImage = `url(bg/${background[getRandomInt(background.length)]}) `
+            // }, 10 * 60 * 1000);
             document.body.style.backgroundImage = `url(bg/${background[getRandomInt(background.length)]}) `
         });
 
