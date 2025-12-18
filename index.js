@@ -2462,7 +2462,6 @@ document.addEventListener("sh_get_anime_related", function (e) {
 })
 
 // [${VideoInfo.info.updated_at.textContent}]
-
 function copy_discord() {
     var screen = ""
     AnimeInfo.screenshots?.forEach((el, i) => {
@@ -2474,12 +2473,16 @@ function copy_discord() {
     AnimeInfo.genres.forEach(e => {
         genres = `${genres} [${e.russian}](<${location.origin}/?anime_genres=${e.russian}>)`
     });
+    L_time = ""
 
+    if(typeof AnimeInfo.next_episode_at=="string")L_time =  `Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime()/1000)}:R>`
+    if(typeof AnimeInfo.released_on=="string")L_time =  `Вышло <t:${Math.floor(new Date(AnimeInfo.released_on).getTime()/1000)}:R>`
+    console.log("Скопирована инфа для этого аниме: ", AnimeInfo)
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
 #  [${AnimeInfo.kind ? AnimeInfo?.kind?.toUpperCase() : "?"}] ${AnimeInfo.russian} 
 
-Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime()/1000)}:R>
+${L_time}
 
 > 🎬 **Серии:** ${VideoInfo.info.series.textContent}  
 > ⏰ **Длительность:** ${VideoInfo.info.duration.textContent}
