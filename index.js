@@ -636,8 +636,8 @@ VideoInfo.info.anime_related_list.addEventListener('wheel', (event) => {
 
 VideoInfo.info.anime_franchise.addEventListener('toggle', (event) => {
     if (event.target.open) {
-        VideoInfo.info.anime_franchise_iframe.src = `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`
-        VideoInfo.info.anime_franchise_link.onclick = () => { window.open(`franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}&MyServerURL=${MyServerURL}`, '_blank') }
+        VideoInfo.info.anime_franchise_iframe.src = `franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}`
+        VideoInfo.info.anime_franchise_link.onclick = () => { window.open(`franchise.htm?shikimori_id=${url_get.searchParams.get("shikimori_id")}`, '_blank') }
         VideoInfo.info.anime_franchise_link.style.cursor = "pointer"
         VideoInfo.info.anime_franchise_iframe.scrollIntoView({ behavior: "smooth" });
         // window.focus()
@@ -797,15 +797,15 @@ function setVideoInfo(e) {
     function add_kodik_pleer(ee) {
 
         if (ee.shiftKey) {
-            window.open(`/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`, '_blank').focus();
+            window.open(`/kodik.htm?shikimori_id=${e.id}`, '_blank').focus();
         } else {
-            VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`;
+            VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}`;
             let DialogVideoInfo = document.getElementById('DialogVideoInfo');
             DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         }
     }
 
-    VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.id}`;
+    VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}`;
     html = ""
     html2 = ""
     e.screenshots?.forEach(el => {
@@ -2572,7 +2572,7 @@ function dialog_(e, info) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         // VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
-        VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.shikimori}`;
+        VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.shikimori}`;
         DialogVideoInfo.classList.remove("d-none");
         // window.open(`/svetacdn.htm?loadserv=kodik&shikimoriID=${e.shikimori}`, '_blank').focus();
         // };
@@ -2583,7 +2583,7 @@ function dialog_(e, info) {
         let DialogVideoInfo = document.getElementById('DialogVideoInfo');
         DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         // VideoPlayer.contentWindow.location.href = `https://kodik.cc/find-player?shikimoriID=${e.shikimori}`;
-        VideoPlayer.contentWindow.location.href = `/kodik.htm?MyServerURL=${MyServerURL}&shikimori_id=${e.shikimori}`;
+        VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.shikimori}`;
         DialogVideoInfo.classList.remove("d-none");
         load.show(false)
     })

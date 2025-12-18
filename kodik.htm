@@ -158,7 +158,7 @@
 
   /////////////////////////////////////////////// Подгрузка базы данных аниме ///////////////////////////////////////////////////
   async function anim_data() {
-    var url_serch = `https://${MyServerURL}/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${shikimori_id}`
+    // var url_serch = `/kodik.php?method=search&limit=1&with_material_data=true&shikimori_id=${shikimori_id}`
     if (BaseAnimeCurrent[shikimori_id]) {
       url_serch = `${url_serch}&translation_id=${BaseAnimeCurrent[shikimori_id].translation.id}`
     } else {
