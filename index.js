@@ -2119,6 +2119,13 @@ function add_cart(e) {
                     }
                 },
                 {
+                    text: 'Скрин карточки', action: () => {
+                        screenshotAndCopy(cart)
+                        // imgTop.style.backgroundImage = `${imgTop.img_pre}&force=true`
+                        // imgTop.style.backgroundImage = imgTop.style.backgroundImage.replace(/url\("([^"]+)"\)/, `url("${imgTop.img_pre}&force=true")`);
+                    }
+                },
+                {
                     text: sh_api.authorize ? 'Добавить в избранное' : null,
                     submenu: [
                         { text: 'смотрю', class: "yellow", action: () => { sh_api.AddUserRates(Number(e.shikimori), 0) } },
@@ -3575,8 +3582,8 @@ window.addEventListener('load', () => {
 
 ////////////////////////////////////////// Делает скриншот в буфер обмена /////////////////////////////////////////
 async function screenshotAndCopy(element) {
+    element.classList.add("screen_transform")
     const canvas = await html2canvas(element);
-
     canvas.toBlob(async (blob) => {
         try {
             await navigator.clipboard.write([
@@ -3587,6 +3594,8 @@ async function screenshotAndCopy(element) {
             console.error("Ошибка копирования:", err);
         }
     });
+    element.classList.remove("screen_transform")
+
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

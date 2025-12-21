@@ -744,6 +744,11 @@
                                     "name": "8bc2947057866049371d955709652513d74b6c",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "ad77c5f4e3b1794227ab6d908adc1a6032a3fb",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -1128,6 +1133,11 @@
                                     "name": "a8e87beae6b5a007bed41dc50d8528d3e132a1",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "eda8eaf83b5da236fe6652259f4d2b17469dcd",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -1328,6 +1338,11 @@
                                 },
                                 {
                                     "name": "60f2f39534fab1e489fc5403169fbfc83b687e",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "a1f5bcc3ec8189cd8e1fef50f034743768412f",
                                     "suffix": "",
                                     "type": "file"
                                 },
@@ -2040,6 +2055,11 @@
                                     "name": "7ec81000961551ca305aee059017edd9254410",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "b0d2bcd014c7f48fcb0109d7f6c94fce5a570e",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -2527,6 +2547,11 @@
                             "children": [
                                 {
                                     "name": "6d83b8cc40ef66e7fa14c34b9cd03e945c2483",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "d6bfd70defa322824e5cba11b3ad5d6061ee28",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -3164,6 +3189,11 @@
                                     "name": "7e28e6b52b8ee19f0abcd780805f5998864d91",
                                     "suffix": "",
                                     "type": "file"
+                                },
+                                {
+                                    "name": "b2dab4c51e79c75d7c7be9c9ef5a64102f7f9e",
+                                    "suffix": "",
+                                    "type": "file"
                                 }
                             ]
                         },
@@ -3230,6 +3260,11 @@
                                 },
                                 {
                                     "name": "4c1fd601bee0f691fcd0e87ba41e1fb86cc3e7",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "d3a405df6da4ee085fbb739dce64538447a589",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -3358,6 +3393,11 @@
                             "children": [
                                 {
                                     "name": "a964b8d4558513c74ce944e4fb3bda3972b38d",
+                                    "suffix": "",
+                                    "type": "file"
+                                },
+                                {
+                                    "name": "d99d4f24a6a2a40c687d226bb8272bc6ef0897",
                                     "suffix": "",
                                     "type": "file"
                                 }
@@ -4494,6 +4534,11 @@
                     "type": "file"
                 }
             ]
+        },
+        {
+            "name": "camera.png",
+            "suffix": ".png",
+            "type": "file"
         },
         {
             "name": "code_parent_test.htm",

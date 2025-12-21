@@ -257,6 +257,25 @@ canvas#starryCanvas {
     /* Синий */
 }
 
+/*  Создание карточки для скрина */
+.screen_transform {
+    background-Color: #212529;
+    width: 900px !important;
+    /* height: 650px !important; */
+    height: auto !important;
+
+}
+.screen_transform #btn_sh_save,
+.screen_transform #copy_discord,
+.screen_transform #info_AnilibriaPlayer,
+.screen_transform #info_AlohaPlayer,
+.screen_transform #info_KodikPlayer,
+.screen_transform #anime_related,
+.screen_transform #anime_franchise {
+    display: none !important;
+}
+/**********************************/
+
 
 #new_anime_list {
     display: flex;
@@ -351,6 +370,15 @@ canvas#starryCanvas {
     width: 38px;
     height: 38px;
     background-image: url(discord_logo.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    margin-left: 4px;
+    margin-right: 4px;
+}
+.btn-camera {
+    width: 38px;
+    height: 38px;
+    background-image: url(camera.png);
     background-size: contain;
     background-repeat: no-repeat;
     margin-left: 4px;
@@ -1587,3 +1615,5 @@ span.sr-only {
     text-decoration: none !important;
     color: #1d9bf0;
 }
+
+
