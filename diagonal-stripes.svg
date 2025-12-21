@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     width="100%"
+     height="100%"
+     viewBox="0 0 56.57 56.57">
+
+  <defs>
+    <pattern id="stripes"
+             width="56.57"
+             height="56.57"
+             patternUnits="userSpaceOnUse">
+
+      <!-- Тёмная полоса -->
+      <rect
+        x="-28.28"
+        y="0"
+        width="28.28"
+        height="80"
+        fill="#212529"
+        transform="rotate(45)"
+      />
+
+      <!-- Светлая полоса -->
+      <rect
+        x="0"
+        y="0"
+        width="28.28"
+        height="80"
+        fill="#292e33"
+        transform="rotate(45)"
+      />
+
+    </pattern>
+  </defs>
+
+  <rect width="100%" height="100%" fill="url(#stripes)"/>
+</svg>

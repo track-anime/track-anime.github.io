@@ -261,10 +261,14 @@ canvas#starryCanvas {
 .screen_transform {
     background-Color: #212529;
     width: 900px !important;
-    /* height: 650px !important; */
     height: auto !important;
+    aspect-ratio: auto !important;
+    background-image: url("waves.png");
+    background-repeat: repeat;
+    background-size: 7%;
 
 }
+
 .screen_transform #btn_sh_save,
 .screen_transform #copy_discord,
 .screen_transform #info_AnilibriaPlayer,
