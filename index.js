@@ -361,6 +361,7 @@ VideoInfo.info = {
     "AlohaPlayer": VideoInfo.querySelector("#info_AlohaPlayer"),
     "AnilibriaPlayer": VideoInfo.querySelector("#info_AnilibriaPlayer"),
     "KodikPlayer": VideoInfo.querySelector("#info_KodikPlayer"),
+    "AddHistory": VideoInfo.querySelector("#info_AddHistory"),
     "duration": VideoInfo.querySelector("#info_duration"),
     "TorrentURL": null,
     "anime_related_list": document.getElementById("anime_related_list"),
@@ -803,6 +804,11 @@ function setVideoInfo(e) {
             let DialogVideoInfo = document.getElementById('DialogVideoInfo');
             DialogVideoInfo.classList.remove("DialogVideoInfoScroll");
         }
+    }
+    VideoInfo.info.AddHistory.addEventListener('click', AddHistory_0)
+
+    function AddHistory_0(ee) {
+
     }
 
     VideoPlayer.contentWindow.location.href = `/kodik.htm?shikimori_id=${e.id}`;
