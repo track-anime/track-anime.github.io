@@ -379,7 +379,7 @@ document.addEventListener('DOMContentLoaded', function () {
     return // Отключил автопроверку
     //////////////////////////////////////////////////////////// Проверка серий /////////////////////////////////////////////////////////
     setInterval(() => {
-        
+
         url_get.searchParams.delete("code")
         window.history.pushState({}, '', url_get);
         if (!HistoryIsActivy || ld) return
@@ -2475,9 +2475,9 @@ function copy_discord() {
     });
     L_time = ""
 
-    if(typeof AnimeInfo.aired_on=="string")L_time =  `Вышло <t:${Math.floor(new Date(AnimeInfo.aired_on).getTime()/1000)}:R>`
-    if(typeof AnimeInfo.released_on=="string")L_time =  `Вышло <t:${Math.floor(new Date(AnimeInfo.released_on).getTime()/1000)}:R>`
-    if(typeof AnimeInfo.next_episode_at=="string")L_time =  `Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime()/1000)}:R>`
+    if (typeof AnimeInfo.aired_on == "string") L_time = `Вышло <t:${Math.floor(new Date(AnimeInfo.aired_on).getTime() / 1000)}:R>`
+    if (typeof AnimeInfo.released_on == "string") L_time = `Вышло <t:${Math.floor(new Date(AnimeInfo.released_on).getTime() / 1000)}:R>`
+    if (typeof AnimeInfo.next_episode_at == "string") L_time = `Следующая серия <t:${Math.floor(new Date(AnimeInfo.next_episode_at).getTime() / 1000)}:R>`
     console.log("Скопирована инфа для этого аниме: ", AnimeInfo)
     copyToClipboard(`
 ~~                                                                                                                                                                                          ~~
@@ -3570,5 +3570,23 @@ window.addEventListener('load', () => {
     connectWebSocket();
 });
 
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////// Делает скриншот в буфер обмена /////////////////////////////////////////
+async function screenshotAndCopy(element) {
+    const canvas = await html2canvas(element);
+
+    canvas.toBlob(async (blob) => {
+        try {
+            await navigator.clipboard.write([
+                new ClipboardItem({ "image/png": blob })
+            ]);
+            console.log("Скриншот скопирован в буфер обмена");
+        } catch (err) {
+            console.error("Ошибка копирования:", err);
+        }
+    });
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
