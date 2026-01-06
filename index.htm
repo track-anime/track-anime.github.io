@@ -1,26 +1,11 @@
 <!DOCTYPE html>
-<!-- <html lang="ru" data-bs-theme="dark"> -->
 <html lang="ru" data-bs-theme="dark">
-<!-- <script defer src="bg.js"></script> -->
 
 <head>
-    <!-- Редирект с гита на новый сайт -->
-    <script defer src="redirect.js"></script>
-    <!-- ============================= -->
-
     <meta name="darkreader-lock">
-    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/scripts/bootstrap.min.css" rel="stylesheet" />
-
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Pangolin&family=Roboto+Flex:opsz,wght@8..144,100..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> -->
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet"> -->
-
-    <!-- <script src="/scripts/jquery.min.js"></script> -->
-
+    <meta charset="UTF-8">
+    <title>Подбор сервера…</title>
 
     <!-- Primary Meta Tags -->
     <link rel="icon" type="image/x-icon" href="/favicon.png" id="fav">
@@ -48,724 +33,160 @@
     <meta property="twitter:image:alt"
         content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
 
+    <!-- Жёстко отключаем кеш -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
 
-    <link type="text/css" href="fonts/RobotoCondensed.css" rel="stylesheet">
-    <!-- <script defer src="/scripts/bootstrap.min.js"></script> -->
-    <script defer src="/scripts/bootstrap.bundle.min.js"></script>
-    <script defer src="/scripts/moment.js"></script>
-    <script defer src="/scripts/moment-with-locales.js"></script>
-    <script defer src="/scripts/counterToStringLabel.js"></script>
-    <script defer src="/scripts/html2canvas.min.js"></script>
-    <script type="text/javascript" src="/scripts/qrcode.min.js"></script>
-    <!-- <script src="/scripts/StarrySky.js"></script> -->
-    <script type="text/javascript" src="https://vk.com/js/api/share.js?168" charset="windows-1251"></script>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script> -->
-    <script src="/scripts/html5-qrcode.min.js"></script>
+    <style>
+        body {
+            font-family: system-ui, sans-serif;
+            background: #0e0e0e;
+            color: #eaeaea;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
 
-    <script defer src="/shikimori_api.js"></script>
+        .box {
+            text-align: center;
+            max-width: 520px;
+        }
 
-    <script defer src="/index.js"></script>
+        .loader {
+            margin: 20px auto;
+            width: 40px;
+            height: 40px;
+            border: 4px solid #333;
+            border-top: 4px solid #4caf50;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
 
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .error {
+            color: #f44336;
+        }
+
+        small {
+            color: #888;
+        }
+    </style>
 </head>
-
-<link rel="stylesheet" type="text/css" href="/styles.css" media="screen" />
-<!-- <link href="/fonts/Pangolin.css" rel="stylesheet" /> -->
-
-<div class="hide" id="load">
-
-    <div class="spinner-border text-primary" role="status" style="scale: 3;">
-        <span id="Loading" class="visually-hidden">Loading...</span>
-        <div class="" id="Loading_skip" style="cursor: pointer;">⏭️</div>
-    </div>
-</div>
-
 
 <body>
 
-    <div id="contextMenu" class="context-menu">
-
-    </div>
-    <!-- Пероснализация -->
-    <div class="modal fade" id="PersonalizedModal" tabindex="-1" aria-labelledby="PersonalizedModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="PersonalizedModalLabel">Пероснализация</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
-                </div>
-                <div class="modal-body">
-                    <h5 class="modal-title" id="PersonalizedModalLabel">Выбери шрифт</h5>
-                    <select class="form-select" id="fontSelect" onchange="FontsCustom(this.value)">
-                        <option selected disabled>Выбери шрифт...</option>
-                        <option value="Roboto Condensed">Roboto Condensed</option>
-                        <option value="Pangolin">Pangolin</option>
-                        <option value="Fira Sans">Fira Sans</option>
-                        <option value="Tektur">Tektur</option>
-                        <option value="Inter Tight">Inter Tight</option>
-                        <option value="Morpheus">Morpheus</option>
-                        <option value="Tolkien">Tolkien</option>
-                        <option value="Propaniac">Propaniac</option>
-                        <!-- <option value="Courier New">Courier New</option>
-                        <option value="Verdana">Verdana</option>
-                        <option value="Georgia">Georgia</option> -->
-                    </select>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                </div>
-            </div>
-        </div>
+    <div class="box">
+        <h1>🌐 Подбор сервера</h1>
+        <p id="status">Инициализация…</p>
+        <div class="loader"></div>
     </div>
 
-    <div class="modal fade" id="modal_reiting_info" aria-hidden="true" aria-labelledby="exampleModalToggleLabel"
-        tabindex="0">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal_reiting_info_title">title</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="modal_reiting_info_body">
-                    <p></p>
-                </div>
-                <div id="modal_reiting_info_userTable_body">
-                    <table class="table table-striped table-bordered">
-                        <thead class="table-dark" id="modal_reiting_info_userTable">
-                            <tr>
-                                <th scope="col">Аватар</th>
-                                <th scope="col">Никнейм</th>
-                                <th scope="col">Рейтинг</th>
-                                <th scope="col">Последний онлайн</th>
-                            </tr>
-                        </thead>
-                        <tbody id="userTableBody"></tbody>
-                    </table>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <img class="image_preview" id="image-preview-window"></img>
-    <div class="modal fade" id="qrcode_scan_modal" tabindex="0" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" id="qrcode_scan_main">
-                    <div class="container_1">
-                        <!-- <h1>Scan QR Codes</h1> -->
-                        <div class="section_1">
-                            <div id="my-qr-reader">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div aria-live="polite" aria-atomic="true" class="position-relative">
-        <div id="ToastsMain" class="toast-container position-fixed bottom-0 p-3">
-        </div>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
-            <div class="container-fluid">
-                <img src="favicon.png" alt="Logo" style="height: 40px; margin-right: 10px;">
-                <a class="navbar-brand ver_info" href="/">Track Anime By ДугДуг</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Переключатель навигации">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <button id="list_home_Button" class="nav-link active" aria-current="page">Главная</button>
-                        </li>
-                        <li class="nav-item">
-                            <button id="list_calendar_Button" aria-current="page"
-                                class="btn-link nav-link">Календарь</button>
-                        </li>
-                        <li class="nav-item">
-                            <button id="resume_Button" aria-current="page" onclick="GetResume()"
-                                class="btn-link nav-link">История</button>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Настройки
-                            </a>
-                            <ul class="dropdown-menu" style="min-width: 250px;">
-                                <!-- <li class="nav-item"><a class="nav-link disabled">Отключенная</a></li> -->
-                                <!-- <li><a class="dropdown-item disabled" href="">Сортировка по рейтингу</a></li> -->
-                                <li>
-                                    <span class="dropdown-item-text" id="RangeRaitingTitle">Фильтр по рейтингу:</span>
-                                </li>
-                                <li><input type="range" class="form-range px-2" min="0" max="10" step="0.1" value="2"
-                                        id="RangeRaiting"></input></li>
-                        </li>
-                        <li>
-                            <span class="dropdown-item-text" id="RangeVolumeText">Громкость уведомлений:</span>
-                        </li>
-                        <li><input type="range" class="form-range px-2" min="0.01" max="1" step="0.01" value="2"
-                                id="RangeVolume"></input></li>
-                        </li>
-                        <!--                     <li>
-                        <hr class="dropdown-divider">
-                    </li> -->
-                        <li class="form-check form-switch nav-item mx-2">
-                            <input class="form-check-input" type="checkbox" value="" id="ChecDataCart">
-
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Скрыть разделители
-                            </label>
-                        </li>
-                        <li class="form-check form-switch nav-item mx-2">
-                            <input class="form-check-input" type="checkbox" value="" id="CheckCalendarType">
-
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Календарь shikimori
-                            </label>
-                        </li>
-                        <li class="form-check form-switch nav-item mx-2">
-                            <input class="form-check-input" type="checkbox" value="" id="CheckСensored">
-
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Цензура 18+
-                            </label>
-                        </li>
-                        <li class="form-check form-switch nav-item mx-2">
-                            <input class="form-check-input" type="checkbox" value="" id="CheckRepeats">
-
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Скрыть повторы
-                            </label>
-                        </li>
-                        <li class="form-check form-switch nav-item mx-2">
-                            <input class="form-check-input" type="checkbox" value="" id="CheckReleased">
-
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Только вышедшие
-                            </label>
-                        </li>
-                        <li class="form-check form-switch nav-item mx-2 hide">
-                            <input class="form-check-input" type="checkbox" value="" id="CheckChinaTrash" disabled>
-
-                            <label class="form-check-label" for="flexCheckDefault">
-                                Включить китай
-                            </label>
-                        </li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li class="nav-item">
-                            <button id="ClearButtonMenu" aria-current="page" class="dropdown-item">Сброс
-                                настроек</button>
-                            <button id="VoiceButtonMenu" aria-current="page" class="dropdown-item">Озвучки</button>
-                            <hr class="dropdown-divider">
-                            <button id="SettingsButtonMenu" aria-current="page" class="dropdown-item"
-                                data-bs-toggle="modal" data-bs-target="#PersonalizedModal">Пероснализация</button>
-                        </li>
-                        <!-- <li>
-                            <hr class="dropdown-divider">
-                        </li> -->
-
-                    </ul>
-                    </li>
-                    <li class="nav-item">
-                        <button id="contacts_Button" onclick="window.location.href = `/contact.htm`" aria-current="page"
-                            class="btn-link nav-link hide">Контакты</button>
-                    </li>
-
-                    <li class="nav-item">
-                        <button id="app_Button" onclick="window.location.href = `/app/`" aria-current="page"
-                            class="btn-link nav-link">
-                            Скачать приложение
-                            <!-- <img src="app/android_logo.png" alt="Android Logo" class="android-logo" style="max-height: 21px;"></button> -->
-                    </li>
-
-                    </ul>
-
-                    <form class="d-flex input-group" role="search" id="search_form">
-                        <input id="search_input" name="search_input" class="form-control" type="search"
-                            placeholder="Поиск" aria-describedby="search anume" aria-label="Поиск">
-                        <button class="btn btn-outline-success" type="submit">Поиск</button>
-                    </form>
-                    <button id="list_login_Button" aria-current="page"
-                        class="btn btn-outline-primary mx-2">Вход</button>
-
-                    <div class="btn-group" id="User_Menu_Group">
-                        <button type="button" id="User_Menu_Button"
-                            class="mx-2 btn btn-outline-primary dropdown-toggle hide" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img class="mx-2 rounded" alt="Image" width="24" height="24" src="pedro.gif"></img>
-                            <span>UserName</span>
-                        </button>
-                        <ul class="dropdown-menu">
-                            </li>
-                            <li><button class="dropdown-item" id="raiting_button" data-bs-toggle="modal"
-                                    href="#modal_reiting_info">Рейтинг</button>
-                            </li>
-                            <li><button class="dropdown-item" id="User_Fav_sinc_button">Избранное</button>
-                            </li>
-                            <li><button class="dropdown-item" id="User_Logaut_button">Выход</button></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <!-- Новый год -->
-    <link rel="stylesheet" href="ng/style.css">
-    <div id="lights"></div>
-    <script src="ng/jquery.min.js"></script>
-    <script src="ng/ny-bulbs.js"></script>
     <script>
-    $( document ).ready(function() {
-        $('#lights').lightsOn({
-            initCycle: 800,
-            lampWidth: 50
-        });
-    });
-</script>
-    <!-- Новый год -->
+        // ===============================
+        // Конфигурация
+        // ===============================
+        const mirrors = [
+            "https://track-anime.dygdyg.ru",
+            "https://track-anime.duckdns.org",
+            // "https://server.dygdyg.ru",
+            // "https://dygdyg.duckdns.org"
+        ];
 
-    <div class="container_ ">
-        <div class="anime_list hide ned_" id="list_calendar">
-            <!--             <details class="ned_spoiler nd">
-                <summary class="ned_name">shikimori</summary>
-                <div class="ned_shikimori"></div>
-            </details> -->
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Понедельник</summary>
-                <div class="ned"></div>
-            </details>
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Вторник</summary>
-                <div class="ned"></div>
-            </details>
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Среда</summary>
-                <div class="ned"></div>
-            </details>
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Четверг</summary>
-                <div class="ned"></div>
-            </details>
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Пятница</summary>
-                <div class="ned"></div>
-            </details>
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Суббота</summary>
-                <div class="ned"></div>
-            </details>
-            <details class="ned_spoiler nd">
-                <summary class="ned_name">Воскресенье</summary>
-                <div class="ned"></div>
-            </details>
-        </div>
+        const CHECK_PATH = "/scripts/moment.js";
+        const TIMEOUT = 4000;
+        const REQUIRED_SUCCESSES = 3;
+        const RETRY_DELAY = 3000;
 
-        <div class="anime_list ned_ hide  " id="list_fav">
-            <div class="d-flex justify-content-center">
+        // ===============================
+        function sleep(ms) {
+            return new Promise(r => setTimeout(r, ms));
+        }
 
-            </div>
+        // ===============================
+        // Одна проверка
+        // ===============================
+        async function checkOnce(baseUrl) {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), TIMEOUT);
 
-            <div>
-                <div class="user-card" style="display: none;">
-                    <img src="pedro.gif" id="User_inf_ava" alt="Avatar" class="avatar">
-                    <div class="card-body">
-                        <h5 class="card-title">Имя пользователя</h5>
-                        <p>Возраст: 25 лет</p>
-                        <div class="links">
-                            <a href="#" class="d-block">Социальная сеть</a>
-                            <a href="#" class="d-block">Страница пользователя</a>
-                        </div>
-                        <button type="button" class="btn btn-primary mb-2">Показать список друзей</button>
-                        <div>
-                            <button type="button" class="btn btn-secondary mb-2">Добавить в друзья</button>
-                            <button type="button" class="btn btn-danger btn-hidden" style="visibility: hidden;">Удалить
-                                из друзей</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <details id="fav_watching" class="ned_spoiler">
-                <!-- <details id="fav_watching" class="ned_spoiler" open> -->
-                <summary class="ned_name btn-primary yellow">смотрю</summary>
-                <div class="ned"></div>
-            </details>
-            <details id="fav_completed" class="ned_spoiler">
-                <summary class="ned_name btn-success">просмотренно</summary>
-                <div class="ned"></div>
-            </details>
-            <details id="fav_dropped" class="ned_spoiler">
-                <summary class="ned_name btn-danger">брошено</summary>
-                <div class="ned"></div>
-            </details>
-            <details id="fav_on_hold" class="ned_spoiler">
-                <summary class="ned_name btn-warning">отложено</summary>
-                <div class="ned"></div>
-            </details>
-            <details id="fav_planned" class="ned_spoiler">
-                <summary class="ned_name btn-secondary pink">запланировано</summary>
-                <div class="ned"></div>
-            </details>
-            <details id="fav_rewatching" class="ned_spoiler">
-                <summary class="ned_name btn-info">пересматриваю</summary>
-                <div class="ned"></div>
-            </details>
-        </div>
+            try {
+                await fetch(
+                    `${baseUrl}${CHECK_PATH}?nocache=${crypto.randomUUID()}`,
+                    {
+                        mode: "no-cors",
+                        cache: "no-store",
+                        signal: controller.signal
+                    }
+                );
+                return true;
+            } catch {
+                return false;
+            } finally {
+                clearTimeout(timeout);
+            }
+        }
 
-        <div class="anime_list hide" id="list_history"></div>
-        <div class="anime_list hide" id="list_resume"></div>
+        // ===============================
+        // Проверка стабильности (3/3)
+        // ===============================
+        async function verifyMirror(baseUrl, statusEl) {
+            for (let i = 1; i <= REQUIRED_SUCCESSES; i++) {
+                statusEl.textContent =
+                    `Проверка ${baseUrl} (${i}/${REQUIRED_SUCCESSES})…`;
 
-        <div class="anime_list hide" id="list_serch">
-            <div id="new_anime_list"></div>
-        </div>
-    </div>
+                if (!(await checkOnce(baseUrl))) {
+                    return false;
+                }
+            }
+            return true;
+        }
 
-    <div id="DialogVideoInfo" class="d-none">
-        <canvas id="starryCanvas"></canvas>
-        <div id="carouselExampleAutoplaying" class="carousel slide screen_filter h-100" data-bs-ride="carousel"
-            data-bs-touch="false">
-            <div id="info_screenshots" class="carousel-inner rounded w-100 h-100">
-                <div class="carousel-item active w-100 h-100" data-bs-interval="30000">
-                    <img src="https://i.ytimg.com/vi/uRsEum05X1s/maxresdefault.jpg" class="d-block w-100" alt="...">
-                </div>
-                <div class="carousel-item w-100 h-100" data-bs-interval="30000">
-                    <img src="https://i.etsystatic.com/13034759/r/il/e630cf/1095944403/il_1588xN.1095944403_21s3.jpg"
-                        class="d-block w-100" alt="...">
-                </div>
-            </div>
-            <!-- <button class="carousel-control-prev" type="button"
-                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Предыдущий</span>
-            </button>
-            <button class="carousel-control-next" type="button"
-                data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Следующий</span>
-            </button> -->
-        </div>
-        <button type="button" class="btn btn-secondary" id="closeDialogButton">X</button>
-        <div id="VideoInfo" >
+        // ===============================
+        // Основной бесконечный цикл
+        // ===============================
+        (async function mainLoop() {
+            const status = document.getElementById("status");
+            let round = 1;
 
-            <!-- ////////////////////////////////////////////////////// -->
+            while (true) {
+                status.textContent = `🔁 Цикл проверки #${round}`;
 
-            <div class="card mb-3 border-0">
-                <div class="row g-0">
-                    <button id="screenshotButton" class="hide">Take Screenshot</button>
-                    <div class="mt-5" style="font-size: 1.4em" id="info_title">
-                        <a style="margin-left: 7px; text-decoration: none;" class="link-danger" target="_blank"
-                            href="./">Бурятский мультик</a>
-                    </div>
-                    <h5 id="info_title2" class="card-title">[Вышла да и хуй с ней. 0:00]</h5>
-                    <hr>
-                    <div class="col-md-3">
-                        <div class="d-flex flex-column align-items-center">
-                            <img id="info_cover" src="cover.png" onerror="this.src='404.webp'"
-                                class="img-fluid rounded-start rounded">
-                            <!-- class="embed-responsive-16by9 embed-responsive-item img-fluid rounded-start rounded min-w-350"> -->
-                            <div style="width: 100%;" class="btn-group mt-3">
-                                <div id="copy_discord">
-                                    <!-- <div></div> -->
-                                    <button type="button" id="btn_vk_share" class="btn btn-primary btn-vk-share"
-                                        onclick="vk_share()" title="Поделиться в VK" aria-expanded="false">
-                                    </button>
-                                    <button type="button" id="btn_copy_discord" class="btn btn-primary btn-discord"
-                                        onclick="copy_discord()" title="Скопировать в буфер для вставки в discord"
-                                        aria-expanded="false">
-                                        <!-- copy discord -->
-                                    </button>
-                                    <button type="button" id="btn_copy_telegram" class="btn btn-primary btn-telegram"
-                                        onclick="copy_telegram()" title="Скопировать в буфер для вставки в telegram"
-                                        aria-expanded="false">
-                                        <!-- copy discord -->
-                                    </button>
-                                    <button type="button" id="btn_copy_telegram" class="btn btn-primary btn-camera"
-                                        onclick="screenshotAndCopy(VideoInfo)" title="Сделать скрин карточки"
-                                        aria-expanded="false">
-                                        <!-- copy discord -->
-                                    </button>
-                                </div>
-                            </div>
-                            <div style="width: 100%;" class="btn-group mt-3">
-                                <button type="button" id="btn_sh_save" class="btn btn-outline-light dropdown-toggle"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                    Добавить
-                                </button>
-                                <ul class="dropdown-menu text-center">
-                                    <li><button id="watching" type="button" title="смотрю" onclick="AddFavorite(0)"
-                                            class="dropdown-item btn btn-primary yellow ">Смотрю</button>
-                                    </li>
-                                    <li><button id="completed" type="button" title="просмотренно"
-                                            onclick="AddFavorite(1)"
-                                            class="dropdown-item btn btn-success">Просмотренно</button></li>
-                                    <li><button id="dropped" type="button" title="брошено" onclick="AddFavorite(2)"
-                                            class="dropdown-item btn btn-danger">Брошено</button></li>
-                                    <li><button id="on_hold" type="button" title="отложено" onclick="AddFavorite(3)"
-                                            class="dropdown-item btn btn-warning">Отложено</button></li>
-                                    <li><button id="planned" type="button" title="запланировано"
-                                            onclick="AddFavorite(4)"
-                                            class="dropdown-item btn pink">Запланировано</button>
-                                    </li>
-                                    <li><button id="rewatching" type="button" title="пересматриваю"
-                                            onclick="AddFavorite(5)"
-                                            class="dropdown-item btn btn-info">Пересматриваю</button></li>
-                                </ul>
-                            </div>
-                        </div>
+                for (const mirror of mirrors) {
+                    if (await verifyMirror(mirror, status)) {
+                        // редирект СРАЗУ
+                        const params = new URLSearchParams(window.location.search);
+                        // params.set("_ts", Date.now());
 
-                        <div id="shikimori_info">
-                            <p class="card-text mb-0 mt-2">Рейтинг <a id="info_shikimori_link" target="_blank" href=""
-                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">shikimori</a>:
-                            </p>
-                            <div class="progress" role="progressbar" aria-label="" aria-valuenow="10" aria-valuemin="0"
-                                aria-valuemax="100">
-                                <div class="progress-bar progress-bar-striped" id="info_shikimori_rating"
-                                    style="width: 93.7%">9.37/10</div>
-                            </div>
-                            <p class="card-text mb-0 mt-0" id="info_shikimori_votes">30229 голосов</p>
-                            </p>
-                        </div>
-                        <div id="imdb_info">
-                            <hr>
-                            <p class="card-text mb-0 mt-0">Рейтинг
-                            <p class="card-text mb-0 mt-2">Рейтинг <a id="info_IMDB_link" target="_blank" href=""
-                                    class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">IMDB</a>:
-                            </p>
-                            <div class="progress" role="progressbar" aria-label="" aria-valuenow="10" aria-valuemin="0"
-                                aria-valuemax="100">
-                                <div class="progress-bar progress-bar-striped bg-warning text-bg-warning"
-                                    style="width: 89.0%" id="info_imdb_rating">8.9/10</div>
-                            </div>
-                            <p class="card-text mb-0 mt-0" id="info_imdb_votes">16350 голосов</p>
-                        </div>
-                        <hr>
-                        <button type="button" id="info_KodikPlayer"
-                            class="player_button btn btn-primary w-100 mb-2">Смотреть онлайн</button>
-                        <button type="button" id="info_AddHistory"
-                            class="hide player_button btn btn-warning w-100 mb-2" title="Добавляет во вкладку истории 0 серию">Добавить в историю</button>
-                        
-                        
-                        <button type="button" id="info_AlohaPlayer"
-                            class="hide player_button btn btn-danger w-100 mb-2">Смотреть
-                            Alloha Player</button>
-                        <button type="button" id="info_AnilibriaPlayer"
-                            class="hide player_button btn btn-warning w-100 mb-2">Искать на
-                            Anilibia</button>
-  
-                    </div>
-                    <!-- <button type="button" id="info_TorrentPlayer" class="btn btn-success w-100 mb-2">Поискать на
-                            Торренте</button>
-                    </div> -->
-                    <div class="col-md-9">
-                        <div class="col col-md-10">
-                            <div class="card-body">
-                                <p class="card-text">Серии:
-                                    <a id="info_series" href=""
-                                        class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">1/12</a>
-                                </p>
-                                <p class="card-text">Длительность:
-                                    <a id="info_duration" style="cursor: pointer;" href="404.html"
-                                        class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">600
-                                        тиков</a>
-                                </p>
-                                <p class="card-text" id="info_studios">Студия:
-                                    <a href=""
-                                        class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Brazzers</a>
-                                </p>
-                                <p class="card-text" id="info_fandubbers">Озвучено:
-                                    <a style="cursor: pointer;"
-                                        class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">С
-                                        божъей помощью</a>
-                                </p>
-                                <p class="card-text">Год выхода:
-                                    <a id="info_year" href=""
-                                        class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">635
-                                        427 810</a>
-                                </p>
-                                <p id="info_genres" class="card-text">Жанры:
-                                    <a href=""
-                                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Психологичкеский
-                                        хоррер</a>,
-                                    <a href=""
-                                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Приключения</a>,
-                                    <a href=""
-                                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Хентай</a>,
-                                    <a href=""
-                                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Симулятор
-                                        смысла жизни</a>
-                                </p>
-                                <p class="card-text">Статус:
-                                    <a id="info_status" href=""
-                                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Релиз</a>
-                                </p>
-                                <p class="card-text">Возростной рейтинг:
-                                    <a id="info_rating_mpaa" href=""
-                                        class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">PG-102</a>
-                                </p>
-                                <p class="card-text" style="display:none">Страна:
-                                    <a id="info_countries" href=""
-                                        class="link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Япония</a>
-                                </p>
-                                <hr class="d-md-none">
-                            </div>
+                        window.location.replace(
+                            `${mirror}/?${params.toString()}`
+                        );
+                        return;
+                    }
+                }
 
-                            <div class="col col-12">
-                                <div class="card-body">
-                                    <p id="info_description" class="card-text">Добро пожаловать в
-                                        захватывающий мир владения Плюмбусом! Плюмбус поможет во многих
-                                        вещах в жизни, сделав ее проще. При надлежащем уходе, обращении,
-                                        хранении и настойчивости Plumbus обеспечит вам лучшую жизнь и
-                                        счастье на всю жизнь.</p>
-                                    <p id="info_updated_at_text" class="card-text text-body-secondary">
-                                        <small id="info_updated_at" class="text-body-secondary"> -1
-                                            мин.
-                                            назад</small>
-                                    </p>
-                                </div>
-                            </div>
-                            <details open="" id="anime_related" style="
-                                padding-right: var(--bs-card-spacer-y);
-                                padding-bottom: 2rem;
-                                padding-left: var(--bs-card-spacer-x);
-                            ">
-                                <summary class="anime_related_spoiler">Связанные аниме</summary>
-                                <div class="w-100" id="anime_related_list"></div>
-                            </details>
+                status.innerHTML =
+                    `<span class="error">❌ Серверы не найдены, повтор через ${RETRY_DELAY / 1000}с…</span>`;
 
-                            <details id="anime_franchise" style="
-                            padding-right: var(--bs-card-spacer-y);
-                            padding-bottom: 2rem;
-                            padding-left: var(--bs-card-spacer-x);
-                            ">
-                                <summary class="anime_franchise_spoiler">Франшиза</summary>
-                                <a id="anime_franchise_link"
-                                    class="info_genre link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">В
-                                    отдельном окне</a>
-                                <iframe class="w-100" id="anime_franchise_iframe" frameborder="0" src="loading.htm"
-                                    allowfullscreen></iframe>
-                            </details>
-                            <!-- <div class="col col-12 link-danger" id="anime_related_title">Связанные аниме:</div> -->
+                round++;
+                await sleep(RETRY_DELAY);
+            }
+        })();
 
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-
-            <!-- ///////////////////////////////////////////////////////////// -->
-        </div>
-        <button type="button" id="VideoInfoBtn" class="VideoInfoBtn btn btn-secondary">
-            <div id="btn_so_max">
-                Описание
-                <br>
-                Смотреть онлайн
-            </div>
-            <div id="btn_so_min">
-                <svg viewBox="0 0 24 24" id="meteor-icon-kit__solid-triangle"
-                    style="width: 19px;transform: rotate(270deg);left:0; margin:5px;" fill="white"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M13.7889 1.57769L23.5528 21.1056C24.0468 22.0935 23.6463 23.2949 22.6584 23.7888C22.3806 23.9277 22.0744 24 21.7639 24H2.23607C1.1315 24 0.236069 23.1046 0.236069 22C0.236069 21.6895 0.308359 21.3833 0.447214 21.1056L10.2111 1.57769C10.7051 0.589734 11.9065 0.189285 12.8944 0.683263C13.2815 0.876791 13.5953 1.19064 13.7889 1.57769Z"
-                        fill="#white" />
-                </svg>
-                <br>
-                <svg viewBox="0 0 24 24" id="meteor-icon-kit__solid-triangle"
-                    style="width: 19px;transform: rotate(90deg); right:0; margin:5px;" fill="white"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" clip-rule="evenodd"
-                        d="M13.7889 1.57769L23.5528 21.1056C24.0468 22.0935 23.6463 23.2949 22.6584 23.7888C22.3806 23.9277 22.0744 24 21.7639 24H2.23607C1.1315 24 0.236069 23.1046 0.236069 22C0.236069 21.6895 0.308359 21.3833 0.447214 21.1056L10.2111 1.57769C10.7051 0.589734 11.9065 0.189285 12.8944 0.683263C13.2815 0.876791 13.5953 1.19064 13.7889 1.57769Z"
-                        fill="#white" />
-                </svg>
-            </div>
-        </button>
-        <div id="VideoPlayerFrame">
-            <iframe id="VideoPlayer" src="loading.htm" frameborder="no" allow="autoplay *; fullscreen *">
-            </iframe>
-        </div>
-    </div>
-
-    <!-- ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-
-    <div id="VoiceSettings" class="modal fade" tabindex="0">
-        <div class="modal-dialog modal-sm modal-dialog-centered ">
-            <div id="VoiceSettings_content" class="modal-content">
-            </div>
-        </div>
-    </div>
-
-    <div id="VideoPlayerAnime" class="modal fade" tabindex="0">
-        <div class="modal-dialog modal-xl modal-dialog-centered ">
-            <div class="modal-content">
-                <button type="button" class="btn btn-secondary" title="PiP" id="pipDialogButton">
-                    <svg width="50%" height="50%">
-                        <rect x="10%" y="10%" width="80%" height="80%" stroke-width="2" stroke="var(--bs-body-color)"
-                            fill="none" />
-                        <rect x="10%" y="10%" width="50%" id="ta_modal_pip_btn_mini" height="50%" stroke-width="2"
-                            stroke="var(--bs-body-color)" fill="none" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Varioqub experiments -->
-    <!-- <script type="text/javascript">
-        (function (e, x, pe, r, i, me, nt) {
-            e[i] = e[i] || function () { (e[i].a = e[i].a || []).push(arguments) },
-                me = x.createElement(pe), me.async = 1, me.src = r, nt = x.getElementsByTagName(pe)[0], nt.parentNode.insertBefore(me, nt)
-        })
-            (window, document, 'script', 'https://abt.s3.yandex.net/expjs/latest/exp.js', 'ymab');
-        ymab('metrika.97169372', 'init'/*, {clientFeatures}, {callback}*/);
-    </script> -->
-
-    <!-- Yandex.Metrika counter -->
-    <!-- <script type="text/javascript">
-        (function (m, e, t, r, i, k, a) {
-            m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments) };
-            m[i].l = 1 * new Date();
-            for (var j = 0; j < document.scripts.length; j++) { if (document.scripts[j].src === r) { return; } }
-            k = e.createElement(t), a = e.getElementsByTagName(t)[0], k.async = 1, k.src = r, a.parentNode.insertBefore(k, a)
-        })
-            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
-
-        ym(97169372, "init", {
-            clickmap: true,
-            trackLinks: true,
-            accurateTrackBounce: true,
-            webvisor: true
+        // ===============================
+        // Отключаем BFCache
+        // ===============================
+        window.addEventListener("pageshow", e => {
+            if (e.persisted) location.reload();
         });
     </script>
-    <noscript>
-        <div><img src="https://mc.yandex.ru/watch/97169372" style="position:absolute; left:-9999px;" alt="" /></div>
-    </noscript> -->
-    <!-- /Yandex.Metrika counter -->
 
 </body>
-
-
-
-<!-- неровный бордер -->
-<svg id="dr_border">
-    <filter id="rough-edge">
-        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="4" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="8" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-</svg>
-<svg id="dr_border">
-    <filter id="rough-edge-2">
-        <feTurbulence type="fractalNoise" baseFrequency="0.015" numOctaves="5" result="noise" />
-        <feDisplacementMap in="SourceGraphic" in2="noise" scale="10" xChannelSelector="R" yChannelSelector="G" />
-    </filter>
-</svg>
-<!-- ====== -->
 
 </html>
