@@ -1,6 +1,0 @@
-@import url('https://fonts.googleapis.com/css2?family=Tektur:wght@400..900&display=swap');
-
-html {
-    /* Устанавливаем шрифт по умолчанию */
-    --font-family: 'Tektur', ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-}

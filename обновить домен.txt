@@ -1,5 +1,0 @@
-sudo certbot certonly --webroot -w /var/www/html -d server.dygdyg.ru -w /var/www/trackanime -d track-anime.dygdyg.ru -w /var/www/html -d dygdyg.duckdns.org
-sudo certbot --nginx -d server.dygdyg.ru -d track-anime.dygdyg.ru -d dygdyg.duckdns.org
-
-
-30 3 * * 2 /usr/bin/certbot renew >> /var/log/renew-ssl.log --post-hook "systemctl reload nginx"
