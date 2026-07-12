@@ -1,169 +1,267 @@
 <!DOCTYPE html>
-<html>
-<link rel="icon" type="image/x-icon" href="/favicon.png">
-<title>TA: 404</title>
+<html lang="ru">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
+    <title>TA: 404</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
     <style>
-        html {
-            color-scheme: light dark;
+        :root {
+            color-scheme: dark;
+            --bg: #0c0e14;
+            --text: #eef0f4;
+            --accent: #6c8cff;
+            --border: rgba(255, 255, 255, 0.16);
         }
 
-        body,
-        html {
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            min-height: 100%;
             margin: 0;
-            padding: 0;
-            user-select: none;
-            /* cursor: s-resize; */
-            animation: 0.4s ease-in-out 0s normal none infinite running cursor-droch;
-
         }
 
-        #myVideo {
+        body {
+            overflow: hidden;
+            background: var(--bg);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            user-select: none;
+        }
+
+        .scene {
+            position: relative;
+            min-height: 100dvh;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            isolation: isolate;
+            padding: clamp(1rem, 5vw, 4rem);
+            animation: cursor-spin 0.4s steps(1, end) infinite;
+        }
+
+        .bg-video {
+            position: absolute;
+            inset: 0;
+            z-index: -3;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            position: fixed;
-            filter: blur(20px);
+            filter: blur(18px) saturate(1.15);
+            transform: scale(1.08);
+            opacity: 0.72;
+        }
+
+        .vignette {
+            position: absolute;
+            inset: 0;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 50% 45%, rgba(12, 14, 20, 0.12), rgba(12, 14, 20, 0.8) 68%),
+                inset 0 0 180px 80px rgba(0, 0, 0, 0.82);
+        }
+
+        .stage {
+            position: absolute;
+            inset: 0;
             z-index: -1;
-
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: clamp(1rem, 4vw, 4rem);
+            padding: 0 clamp(1rem, 4vw, 5rem);
+            pointer-events: none;
         }
 
-        #myVideo2 {
+        .center-video {
+            width: min(42vw, 32rem);
             height: 100%;
+            max-height: 100dvh;
+            min-width: 13rem;
             object-fit: cover;
-            mask-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 1) 80%, rgba(0, 0, 0, 0) 100%);
-            /* radial-gradient(circle, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 80%, rgba(0,0,0,0) 100%); */
+            opacity: 0.9;
+            mask-image: linear-gradient(to right, transparent 0%, black 20%, black 80%, transparent 100%);
         }
 
-        .text-overlay {
-            font-size: 1000%;
-            font-weight: bold;
-            color: #d4e1e4;
-            -webkit-text-stroke: 3px #0000007e;
-            animation: 0.9s ease-in-out 0s normal none infinite running tilt-n-move-shaking;
-
+        .code {
+            flex: 0 0 auto;
+            font-size: clamp(5.5rem, 18vw, 16rem);
+            font-weight: 900;
+            line-height: 0.8;
+            color: rgba(229, 241, 245, 0.5);
+            -webkit-text-stroke: 2px rgba(0, 0, 0, 0.55);
+            text-shadow: 0 34px 22px rgba(0, 0, 0, 0.58);
+            animation: shake 0.92s ease-in-out infinite;
         }
 
-        #E404_1 {
-            text-shadow: -50px 50px 5px #000000bd;
-            cursor: no-drop;
-
+        .code-right {
+            animation-delay: -0.18s;
         }
 
-        #E404_2 {
-            text-shadow: 50px 50px 5px #000000bd;
-            cursor: not-allowed;
-
+        .content {
+            width: min(100%, 42rem);
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            background: rgba(8, 10, 16, 0.48);
+            padding: clamp(1.5rem, 4vw, 2.5rem);
+            text-align: center;
+            box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+            backdrop-filter: blur(12px);
         }
 
-        @keyframes cursor-droch {
+        .eyebrow {
+            margin: 0 0 0.75rem;
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 0;
+            font-size: clamp(2rem, 8vw, 4rem);
+            line-height: 1.05;
+        }
+
+        p {
+            max-width: 34rem;
+            margin: 1rem auto 0;
+            color: rgba(255, 255, 255, 0.78);
+            line-height: 1.6;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        a,
+        button {
+            min-height: 2.75rem;
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 0.65rem 1rem;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            font: inherit;
+            font-weight: 700;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        a.primary {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        @keyframes cursor-spin {
             0% {
                 cursor: w-resize;
             }
-
             25% {
                 cursor: ne-resize;
             }
-
             50% {
                 cursor: n-resize;
             }
-
-            75% {
-                cursor: nw-resize;
-            }
-
+            75%,
             100% {
                 cursor: nw-resize;
             }
         }
 
-        @keyframes tilt-n-move-shaking {
-            0% {
+        @keyframes shake {
+            0%,
+            100% {
                 transform: translate(0, 0) rotate(0deg);
-                color: #b3ceb580;
+                color: rgba(179, 206, 181, 0.5);
             }
-
             25% {
-                transform: translate(5px, 5px) rotate(5deg);
-                color: #d4e1e480;
+                transform: translate(5px, 5px) rotate(4deg);
+                color: rgba(212, 225, 228, 0.52);
             }
-
             50% {
-                transform: translate(0, 0) rotate(0eg);
-                color: #e3d7bd80;
-            }
-
-            75% {
-                transform: translate(-5px, 5px) rotate(-5deg);
-                color: #a5b1b380;
-            }
-
-            100% {
                 transform: translate(0, 0) rotate(0deg);
-                color: #b7e4ef80;
+                color: rgba(227, 215, 189, 0.48);
+            }
+            75% {
+                transform: translate(-5px, 5px) rotate(-4deg);
+                color: rgba(165, 177, 179, 0.5);
             }
         }
 
-        #v2 {
-            display: flex;
-            flex-direction: row;
-            flex-wrap: nowrap;
-            height: 100%;
-            width: 100%;
-            align-items: center;
-            justify-content: space-around;
-            position: absolute;
-            box-shadow: 0 0 200px 100px black inset;
+        @media (max-width: 760px) {
+            .stage {
+                justify-content: center;
+                opacity: 0.8;
+            }
+
+            .center-video {
+                width: min(74vw, 24rem);
+                height: 100%;
+                max-height: 100dvh;
+            }
+
+            .code {
+                position: absolute;
+                font-size: clamp(4.75rem, 28vw, 9rem);
+            }
+
+            .code-left {
+                left: -0.25rem;
+                top: 14%;
+            }
+
+            .code-right {
+                right: -0.25rem;
+                bottom: 13%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .scene,
+            .code {
+                animation: none;
+            }
         }
     </style>
 </head>
 
 <body>
-    <video id="myVideo" autoplay loop loop loop muted controlsList="noplayback">
-        <source src="404.webm" type="video/webm">
-    </video>
-    <div id="v2">
-        <div id="E404_1" class="text-overlay">
-            404
-        </div>
-        <video id="myVideo2" autoplay loop loop loop muted controlsList="noplayback">
+    <main class="scene">
+        <video class="bg-video" autoplay muted loop playsinline preload="metadata" aria-hidden="true">
             <source src="404.webm" type="video/webm">
         </video>
-        <div id="E404_2" class="text-overlay">
-            404
+        <div class="vignette" aria-hidden="true"></div>
+        <div class="stage" aria-hidden="true">
+            <span class="code code-left">404</span>
+            <video class="center-video" autoplay muted loop playsinline preload="metadata">
+                <source src="404.webm" type="video/webm">
+            </video>
+            <span class="code code-right">404</span>
         </div>
-    </div>
-    <!--     <div id="404">
-        <div class="text-overlay">
-            404
-        </div>
-        <div class="text-overlay">
-            404
-        </div>
-    </div> -->
-
-    <script>
-        var video = document.getElementById("myVideo");
-
-        video.volume = 0.15;
-        document.body.addEventListener("mouseover", function () {
-            video.muted = false;
-            video.play();
-        });
-        document.body.addEventListener("click", function () {
-            window.history.back();
-        });
-        document.body.addEventListener('scroll', function () {
-            video.muted = false;
-            video.play();
-        });
-
-        /*         video.addEventListener("mouseout", function () {
-                    // video.muted = true;
-                }); */
-    </script>
+        <section class="content" aria-labelledby="title">
+            <p class="eyebrow">Track Anime</p>
+            <h1 id="title">Страница не найдена</h1>
+            <p>Ссылка устарела или адрес набран с ошибкой. Можно вернуться назад или открыть главную.</p>
+            <div class="actions">
+                <a class="primary" href="/">На главную</a>
+                <button type="button" onclick="history.length > 1 ? history.back() : location.assign('/')">Назад</button>
+            </div>
+        </section>
+    </main>
 </body>
 
 </html>
+
+
+
