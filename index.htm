@@ -1,67 +1,127 @@
 <!DOCTYPE html>
-<html lang="ru" data-bs-theme="dark">
+<html lang="ru">
 
 <head>
-    <meta name="darkreader-lock">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
-    <title>Подбор сервера…</title>
-
-    <!-- Primary Meta Tags -->
-    <link rel="icon" type="image/x-icon" href="/favicon.png" id="fav">
-    <title>Track Anime By ДугДуг</title>
-
-    <link rel="canonical" href="https://track-anime.dygdyg.ru/">
-
-    <meta name="title" content="Track Anime By ДугДуг">
-    <meta name="description"
-        content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="//track-anime.dygdyg.ru">
-    <meta property="og:title" content="Track Anime By ДугДуг">
-    <meta property="og:description"
-        content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
-    <meta property="og:image" content="/favicon.png">
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <!-- <meta property="twitter:url" content="//track-anime.github.io"> -->
-    <meta property="twitter:title" content="Track Anime By ДугДуг">
-    <meta property="twitter:description"
-        content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
-    <meta property="twitter:image" content="/favicon.png">
-    <meta property="twitter:image:alt"
-        content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени. Для связи со мной можно писать в мой discord: .dygdyg">
-
-    <!-- Жёстко отключаем кеш -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
 
+    <title>Подбор сервера | Track Anime</title>
+    <link rel="canonical" href="https://track-anime.dygdyg.ru/">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta name="title" content="Track Anime By ДугДуг">
+    <meta name="description" content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://track-anime.dygdyg.ru/">
+    <meta property="og:title" content="Track Anime By ДугДуг">
+    <meta property="og:description" content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени.">
+    <meta property="og:image" content="/favicon.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Track Anime By ДугДуг">
+    <meta name="twitter:description" content="Сервис для просмотра аниме и отслеживания выхода новых серий в реальном времени.">
+    <meta name="twitter:image" content="/favicon.png">
+
     <style>
-        body {
-            font-family: system-ui, sans-serif;
-            background: #0e0e0e;
-            color: #eaeaea;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
+        :root {
+            color-scheme: dark;
+            --bg: #101114;
+            --panel: #181a20;
+            --text: #f3f4f6;
+            --muted: #a5adba;
+            --accent: #57d39b;
+            --danger: #ff6b6b;
+            --border: #2d313a;
         }
 
-        .box {
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: radial-gradient(circle at top, #1c2430 0, var(--bg) 42%);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        main {
+            width: min(100%, 520px);
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--panel) 92%, transparent);
+            box-shadow: 0 24px 80px rgb(0 0 0 / 0.35);
             text-align: center;
-            max-width: 520px;
+        }
+
+        .logo-wrap {
+            width: min(76vw, 260px);
+            height: min(76vw, 260px);
+            margin: 0 auto 26px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: #0c0d10;
+            overflow: hidden;
+        }
+
+        #brandLogo {
+            display: none;
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .fallback-logo {
+            color: var(--accent);
+            font-size: 64px;
+            font-weight: 700;
+        }
+
+        h1 {
+            margin: 0 0 12px;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        p {
+            margin: 0;
+        }
+
+        #status {
+            min-height: 48px;
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        #serverName {
+            margin-top: 16px;
+            color: var(--text);
+            font-size: 14px;
+            overflow-wrap: anywhere;
         }
 
         .loader {
-            margin: 20px auto;
             width: 40px;
             height: 40px;
-            border: 4px solid #333;
-            border-top: 4px solid #4caf50;
+            margin: 22px auto 0;
+            border: 4px solid #30343d;
+            border-top-color: var(--accent);
             border-radius: 50%;
-            animation: spin 1s linear infinite;
+            animation: spin 900ms linear infinite;
+        }
+
+        .error {
+            color: var(--danger);
         }
 
         @keyframes spin {
@@ -70,124 +130,141 @@
             }
         }
 
-        .error {
-            color: #f44336;
-        }
+        @media (max-width: 420px) {
+            main {
+                padding: 22px;
+            }
 
-        small {
-            color: #888;
+            h1 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 
 <body>
-
-    <div class="box">
-        <h1>🌐 Подбор сервера</h1>
-        <p id="status">Инициализация…</p>
-        <div class="loader"></div>
-    </div>
+    <main>
+        <div class="logo-wrap" aria-hidden="true">
+            <img id="brandLogo" alt="">
+            <div id="fallbackLogo" class="fallback-logo">TA</div>
+        </div>
+        <h1>Подбор сервера</h1>
+        <p id="status">Инициализация...</p>
+        <p id="serverName"></p>
+        <div class="loader" aria-hidden="true"></div>
+    </main>
 
     <script>
-        // ===============================
-        // Конфигурация
-        // ===============================
-        const mirrors = [
+        const MIRRORS = [
             "https://track-anime.dygdyg.ru",
             "https://track-anime.duckdns.org",
-            "https://ta.dygdyg.ru",
-            // "https://server.dygdyg.ru",
-            // "https://dygdyg.duckdns.org"
+            "https://ta.dygdyg.ru"
         ];
 
-        const CHECK_PATH = "/scripts/moment.js";
-        const TIMEOUT = 4000;
-        const REQUIRED_SUCCESSES = 3;
-        const RETRY_DELAY = 3000;
+        const LOGO_PATH = "/api/brand/logo";
+        const TIMEOUT_MS = 4000;
+        const REQUIRED_SUCCESSES = 2;
+        const RETRY_DELAY_MS = 3000;
 
-        // ===============================
-        function sleep(ms) {
-            return new Promise(r => setTimeout(r, ms));
+        const statusEl = document.getElementById("status");
+        const serverNameEl = document.getElementById("serverName");
+        const logoEl = document.getElementById("brandLogo");
+        const fallbackLogoEl = document.getElementById("fallbackLogo");
+
+        const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+        function withCacheBust(url) {
+            const nextUrl = new URL(url);
+            nextUrl.searchParams.set("_", String(Date.now()));
+            return nextUrl.href;
         }
 
-        // ===============================
-        // Одна проверка
-        // ===============================
-        async function checkOnce(baseUrl) {
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), TIMEOUT);
-
-            try {
-                await fetch(
-                    `${baseUrl}${CHECK_PATH}?nocache=${crypto.randomUUID()}`,
-                    {
-                        mode: "no-cors",
-                        cache: "no-store",
-                        signal: controller.signal
-                    }
-                );
-                return true;
-            } catch {
-                return false;
-            } finally {
-                clearTimeout(timeout);
-            }
+        function getLogoUrl(baseUrl) {
+            return new URL(LOGO_PATH, baseUrl).href;
         }
 
-        // ===============================
-        // Проверка стабильности (3/3)
-        // ===============================
-        async function verifyMirror(baseUrl, statusEl) {
-            for (let i = 1; i <= REQUIRED_SUCCESSES; i++) {
-                statusEl.textContent =
-                    `Проверка ${baseUrl} (${i}/${REQUIRED_SUCCESSES})…`;
+        function showScannedMirror(baseUrl, attempt) {
+            const logoUrl = withCacheBust(getLogoUrl(baseUrl));
 
-                if (!(await checkOnce(baseUrl))) {
+            statusEl.className = "";
+            statusEl.textContent = `Проверяем зеркало ${attempt}/${REQUIRED_SUCCESSES}`;
+            serverNameEl.textContent = baseUrl;
+            fallbackLogoEl.style.display = "grid";
+            logoEl.style.display = "none";
+            logoEl.removeAttribute("src");
+            logoEl.src = logoUrl;
+        }
+
+        function checkLogo(baseUrl) {
+            return new Promise((resolve) => {
+                const image = new Image();
+                const timer = setTimeout(() => finish(false), TIMEOUT_MS);
+
+                function finish(isReady) {
+                    clearTimeout(timer);
+                    image.onload = null;
+                    image.onerror = null;
+                    resolve(isReady);
+                }
+
+                image.onload = () => finish(true);
+                image.onerror = () => finish(false);
+                image.src = withCacheBust(getLogoUrl(baseUrl));
+            });
+        }
+
+        async function verifyMirror(baseUrl) {
+            for (let attempt = 1; attempt <= REQUIRED_SUCCESSES; attempt += 1) {
+                showScannedMirror(baseUrl, attempt);
+
+                if (!(await checkLogo(baseUrl))) {
                     return false;
                 }
+
+                fallbackLogoEl.style.display = "none";
+                logoEl.style.display = "block";
             }
+
             return true;
         }
 
-        // ===============================
-        // Основной бесконечный цикл
-        // ===============================
-        (async function mainLoop() {
-            const status = document.getElementById("status");
+        function redirectTo(baseUrl) {
+            const targetUrl = new URL("/", baseUrl);
+            targetUrl.search = window.location.search;
+            targetUrl.hash = window.location.hash;
+            window.location.replace(targetUrl.href);
+        }
+
+        async function main() {
             let round = 1;
 
             while (true) {
-                status.textContent = `🔁 Цикл проверки #${round}`;
-
-                for (const mirror of mirrors) {
-                    if (await verifyMirror(mirror, status)) {
-                        // редирект СРАЗУ
-                        const params = new URLSearchParams(window.location.search);
-                        // params.set("_ts", Date.now());
-
-                        window.location.replace(
-                            `${mirror}/?${params.toString()}`
-                        );
+                for (const mirror of MIRRORS) {
+                    if (await verifyMirror(mirror)) {
+                        statusEl.textContent = "Сервер найден. Переходим...";
+                        redirectTo(mirror);
                         return;
                     }
                 }
 
-                status.innerHTML =
-                    `<span class="error">❌ Серверы не найдены, повтор через ${RETRY_DELAY / 1000}с…</span>`;
-
-                round++;
-                await sleep(RETRY_DELAY);
+                statusEl.className = "error";
+                statusEl.textContent = `Серверы не найдены. Повтор через ${RETRY_DELAY_MS / 1000} с...`;
+                serverNameEl.textContent = `Цикл проверки #${round}`;
+                round += 1;
+                await delay(RETRY_DELAY_MS);
             }
-        })();
+        }
 
-        // ===============================
-        // Отключаем BFCache
-        // ===============================
-        window.addEventListener("pageshow", e => {
-            if (e.persisted) location.reload();
+        window.addEventListener("pageshow", (event) => {
+            if (event.persisted) {
+                window.location.reload();
+            }
         });
-    </script>
 
+        main();
+    </script>
 </body>
 
 </html>
+
+

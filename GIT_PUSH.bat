@@ -3,7 +3,11 @@ echo %~dp0
 cd /D %~dp0
 
 
-scan.exe
+if exist scan.exe (
+    scan.exe
+) else (
+    echo scan.exe not found, skipping scan.
+)
 @REM for /f "tokens=1-4 delims=. " %%a in ('echo %date%') do set dt=%%a-%%b-%%c
 @REM for /f "tokens=1-4 delims=:., " %%a in ('echo %time%') do set tm=%%a-%%b-%%c
 @REM set datetime=%dt%_%tm%
