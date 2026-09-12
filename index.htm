@@ -229,9 +229,11 @@
         }
 
         function redirectTo(baseUrl) {
-            const targetUrl = new URL("/", baseUrl);
-            targetUrl.search = window.location.search;
-            targetUrl.hash = window.location.hash;
+            let path = window.location.pathname || "/";
+            if (path === "/index.htm" || path === "/index.html") {
+                path = "/";
+            }
+            const targetUrl = new URL(path + window.location.search + window.location.hash, baseUrl);
             window.location.replace(targetUrl.href);
         }
 

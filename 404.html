@@ -7,6 +7,75 @@
     <meta name="darkreader-lock">
     <title>TA: 404</title>
     <link rel="icon" type="image/png" href="/favicon.png">
+    <script>
+        /**
+         * GitHub Pages отдаёт 404.html для неизвестных путей (например /anime/63508).
+         * Для маршрутов сайта выбираем живое зеркало и переносим path+query+hash.
+         */
+        (function () {
+            const path = window.location.pathname || "/";
+            const shouldRoute =
+                /^\/anime\/\d+/i.test(path) ||
+                /^\/(history|favorites|calendar|search|app|login|user|admin)(\/|$)/i.test(path);
+
+            if (!shouldRoute) return;
+
+            const MIRRORS = [
+                "https://track-anime.dygdyg.ru",
+                "https://track-anime.duckdns.org",
+                "https://ta.dygdyg.ru",
+            ];
+            const TIMEOUT_MS = 3500;
+            const REQUIRED_SUCCESSES = 2;
+
+            function withCacheBust(url) {
+                const next = new URL(url);
+                next.searchParams.set("_", String(Date.now()));
+                return next.href;
+            }
+
+            function checkLogo(baseUrl) {
+                return new Promise((resolve) => {
+                    const image = new Image();
+                    const timer = setTimeout(() => finish(false), TIMEOUT_MS);
+                    function finish(ok) {
+                        clearTimeout(timer);
+                        image.onload = null;
+                        image.onerror = null;
+                        resolve(ok);
+                    }
+                    image.onload = () => finish(true);
+                    image.onerror = () => finish(false);
+                    image.src = withCacheBust(new URL("/api/brand/logo", baseUrl).href);
+                });
+            }
+
+            async function verifyMirror(baseUrl) {
+                for (let i = 0; i < REQUIRED_SUCCESSES; i += 1) {
+                    if (!(await checkLogo(baseUrl))) return false;
+                }
+                return true;
+            }
+
+            function redirectTo(baseUrl) {
+                const target = new URL(path + window.location.search + window.location.hash, baseUrl);
+                window.location.replace(target.href);
+            }
+
+            (async function run() {
+                document.documentElement.dataset.routing = "1";
+                while (true) {
+                    for (const mirror of MIRRORS) {
+                        if (await verifyMirror(mirror)) {
+                            redirectTo(mirror);
+                            return;
+                        }
+                    }
+                    await new Promise((r) => setTimeout(r, 2500));
+                }
+            })();
+        })();
+    </script>
     <style>
         :root {
             color-scheme: dark;
