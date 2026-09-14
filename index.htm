@@ -154,13 +154,8 @@
         <div class="loader" aria-hidden="true"></div>
     </main>
 
+    <script src="/mirrors.js"></script>
     <script>
-        const MIRRORS = [
-            "https://track-anime.dygdyg.ru",
-            "https://track-anime.duckdns.org",
-            "https://ta.dygdyg.ru"
-        ];
-
         const LOGO_PATH = "/api/brand/logo";
         const TIMEOUT_MS = 4000;
         const REQUIRED_SUCCESSES = 2;
@@ -229,17 +224,20 @@
         }
 
         function redirectTo(baseUrl) {
-            const targetUrl = new URL("/", baseUrl);
-            targetUrl.search = window.location.search;
-            targetUrl.hash = window.location.hash;
+            let path = window.location.pathname || "/";
+            if (path === "/index.htm" || path === "/index.html") {
+                path = "/";
+            }
+            const targetUrl = new URL(path + window.location.search + window.location.hash, baseUrl);
             window.location.replace(targetUrl.href);
         }
 
         async function main() {
+            const mirrors = await window.TrackAnimeMirrors.loadMirrors();
             let round = 1;
 
             while (true) {
-                for (const mirror of MIRRORS) {
+                for (const mirror of mirrors) {
                     if (await verifyMirror(mirror)) {
                         statusEl.textContent = "Сервер найден. Переходим...";
                         redirectTo(mirror);
