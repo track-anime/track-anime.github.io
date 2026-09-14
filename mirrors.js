@@ -4,6 +4,7 @@
  */
 (function (global) {
   const FALLBACK_MIRRORS = [
+    "https://track-anime.win",
     "https://track-anime.dygdyg.ru",
     "https://track-anime.duckdns.org",
     "https://ta.dygdyg.ru",
