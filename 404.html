@@ -15,7 +15,7 @@
             var path = window.location.pathname || "/";
             var shouldRoute =
                 /^\/anime\/\d+/i.test(path) ||
-                /^\/(history|favorites|calendar|search|app|login|user|admin)(\/|$)/i.test(path);
+                /^\/(history|favorites|calendar|search|login|user|admin)(\/|$)/i.test(path);
             window.__TA_ROUTE_PATH = path;
             if (shouldRoute) {
                 document.documentElement.setAttribute("data-route", "1");

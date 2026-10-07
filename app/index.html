@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="darkreader-lock">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+
+    <title>Приложения Track Anime</title>
+    <link rel="canonical" href="https://track-anime.github.io/app/">
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <meta name="description" content="Скачать Track Anime для Android и Android TV. APK без рекламы, с проверкой обновлений через GitHub Pages.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://track-anime.github.io/app/">
+    <meta property="og:title" content="Приложения Track Anime">
+    <meta property="og:description" content="Скачать Track Anime для Android и Android TV.">
+    <meta property="og:image" content="https://track-anime.github.io/favicon.png">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Приложения Track Anime">
+    <meta name="twitter:description" content="Скачать Track Anime для Android и Android TV.">
+    <meta name="twitter:image" content="https://track-anime.github.io/favicon.png">
+
+    <style>
+        :root {
+            color-scheme: dark;
+            --bg: #101114;
+            --panel: #181a20;
+            --text: #f3f4f6;
+            --muted: #a5adba;
+            --accent: #57d39b;
+            --accent-soft: color-mix(in srgb, var(--accent) 22%, transparent);
+            --border: #2d313a;
+            --card: #0c0d10;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            display: grid;
+            place-items: center;
+            padding: 24px;
+            background: radial-gradient(circle at top, #1c2430 0, var(--bg) 42%);
+            color: var(--text);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        main {
+            width: min(100%, 560px);
+            padding: 28px;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--panel) 92%, transparent);
+            box-shadow: 0 24px 80px rgb(0 0 0 / 0.35);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            font-size: 1.65rem;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .lead {
+            margin: 0 0 22px;
+            color: var(--muted);
+            line-height: 1.5;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: color-mix(in srgb, var(--card) 88%, transparent);
+        }
+
+        @media (min-width: 480px) {
+            .card {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+        }
+
+        .qr-wrap {
+            width: 10rem;
+            height: 10rem;
+            flex-shrink: 0;
+            margin: 0 auto;
+            display: grid;
+            place-items: center;
+            border-radius: 10px;
+            background: #fff;
+            padding: 8px;
+        }
+
+        #qrCode {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .qr-placeholder {
+            width: 70%;
+            height: 70%;
+            border-radius: 8px;
+            background: #e5e7eb;
+            animation: pulse 1.2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            50% {
+                opacity: 0.55;
+            }
+        }
+
+        .card-body {
+            min-width: 0;
+            flex: 1;
+            text-align: center;
+        }
+
+        @media (min-width: 480px) {
+            .card-body {
+                text-align: left;
+            }
+        }
+
+        .card-body h2 {
+            margin: 0 0 6px;
+            font-size: 1.15rem;
+        }
+
+        .card-body p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 14px;
+        }
+
+        @media (min-width: 480px) {
+            .actions {
+                justify-content: flex-start;
+            }
+        }
+
+        a.btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.1rem;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #0b1210;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        a.btn:hover {
+            filter: brightness(1.05);
+        }
+
+        a.btn-secondary {
+            background: transparent;
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        a.btn-secondary:hover {
+            border-color: color-mix(in srgb, var(--accent) 55%, var(--border));
+            background: var(--accent-soft);
+        }
+
+        .meta {
+            margin-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: 0.8rem;
+            line-height: 1.45;
+        }
+
+        .meta a {
+            color: var(--accent);
+        }
+
+        .error {
+            color: #ff6b6b;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <h1>Приложения Track Anime</h1>
+        <p class="lead">Скачайте Android APK здесь, даже если основные зеркала сайта недоступны.</p>
+
+        <section class="card" aria-labelledby="android-title">
+            <div class="qr-wrap" aria-hidden="true">
+                <div id="qrPlaceholder" class="qr-placeholder"></div>
+                <img id="qrCode" alt="">
+            </div>
+            <div class="card-body">
+                <h2 id="android-title">Приложение для Android</h2>
+                <p id="androidDesc">
+                    Установите Track Anime на телефон, планшет или Android TV: без рекламы и с системными уведомлениями о новых сериях.
+                    QR-код ведёт на эту страницу.
+                </p>
+                <p id="androidHint" style="margin-top: 8px;">
+                    Отсканируйте код камерой телефона или скачайте APK прямо на устройстве.
+                </p>
+                <div class="actions">
+                    <a class="btn" id="downloadBtn" href="/downloads/TrackAnime.apk" download>Скачать APK</a>
+                    <a class="btn btn-secondary" href="/">Открыть сайт</a>
+                </div>
+            </div>
+        </section>
+
+        <p class="meta" id="status">Загружаем сведения о версии…</p>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.4/build/qrcode.min.js"></script>
+    <script>
+        (function () {
+            var pageUrl = "https://track-anime.github.io/app/";
+            var descEl = document.getElementById("androidDesc");
+            var statusEl = document.getElementById("status");
+            var qrEl = document.getElementById("qrCode");
+            var placeholderEl = document.getElementById("qrPlaceholder");
+
+            function setVersion(versionName) {
+                var base =
+                    "Установите Track Anime на телефон, планшет или Android TV: без рекламы и с системными уведомлениями о новых сериях. QR-код ведёт на эту страницу.";
+                descEl.textContent = versionName ? base + " Текущая версия: " + versionName + "." : base;
+            }
+
+            fetch("/downloads/TrackAnime.json", { cache: "no-store" })
+                .then(function (response) {
+                    if (!response.ok) throw new Error("HTTP " + response.status);
+                    return response.json();
+                })
+                .then(function (manifest) {
+                    var version =
+                        typeof manifest.versionName === "string" ? manifest.versionName : null;
+                    setVersion(version);
+                    statusEl.innerHTML =
+                        "Манифест: <a href=\"/downloads/TrackAnime.json\">TrackAnime.json</a>" +
+                        (version ? " · v" + version : "") +
+                        (manifest.versionCode != null ? " (code " + manifest.versionCode + ")" : "") +
+                        " · <a href=\"/\">подбор зеркала</a>";
+                })
+                .catch(function () {
+                    setVersion(null);
+                    statusEl.className = "meta error";
+                    statusEl.textContent = "Не удалось загрузить манифест версии. Скачивание APK всё равно доступно.";
+                });
+
+            if (typeof QRCode !== "undefined" && QRCode.toDataURL) {
+                QRCode.toDataURL(pageUrl, { margin: 1, width: 256, errorCorrectionLevel: "M" })
+                    .then(function (dataUrl) {
+                        qrEl.src = dataUrl;
+                        qrEl.alt = "QR-код страницы приложения Track Anime";
+                        qrEl.style.display = "block";
+                        placeholderEl.style.display = "none";
+                    })
+                    .catch(function () {
+                        placeholderEl.style.display = "none";
+                    });
+            } else {
+                placeholderEl.style.display = "none";
+            }
+        })();
+    </script>
+</body>
+
+</html>
