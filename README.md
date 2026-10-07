@@ -9,6 +9,8 @@ Track Anime — веб-приложение для просмотра аниме
 
 Список зеркал для автовыбора правится в [`mirrors.json`](mirrors.json) (порядок = порядок проверки).
 
+Android-приложение также читает отсюда [`downloads/TrackAnime.json`](downloads/TrackAnime.json) и скачивает [`downloads/TrackAnime.apk`](downloads/TrackAnime.apk) для in-app обновлений (синхронизируется из основного репо скриптом `deploy-apk`).
+
 ## Возможности
 
 | Раздел | Что делает |
