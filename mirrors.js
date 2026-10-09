@@ -5,7 +5,8 @@
 (function (global) {
   const FALLBACK_MIRRORS = [
     "https://track-anime.win",
-    "https://www.track-anime.win"
+    "https://www.track-anime.win",
+    "https://mirror.track-anime.win"
   ];
 
   function normalizeMirror(value) {
