@@ -5,6 +5,7 @@
 (function (global) {
   const FALLBACK_MIRRORS = [
     "https://track-anime.win",
+    "https://gcore.track-anime.win",
     "https://mirror.track-anime.win",
     "https://777.track-anime.win"
   ];
